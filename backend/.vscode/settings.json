@@ -1,0 +1,7 @@
+{
+	"deno.enable": true,
+	"editor.formatOnSave": true,
+	"files.insertFinalNewline": true,
+	"editor.useTabStops": true,
+	"editor.tabSize": 2
+}

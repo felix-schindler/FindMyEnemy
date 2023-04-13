@@ -1,0 +1,19 @@
+{
+	"imports": {
+		"$std/": "https://deno.land/std@0.183.0/",
+		"hono": "https://deno.land/x/hono@v3.1.5",
+		"hono/": "https://deno.land/x/hono@v3.1.5/"
+	},
+	"tasks": {
+		"dev": "deno run --watch --allow-net src/main.ts",
+		"start": "deno run --allow-net src/main.ts"
+	},
+	"fmt": {
+		"options": {
+			"semiColons": true,
+			"singleQuote": false,
+			"useTabs": true,
+			"indentWidth": 2
+		}
+	}
+}
