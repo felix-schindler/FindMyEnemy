@@ -4,8 +4,8 @@ FROM denoland/deno:alpine
 # Set the working directory (could be any directory)
 WORKDIR /app
 
-# Copy all files to the working directory
-COPY . .
+# Prefer not to run as root.
+USER deno
 
 # Compile into a single executable
 RUN deno task compile
@@ -14,4 +14,4 @@ RUN deno task compile
 CMD ["./backend"]
 
 # The port that your application listens to.
-EXPOSE 8000
+EXPOSE 8000:8000
