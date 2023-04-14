@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+  web-frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+  web-backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+  # db:
+  #   image: postgres:12.1
+  #   volumes:
+  #     - db_data:/var/lib/postgresql/data
+  #   environment:
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_PASSWORD: postgres
+  #   ports:
+  #     - "5432:5432"
+
+# volumes:
+#   db_data:
