@@ -12,6 +12,3 @@ RUN deno task compile
 
 # Run the app
 CMD ["./backend"]
-
-# The port that your application listens to.
-EXPOSE 8000
