@@ -1,10 +1,20 @@
-#Basisimage: Node Alpine
-FROM node:latest AS deploy-node
+# Using node alpine image
+FROM node:19-alpine
 
-#Terminalbefehle -> kopiert in den Container
+# Set the working directory (could be any directory)
 WORKDIR /app
-RUN rm -ff ./*
-COPY package.json .
-#COPY --from=build /app/build .
-RUN npm --prod
-#CMD ["node", "index.ts"]
+
+# Copy package.json and package-lock.json
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy all files to the working directory
+COPY . .
+
+# Build the node server
+RUN npm run build
+
+# Run the node app
+CMD ["npm", "start"]
