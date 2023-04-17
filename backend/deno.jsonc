@@ -6,7 +6,8 @@
 	},
 	"tasks": {
 		"dev": "deno run --watch --allow-net src/main.ts",
-		"start": "deno run --allow-net src/main.ts"
+		"start": "deno run --allow-net src/main.ts",
+		"compile": "deno compile --allow-net src/main.ts -o backend"
 	},
 	"fmt": {
 		"options": {

@@ -1,0 +1,22 @@
+version: '3'
+services:
+  web:
+    image: caddy:2-alpine
+    ports:
+      - 80:80
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+  frontend:
+    build: ./frontend
+  backend:
+    build: ./backend
+  db:
+    image: surrealdb/surrealdb:latest
+    container_name: db
+    restart: always
+    command: start --user fme --pass ba7825d4 file:/data/fme_data.db
+    volumes:
+      - ./data:/data
+
+volumes:
+  data:
