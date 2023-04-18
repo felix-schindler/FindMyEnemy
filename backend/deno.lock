@@ -43,6 +43,15 @@
     "https://deno.land/x/hono@v3.1.5/utils/types.ts": "64fe2bf6526c682024bc5d0cd59d01a32f12bb9b80dca58d1cfc4e70231ef696",
     "https://deno.land/x/hono@v3.1.5/utils/url.ts": "e219e5d62acfe82f51cc6196b0a721cf09e04fa00a58bb0e682956ede68b4a79",
     "https://deno.land/x/hono@v3.1.5/validator/index.ts": "6c986e8b91dcf857ecc8164a506ae8eea8665792a4ff7215471df669c632ae7c",
-    "https://deno.land/x/hono@v3.1.5/validator/validator.ts": "e52183ddf8cefc3cfe2788802fe6ce766df8ac904df485107b01cbcca167dbad"
+    "https://deno.land/x/hono@v3.1.5/validator/validator.ts": "e52183ddf8cefc3cfe2788802fe6ce766df8ac904df485107b01cbcca167dbad",
+    "https://deno.land/x/surrealdb@v0.6.0/mod.ts": "f9b080bdcb417ad67b2bfa9c03f74bbf5b6d8fe445d8ed00aac8668c38eba22d",
+    "https://deno.land/x/surrealdb@v0.6.0/src/classes/emitter.ts": "c1be0bd5ed03688aad0b5ca09f8a3fbb476795e0e2fd4cdb941362c415f3fdfe",
+    "https://deno.land/x/surrealdb@v0.6.0/src/classes/live.ts": "0310cb09a9adc8e6a9e3704efe20f399d64120d5bd5c7405e72fd0707a5b581a",
+    "https://deno.land/x/surrealdb@v0.6.0/src/classes/pinger.ts": "c0e02f098178b802518b36a815085181be6e9a1bd6ca01c534c9e115a6311deb",
+    "https://deno.land/x/surrealdb@v0.6.0/src/classes/socket.ts": "53a7d20c056c31671c8b22bde3c8c10c9553727904ef9901bacfc0dce1f22e06",
+    "https://deno.land/x/surrealdb@v0.6.0/src/errors/index.ts": "8db3c55352889a00f9bbc4d5e17ea871c48fd0b0f2e4e15b26150c81cbe23f7c",
+    "https://deno.land/x/surrealdb@v0.6.0/src/index.ts": "de4bc55c84649331eed1b3be9889625e9e7ba912ed3aa6b15cb06e4634211d31",
+    "https://deno.land/x/surrealdb@v0.6.0/src/utils/guid.ts": "e63ee9ce26f5e38fd40a5bb0d21e1f19fdd438aa8e81482f6b8e918a3788af7b",
+    "https://deno.land/x/surrealdb@v0.6.0/src/ws/deno.ts": "4de80d57aa71c61bc40bcf4afd9f8fa23c84bbd5412f17a53e50d50d81127612"
   }
 }
