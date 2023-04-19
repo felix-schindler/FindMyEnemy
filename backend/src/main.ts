@@ -1,6 +1,6 @@
 import { serve } from "$std/http/server.ts";
 import { Hono } from "hono/mod.ts";
-import { jwt } from "hono/middleware.ts"
+// import { jwt } from "hono/middleware.ts"
 import Database from "./core/db.ts";
 
 import { info } from "./core/log.ts";
