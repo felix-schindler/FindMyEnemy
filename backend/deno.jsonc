@@ -5,10 +5,10 @@
 		"surrealdb": "https://deno.land/x/surrealdb@v0.6.0/mod.ts"
 	},
 	"tasks": {
-		"dev": "deno run --watch --allow-net --allow-read --allow-write src/main.ts",
-		"start": "deno run --allow-net --allow-read --allow-write src/main.ts",
-		"compile": "deno compile --allow-net --allow-read --allow-write src/main.ts -o backend",
-		"test": "deno test --allow-net --allow-read --allow-write"
+		"dev": "deno run --watch --allow-net --allow-read=. --allow-write=. src/main.ts",
+		"start": "deno run --allow-net --allow-read=. --allow-write=. src/main.ts",
+		"compile": "deno compile --allow-net --allow-read=. --allow-write=. src/main.ts -o backend",
+		"test": "deno test --allow-net --allow-read=. --allow-write=."
 	},
 	"fmt": {
 		"options": {

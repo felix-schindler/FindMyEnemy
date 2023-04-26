@@ -1,4 +1,4 @@
-import { cyan, yellow, red } from "$std/fmt/colors.ts";
+import { cyan, red, yellow } from "$std/fmt/colors.ts";
 
 // Save all logs to backend.log file in current directory
 const cwd = Deno.cwd();
