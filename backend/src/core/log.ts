@@ -1,22 +1,39 @@
 import { cyan, red, yellow } from "$std/fmt/colors.ts";
 
-// Save all logs to backend.log file in current directory
-const cwd = Deno.cwd();
-function append(msg: string) {
-	Deno.writeTextFile(`${cwd}/backend.log`, msg, { append: true });
-}
+export default class Log {
+	public static cwd = Deno.cwd();
 
-export function info(...message: unknown[]) {
-	append(`[INFO] ${message.join(" ")}\n`);
-	console.log(cyan("[INFO]"), ...message);
-}
+	public static enabled = true;
+	public static noFile = false;
 
-export function warn(...message: unknown[]) {
-	append(`[INFO] ${message.join(" ")}\n`);
-	console.warn(yellow("[WARN]"), ...message);
-}
+	private static append(msg: string) {
+		Deno.writeTextFile(`${this.cwd}/backend.log`, msg, { append: true });
+	}
 
-export function error(...message: unknown[]) {
-	append(`[INFO] ${message.join(" ")}\n`);
-	console.error(red("[ERROR]"), ...message);
+	static info(...message: unknown[]) {
+		if (Log.enabled) {
+			if (!Log.noFile) {
+				Log.append(`[INFO] ${message.join(" ")}\n`);
+			}
+			console.log(cyan("[INFO]"), ...message);
+		}
+	}
+
+	static warn(...message: unknown[]) {
+		if (Log.enabled) {
+			if (!Log.noFile) {
+				Log.append(`[WARN] ${message.join(" ")}\n`);
+			}
+			console.warn(yellow("[WARN]"), ...message);
+		}
+	}
+
+	static error(...message: unknown[]) {
+		if (Log.enabled) {
+			if (!Log.noFile) {
+				Log.append(`[ERROR] ${message.join(" ")}\n`);
+			}
+			console.error(red("[ERROR]"), ...message);
+		}
+	}
 }
