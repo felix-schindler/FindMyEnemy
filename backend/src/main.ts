@@ -6,7 +6,7 @@ import { compare } from "bcrypt";
 import Database from "./core/db.ts";
 import Log from "./core/log.ts";
 import HttpError from "./core/errors.ts";
-import type { User, UserAnswer } from "./core/types.ts";
+import { Question, User, UserAnswer } from "./core/types.ts";
 import { hash } from "https://deno.land/x/bcrypt@v0.4.1/src/main.ts";
 
 if (Deno.args.includes("--help")) {
@@ -98,6 +98,12 @@ app.post("/auth/register", async (c) => {
 		password: passHash,
 		personality,
 	});
+});
+
+// Get questions
+app.get("/questions", async (c) => {
+	const questions = await db.select<Question, string>("questions");
+	return c.json(questions);
 });
 
 // Get personality
