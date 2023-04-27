@@ -17,11 +17,12 @@ if (Deno.args.includes("--help")) {
 	console.log("  --help\t\tShow this help message");
 	console.log("  --no-log\t\tDisable logging");
 	console.log("  --no-log-file\t\tDisable logging to file");
+	console.log("  --show-routes\t\tShow all registered routes");
 	Deno.exit(0);
 }
 
 // Configure logging
-if (Deno.args.includes("--no-log")) Log.enabled = false;
+if (Deno.args.includes("--no-log") || Deno.args.includes("--show-routes")) Log.enabled = false;
 if (Deno.args.includes("--no-log-file")) Log.noFile = true;
 
 // Configure database
@@ -174,6 +175,12 @@ app.onError((err, c) => {
 		raw: err,
 	}, 500);
 });
+
+// Show routes
+if (Deno.args.includes("--show-routes")) {
+	app.showRoutes();
+	Deno.exit(0);
+}
 
 // Start web server
 serve(app.fetch);
