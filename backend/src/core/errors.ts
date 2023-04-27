@@ -78,7 +78,7 @@ const HttpErrorMessages: Record<HttpStatusCode, string> = {
 };
 
 export default class HttpError extends Error {
-	public status: number;
+	public status: HttpStatusCode;
 	public message: string;
 
 	constructor(status: HttpStatusCode, message?: string) {
