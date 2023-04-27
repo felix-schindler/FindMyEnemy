@@ -161,25 +161,20 @@ app.get("/enemies", () => {
 
 // Error handler
 app.onError((err, c) => {
-	console.error(`${err}`);
+	Log.error(err);
 
 	if (err instanceof HTTPException) {
 		return err.getResponse();
-	}
-
-	if (err instanceof HttpError) {
-		return c.json({
-			status: err.status,
-			msg: err.status,
-			raw: err,
-		}, err.status);
 	}
 
 	return c.json({
 		status: 500,
 		msg: err.message ?? "Internal server error",
 		raw: err,
-	}, 500);
+	}, {
+		status: 500,
+		statusText: "Internal server error",
+	});
 });
 
 // Show routes
