@@ -1,13 +1,12 @@
 import { serve } from "$std/http/server.ts";
 import { Hono } from "hono/mod.ts";
 import { cache, cors, jwt, prettyJSON } from "hono/middleware.ts";
-import { compare } from "bcrypt";
+import { compare, hash } from "bcrypt";
 
 import Database from "./core/db.ts";
 import Log from "./core/log.ts";
 import HttpError from "./core/errors.ts";
 import { Question, User, UserAnswer } from "./core/types.ts";
-import { hash } from "https://deno.land/x/bcrypt@v0.4.1/src/main.ts";
 
 if (Deno.args.includes("--help")) {
 	console.log(
@@ -22,7 +21,9 @@ if (Deno.args.includes("--help")) {
 }
 
 // Configure logging
-if (Deno.args.includes("--no-log") || Deno.args.includes("--show-routes")) Log.enabled = false;
+if (Deno.args.includes("--no-log") || Deno.args.includes("--show-routes")) {
+	Log.enabled = false;
+}
 if (Deno.args.includes("--no-log-file")) Log.noFile = true;
 
 // Configure database
