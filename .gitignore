@@ -3,16 +3,10 @@
 *.log
 
 # Frontend
-node_modules
-/build
-/.svelte-kit
-/package
-.env
-.env.*
-!.env.example
-.vercel
-.output
-vite.config.js.timestamp-*
+frontend/node_modules
+frontend/build
+frontend/.svelte-kit
+frontend/package
 vite.config.ts.timestamp-*
 
 # Database

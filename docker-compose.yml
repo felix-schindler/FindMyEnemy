@@ -13,7 +13,6 @@ services:
   db:
     image: surrealdb/surrealdb:latest
     container_name: db
-    restart: always
     command: start --user fme --pass ba7825d4 file:/data/fme_data.db
     volumes:
       - ./data:/data
