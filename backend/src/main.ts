@@ -1,6 +1,7 @@
 import { serve } from "$std/http/server.ts";
 import { Hono } from "hono/mod.ts";
 import { cache, cors, jwt, prettyJSON } from "hono/middleware.ts";
+import { HTTPException } from "hono/http-exception.ts";
 import { compare, hash } from "bcrypt";
 
 import Database from "./core/db.ts";
@@ -161,6 +162,10 @@ app.get("/enemies", () => {
 // Error handler
 app.onError((err, c) => {
 	console.error(`${err}`);
+
+	if (err instanceof HTTPException) {
+		return err.getResponse();
+	}
 
 	if (err instanceof HttpError) {
 		return c.json({
