@@ -6,17 +6,15 @@
 		"bcrypt": "https://deno.land/x/bcrypt@v0.4.1/mod.ts"
 	},
 	"tasks": {
-		"dev": "deno run --watch --allow-net --allow-read=. --allow-write=. src/main.ts --no-log-file",
-		"start": "deno run --allow-net --allow-read=. --allow-write=. src/main.ts",
-		"compile": "deno compile --allow-net --allow-read=. --allow-write=. src/main.ts -o backend",
-		"test": "deno test --allow-net --allow-read=. --allow-write=."
+		"dev": "deno run --watch=src/ --allow-net --allow-read=. --allow-write=. --unstable src/main.ts --no-log-file",
+		"start": "deno run --allow-net --allow-read=. --allow-write=. --unstable src/main.ts",
+		"compile": "deno compile --allow-net --allow-read=. --allow-write=. --unstable src/main.ts -o backend",
+		"test": "deno test --allow-net --allow-read=. --allow-write=. --unstable"
 	},
 	"fmt": {
-		"options": {
-			"semiColons": true,
-			"singleQuote": false,
-			"useTabs": true,
-			"indentWidth": 2
-		}
+		"semiColons": true,
+		"singleQuote": false,
+		"useTabs": true,
+		"indentWidth": 2
 	}
 }
