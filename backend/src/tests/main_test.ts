@@ -1,12 +1,65 @@
 import { app } from "../main.ts";
-import { assertEquals } from "$std/testing/asserts.ts";
+import { assertEquals, assertNotEquals } from "$std/testing/asserts.ts";
 
-Deno.test("Hello World", async () => {
-	let res: Response;
+Deno.test("Test all routes", async () => {
+	let res: Response, body: any;
 
-	res = await app.request("/");
+	// #region Login
+
+	res = (await app.request("/auth", {
+		method: "POST",
+		body: JSON.stringify({
+			user: "admin",
+			password: "admin",
+		})
+	}));
+
 	assertEquals(res.status, 200);
 
-	res = await app.request("/1/2/3/4/5");
-	assertEquals(res.status, 404);
+	body = await res.json();
+	assertNotEquals(body.id, undefined);
+	assertNotEquals(body.username, undefined);
+	assertNotEquals(body.email, undefined);
+	assertNotEquals(body.personality, undefined);
+	assertNotEquals(body.token, undefined);
+
+	assertEquals(body.password, undefined);
+
+	// #endregion Login
+
+	// #region Register
+
+	res = (await app.request("/auth/register", {
+		method: "POST",
+		body: JSON.stringify({
+			username: "test",
+			email: "admin@admin.com",
+			password: "admin",
+			personality: "admin",
+		})
+	}));
+
+	assertEquals(res.status, 200);
+
+	body = await res.json();
+	assertNotEquals(body.id, undefined);
+	assertNotEquals(body.username, undefined);
+	assertNotEquals(body.email, undefined);
+	assertNotEquals(body.personality, undefined);
+	assertNotEquals(body.token, undefined);
+
+	assertEquals(body.password, undefined);
+
+	// #endregion Register
+
+	// #region Get questions
+
+	res = await app.request("/questions");
+
+	assertEquals(res.status, 200);
+
+	body = await res.json();
+	assertNotEquals(body.length, 0);
+
+	// #endregion Get questions
 });
