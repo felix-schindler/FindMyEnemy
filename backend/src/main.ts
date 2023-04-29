@@ -1,5 +1,5 @@
 import { Hono } from "hono/mod.ts";
-import { cache, cors, jwt, logger, prettyJSON } from "hono/middleware.ts";
+import { /*cache,*/ cors, jwt, logger, prettyJSON } from "hono/middleware.ts";
 import { decode, sign } from "hono/utils/jwt/jwt.ts";
 import { HTTPException } from "hono/http-exception.ts";
 import { compare, hash } from "bcrypt";
@@ -49,14 +49,15 @@ export const app = new Hono();
 app.use("*", logger());
 app.use("*", prettyJSON());
 app.use("*", cors()); // TODO: Configure CORS
-app.get(
-	"*",
-	cache({
-		cacheName: "backend-default",
-		cacheControl: "max-age=3600",
-		wait: true,
-	}),
-);
+// NOTE: Cache MUST NOT be used because it triggers a panic in Deno (denoland/deno#18889)
+// app.get(
+// 	"*",
+// 	cache({
+// 		cacheName: "backend-default",
+// 		cacheControl: "max-age=3600",
+// 		wait: true,
+// 	}),
+// );
 
 // Sign in
 app.post("/auth", async (c) => {
