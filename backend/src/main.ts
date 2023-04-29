@@ -1,5 +1,5 @@
 import { Hono } from "hono/mod.ts";
-import { cache, cors, jwt, prettyJSON } from "hono/middleware.ts";
+import { cache, cors, jwt, logger, prettyJSON } from "hono/middleware.ts";
 import { decode, sign } from "hono/utils/jwt/jwt.ts";
 import { HTTPException } from "hono/http-exception.ts";
 import { compare, hash } from "bcrypt";
@@ -46,11 +46,7 @@ await db.signin({
 Log.info("Hono", "Registering routes...");
 export const app = new Hono();
 
-app.use("*", async (c, next) => {
-	Log.info(`[${c.req.method}] ${c.req.url}`);
-	await next();
-});
-
+app.use("*", logger());
 app.use("*", prettyJSON());
 app.use("*", cors()); // TODO: Configure CORS
 app.get(
