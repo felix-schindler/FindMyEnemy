@@ -2,20 +2,11 @@
 
 ## Run the app
 
-Start frontend and backend (on [localhost](http://localhost)) and database (on :8001) with `docker-compose up`
+Start frontend, backend and database (on [:80](http://localhost)) with `docker-compose up`
 
 ## Services
 
-### Development
-
-| Service      | Standard Port | Directory |
-|--------------|---------------|-----------|
-| Frontend     | 5173          | frontend  |
-| Backend      | 8000          | backend   |
-
-### Deployment (Docker)
-
-| Service      | Port      | Directory | Web-Path |
+| Service      | Port      | Directory | Path |
 |--------------|-----------|-----------|----------|
 | Frontend     | 80:3000   | frontend  | /        |
 | Backend      | 80:8000   | backend   | /api/    |
