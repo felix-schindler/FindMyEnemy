@@ -83,7 +83,7 @@ app.post("/auth", async (c) => {
 
 	return c.json({
 		...dbUser.result,
-		token: "",	// TODO: Generate JWT token
+		token: "", // TODO: Generate JWT token
 	});
 });
 
@@ -112,7 +112,7 @@ app.post("/auth/register", async (c) => {
 		username,
 		email,
 		personality,
-		token: "",	// TODO: Generate JWT token
+		token: "", // TODO: Generate JWT token
 	});
 });
 

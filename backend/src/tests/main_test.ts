@@ -6,13 +6,13 @@ Deno.test("Test all routes", async () => {
 
 	// #region Login
 
-	res = (await app.request("/auth", {
+	res = await app.request("/auth", {
 		method: "POST",
 		body: JSON.stringify({
 			user: "admin",
 			password: "admin",
-		})
-	}));
+		}),
+	});
 
 	assertEquals(res.status, 200);
 
@@ -29,15 +29,15 @@ Deno.test("Test all routes", async () => {
 
 	// #region Register
 
-	res = (await app.request("/auth/register", {
+	res = await app.request("/auth/register", {
 		method: "POST",
 		body: JSON.stringify({
 			username: "test",
 			email: "admin@admin.com",
 			password: "admin",
 			personality: "admin",
-		})
-	}));
+		}),
+	});
 
 	assertEquals(res.status, 200);
 
