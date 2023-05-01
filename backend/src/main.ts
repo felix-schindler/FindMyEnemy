@@ -162,18 +162,43 @@ app.post("/personality", async (c) => {
 
 // Require authentication for all following routes
 app.use(
-	["/enemies"],
+	"/enemies/*",
 	jwt({
 		secret: JWT_SECRET,
 	}),
 );
 
-app.get("/enemies", (c) => {
-	const jwt = c.req.header("Authorization")!;
-	const user = decode(jwt).payload as User;
-	Log.info("/enemies", `Getting enemies for ${user.username}...`);
+app.get("/enemies", async (c) => {
+	// Get user from JWT
+	const reqUser = decode(c.req.header("Authorization")!).payload as User;
 
-	throw new HttpError(501, "Not implemented");
+	// Get all users with different personality from database
+	const _users = await db.query<User>(
+		"SELECT * FROM users WHERE personality != $personality",
+		{
+			personality: reqUser.personality,
+		},
+	);
+
+	// Add the user to the array and check for errors
+	const users: User[] = [];
+	_users.map((u) => {
+		if (u.result) users.push(u.result);
+		else throw u.error;
+	});
+
+	return c.json(users);
+});
+
+app.get("/enemies/:username", async (c) => {
+	// Get user from database by username
+	const username = c.req.param("username");
+	const user = await db.select<User, string>(`users:${username}`);
+
+	// @ts-ignore - Remove password from user object before sending it to the client
+	delete dbUser.password;
+
+	return c.json(user);
 });
 
 // Error handler
