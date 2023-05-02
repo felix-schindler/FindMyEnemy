@@ -15,3 +15,5 @@ export default class Database extends Surreal {
 		});
 	}
 }
+
+export const db = Database.shared;

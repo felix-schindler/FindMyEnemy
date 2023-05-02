@@ -2,9 +2,11 @@ import { Context, Env } from "hono/mod.ts";
 import { decode, sign } from "hono/utils/jwt/jwt.ts";
 import { compare, hash } from "bcrypt";
 
-import { db, JWT_SECRET } from "../main.ts";
-import HttpError from "../core/errors.ts";
 import { AuthController } from "./Controller.ts";
+import { db } from "../core/Database.ts";
+import HttpError from "../core/HttpError.ts";
+import { JWT_SECRET } from "../core/stores.ts";
+
 import type { ClientUser, UncreatedUser, User } from "../core/types.ts";
 
 export default class UserController extends AuthController {

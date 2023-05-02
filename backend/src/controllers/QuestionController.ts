@@ -1,9 +1,10 @@
 import type { Context, Env } from "hono/mod.ts";
 
-import { db } from "../main.ts";
-import { Question, UserAnswer } from "../core/types.ts";
 import Controller from "./Controller.ts";
-import HttpError from "../core/errors.ts";
+import { db } from "../core/Database.ts";
+import HttpError from "../core/HttpError.ts";
+
+import type { Question, UserAnswer } from "../core/types.ts";
 
 export default class QuestionController extends Controller {
 	public static readonly shared = new QuestionController();
