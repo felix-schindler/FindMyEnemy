@@ -2,7 +2,7 @@ import { Hono } from "hono/mod.ts";
 import { cors, jwt, logger, prettyJSON } from "hono/middleware.ts";
 import { HTTPException } from "hono/http-exception.ts";
 
-import Log from "./core/log.ts";
+import Log from "./core/Log.ts";
 import { JWT_SECRET } from "./core/stores.ts";
 import UserController from "./controllers/UserController.ts";
 import QuestionController from "./controllers/QuestionController.ts";

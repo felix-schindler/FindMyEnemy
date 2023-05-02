@@ -1,5 +1,5 @@
 import { Surreal } from "surrealdb";
-import Log from "./log.ts";
+import Log from "./Log.ts";
 
 export default class Database extends Surreal {
 	public static shared = new Database();

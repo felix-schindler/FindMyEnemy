@@ -104,11 +104,11 @@ export default class UserController extends AuthController {
 		return c.json(user);
 	}
 
-	async update(c: Context<Env, "/users/:id">): Promise<Response> {
+	update(_c: Context<Env, "/users/:id">): Promise<Response> {
 		throw new HttpError(501);
 	}
 
-	async replace(c: Context<Env, "/users/:id">): Promise<Response> {
+	replace(_c: Context<Env, "/users/:id">): Promise<Response> {
 		throw new HttpError(501);
 	}
 
