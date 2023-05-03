@@ -1,3 +1,8 @@
+export type Question = {
+    question: string;
+    answers: string[];
+}
+
 export const questions = [
     {
         question: "At a party do you",
