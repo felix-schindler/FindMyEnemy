@@ -9,8 +9,24 @@
     --border: #787878;
 }
 
-.app  {
-    
+meter {
+    display: block;
+    margin-bottom: 1rem;
+    width: 70%;
+    color: var(--primary)
+}
+meter::-webkit-meter-bar{
+    background: var(--primary);
 
-    
+}
+meter::-webkit-meter-optimum-value {
+    background: var(--secondary)
+}
+
+.questionButton,
+.reverseButton {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 1rem;
 }

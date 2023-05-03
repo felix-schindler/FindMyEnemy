@@ -1,5 +1,6 @@
 <script lang="ts">
     import { questions, type Question } from "$lib/data";
+	import Layout from "../+layout.svelte";
 
     let qIndex = 0;
     let question: Question = questions[qIndex];
@@ -16,18 +17,18 @@
 <ol>
     {#each question.answers as answer, index}
         <li>
-            <button type="button" on:click={() => addAnswer(index)}>{answer}</button>
+            <button type="button" class="questionButton" on:click={() => addAnswer(index)}>{answer}</button>
         </li>
     {/each}
 </ol>
 {#if qIndex > 0}
-    <button type="button" on:click={() => {
-        const newIndex = --qIndex;
-        if (newIndex > -1) {
-            question = questions[newIndex];
-            answers.pop();
-        }
-    }}>Back</button>
+<button type="button" class="reverseButton" on:click={() => {
+    const newIndex = --qIndex;
+    if (newIndex > -1) {
+        question = questions[newIndex];
+        answers.pop();
+    }
+}}>Back</button>
 {/if}
 
 <style>
