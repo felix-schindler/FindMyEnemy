@@ -1,3 +1,16 @@
 :root {
-    --accent: #FF0000;
+    --primary: #201254;
+    --secondary: #E3DCFF;
+    --background: #0E0825;
+    --background-gradient: radial-gradient(at top right, #0E0825, #690073);
+    --main-gradient: linear-gradient(45deg, #D20033, #7C0087);
+    --button: #F2F2F2;
+    --text-icon: #FFFFFF;
+    --border: #787878;
+}
+
+.app  {
+    
+
+    
 }
