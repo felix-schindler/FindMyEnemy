@@ -6,7 +6,8 @@ export type Record = {
 // User records (auth)
 export type AuthRecord = Record & {
 	email: string;
-	name: string;
+	username: string;
+	personality: string;
 	jwt: string;
 };
 
@@ -18,5 +19,6 @@ export type Question = Record & {
 
 export type User = Record & {
 	email: string;
-	name: string;
+	username: string;
+	personality: string;
 };

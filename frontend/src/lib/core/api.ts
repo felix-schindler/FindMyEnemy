@@ -1,14 +1,4 @@
-type User = {
-	id: number;
-	username: string;
-	email: string;
-	personality: string;
-};
-
-type Question = {
-	question: string;
-	answers: string[];
-};
+import type { AuthRecord, Question, User } from './types';
 
 type RequestMap = {
 	'/users': {
@@ -30,6 +20,23 @@ type RequestMap = {
 			query: never;
 			body: never;
 			response: User;
+		};
+	};
+	'/users/auth': {
+		POST: {
+			query: never;
+			body: {
+				username: string;
+				password: string;
+			};
+			response: AuthRecord;
+		};
+	};
+	'/users/auth/register': {
+		POST: {
+			query: never;
+			body: User;
+			response: AuthRecord;
 		};
 	};
 	'/questions': {
@@ -62,5 +69,5 @@ export async function req<
 	body?: RequestMap[Path][Method]['body'],
 	query?: RequestMap[Path][Method]['query']
 ): Promise<T> {
-	return await (await fetch(`/api${url}`)).json() as T;
+	return (await (await fetch(`/api${url}`)).json()) as T;
 }
