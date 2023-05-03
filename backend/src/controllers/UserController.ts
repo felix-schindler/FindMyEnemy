@@ -73,19 +73,27 @@ export default class UserController extends AuthController {
 	}
 
 	async getList(c: Context<Env, "/users">): Promise<Response> {
+		const enemies = c.req.query("enemies");
+
 		// Get user from JWT
 		const reqUser = decode(c.req.header("Authorization")!).payload as User;
 
+		const users: User[] = [];
+		let qStr = "SELECT id, username, email, personality FROM users";
+
+		if (enemies)
+			qStr = qStr.concat(" WHERE personality != $personality");
+		qStr.concat(";");
+
 		// Get all users with different personality from database
 		const _users = await db.query<User>(
-			"SELECT * FROM users WHERE personality != $personality",
+			" WHERE personality != $personality",
 			{
 				personality: reqUser.personality,
 			},
 		);
 
 		// Add the user to the array and check for errors
-		const users: User[] = [];
 		_users.map((u) => {
 			if (u.result) users.push(u.result);
 			else throw u.error;
