@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,500;0,700;1,700&display=swap');
+
+
+:root {
+    --primary: #201254;
+    --secondary: #E3DCFF;
+    --background: #0E0825;
+    --background-gradient: radial-gradient(at top right, #0E0825, #690073);
+    --main-gradient: linear-gradient(45deg, #D20033, #7C0087);
+    --button: #F2F2F2;
+    --text-icon: #FFFFFF;
+    --button-content: #AB0059;
+    --border: #787878;
+    --font-family: 'Rubik', sans-serif;
+    --fw-reg: '500';
+    --fw-bold: '700';
+    --fs-italic: italic
+}
+
+
+.mainBtn {
+    background-image: var(--main-gradient);
+    border-radius: 999px;
+    border: none;
+    box-sizing: border-box;
+    color: var(--button-content);
+    display: inline-block;
+    font: 1.25rem var(--font-family);
+    font-weight: 700;
+    padding: .3rem;
+    text-decoration: none;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.mainBtn span {
+    align-items: center;
+    background: var(--text-icon);
+    padding: 1rem;
+    border-radius: 999px;
+    display: flex;
+    justify-content: center;
+}
+
+meter {
+    display: flex;
+    margin-bottom: 1rem;
+    width: 40%;
+    color: var(--primary)
+}
+
+meter::-webkit-meter-bar {
+    background: var(--primary);
+
+}
+
+meter::-webkit-meter-optimum-value {
+    background: var(--secondary)
+}
+
+.questionButton,
+.reverseButton {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 1rem;
+}
+
+.questionButton {
+        width: 20rem;
+        margin: 1rem;
+        border-radius: 16px;
+}
+
+.reverseButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%
+}
+
+.reverseButton img {
+    height: 20px;
+    margin:5px;
+
+}
