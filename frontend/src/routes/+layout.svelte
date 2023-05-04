@@ -15,6 +15,7 @@
 	
 	.app {
 		background: var(--background-gradient);
+		color: var(--text-icon);
 		display: grid;
 		font-family: 'Rubik', sans-serif;
 		font-weight: 500;

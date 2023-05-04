@@ -46,7 +46,7 @@ meter {
     display: flex;
     margin-bottom: 1rem;
     width: 40%;
-    color: var(--primary)
+    color: var(--primary);
 }
 
 meter::-webkit-meter-bar {
@@ -56,6 +56,10 @@ meter::-webkit-meter-bar {
 
 meter::-webkit-meter-optimum-value {
     background: var(--secondary)
+}
+
+meter::moz-meter-bar{
+    
 }
 
 .questionButton,

@@ -2,6 +2,7 @@
     import { questions, type Question } from "$lib/data";
 	import Layout from "../+layout.svelte";
     import '$lib/style/main.css';
+    import backButton from "$lib/images/back-icon.svg"
 
     let qIndex = 0;
     let question: Question = questions[qIndex];
@@ -33,7 +34,7 @@
         question = questions[newIndex];
         answers.pop();
     }
-}}><img src="$lib/images/svelte-logo.svg" alt="Back"></button>
+}}><img src={backButton} alt="Back"></button>
 {/if}
 </div>
 
