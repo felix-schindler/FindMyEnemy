@@ -40,6 +40,8 @@
     border-radius: 999px;
     display: flex;
     justify-content: center;
+}
+
 meter {
     display: flex;
     margin-bottom: 1rem;
