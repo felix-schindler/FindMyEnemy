@@ -10,15 +10,17 @@
 }
 
 meter {
-    display: block;
+    display: flex;
     margin-bottom: 1rem;
-    width: 70%;
+    width: 40%;
     color: var(--primary)
 }
-meter::-webkit-meter-bar{
+
+meter::-webkit-meter-bar {
     background: var(--primary);
 
 }
+
 meter::-webkit-meter-optimum-value {
     background: var(--secondary)
 }
@@ -29,4 +31,23 @@ meter::-webkit-meter-optimum-value {
     color: white;
     border: none;
     padding: 1rem;
+}
+
+.questionButton {
+        width: 20rem;
+        margin: 1rem;
+        border-radius: 16px;
+}
+
+.reverseButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%
+}
+
+.reverseButton img {
+    height: 20px;
+    margin:5px;
+
 }

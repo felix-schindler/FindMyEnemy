@@ -12,6 +12,8 @@
     }
 </script>
 
+<div class="persContainer"> 
+
 <meter min="1" max="35" value={qIndex} />
 <p>{question.question}</p>
 <ol>
@@ -22,16 +24,24 @@
     {/each}
 </ol>
 {#if qIndex > 0}
+
+
 <button type="button" class="reverseButton" on:click={() => {
     const newIndex = --qIndex;
     if (newIndex > -1) {
         question = questions[newIndex];
         answers.pop();
     }
-}}>Back</button>
+}}><img src="$lib/images/svelte-logo.svg" alt="Back"></button>
 {/if}
+</div>
 
 <style>
+    .persContainer{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
     ol {
         list-style: upper-latin;
     }
