@@ -1,5 +1,6 @@
 <script lang="ts">
     import { questions, type Question } from "$lib/data";
+    import '$lib/style/main.css';
 
     let qIndex = 0;
     let question: Question = questions[qIndex];
@@ -30,8 +31,14 @@
     }}>Back</button>
 {/if}
 
+<button class="mainBtn">
+    <span>Click Me!</span>
+</button>
+
 <style>
     ol {
         list-style: upper-latin;
     }
+    
+
 </style>

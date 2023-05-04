@@ -1,9 +1,9 @@
 <script>
-	import logo from '$lib/images/svelte-logo.svg';
+	import logo from '$lib/images/findmyenemy-logo.svg';
 </script>
 
 <header>
-	<img src={logo} alt="SvelteKit" />
+	<img src={logo} alt="FindMyEnemy" class="logo"/>
 </header>
 
 <style>
@@ -13,6 +13,11 @@
 	}
 
 	img {
-		max-height: 3em;
+		max-height: 3rem;
 	}
+
+	.logo {
+		margin: 1rem;
+	}
+
 </style>
