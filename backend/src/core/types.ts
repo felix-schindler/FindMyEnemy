@@ -19,7 +19,7 @@ export type AuthUser = {
 	email: string;
 	personality: string;
 	token: string;
-}
+};
 
 export type Question = {
 	id: number;

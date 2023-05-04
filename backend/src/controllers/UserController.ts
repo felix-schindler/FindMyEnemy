@@ -7,7 +7,7 @@ import { db } from "../core/Database.ts";
 import HttpError from "../core/HttpError.ts";
 import { JWT_SECRET } from "../core/stores.ts";
 
-import type { ClientUser, AuthUser, User } from "../core/types.ts";
+import type { AuthUser, ClientUser, User } from "../core/types.ts";
 
 export default class UserController extends AuthController {
 	public static readonly shared = new UserController();
@@ -81,8 +81,9 @@ export default class UserController extends AuthController {
 
 		// Create query string
 		let qStr = "SELECT id, username, email, personality FROM users";
-		if (enemies)
+		if (enemies) {
 			qStr = qStr.concat(" WHERE personality != $personality");
+		}
 		qStr.concat(";");
 
 		// Get all users with different personality from database

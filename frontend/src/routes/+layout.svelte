@@ -12,7 +12,6 @@
 
 <style>
 	@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,500;0,700;1,700&display=swap');
-	
 	.app {
 		background: var(--background-gradient);
 		color: var(--text-icon);
@@ -25,5 +24,4 @@
 		grid-template-rows: auto 1fr;
 		min-height: 100vh;
 	}
-
 </style>
