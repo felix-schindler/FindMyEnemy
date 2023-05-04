@@ -159,13 +159,6 @@ export const questions = [
         ],
     },
     {
-        question: "",
-        answers: [
-            "",
-            "",
-        ],
-    },
-    {
         question: "Facts",
         answers: [
             "Speak for themselves",
