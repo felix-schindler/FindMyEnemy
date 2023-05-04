@@ -33,6 +33,39 @@
     z-index: 2;
 }
 
+
+.form {
+    margin: 0 calc(33.33vw - 8px);
+    margin-top: 150px ;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1.5em;
+}
+
+button[type="submit"] {
+    border: none;
+    height: 40px;
+    border-radius: 16px;
+  }
+
+input[type="text"] {
+    padding: 30px;
+    border: none; 
+    border-radius: 16px;
+    height: 40px;
+    background-color: #201254;
+    color: white; 
+}
+
+input[type="text"] ::placeholder{
+    color: #E3DCFF; 
+}
+
+input[type="text"]::-webkit-input-placeholder {
+    color: #E3DCFF;
+}
+
 .mainBtn span {
     align-items: center;
     background: var(--text-icon);

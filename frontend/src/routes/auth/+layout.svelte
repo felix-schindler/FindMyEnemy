@@ -1,2 +1,2 @@
-<h1>find my enemy</h1>
+ <!-- <h1>find my enemy</h1> -->
 <slot />
