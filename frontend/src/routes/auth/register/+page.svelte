@@ -1,21 +1,23 @@
 <script>
 	async function register() {}
 	import '$lib/style/main.css';
+	import abc from "$lib/images/userlogin-icon.svg"
 </script>
 
 <form class="form" on:submit={register}>
-	<h1>find my enemy</h1>
-	<input type="text" placeholder="email" />
-	<input type="text" placeholder="username" />
-	<input type="text" placeholder="password" />
-	<button type="submit">Sign Up</button>
+	<input type="text" placeholder="username"/> 
+	<input type="password" placeholder="password" />
+	<input type="password" placeholder="repeat password" />
+	<button type="submit" class = "mainBtn">
+		<span>Sign Up</span>
+	</button>
 	<a href="/auth">Already registered?</a>
 </form>
 
  <style>
-	/* form {
-		 display: flex;
-		flex-direction: column;
-		gap: 1em; 
-	} */
+	a {
+		justify-content: center;
+		text-align: center; 
+		color: #E3DCFF;
+	}
 </style>
