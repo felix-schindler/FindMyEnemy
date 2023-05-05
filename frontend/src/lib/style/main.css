@@ -85,11 +85,11 @@ input::-webkit-input-placeholder {
 }
 
 input[type="text"] {
-    background-image: url('src/lib/images/userlogin-icon.svg');
+    background-image: url('/src/lib/images/userlogin-icon.svg');
 }
 
 input[type="password"] {
-    background-image: url('src/lib/images/password-icon.svg');
+    background-image: url('/src/lib/images/password-icon.svg');
 }
 
 meter {
