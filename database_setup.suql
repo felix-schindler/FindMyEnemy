@@ -1,0 +1,39 @@
+-- Namepace for Find My Enemy.
+DEFINE NAMESPACE fme;
+
+-- Specify the namespace for the database
+USE NS fme;
+
+-- Create the database.
+DEFINE DATABASE app_fme;
+
+USE DB app_fme
+-- Create schemafull user table.
+DEFINE TABLE user SCHEMAFULL;
+
+-- Define some fields.
+DEFINE FIELD username ON TABLE user TYPE string
+  ASSERT $value != NONE;
+DEFINE INDEX username ON TABLE user COLUMNS email UNIQUE;
+
+-- SEE IT IN ACTION
+
+CREATE user SET username = 'Greg', email = 'greg@fme.com';
+
+
+-- Create questions table.
+DEFINE TABLE question SCHEMAFULL;
+
+-- Define some fields.
+DEFINE FIELD question_content ON TABLE question TYPE string ASSERT $value != NONE;
+DEFINE FIELD answers ON TABLE question TYPE array  ASSERT $value != NONE;
+
+-- SEE IT IN ACTION
+
+CREATE question SET question_content = 'At a party do you', answers = [{answer_id: 1, answer_content: 'Interact with many, including strangers', category: "E"}, {answer_id: 2, answer_content: 'Interact with a few, known to you', category: "I"}];
+
+-- Create results table.
+DEFINE TABLE results;
+
+-- EXAMPLE result
+--CREATE result SET user_id = user:018247102347, question_id = question:124871923469128, answer_id = '1';
