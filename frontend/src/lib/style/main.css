@@ -40,23 +40,24 @@
 	justify-content: center;
 }
 
-meter {
-	display: flex;
-	margin-bottom: 1rem;
-	width: 40%;
-	color: var(--primary);
-}
 
-meter::-webkit-meter-bar {
+::-webkit-meter-bar{
 	background: var(--primary);
+	border: none;
 }
 
-meter::-webkit-meter-optimum-value {
+
+::-webkit-meter-optimum-value{
 	background: var(--secondary);
 }
-
-meter::moz-meter-bar {
+::-webkit-meter-suboptimum-value{
+	background: var(primary);
 }
+
+:-moz-meter-bar{
+	border-radius: 50%;
+}
+
 
 .questionButton,
 .reverseButton {

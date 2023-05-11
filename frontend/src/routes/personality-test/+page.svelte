@@ -14,7 +14,7 @@
 </script>
 
 <div class="persContainer">
-	<meter min="1" max="35" value={qIndex} />
+	<meter class="meter" min="1" max="35" value={qIndex} />
 	<p>{question.question}</p>
 	<ol>
 		{#each question.answers as answer, index}
