@@ -14,7 +14,12 @@
 </script>
 
 <div class="persContainer">
-	<meter class="meter" min="1" max="35" value={qIndex} />
+	<!-- <meter class="meter" min="1" max="35" value={qIndex} /> -->
+	<div class ="progress-bar" id="progressBar">
+		<div class="progress" id="progress" style="width: {(qIndex*100)/35}%" >
+		</div>
+	</div>
+	
 	<p>{question.question}</p>
 	<ol>
 		{#each question.answers as answer, index}
@@ -39,10 +44,6 @@
 		>
 	{/if}
 </div>
-
-<button class="mainBtn">
-	<span>Click Me!</span>
-</button>
 
 <style>
 	.persContainer {

@@ -41,7 +41,7 @@
 }
 
 
-::-webkit-meter-bar{
+/* ::-webkit-meter-bar{
 	background: var(--primary);
 	border: none;
 }
@@ -56,8 +56,19 @@
 
 :-moz-meter-bar{
 	border-radius: 50%;
+} */
+
+.progress-bar {
+	width: 100%;
+	height: 10px;
+	background-color: var(--primary);
 }
 
+.progress {
+	width: 50%;
+	height: 100%;
+	background-color:var(--secondary);
+}
 
 .questionButton,
 .reverseButton {
