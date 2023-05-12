@@ -41,33 +41,18 @@
 }
 
 
-/* ::-webkit-meter-bar{
-	background: var(--primary);
-	border: none;
-}
-
-
-::-webkit-meter-optimum-value{
-	background: var(--secondary);
-}
-::-webkit-meter-suboptimum-value{
-	background: var(primary);
-}
-
-:-moz-meter-bar{
-	border-radius: 50%;
-} */
-
 .progress-bar {
-	width: 100%;
+	width: 75%;
 	height: 10px;
 	background-color: var(--primary);
+	border-radius: 16px;
 }
 
 .progress {
 	width: 50%;
 	height: 100%;
 	background-color:var(--secondary);
+	border-radius: 16px;
 }
 
 .questionButton,
