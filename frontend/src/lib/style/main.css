@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,500;0,700;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,700;1,700&display=swap');
 
 :root {
 	--primary: #201254;
@@ -10,10 +11,14 @@
 	--text-icon: #ffffff;
 	--button-content: #ab0059;
 	--border: #787878;
-	--font-family: 'Rubik', sans-serif;
-	--fw-reg: '500';
+	--main-font: 'Rubik', sans-serif;
+	--fw-reg: '400';
 	--fw-bold: '700';
 	--fs-italic: italic;
+}
+
+html * {
+	font-family: var(--main-font);
 }
 
 .mainBtn {
@@ -23,7 +28,7 @@
 	box-sizing: border-box;
 	color: var(--button-content);
 	display: inline-block;
-	font: 1.25rem var(--font-family);
+	font-size: 1.25rem;
 	font-weight: 700;
 	padding: 0.3rem;
 	text-decoration: none;
@@ -38,6 +43,15 @@
 	border-radius: 999px;
 	display: flex;
 	justify-content: center;
+}
+
+.mainBtn img {
+	align-items: center;
+	background: var(--text-icon);
+	padding: 1rem;
+	border-radius: 999px;
+	display: flex;
+
 }
 
 meter {
@@ -70,6 +84,7 @@ meter::moz-meter-bar {
 	width: 20rem;
 	margin: 1rem;
 	border-radius: 16px;
+	cursor: pointer;
 }
 
 .reverseButton {
@@ -77,6 +92,7 @@ meter::moz-meter-bar {
 	align-items: center;
 	justify-content: center;
 	border-radius: 100%;
+	cursor: pointer;
 }
 
 .reverseButton img {
