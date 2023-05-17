@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,500;0,700;1,700&display=swap');
+
+
+.searchBar{
+    display: flex;
+    justify-content: center;
+  }
+
+.search-bar {
+  width: 45vw; 
+}
+
+.top-enemies{
+    margin: 0 calc(8%);
+    margin-top: 3vw
+  }
+
+
+.grid-container {
+  display: flex;
+  gap: 5%;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+}
+
+.grid-item {
+  flex: 0 0 clamp(30px, 30vw, 300px); 
+  position: relative;
+  overflow: hidden;
+  margin-right: var(--gap-width);
+  margin-bottom: 20px;
+}
+
+.grid-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s ease-in-out;
+}
+
+.user-information {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  background-color: rgba(50, 46, 46, 0.7);
+  color: #fff;
+}
+
+.user-information h3,
+.user-information p {
+  margin: 0;
+}
+
+.grid-item:hover img {
+  transform: scale(1.1);
+}
+
+/* .buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1%;
+  overflow-x: auto; 
+} */
+

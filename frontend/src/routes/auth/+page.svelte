@@ -3,10 +3,12 @@
 	import '$lib/style/main.css';
 </script>
 
+<main>
+<div class="helpp">
 <form class="form" on:submit={login}>
 	<input type="text" placeholder="username" />
 	<input type="password" placeholder="password" />
-	<div>
+	<div class="abc">
 		<input type="checkbox" id="remember" style="margin-right: 10px;" />
 		<label for="remember">Remember me</label>
 	</div>
@@ -16,6 +18,8 @@
 	<a href="/auth/register" > Don't have an account yet? <b>Take the test! </b>
 	</a>
 </form>
+</div>
+</main>
 
 
 <style>
@@ -25,9 +29,13 @@
 		color: #E3DCFF;
 	}
 
-	div {
+	.abc {
  	display: flex;
   	align-items: center;
+	}
+
+	.helpp {
+	 margin: 0px;
 	}
 
 </style> 

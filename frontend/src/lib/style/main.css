@@ -17,7 +17,6 @@
     --fs-italic: italic
 }
 
-
 .mainBtn {
     background-image: var(--main-gradient);
     border-radius: 999px;
@@ -49,19 +48,59 @@
 
 
 .form {
-    margin: 0 calc(33.33vw - 8px);
-    margin-top: auto ; 
+
     display: flex;
     gap: 1.5em;
     justify-content: center;
     flex-direction: column;
 }
 
-/* button[type="submit"] {
-    border: none;
-    height: 40px;
-    border-radius: 16px;
-  } [type="text"]  */
+@media (max-width: 600px) {
+    .form {
+      margin: 0 clamp(10px, 20vw, 200px);
+      margin-top: auto 0; 
+    }
+    p {
+         font-size: 2vw;
+        line-height: 1.5;
+    }
+    h3 {
+         font-size: 2.5vw; 
+        font-size: 1.2em;
+        line-height: 1.5;
+    }
+    h2 {
+        font-size: 3vw; 
+        line-height: 1.5;
+    }
+    h1 {
+        font-size: 3.5vw;
+        line-height: 1.5;
+    } 
+
+    
+}
+@media (min-width: 601px) {
+    .form {
+        margin: 0 clamp(10px, 30vw, 450px); 
+    }
+     p {
+         font-size: clamp(13px, 1.5vw, 16px); 
+        line-height: 1.5;
+    }
+    h3 {
+         font-size: clamp(16px, 2vw, 18px); 
+        line-height: 1.5;
+    }
+    h2 {
+         font-size: clamp(18px, 2.5vw, 20px);
+        line-height: 1.5;
+    }
+    h1 {
+         font-size: clamp(20px, 3vw, 26px); 
+        line-height: 1.5;
+    } 
+}
 
 input {
     padding: 30px;
@@ -92,6 +131,10 @@ input[type="password"] {
     background-image: url('/src/lib/images/password-icon.svg');
 }
 
+input[type="search"] {
+    background-image: url('/src/lib/images/search-icon.svg');
+}
+
 meter {
     display: flex;
     margin-bottom: 1rem;
@@ -108,9 +151,9 @@ meter::-webkit-meter-optimum-value {
     background: var(--secondary)
 }
 
-meter::moz-meter-bar{
+ meter::moz-meter-bar{
     
-}
+} 
 
 .questionButton,
 .reverseButton {
@@ -118,6 +161,7 @@ meter::moz-meter-bar{
     color: white;
     border: none;
     padding: 1rem;
+    resize: both;
 }
 
 .questionButton {
@@ -126,7 +170,7 @@ meter::moz-meter-bar{
         border-radius: 16px;
 }
 
-.reverseButton {
+.reverseButton { 
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -134,7 +178,7 @@ meter::moz-meter-bar{
 }
 
 .reverseButton img {
-    height: 20px;
-    margin:5px;
+    height: 1.5vw;
+    margin: 5px;
 
 }
