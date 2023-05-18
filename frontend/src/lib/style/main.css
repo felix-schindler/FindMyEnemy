@@ -48,7 +48,6 @@
 
 
 .form {
-
     display: flex;
     gap: 1.5em;
     justify-content: center;
@@ -61,20 +60,20 @@
       margin-top: auto 0; 
     }
     p {
-         font-size: 2vw;
+        font-size: 0.8rem; 
         line-height: 1.5;
     }
     
     h3 {
-         font-size: 2.5vw; 
+         font-size: 1.2rem; 
         line-height: 1.5;
     }
     h2 {
-        font-size: 3vw; 
+        font-size: 1.5rem; 
         line-height: 1.5;
     }
     h1 {
-        font-size: 3.5vw;
+        font-size: 2rem;
         line-height: 1.5;
     } 
 }
@@ -97,7 +96,7 @@
         line-height: 1.5;
     }
     h1 {
-         font-size: clamp(20px, 3vw, 26px); 
+         font-size: clamp(20px, 4vw, 34px); 
         line-height: 1.5;
     } 
     
