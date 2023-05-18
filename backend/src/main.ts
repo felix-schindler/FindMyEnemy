@@ -55,7 +55,7 @@ app.post("/users/auth/register", UserController.shared.register);
 // Question and answer routes
 Log.info("Hono", "Registering question and answer routes");
 app.get("/questions", QuestionController.shared.getList);
-app.post("/questions/answers", QuestionController.shared.createAnswers);
+app.post("/questions/personality", QuestionController.shared.personality);
 
 // Error handler
 app.onError((err, c) => {

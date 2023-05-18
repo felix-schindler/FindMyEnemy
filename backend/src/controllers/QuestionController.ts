@@ -15,9 +15,8 @@ export default class QuestionController extends Controller {
 		return c.json(questions);
 	}
 
-	// TODO: Save to DB
-	public async createAnswers(
-		c: Context<Env, "/questions/answers">,
+	public async personality(
+		c: Context<Env, "/questions/personality">,
 	): Promise<Response> {
 		const userAnswers = await c.req.json() as UserAnswer[];
 
