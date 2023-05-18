@@ -8,17 +8,29 @@
   let vwValue = 0;
 
   let scrollPosition = 0;
+  let scrollPosition2 = 0;
 
   onMount(() => {
     const container = document.querySelector('.grid-container');
+    const container2 = document.querySelector('.grid-container2');
     const buttonPrev = document.querySelector('.prevButton');
     const buttonNext = document.querySelector('.nextButton');
+    const buttonPrev2 = document.querySelector('.prevButton2');
+    const buttonNext2 = document.querySelector('.nextButton2');
 
-    if (container && buttonPrev && buttonNext) {
+    if (container && container2 && buttonPrev && buttonNext && buttonPrev2 && buttonNext2) {
       const scrollLeft = () => {
         scrollPosition -= container.clientWidth;
         container.scrollTo({
           left: scrollPosition,
+          behavior: 'smooth'
+        });
+      };
+
+      const scrollLeft2 = () => {
+        scrollPosition2 -= container2.clientWidth;
+        container2.scrollTo({
+          left: scrollPosition2,
           behavior: 'smooth'
         });
       };
@@ -31,8 +43,18 @@
         });
       };
 
+      const scrollRight2 = () => {
+        scrollPosition2 += container2.clientWidth;
+        container2.scrollTo({
+          left: scrollPosition2,
+          behavior: 'smooth'
+        });
+      };
+
       buttonPrev.addEventListener('click', scrollLeft);
       buttonNext.addEventListener('click', scrollRight);
+      buttonPrev2.addEventListener('click', scrollLeft2);
+      buttonNext2.addEventListener('click', scrollRight2);
     }
   });
 
@@ -106,6 +128,7 @@
       description: "12km"
     }
   ];
+
 </script>
 
 <main>
@@ -148,7 +171,7 @@
 <div class="top-enemies"> 
   <h2 style="margin-bottom: 2%;">Your mortal enemies</h2>
   
-  <div class="grid-container">
+  <div class="grid-container2">
     {#each products as product (product.id)}
       <div class="grid-item">
         <img src={product.imageSrc} alt={product.title} />
@@ -163,8 +186,8 @@
   </div>
   
  <div class="buttons">
-    <button class="reverseButton prevButton"><img src='/src/lib/images/back-icon.svg' alt="Back"></button>
-    <button class="reverseButton nextButton"><img src='/src/lib/images/next-icon.svg' alt="Next"></button>
+    <button class="reverseButton prevButton2"><img src='/src/lib/images/back-icon.svg' alt="Back"></button>
+    <button class="reverseButton nextButton2"><img src='/src/lib/images/next-icon.svg' alt="Next"></button>
   </div> 
 </main>
 
@@ -181,7 +204,7 @@
     margin: 10px;
   }
 
-.grid-container {
+.grid-container, .grid-container2 {
     display: flex;
     overflow-x: auto;
     scroll-behavior: smooth;

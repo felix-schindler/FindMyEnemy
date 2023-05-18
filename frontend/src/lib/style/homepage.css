@@ -16,7 +16,7 @@
   }
 
 
-.grid-container {
+.grid-container, .grid-container2 {
   display: flex;
   gap: 5%;
   overflow-x: scroll;

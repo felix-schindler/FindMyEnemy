@@ -64,6 +64,7 @@
          font-size: 2vw;
         line-height: 1.5;
     }
+    
     h3 {
          font-size: 2.5vw; 
         line-height: 1.5;
@@ -76,9 +77,9 @@
         font-size: 3.5vw;
         line-height: 1.5;
     } 
-
-    
 }
+
+
 @media (min-width: 601px) {
     .form {
         margin: 0 clamp(10px, 30vw, 450px); 
@@ -99,10 +100,10 @@
          font-size: clamp(20px, 3vw, 26px); 
         line-height: 1.5;
     } 
+    
 }
 
-input {
-    padding: 30px;
+input { padding: 30px;
     padding-left: 40px ;
     border: none; 
     background-repeat: no-repeat;
