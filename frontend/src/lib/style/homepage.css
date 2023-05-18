@@ -44,8 +44,13 @@
   left: 0;
   width: 100%;
   padding: 10px;
-  background-color: rgba(50, 46, 46, 0.7);
+  background-color: rgba(82, 79, 79, 0.371);
   color: #fff;
+}
+
+.user-details{
+  display: flex;
+  justify-content: space-between;
 }
 
 .user-information h3,

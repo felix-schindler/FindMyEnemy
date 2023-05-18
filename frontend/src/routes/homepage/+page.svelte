@@ -67,47 +67,51 @@
       id: 1,
       imageSrc: "/src/lib/images/SpongeBob_SquarePants_character.svg.png",
       title: "Timothy",
-      description: "Description of Product 1"
+      compatibility: "89%",
+      description: "12km"
     },
     {
       id: 2,
       imageSrc: "/src/lib/images/SpongeBob_SquarePants_character.svg.png",
       title: "Benjamin",
-      description: "Description of Product 2"
+      compatibility: "89%",
+      description: "12km"
     },
     {
       id: 3,
       imageSrc: "/src/lib/images/SpongeBob_SquarePants_character.svg.png",
       title: "Benjamin",
-      description: "Description of Product 2"
+      compatibility: "89%",
+      description: "12km"
     },
     {
       id: 4,
       imageSrc: "/src/lib/images/SpongeBob_SquarePants_character.svg.png",
       title: "Benjamin",
-      description: "Description of Product 2"
+      compatibility: "89%",
+      description: "12km"
     },
     {
       id: 5,
       imageSrc: "/src/lib/images/SpongeBob_SquarePants_character.svg.png",
       title: "Benjamin",
-      description: "Description of Product 2"
+      compatibility: "89%",
+      description: "12km"
     },
     {
       id: 6,
       imageSrc: "/src/lib/images/SpongeBob_SquarePants_character.svg.png",
       title: "Benjamin",
-      description: "Description of Product 2"
+      compatibility: "89%",
+      description: "12km"
     }
-   
-    // Add more products here
   ];
 </script>
 
 <main>
 
-  <p>The viewport width is: {viewportWidth}px</p>
-  <p>The vw value is: {vwValue}</p>
+  <!-- <p>The viewport width is: {viewportWidth}px</p>
+  <p>The vw value is: {vwValue}</p> -->
   <div class="searchBar">
   <input type="search" class="search-bar" placeholder="Search...">
   </div>
@@ -122,7 +126,10 @@
     <div class="grid-item">
       <img src={product.imageSrc} alt={product.title} />
       <div class="user-information">
+        <div class="user-details">
         <h3>{product.title}</h3>
+        <h2>{product.compatibility}</h2>
+      </div>
         <p>{product.description}</p>
       </div>
     </div>
@@ -168,6 +175,10 @@
     align-items: center;
     margin: auto;
     width: 100%;
+  }
+
+  .buttons button {
+    margin: 10px;
   }
 
 .grid-container {
