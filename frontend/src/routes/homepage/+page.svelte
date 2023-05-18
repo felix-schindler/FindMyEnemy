@@ -58,11 +58,16 @@
     }
   });
 
+  $: {
+  viewportWidth = document.documentElement.clientWidth;
+  }
+
   function getVWValue() {
-    const viewportWidth = document.documentElement.clientWidth;
+     const viewportWidth = document.documentElement.clientWidth;
     const vwValue = (26/ viewportWidth) * 100;
     return vwValue;
   }
+
 
   vwValue = getVWValue();
 
@@ -133,16 +138,17 @@
 
 <main>
 
-  <!-- <p>The viewport width is: {viewportWidth}px</p>
-  <p>The vw value is: {vwValue}</p> -->
+   <!-- <p>The viewport width is: {viewportWidth}px</p>
+  <p>The vw value is: {vwValue}</p>  -->
   <div class="searchBar">
   <input type="search" class="search-bar" placeholder="Search...">
   </div>
+  
 <div class="top-enemies">
 
-<h1 style="margin-bottom: 4%;">Hi Blablo <br> something here! </h1>
+<h1 style="margin-bottom: 24px;">Hi Blablo</h1>
 
-<h2 style="margin-bottom: 2%;">Top enemies</h2>
+<h2 style="margin-bottom: 16px;">Top enemies</h2>
 
 <div class="grid-container" >
   {#each products as product (product.id)}
@@ -151,7 +157,7 @@
       <div class="user-information">
         <div class="user-details">
         <h3>{product.title}</h3>
-        <h2>{product.compatibility}</h2>
+        <h3>{product.compatibility}</h3>
       </div>
         <p>{product.description}</p>
       </div>
@@ -161,15 +167,20 @@
 
 </div>
 
+{#if viewportWidth > 601 } 
 <div class="buttons">
   <button class="reverseButton prevButton"  ><img src='/src/lib/images/back-icon.svg' alt="Back"></button>
   <button class="reverseButton nextButton" ><img src='/src/lib/images/next-icon.svg' alt="Next"></button>
-</div>
-
-
+</div> 
+ {:else}
+<div class="buttons-mobile">
+  <button class="reverseButton"  ><img src='/src/lib/images/back-icon.svg' alt="Back"></button>
+  <button class="reverseButton" ><img src='/src/lib/images/next-icon.svg' alt="Next"></button>
+</div> 
+{/if} 
 
 <div class="top-enemies"> 
-  <h2 style="margin-bottom: 2%;">Your mortal enemies</h2>
+  <h2 style="margin-bottom: 16px;">Your mortal enemies</h2>
   
   <div class="grid-container2">
     {#each products as product (product.id)}
@@ -185,11 +196,19 @@
   
   </div>
   
- <div class="buttons">
-    <button class="reverseButton prevButton2"><img src='/src/lib/images/back-icon.svg' alt="Back"></button>
-    <button class="reverseButton nextButton2"><img src='/src/lib/images/next-icon.svg' alt="Next"></button>
+  {#if viewportWidth > 601 }
+  <div class="buttons">
+    <button class="reverseButton prevButton2"  ><img src='/src/lib/images/back-icon.svg' alt="Back"></button>
+    <button class="reverseButton nextButton2" ><img src='/src/lib/images/next-icon.svg' alt="Next"></button>
   </div> 
-</main>
+  {:else}
+  <div class="buttons-mobile">
+    <button class="reverseButton"  ><img src='/src/lib/images/back-icon.svg' alt="Back"></button>
+    <button class="reverseButton" ><img src='/src/lib/images/next-icon.svg' alt="Next"></button>
+  </div> 
+  {/if}
+
+</main> 
 
 <style>
   .buttons {
@@ -204,9 +223,10 @@
     margin: 10px;
   }
 
-.grid-container, .grid-container2 {
-    display: flex;
-    overflow-x: auto;
-    scroll-behavior: smooth;
+  .buttons-mobile{
+    display:none;
+
   }
+
+  
 </style>

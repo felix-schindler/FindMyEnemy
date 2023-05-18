@@ -4,14 +4,16 @@
 .searchBar{
     display: flex;
     justify-content: center;
+    margin-bottom: 32px;
   }
 
 .search-bar {
-  width: 45vw; 
+  width: 80vw; 
+  height: 20px;
 }
 
 .top-enemies{
-    margin: 0 calc(8%);
+    margin-left: calc(8%);
     margin-top: 3vw
   }
 
@@ -19,12 +21,12 @@
 .grid-container, .grid-container2 {
   display: flex;
   gap: 5%;
-  overflow-x: scroll;
-  scroll-behavior: smooth;
+   /* overflow-x: scroll;  */
+    /* overflow-x: auto; */
 }
 
 .grid-item {
-  flex: 0 0 clamp(30px, 30vw, 300px); 
+   flex: 0 0 clamp(30px, 50vw, 300px);  
   position: relative;
   overflow: hidden;
   margin-right: var(--gap-width);
@@ -62,10 +64,17 @@
   transform: scale(1.1);
 }
 
-/* .buttons {
-  display: flex;
-  justify-content: center;
-  gap: 1%;
-  overflow-x: auto; 
-} */
+  @media (min-width: 601px) {
+  .grid-container, .grid-container2 {
+    overflow-x: scroll; 
+}
+ }
+
+@media (max-width: 600px) {
+  .grid-container, .grid-container2 {
+      overflow-x: auto; 
+  }
+} 
+  
+
 
