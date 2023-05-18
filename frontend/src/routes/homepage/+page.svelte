@@ -148,7 +148,10 @@
 
 <h1 style="margin-bottom: 24px;">Hi Blablo</h1>
 
-<h2 style="margin-bottom: 16px;">Top enemies</h2>
+<div class="moredetails-button">
+<h2>Discover top enemies</h2>
+<span class="moredetails-icon"></span>
+</div>
 
 <div class="grid-container" >
   {#each products as product (product.id)}
@@ -156,8 +159,8 @@
       <img src={product.imageSrc} alt={product.title} />
       <div class="user-information">
         <div class="user-details">
-        <h3>{product.title}</h3>
-        <h3>{product.compatibility}</h3>
+        <p><b>{product.title}</b></p>
+        <p><b>{product.compatibility}</b></p>
       </div>
         <p>{product.description}</p>
       </div>
@@ -174,20 +177,26 @@
 </div> 
  {:else}
 <div class="buttons-mobile">
-  <button class="reverseButton"  ><img src='/src/lib/images/back-icon.svg' alt="Back"></button>
+  <button class="reverseButton"><img src='/src/lib/images/back-icon.svg' alt="Back"></button>
   <button class="reverseButton" ><img src='/src/lib/images/next-icon.svg' alt="Next"></button>
 </div> 
 {/if} 
 
 <div class="top-enemies"> 
-  <h2 style="margin-bottom: 16px;">Your mortal enemies</h2>
+  <div class="moredetails-button">
+    <h2>Your mortal enemies</h2>
+    <span class="moredetails-icon"></span>
+    </div>
   
   <div class="grid-container2">
     {#each products as product (product.id)}
       <div class="grid-item">
         <img src={product.imageSrc} alt={product.title} />
         <div class="user-information">
-          <h3>{product.title}</h3>
+          <div class="user-details">
+          <p>{product.title}</p>
+           <p><b>{product.compatibility}</b></p>
+          </div>
           <p>{product.description}</p>
         </div>
       </div>
@@ -203,7 +212,7 @@
   </div> 
   {:else}
   <div class="buttons-mobile">
-    <button class="reverseButton"  ><img src='/src/lib/images/back-icon.svg' alt="Back"></button>
+    <button class="reverseButton"><img src='/src/lib/images/back-icon.svg' alt="Back"></button>
     <button class="reverseButton" ><img src='/src/lib/images/next-icon.svg' alt="Next"></button>
   </div> 
   {/if}
@@ -225,7 +234,21 @@
 
   .buttons-mobile{
     display:none;
+  }
 
+  .moredetails-button{
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .moredetails-icon{
+    display:inline-block;
+  width: 8px; /* Adjust the width and height as needed */
+  height: 12px;
+  background-image: url(/src/lib/images/moredetails.svg);  
+  background-size: cover; 
+  margin-left: 10px; 
   }
 
   
