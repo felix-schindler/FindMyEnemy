@@ -41,12 +41,12 @@
 }
 
 .back-button {
-	position: absolute;
 	top: 2rem;
 	left: 2rem;
 	background-color: transparent;
 	border: none;
 	cursor: pointer;
+	text-align: left;
 }
 
 meter {

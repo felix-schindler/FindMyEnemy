@@ -40,10 +40,6 @@
 	{/if}
 </div>
 
-<button class="mainBtn">
-	<span>Click Me!</span>
-</button>
-
 <style>
 	.persContainer {
 		display: flex;

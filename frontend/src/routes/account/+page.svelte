@@ -14,23 +14,18 @@
     function saveUsername() {
         editing = false;
     }
-
     function deleteAccount() {
     // Logic for deleting the account
     }
-
     function changePassword() {
         // Logic for changing the password
     }
-
     function viewChallengeHistory() {
         // Logic for viewing the challenge history
     }
-
     function viewFrenemies() {
         // Logic for viewing frenemies
     }
-
     function logOut() {
         // Logic for logging out
     }
