@@ -1,13 +1,13 @@
 <script lang="ts">
 	import '$lib/style/main.css';
 	import BackButton from '../BackButton.svelte';
-	import leftCheveron from '$lib/images/left-cheveron.svg';
 	import openEdit from '$lib/images/edit.svg';
 	import check from '$lib/images/check.svg';
 	import deleteIcon from '$lib/images/delete.svg';
 	import changePasswordIcon from '$lib/images/lock.svg';
 	import challengeHistoryIcon from '$lib/images/star.svg';
 	import frenemiesIcon from '$lib/images/users.svg';
+	import AccountButton from '../AccountButton.svelte';
 
 	let username = 'Username'; // Beispiel-Benutzername
 	let editing = false;
@@ -33,20 +33,14 @@
 </script>
 
 <div>
+	<AccountButton/>
+</div>
+<div>
 	<BackButton/>
 </div>
 
+
 <div class="container">
-<!-- 	<div class="back-button">
-		<button
-			class="back-button"
-			on:click={() => {
-				window.history.back();
-			}}
-		>
-			<img src={leftCheveron} alt="Back" />
-		</button>
-	</div> -->
 	<div class="content">
 		<div class="profile-img">
 			<img src="https://via.placeholder.com/150" alt="profile picture" />
