@@ -9,4 +9,4 @@ frontend/package
 vite.config.ts.timestamp-*
 
 # Database
-data/fme_data.db
+db/data
