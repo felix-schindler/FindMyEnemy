@@ -41,16 +41,16 @@ app.use(
 	}),
 );
 
-// User routes
 Log.info("Hono", "Registering user routes");
+// Auth routes
+app.post("/users", UserController.shared.register);
+app.post("/users/login", UserController.shared.login);
+// Normal routes
 app.get("/users", UserController.shared.getList);
 app.get("/users/:id", UserController.shared.get);
 app.patch("/users/:id", UserController.shared.update);
 app.put("/users/:id", UserController.shared.replace);
 app.delete("/users/:id", UserController.shared.delete);
-// Auth routes
-app.post("/users/auth", UserController.shared.login);
-app.post("/users/auth/register", UserController.shared.register);
 
 // Question and answer routes
 Log.info("Hono", "Registering question and answer routes");
