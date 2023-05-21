@@ -19,7 +19,7 @@ services:
       POSTGRES_PASSWORD: DnxctEotDlNsk3FuOoVm
     volumes:
       - ./db/data:/var/lib/postgresql/data
-      - ./db/data/db-init-scripts/:/docker-entrypoint-initdb.d/
+      - ./db/db-init-scripts/:/docker-entrypoint-initdb.d/
 
 volumes:
   data:
