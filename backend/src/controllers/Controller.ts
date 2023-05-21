@@ -1,8 +1,6 @@
 import type { Context } from "hono/mod.ts";
 
 export default abstract class Controller {
-	protected abstract readonly table: Readonly<string>;
-
 	protected constructor() {}
 }
 
