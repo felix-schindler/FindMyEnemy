@@ -1,13 +1,13 @@
 import { app } from "../main.ts";
 import { assertEquals, assertNotEquals } from "$std/testing/asserts.ts";
 
-Deno.test("Test all routes", async () => {
+Deno.test("User routes", async () => {
 	// deno-lint-ignore no-explicit-any
 	let res: Response, body: any;
 
 	// #region Login
 
-	res = await app.request("/auth", {
+	res = await app.request("/users/login", {
 		method: "POST",
 		body: JSON.stringify({
 			user: "admin",
