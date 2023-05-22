@@ -1,9 +1,8 @@
 import { Hono } from "hono/mod.ts";
-import { cors, jwt, logger, prettyJSON } from "hono/middleware.ts";
+import { cors, logger, prettyJSON } from "hono/middleware.ts";
 import { HTTPException } from "hono/http-exception.ts";
 
 import Log from "./core/Log.ts";
-import { JWT_SECRET } from "./core/stores.ts";
 import UserController from "./controllers/UserController.ts";
 import QuestionController from "./controllers/QuestionController.ts";
 import { Status } from "./core/types.ts";
@@ -33,15 +32,6 @@ export const app = new Hono();
 Log.info("Hono", "Registering std middleware");
 app.use(prettyJSON(), cors());
 if (Log.enabled) app.use("*", logger());
-
-// Require authentication for all routes starting with /enemies
-Log.info("Hono", "Registering auth middleware");
-app.use(
-	"/enemies/*",
-	jwt({
-		secret: JWT_SECRET,
-	}),
-);
 
 Log.info("Hono", "Registering user routes");
 // Auth routes
