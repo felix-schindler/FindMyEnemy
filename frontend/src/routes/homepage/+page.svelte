@@ -2,6 +2,9 @@
 <script>
   import '$lib/style/main.css';
   import '$lib/style/homepage.css';
+  import AccountButton from '../AccountButton.svelte';
+
+
   import { onMount, onDestroy } from 'svelte';
 
   let viewportWidth = 0;
@@ -117,26 +120,15 @@
       title: "Benjamin",
       compatibility: "89%",
       description: "12km"
-    },
-    {
-      id: 5,
-      imageSrc: "/src/lib/images/SpongeBob_SquarePants_character.svg.png",
-      title: "Benjamin",
-      compatibility: "89%",
-      description: "12km"
-    },
-    {
-      id: 6,
-      imageSrc: "/src/lib/images/SpongeBob_SquarePants_character.svg.png",
-      title: "Benjamin",
-      compatibility: "89%",
-      description: "12km"
     }
   ];
 
 </script>
 
 <main>
+
+  <AccountButton/>
+
 
    <!-- <p>The viewport width is: {viewportWidth}px</p>
   <p>The vw value is: {vwValue}</p>  -->
