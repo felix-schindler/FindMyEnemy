@@ -1,7 +1,8 @@
 // The most simple API answer
 export type Status = {
-	success: boolean;
-	message: string;
+	status: number;
+	msg: string;
+	raw: unknown;
 };
 
 export type User = {

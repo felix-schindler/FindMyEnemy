@@ -13,16 +13,16 @@ export default class UserController extends AuthController {
 	public static readonly shared = new UserController();
 
 	override async login(c: Context<Env, "/users/login">): Promise<Response> {
-		const { user, password } = await c.req.json();
+		const { username, password } = await c.req.json();
 
-		if (!(user && password)) {
+		if (!(username && password)) {
 			throw new HttpError(400, "Missing user or password");
 		}
 
 		// Get user from database
 		const dbUser = (await db.queryObject<User>(
 			"SELECT * FROM user WHERE username = $user;",
-			{ user },
+			{ username },
 		)).rows[0];
 
 		// Check password
@@ -124,8 +124,8 @@ export default class UserController extends AuthController {
 		const success = rowCount == 1;
 
 		return c.json<Status>({
-			success: success,
-			message: success ? "User deleted" : "Failed to delete user",
+			status: success ? 200 : 500,
+			msg: success ? "User deleted" : "Failed to delete user",
 		});
 	}
 }

@@ -6,6 +6,7 @@ import Log from "./core/Log.ts";
 import { JWT_SECRET } from "./core/stores.ts";
 import UserController from "./controllers/UserController.ts";
 import QuestionController from "./controllers/QuestionController.ts";
+import { Status } from "./core/types.ts";
 
 if (Deno.args.includes("--help")) {
 	console.log(
@@ -65,7 +66,7 @@ app.onError((err, c) => {
 		return err.getResponse();
 	}
 
-	return c.json({
+	return c.json<Status>({
 		status: 500,
 		msg: err.message ?? "Internal server error",
 		raw: err,
