@@ -16,7 +16,7 @@ export default class UserController extends AuthController {
 		const { username, password } = await c.req.json();
 
 		if (!(username && password)) {
-			throw new HttpError(400, "Missing user or password");
+			throw new HttpError(400, "Missing username or password");
 		}
 
 		// Get user from database
@@ -215,10 +215,10 @@ export default class UserController extends AuthController {
 			throw new HttpError(401);
 		}
 
-		const id = c.req.param("id");
-		const user_id: string = decode(token).payload.id;
+		const id = Number(c.req.param("id"));
+		const user_id: number = decode(token).payload.id;
 
-		if (id !== user_id) throw new HttpError(403);
+		if (id !== user_id) throw new HttpError(403, `${user_id} is not allowed to delete ${id}`);
 
 		const rowCount =
 			(await db.queryObject(`DELETE FROM users WHERE id = $1; `, [user_id]))
