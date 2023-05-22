@@ -40,6 +40,15 @@
 	justify-content: center;
 }
 
+.back-button {
+	top: 2rem;
+	left: 2rem;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	text-align: left;
+}
+
 meter {
 	display: flex;
 	margin-bottom: 1rem;
