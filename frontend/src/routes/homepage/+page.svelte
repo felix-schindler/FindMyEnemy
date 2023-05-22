@@ -142,7 +142,21 @@
 
 <div class="moredetails-button">
 <h2>Discover top enemies</h2>
-<span class="moredetails-icon"></span>
+<!-- <button class="moredetails-icon" on:click={() => {
+  window.location.href = '/top-enemies';
+}}>
+  <img src="/src/lib/images/moredetails.svg" alt="Button" /> 
+</button> -->
+
+<button
+		class="moredetails-icon"
+		on:click={() => {
+			window.location.href = '/top-enemies';
+		}}
+	>
+		<img src="/src/lib/images/moredetails.svg" alt="Back" />
+	</button>
+
 </div>
 
 <div class="grid-container" >
@@ -234,12 +248,12 @@
     margin-bottom: 16px;
   }
 
-  .moredetails-icon{
-    display:inline-block;
+  .moredetails-icon img {
+    /* display:inline-block; */
   width: 8px; /* Adjust the width and height as needed */
   height: 12px;
-  background-image: url(/src/lib/images/moredetails.svg);  
-  background-size: cover; 
+   /* background-image: url(/src/lib/images/moredetails.svg);    */
+  /* background-size: cover;  */
   margin-left: 10px; 
   }
 

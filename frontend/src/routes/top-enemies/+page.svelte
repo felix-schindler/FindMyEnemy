@@ -61,7 +61,7 @@
 
 <div class="grid-container" >
   {#each enemies as enemy (enemy.id)}
-    <div class="grid-item">
+    <div class="enemy-grid-item">
 
       <div class="image-container">
 
@@ -102,7 +102,7 @@
     gap: 3%;
   }
   
-    .grid-item {
+    .enemy-grid-item {
      display: flex;
      flex-basis: 100%;
       margin-bottom: 34px;
@@ -157,7 +157,7 @@
   background-size: cover; 
   }
   @media (min-width: 601px) {
-    .grid-item {
+    .enemy-grid-item {
       flex-basis: calc(50% - 3%);
     }
   }
