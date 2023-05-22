@@ -91,14 +91,18 @@
 
   .grid-container {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
+    flex-wrap: wrap;
+    gap: 3%;
   }
   
     .grid-item {
      display: flex;
+     flex-basis: 100%;
       margin-bottom: 34px;
       border-radius: 10%;
       background-color: #201254;
+      box-sizing: border-box;
      }
 
  .image-container {
@@ -140,11 +144,15 @@
 
 .filter-icon{
     display:inline-block;
-  width: 32px; /* Adjust the width and height as needed */
+  width: 32px; 
   height: 28px;
   background-image: url(/src/lib/images/filter-icon.svg);  
   background-size: cover; 
   }
-
+  @media (min-width: 601px) {
+    .grid-item {
+      flex-basis: calc(50% - 3%);
+    }
+  }
 
 </style>
