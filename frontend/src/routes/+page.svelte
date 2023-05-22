@@ -8,4 +8,4 @@
 <a href="/personality-test">Take the test</a>
 <a href="/onboarding">Onboarding</a>
 <a href="/homepage">Homepage</a>
-
+<a href="/top-enemies">Top enemies</a>

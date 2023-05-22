@@ -92,7 +92,7 @@
     window.removeEventListener('resize', updateViewportWidth);
   });
 
-  let products = [
+  let users = [
     {
       id: 1,
       imageSrc: "/src/lib/images/SpongeBob_SquarePants_character.svg.png",
@@ -146,15 +146,15 @@
 </div>
 
 <div class="grid-container" >
-  {#each products as product (product.id)}
+  {#each users as user (user.id)}
     <div class="grid-item">
-      <img src={product.imageSrc} alt={product.title} />
+      <img src={user.imageSrc} alt={user.title} />
       <div class="user-information">
         <div class="user-details">
-        <p><b>{product.title}</b></p>
-        <p><b>{product.compatibility}</b></p>
+        <p><b>{user.title}</b></p>
+        <p><b>{user.compatibility}</b></p>
       </div>
-        <p>{product.description}</p>
+        <p>{user.description}</p>
       </div>
     </div>
   {/each}
@@ -181,15 +181,15 @@
     </div>
   
   <div class="grid-container2">
-    {#each products as product (product.id)}
+    {#each users as user (user.id)}
       <div class="grid-item">
-        <img src={product.imageSrc} alt={product.title} />
+        <img src={user.imageSrc} alt={user.title} />
         <div class="user-information">
           <div class="user-details">
-          <p>{product.title}</p>
-           <p><b>{product.compatibility}</b></p>
+          <p>{user.title}</p>
+           <p><b>{user.compatibility}</b></p>
           </div>
-          <p>{product.description}</p>
+          <p>{user.description}</p>
         </div>
       </div>
     {/each}
@@ -244,4 +244,5 @@
   }
 
   
+
 </style>

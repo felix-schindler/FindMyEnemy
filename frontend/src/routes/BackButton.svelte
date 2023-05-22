@@ -15,7 +15,7 @@
 
 <style>
 	.backBtnContainer {
-		margin-left: 6rem;
+		margin-left:  8%;
 	}
 
 	img {
