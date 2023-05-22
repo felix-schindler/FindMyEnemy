@@ -48,11 +48,11 @@
 
 <main>
 
+  <AccountButton/>
+  
+  <BackButton/>
+
   <div class="top-enemies">
-
-      <AccountButton/>
-
-      <BackButton/>
 
     <div class="filter-button">
       <h1 style="margin-bottom: 24px;">Top Enemies</h1>
@@ -90,9 +90,9 @@
 <style>
 
 .top-enemies{
-    margin-left: calc(8%);
-    margin-right: calc(8%);
-    margin-top: 3vw
+    margin-left: 8%;
+    margin-right: 8%;
+    margin-top: 3%
   }
 
   .grid-container {
@@ -145,7 +145,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 16px;
+    margin-bottom: 5%;
+    margin-top: 5%;
   }
 
 .filter-icon{
