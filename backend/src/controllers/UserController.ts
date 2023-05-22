@@ -116,7 +116,7 @@ export default class UserController extends AuthController {
 
 		// Check if user is trying to update another user
 		if (id !== user.id) {
-			throw new HttpError(403, `${user.id} tried to update ${id}`);
+			throw new HttpError(403, `${user.id} is not allowed to update ${id}`);
 		}
 
 		const { username, password, personality } = await c.req.json();
@@ -160,8 +160,53 @@ export default class UserController extends AuthController {
 		});
 	}
 
-	replace(_c: Context<Env, "/users/:id">): Promise<Response> {
-		throw new HttpError(501);
+	async replace(c: Context<Env, "/users/:id">): Promise<Response> {
+		// Check authentication and access
+		const token = c.req.header("Authorization");
+		if (!token || !verify(token, JWT_SECRET)) throw new HttpError(401);
+
+		// Get user from JWT
+		const user = decode(token).payload as ClientUser;
+		const id = Number(c.req.param("id"));
+
+		// Check if user is trying to update another user
+		if (id !== user.id) {
+			throw new HttpError(403, `${user.id} is not allowed to update ${id}`);
+		}
+
+		// Update user in database
+		const { username, password, personality } = await c.req.json();
+		if (!(username && password && personality)) {
+			throw new HttpError(400, "Missing fields");
+		}
+
+		const qStr =
+			"UPDATE users SET username = $username, password = $password, personality = $personality WHERE id = $id;";
+		const rowCount = (await db.queryObject(qStr, {
+			id,
+			username,
+			password: await hash(password),
+			personality,
+		})).rowCount ?? 0;
+
+		// Build response
+		const cUser: ClientUser = {
+			id,
+			username,
+			personality,
+		};
+
+		return c.json<Status>({
+			status: rowCount == 1 ? 200 : 500,
+			msg: rowCount == 1 ? "User updated" : "Failed to update user",
+			raw: {
+				rowCount,
+				user: {
+					...cUser,
+					token: await sign(cUser, JWT_SECRET),
+				}
+			},
+		});
 	}
 
 	async delete(c: Context<Env, "/users/:id">): Promise<Response> {
