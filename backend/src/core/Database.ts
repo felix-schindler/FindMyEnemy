@@ -6,11 +6,12 @@ export default class Database extends Client {
 
 	private constructor() {
 		Log.info("DB", "Connecting");
+
 		super({
 			user: "postgres",
 			password: "DnxctEotDlNsk3FuOoVm",
 			database: "postgres",
-			hostname: "localhost",
+			hostname: Deno.env.get("DEV") ? "localhost" : "db",
 			port: 5432,
 		});
 	}
