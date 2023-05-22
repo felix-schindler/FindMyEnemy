@@ -2,6 +2,8 @@
 <script>
 
   import { onMount, onDestroy } from 'svelte';
+  import AccountButton from '../AccountButton.svelte';
+  import BackButton from '../BackButton.svelte';
 
   let enemies = [
     {
@@ -47,6 +49,10 @@
 <main>
 
   <div class="top-enemies">
+
+      <AccountButton/>
+
+      <BackButton/>
 
     <div class="filter-button">
       <h1 style="margin-bottom: 24px;">Top Enemies</h1>
