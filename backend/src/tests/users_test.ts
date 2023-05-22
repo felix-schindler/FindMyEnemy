@@ -1,4 +1,4 @@
-import { app } from "../main.ts";
+import { ac, app } from "../main.ts";
 import { assertEquals, assertNotEquals } from "$std/testing/asserts.ts";
 import { AuthUser } from "../core/types.ts";
 
@@ -120,6 +120,8 @@ Deno.test("User delete", async () => {
 	assertEquals(res.status, 200);
 	assertEquals(body.raw.rowCount, 1);
 
-	// @ts-ignore (We know what we're doing)
+	// @ts-ignore (tester has Feierabend)
 	tester = undefined;
 });
+
+ac.abort();

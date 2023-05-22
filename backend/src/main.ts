@@ -84,4 +84,5 @@ if (Deno.args.includes("--show-routes")) {
 }
 
 // Start web server
-Deno.serve(app.fetch);
+export const ac = new AbortController();
+Deno.serve({ signal: ac.signal }, app.fetch);
