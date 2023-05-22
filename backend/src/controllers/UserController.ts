@@ -21,8 +21,8 @@ export default class UserController extends AuthController {
 
 		// Get user from database
 		const dbUser = (await db.queryObject<User>(
-			"SELECT * FROM user WHERE username = $user;",
-			{ username },
+			"SELECT * FROM users WHERE username = $1;",
+			[username],
 		)).rows[0];
 
 		// Check password
@@ -30,11 +30,14 @@ export default class UserController extends AuthController {
 			throw new HttpError(400, "Invalid password");
 		}
 
-		// @ts-ignore - Remove password from user object before sending it to the client
-		delete dbUser.password;
+		const cUser: ClientUser = {
+			id: dbUser.id,
+			username: dbUser.username,
+			personality: dbUser.personality,
+		};
 
 		return c.json<AuthUser>({
-			...dbUser,
+			...cUser,
 			token: await sign(dbUser, JWT_SECRET),
 		});
 	}
@@ -49,22 +52,26 @@ export default class UserController extends AuthController {
 		}
 
 		const user: User = {
-			id: 0,
+			id: 0, // This will be set by the database
 			username,
 			password: await hash(password),
 			personality,
 		};
 
-		const result = (await db.queryObject<{ id: number }>(
-			"INSERT INTO user (username, password, personality) VALUES ($1, $2, $3) RETURNING id;",
+		const insert = (await db.queryObject<{ id: number }>(
+			"INSERT INTO users (username, password, personality) VALUES ($1, $2, $3) RETURNING id;",
 			[user.username, user.password, user.personality],
 		)).rows[0];
 
-		return c.json<AuthUser>({
-			id: result.id,
+		const cUser: ClientUser = {
+			id: insert.id,
 			username: user.username,
-			personality: user.personality!,
-			token: await sign(user, JWT_SECRET),
+			personality: user.personality,
+		};
+
+		return c.json<AuthUser>({
+			...cUser,
+			token: await sign(cUser, JWT_SECRET),
 		});
 	}
 
@@ -73,11 +80,11 @@ export default class UserController extends AuthController {
 		if (!token || !await verify(token, JWT_SECRET)) throw new HttpError(401);
 
 		// Get user from JWT
-		const user = decode(c.req.header("Authorization")!).payload as User;
+		const user = decode(token).payload as ClientUser;
 
 		// Create query string
 		const qStr =
-			"SELECT id, username, personality FROM user WHERE personality != $personality;";
+			"SELECT id, username, personality FROM users WHERE personality != $personality;";
 
 		// Get all users with different personality from database
 		const users = (await db.queryObject<ClientUser>(qStr, {
@@ -89,18 +96,68 @@ export default class UserController extends AuthController {
 
 	async get(c: Context<Env, "/users/:id">): Promise<Response> {
 		const id = c.req.param("id");
-		const user =
-			(await db.queryObject<User>(`SELECT * FROM user WHERE id = $id;`, { id }))
-				.rows[0];
-
-		// @ts-ignore - Remove password from user object before sending it to the client
-		delete dbUser.password;
+		const user = (await db.queryObject<ClientUser>(
+			`SELECT id, username, personality FROM users WHERE id = $1;`,
+			[id],
+		))
+			.rows[0];
 
 		return c.json<ClientUser>(user);
 	}
 
-	update(_c: Context<Env, "/users/:id">): Promise<Response> {
-		throw new HttpError(501);
+	async update(c: Context<Env, "/users/:id">): Promise<Response> {
+		// Check if user is authenticated
+		const token = c.req.header("Authorization");
+		if (!token || !await verify(token, JWT_SECRET)) throw new HttpError(401);
+
+		// Get user from JWT
+		const user = decode(token).payload as ClientUser;
+		const id = Number(c.req.param("id"));
+
+		// Check if user is trying to update another user
+		if (id !== user.id) {
+			throw new HttpError(403, `${user.id} tried to update ${id}`);
+		}
+
+		const { username, password, personality } = await c.req.json();
+
+		// Build update query string paying attention to which fields are being updated
+		let qStr = "UPDATE users SET ";
+		if (username) qStr += "username = $username, ";
+		if (password) qStr += "password = $password, ";
+		if (personality) qStr += "personality = $personality, ";
+		qStr = qStr.slice(0, -2);
+		qStr += " WHERE id = $id;";
+
+		// Build query parameters paying attention to which fields are being updated
+		const qParams = {
+			id,
+			username,
+			password: await hash(password ?? ""),
+			personality,
+		};
+
+		// Execute query
+		const rowCount = (await db.queryObject(qStr, qParams)).rowCount ?? 0;
+
+		// Build response
+		const cUser: ClientUser = {
+			id: qParams.id,
+			username: qParams.username ?? user.username,
+			personality: qParams.personality ?? user.personality,
+		};
+
+		return c.json<Status>({
+			status: rowCount == 1 ? 200 : 500,
+			msg: rowCount == 1 ? "User updated" : "Failed to update user",
+			raw: {
+				rowCount,
+				user: {
+					...cUser,
+					token: await sign(cUser, JWT_SECRET),
+				},
+			},
+		});
 	}
 
 	replace(_c: Context<Env, "/users/:id">): Promise<Response> {
@@ -119,13 +176,14 @@ export default class UserController extends AuthController {
 		if (id !== user_id) throw new HttpError(403);
 
 		const rowCount =
-			(await db.queryObject(`DELETE FROM user WHERE id = $id;`, { user_id }))
+			(await db.queryObject(`DELETE FROM users WHERE id = $1; `, [user_id]))
 				.rowCount ?? 0;
 		const success = rowCount == 1;
 
 		return c.json<Status>({
 			status: success ? 200 : 500,
 			msg: success ? "User deleted" : "Failed to delete user",
+			raw: { rowCount },
 		});
 	}
 }

@@ -21,8 +21,8 @@ export default class QuestionController extends Controller {
 					'category', a.category
 				)) AS answers
 			FROM
-				question q
-				JOIN answer a ON q.id = a.question_id
+				questions q
+				JOIN answers a ON q.id = a.question_id
 			GROUP BY
 				q.id, q.content
 			ORDER BY
