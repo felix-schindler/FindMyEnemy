@@ -1,17 +1,18 @@
-import { Surreal } from "surrealdb";
+import { Client } from "postgres";
 import Log from "./Log.ts";
 
-export default class Database extends Surreal {
+export default class Database extends Client {
 	public static shared = new Database();
 
 	private constructor() {
 		Log.info("DB", "Connecting");
-		super("http://localhost/db/rpc");
-		this.signin({
-			NS: "fme",
-			DB: "fme",
-			user: "fme",
-			pass: "ba7825d4",
+
+		super({
+			user: "postgres",
+			password: "DnxctEotDlNsk3FuOoVm",
+			database: "postgres",
+			hostname: Deno.env.get("DEV") ? "localhost" : "db",
+			port: 5432,
 		});
 	}
 }
