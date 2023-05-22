@@ -18,10 +18,7 @@ export type ClientUser = {
 	personality: string;
 };
 
-export type AuthUser = {
-	id: number;
-	username: string;
-	personality: string;
+export type AuthUser = ClientUser & {
 	token: string;
 };
 
