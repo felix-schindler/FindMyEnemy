@@ -3,7 +3,7 @@ import { app } from "../main.ts";
 import { assertEquals, assertNotEquals } from "$std/testing/asserts.ts";
 import { Challenge } from "../core/types.ts";
 
-Deno.test("Challenge routes", async () => {
+Deno.test("Challenges", async () => {
 	// deno-lint-ignore no-explicit-any
 	let res: Response, body: any;
 
