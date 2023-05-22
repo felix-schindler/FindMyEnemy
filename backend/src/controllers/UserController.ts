@@ -142,6 +142,7 @@ export default class UserController extends AuthController {
 
 		// Execute query
 		const rowCount = (await db.queryObject(qStr, qParams)).rowCount ?? 0;
+		const success = rowCount == 1;
 
 		// Build response
 		const cUser: ClientUser = {
@@ -151,14 +152,16 @@ export default class UserController extends AuthController {
 		};
 
 		return c.json<Status>({
-			status: rowCount == 1 ? 200 : 500,
-			msg: rowCount == 1 ? "User updated" : "Failed to update user",
+			status: success ? 200 : 500,
+			msg: success ? "User updated" : "Failed to update user",
 			raw: {
 				rowCount,
-				user: {
-					...cUser,
-					token: await sign(cUser, JWT_SECRET),
-				},
+				user: success
+					? {
+						...cUser,
+						token: await sign(cUser, JWT_SECRET),
+					}
+					: undefined,
 			},
 		});
 	}
@@ -191,6 +194,7 @@ export default class UserController extends AuthController {
 			password: await hash(password),
 			personality,
 		})).rowCount ?? 0;
+		const success = rowCount == 1;
 
 		// Build response
 		const cUser: ClientUser = {
@@ -200,14 +204,16 @@ export default class UserController extends AuthController {
 		};
 
 		return c.json<Status>({
-			status: rowCount == 1 ? 200 : 500,
-			msg: rowCount == 1 ? "User updated" : "Failed to update user",
+			status: success ? 200 : 500,
+			msg: success ? "User updated" : "Failed to update user",
 			raw: {
 				rowCount,
-				user: {
-					...cUser,
-					token: await sign(cUser, JWT_SECRET),
-				},
+				user: success
+					? {
+						...cUser,
+						token: await sign(cUser, JWT_SECRET),
+					}
+					: undefined,
 			},
 		});
 	}
