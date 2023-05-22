@@ -3,7 +3,7 @@
 </script>
 
 <header>
-	<img src={logo} alt="FindMyEnemy" class="logo"/>
+	<img src={logo} alt="FindMyEnemy" class="logo" />
 </header>
 
 <style>
@@ -19,5 +19,4 @@
 	.logo {
 		margin: 1rem;
 	}
-
 </style>
