@@ -120,6 +120,9 @@ export default class UserController extends AuthController {
 		}
 
 		const { username, password, personality } = await c.req.json();
+		if (!(username || password || personality)) {
+			throw new HttpError(400, "Missing fields");
+		}
 
 		// Build update query string paying attention to which fields are being updated
 		let qStr = "UPDATE users SET ";
@@ -204,7 +207,7 @@ export default class UserController extends AuthController {
 				user: {
 					...cUser,
 					token: await sign(cUser, JWT_SECRET),
-				}
+				},
 			},
 		});
 	}
@@ -218,7 +221,9 @@ export default class UserController extends AuthController {
 		const id = Number(c.req.param("id"));
 		const user_id: number = decode(token).payload.id;
 
-		if (id !== user_id) throw new HttpError(403, `${user_id} is not allowed to delete ${id}`);
+		if (id !== user_id) {
+			throw new HttpError(403, `${user_id} is not allowed to delete ${id}`);
+		}
 
 		const rowCount =
 			(await db.queryObject(`DELETE FROM users WHERE id = $1; `, [user_id]))
