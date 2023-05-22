@@ -28,9 +28,14 @@ if (Deno.args.includes("--no-log-file")) Log.noFile = true;
 // Configure web server
 export const app = new Hono();
 
-// TODO: configure CORS
 Log.info("Hono", "Registering std middleware");
-app.use(prettyJSON(), cors());
+app.use(
+	prettyJSON(),
+	cors({
+		origin: "localhost",
+		allowHeaders: ["Content-Type", "Authorization"],
+	}),
+);
 if (Log.enabled) app.use("*", logger());
 
 Log.info("Hono", "Registering user routes");
