@@ -31,7 +31,8 @@ export const app = new Hono();
 
 // TODO: configure CORS
 Log.info("Hono", "Registering std middleware");
-app.use(logger(), prettyJSON(), cors());
+app.use(prettyJSON(), cors());
+if (Log.enabled) app.use("*", logger());
 
 // Require authentication for all routes starting with /enemies
 Log.info("Hono", "Registering auth middleware");
