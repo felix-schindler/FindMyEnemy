@@ -160,10 +160,10 @@ Deno.test("Personality", async () => {
 			],
 		),
 	});
-	body = await res.text();
+	body = await res.json() as { personality: string };
 
 	assertEquals(res.status, 200);
-	assertEquals(body, "N");
+	assertEquals(body.personality, "N");
 });
 
 ac.abort();

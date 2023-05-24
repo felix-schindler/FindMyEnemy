@@ -79,17 +79,23 @@ export default class UserController extends AuthController {
 		const token = c.req.header("Authorization");
 		if (!token || !await verify(token, JWT_SECRET)) throw new HttpError(401);
 
-		// Get user from JWT
-		const user = decode(token).payload as ClientUser;
+		let where: string, param: string;
+
+		// Get search query from url, if set
+		const search = c.req.query("q");
+		if (search) {
+			where = "WHERE username LIKE '%$1%'";
+			param = search;
+		} else {
+			where = "WHERE personality != $1";
+			param = (decode(token).payload as ClientUser).personality; // Get user from JWT and set param
+		}
 
 		// Create query string
-		const qStr =
-			"SELECT id, username, personality FROM users WHERE personality != $personality;";
+		const qStr = `SELECT id, username, personality FROM users ${where};`;
 
 		// Get all users with different personality from database
-		const users = (await db.queryObject<ClientUser>(qStr, {
-			personality: user.personality,
-		})).rows;
+		const users = (await db.queryObject<ClientUser>(qStr, [param])).rows;
 
 		return c.json<ClientUser[]>(users);
 	}
