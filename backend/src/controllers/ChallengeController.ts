@@ -54,6 +54,25 @@ export default class ChallangeController extends Controller {
 		});
 	}
 
+	public async get(c: Context<Env, "/challanges/:id">): Promise<Response> {
+		// Check token and get user id from token
+		const token = c.req.header("Authorization");
+		if (!(token && await verify(token, JWT_SECRET))) {
+			throw new HttpError(401);
+		}
+
+		const id = c.req.param("id");
+		const user = decode(token).payload as ClientUser;
+
+		// Get challange from database where the user is involved
+		const challange = (await db.queryObject<Challange>(
+			"SELECT * FROM challanges WHERE (user_1_id = $1 OR user_2_id = $1) AND id = $2;",
+			[user.id, id],
+		)).rows[0];
+
+		return c.json<Challange>(challange);
+	}
+
 	public async update(c: Context<Env, "/challanges/:id">): Promise<Response> {
 		// Check token and get user id from token
 		const token = c.req.header("Authorization");
@@ -83,24 +102,5 @@ export default class ChallangeController extends Controller {
 				: "Failed to update challange",
 			raw: undefined,
 		});
-	}
-
-	public async get(c: Context<Env, "/challanges/:id">): Promise<Response> {
-		// Check token and get user id from token
-		const token = c.req.header("Authorization");
-		if (!(token && await verify(token, JWT_SECRET))) {
-			throw new HttpError(401);
-		}
-
-		const id = c.req.param("id");
-		const user = decode(token).payload as ClientUser;
-
-		// Get challange from database where the user is involved
-		const challange = (await db.queryObject<Challange>(
-			"SELECT * FROM challanges WHERE (user_1_id = $1 OR user_2_id = $1) AND id = $2;",
-			[user.id, id],
-		)).rows[0];
-
-		return c.json<Challange>(challange);
 	}
 }
