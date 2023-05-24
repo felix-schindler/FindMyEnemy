@@ -19,7 +19,15 @@ CREATE TABLE IF NOT EXISTS answers (
 	category CHAR(1) NOT NULL
 );
 
-INSERT INTO question (content) VALUES
+CREATE TABLE IF NOT EXISTS challenges (
+    id SERIAL PRIMARY KEY,
+    user1_id INT NOT NULL REFERENCES users(id),
+    user2_id INT NOT NULL REFERENCES users(id),
+    user_1_score INT,
+    user_2_score INT
+);
+
+INSERT INTO questions (content) VALUES
 	('At a party do you'),
 	('Are you more'),
 	('Is it worse to'),
@@ -56,7 +64,7 @@ INSERT INTO question (content) VALUES
 	('Which is more admirable'),
 	('Do you put more value on');
 
-INSERT INTO answer (question_id, content, category) VALUES
+INSERT INTO answers (question_id, content, category) VALUES
 	(1, 'Interact with many, including strangers', 'E'),
 	(1, 'Interact with a few, known to you', 'I'),
 	(2, 'Realistic than speculative', 'S'),
