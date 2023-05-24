@@ -88,8 +88,8 @@ export default class ChallangeController extends Controller {
 		const { score } = await c.req.json();
 		const rowCount = (await db.queryObject<Challange>(
 			`
-			UPDATE challanges SET user_1_score = $1 WHERE user_1_id = $2 AND id = $3;
-			UPDATE challanges SET user_2_score = $1 WHERE user_2_id = $2 AND id = $3;
+			UPDATE challanges SET user_1_score = $1 WHERE id = $3 AND user_1_score = 0 AND user_1_id = $2;
+			UPDATE challanges SET user_2_score = $1 WHERE id = $3 AND user_2_score = 0 AND user_2_id = $2;
 			`,
 			[score, user_self, id],
 		)).rowCount ?? 0;

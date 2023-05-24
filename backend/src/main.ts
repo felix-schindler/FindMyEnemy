@@ -6,7 +6,7 @@ import Log from "./core/Log.ts";
 import UserController from "./controllers/UserController.ts";
 import QuestionController from "./controllers/QuestionController.ts";
 import { Status } from "./core/types.ts";
-import ChallangeController from "./controllers/ChallengeController.ts";
+import ChallangeController from "./controllers/ChallangeController.ts";
 
 if (Deno.args.includes("--help")) {
 	console.log(
