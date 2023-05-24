@@ -27,7 +27,7 @@ Deno.test("Create challange", async () => {
 		challangee: 2,
 	};
 
-	res = await app.request("/users/1/challange", {
+	res = await app.request("/challanges", {
 		method: "POST",
 		headers: {
 			Authorization: AUTH_TOKEN,
