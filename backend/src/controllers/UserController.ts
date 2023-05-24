@@ -84,7 +84,7 @@ export default class UserController extends AuthController {
 		// Get search query from url, if set
 		const search = c.req.query("q");
 		if (search) {
-			where = "WHERE username LIKE '%$1%'";
+			where = "WHERE username LIKE '%' || $1 || '%'";
 			param = search;
 		} else {
 			where = "WHERE personality != $1";
