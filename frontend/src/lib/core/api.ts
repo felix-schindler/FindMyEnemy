@@ -135,7 +135,13 @@ export async function req<
 		if (query) {
 			const params = new URLSearchParams();
 			for (const [key, value] of Object.entries(query)) {
-				params.append(key, String(value));
+				if (path.includes(`:${key}`)) {
+					// Check if path needs this query param
+					path = path.replace(`:${key}`, String(value));
+				} else {
+					// Otherwise, add it to the query params
+					params.append(key, String(value));
+				}
 			}
 
 			path = path.concat('?', params.toString());
