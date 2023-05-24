@@ -6,6 +6,7 @@ import Log from "./core/Log.ts";
 import UserController from "./controllers/UserController.ts";
 import QuestionController from "./controllers/QuestionController.ts";
 import { Status } from "./core/types.ts";
+import ChallangeController from "./controllers/ChallengeController.ts";
 
 if (Deno.args.includes("--help")) {
 	console.log(
@@ -45,14 +46,21 @@ app.post("/users/login", UserController.shared.login);
 // Normal routes
 app.get("/users", UserController.shared.getList);
 app.get("/users/:id", UserController.shared.get);
-app.patch("/users/:id", UserController.shared.update);
 app.put("/users/:id", UserController.shared.replace);
+app.patch("/users/:id", UserController.shared.update);
 app.delete("/users/:id", UserController.shared.delete);
 
 // Question and answer routes
 Log.info("Hono", "Registering question and answer routes");
 app.get("/questions", QuestionController.shared.getList);
 app.post("/questions/personality", QuestionController.shared.personality);
+
+// Challange routes
+Log.info("Hono", "Registering challange routes");
+app.get("/challanges", ChallangeController.shared.getList);
+app.post("/challanges", ChallangeController.shared.create);
+app.get("/challanges/:id", ChallangeController.shared.get);
+app.patch("/challanges/:id", ChallangeController.shared.update);
 
 // Error handler
 app.onError((err, c) => {
