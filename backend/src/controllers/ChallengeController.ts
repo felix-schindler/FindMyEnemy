@@ -120,11 +120,13 @@ export default class ChallangeController extends Controller {
 			"DELETE FROM challanges WHERE id = $1 AND (user_1_id = $2 OR user_2_id = $2);",
 			[id, user_self],
 		)).rowCount ?? 0;
-		const success = (rowCount == 1);
+		const success = rowCount == 1;
 
 		return c.json<Status>({
 			status: success ? 200 : 500,
-			msg: success ? "Challange deleted successfully" : "Failed to delete challange",
+			msg: success
+				? "Challange deleted successfully"
+				: "Failed to delete challange",
 			raw: { rowCount },
 		});
 	}
