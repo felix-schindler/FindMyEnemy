@@ -52,3 +52,11 @@ export type UserAnswer = {
 	question_id: number; // Number between 0-34 (or maybe 1-35?)
 	category: Category;
 };
+
+export type Challange = {
+	id: number;
+	user_1_id: number;
+	user_2_id: number;
+	user_1_score: number;
+	user_2_score: number;
+};
