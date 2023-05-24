@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS questions (
 
 CREATE TABLE IF NOT EXISTS answers (
 	id SERIAL PRIMARY KEY,
-	question_id INT NOT NULL REFERENCES question(id),
+	question_id INT NOT NULL REFERENCES questions(id),
 	content TEXT NOT NULL,
 	category CHAR(1) NOT NULL
 );
@@ -137,11 +137,11 @@ INSERT INTO answers (question_id, content, category) VALUES
 	(35, 'Open-minded', 'P');
 
 -- Password: admin
-INSERT INTO "user" (username, password, personality)
+INSERT INTO "users" (username, password, personality)
 VALUES ('admin', '$2a$10$w3CxnJGRms6YanIeNQnVieoKcIZ0O5TLihB0ZrDA4xwaFIvPBSvei', 'ENFJ');
 
 -- Password: password
-INSERT INTO "user" (username, password, personality)
+INSERT INTO "users" (username, password, personality)
 VALUES ('jane_smith', '$2a$10$pgYTn5zQ/TgL9ISqVJ2WeeFtrI8dVH9oB/Jzoljy1WmSkdWlKjbXm', 'ISTP');
 
 COMMIT;
