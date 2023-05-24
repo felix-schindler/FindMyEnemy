@@ -100,7 +100,32 @@ export default class ChallangeController extends Controller {
 			msg: success
 				? "Challange updated successfully"
 				: "Failed to update challange",
-			raw: undefined,
+			raw: { rowCount },
+		});
+	}
+
+	public async delete(c: Context<Env, "/challanges/:id">): Promise<Response> {
+		// Check token and get user id from token
+		const token = c.req.header("Authorization");
+		if (!(token && await verify(token, JWT_SECRET))) {
+			throw new HttpError(401);
+		}
+
+		// Get challange from req body
+		const id = c.req.param("id");
+		const user_self: number = decode(token).payload.id;
+
+		// Delete challange
+		const rowCount = (await db.queryObject<Challange>(
+			"DELETE FROM challanges WHERE id = $1 AND (user_1_id = $2 OR user_2_id = $2);",
+			[id, user_self],
+		)).rowCount ?? 0;
+		const success = (rowCount == 1);
+
+		return c.json<Status>({
+			status: success ? 200 : 500,
+			msg: success ? "Challange deleted successfully" : "Failed to delete challange",
+			raw: { rowCount },
 		});
 	}
 }

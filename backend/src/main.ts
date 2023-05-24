@@ -61,6 +61,7 @@ app.get("/challanges", ChallangeController.shared.getList);
 app.post("/challanges", ChallangeController.shared.create);
 app.get("/challanges/:id", ChallangeController.shared.get);
 app.patch("/challanges/:id", ChallangeController.shared.update);
+app.delete("/challanges/:id", ChallangeController.shared.delete);
 
 // Error handler
 app.onError((err, c) => {
