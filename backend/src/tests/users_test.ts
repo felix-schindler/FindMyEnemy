@@ -100,12 +100,34 @@ Deno.test("User get (enemy list)", async () => {
 	res = await app.request("/users", {
 		headers: { Authorization: tester.token },
 	});
+	body = await res.json();
+
+	assertEquals(res.status, 200);
+	assertNotEquals(body.length, 0);
+});
+
+Deno.test("User get (enemy list)", async () => {
+	res = await app.request("/users?q=test", {
+		headers: { Authorization: tester.token },
+	});
+	body = await res.json();
+
+	assertEquals(res.status, 200);
+	assertNotEquals(body.length, 0);
 });
 
 Deno.test("User get (single)", async () => {
 	res = await app.request("/users/1", {
 		headers: { Authorization: tester.token },
 	});
+	body = await res.json();
+
+	assertEquals(res.status, 200);
+	assertNotEquals(body.id, undefined);
+	assertNotEquals(body.username, undefined);
+	assertNotEquals(body.personality, undefined);
+	assertEquals(body.token, undefined);
+	assertEquals(body.password, undefined);
 });
 
 Deno.test("User delete", async () => {
