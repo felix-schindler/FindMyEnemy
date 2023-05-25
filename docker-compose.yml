@@ -11,11 +11,15 @@ services:
   backend:
     build: ./backend
   db:
-    image: surrealdb/surrealdb:latest
+    image: postgres:alpine
     container_name: db
-    command: start --user fme --pass ba7825d4 file:/data/fme_data.db
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: DnxctEotDlNsk3FuOoVm
     volumes:
-      - ./data:/data
+      - ./db/data:/var/lib/postgresql/data
+      - ./db/db-init-scripts/:/docker-entrypoint-initdb.d/
 
 volumes:
   data:

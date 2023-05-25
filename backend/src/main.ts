@@ -1,11 +1,12 @@
 import { Hono } from "hono/mod.ts";
-import { cors, jwt, logger, prettyJSON } from "hono/middleware.ts";
+import { cors, logger, prettyJSON } from "hono/middleware.ts";
 import { HTTPException } from "hono/http-exception.ts";
 
 import Log from "./core/Log.ts";
-import { JWT_SECRET } from "./core/stores.ts";
 import UserController from "./controllers/UserController.ts";
 import QuestionController from "./controllers/QuestionController.ts";
+import { Status } from "./core/types.ts";
+import ChallangeController from "./controllers/ChallangeController.ts";
 
 if (Deno.args.includes("--help")) {
 	console.log(
@@ -28,34 +29,39 @@ if (Deno.args.includes("--no-log-file")) Log.noFile = true;
 // Configure web server
 export const app = new Hono();
 
-// TODO: configure CORS
 Log.info("Hono", "Registering std middleware");
-app.use(logger(), prettyJSON(), cors());
-
-// Require authentication for all routes starting with /enemies
-Log.info("Hono", "Registering auth middleware");
 app.use(
-	"/enemies/*",
-	jwt({
-		secret: JWT_SECRET,
+	prettyJSON(),
+	cors({
+		origin: "localhost",
+		allowHeaders: ["Content-Type", "Authorization"],
 	}),
 );
+if (Log.enabled) app.use("*", logger());
 
-// User routes
 Log.info("Hono", "Registering user routes");
+// Auth routes
+app.post("/users", UserController.shared.register);
+app.post("/users/login", UserController.shared.login);
+// Normal routes
 app.get("/users", UserController.shared.getList);
 app.get("/users/:id", UserController.shared.get);
-app.patch("/users/:id", UserController.shared.update);
 app.put("/users/:id", UserController.shared.replace);
+app.patch("/users/:id", UserController.shared.update);
 app.delete("/users/:id", UserController.shared.delete);
-// Auth routes
-app.post("/users/auth", UserController.shared.login);
-app.post("/users/auth/register", UserController.shared.register);
 
 // Question and answer routes
 Log.info("Hono", "Registering question and answer routes");
 app.get("/questions", QuestionController.shared.getList);
-app.post("/questions/answers", QuestionController.shared.createAnswers);
+app.post("/questions/personality", QuestionController.shared.personality);
+
+// Challange routes
+Log.info("Hono", "Registering challange routes");
+app.get("/challanges", ChallangeController.shared.getList);
+app.post("/challanges", ChallangeController.shared.create);
+app.get("/challanges/:id", ChallangeController.shared.get);
+app.patch("/challanges/:id", ChallangeController.shared.update);
+app.delete("/challanges/:id", ChallangeController.shared.delete);
 
 // Error handler
 app.onError((err, c) => {
@@ -65,7 +71,7 @@ app.onError((err, c) => {
 		return err.getResponse();
 	}
 
-	return c.json({
+	return c.json<Status>({
 		status: 500,
 		msg: err.message ?? "Internal server error",
 		raw: err,
@@ -82,4 +88,5 @@ if (Deno.args.includes("--show-routes")) {
 }
 
 // Start web server
-Deno.serve(app.fetch);
+export const ac = new AbortController();
+Deno.serve({ signal: ac.signal }, app.fetch);
