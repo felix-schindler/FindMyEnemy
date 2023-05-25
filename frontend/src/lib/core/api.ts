@@ -1,4 +1,6 @@
+import { get } from 'svelte/store';
 import type { AuthUser, Question, Status, User, UserAnswer } from './types';
+import { authStore } from './stores';
 
 type RequestMap = {
 	'/users': {
@@ -150,7 +152,8 @@ export async function req<
 		const res = await fetch(path, {
 			method: String(method),
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				Authorization: get(authStore).token
 			},
 			body: JSON.stringify(body)
 		});
