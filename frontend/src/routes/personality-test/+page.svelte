@@ -14,7 +14,16 @@
 </script>
 
 <div class="persContainer">
-	<meter min="1" max="35" value={qIndex} />
+	<!-- <meter class="meter" min="1" max="35" value={qIndex} /> -->
+	<div class ="progress-bar" id="progressBar">
+		<div class="progress" id="progress" style="width: {(qIndex*100)/35}%" >
+		</div>
+	</div>
+	<div class="display-number">
+		<p> {qIndex}/35</p>
+	</div>
+	
+	<div class="personality-test">
 	<p>{question.question}</p>
 	<ol>
 		{#each question.answers as answer, index}
@@ -25,6 +34,8 @@
 			</li>
 		{/each}
 	</ol>
+	</div>
+	<div class="back-button">
 	{#if qIndex > 0}
 		<button
 			type="button"
@@ -38,19 +49,45 @@
 			}}><img src={backButton} alt="Back" /></button
 		>
 	{/if}
+	</div>
 </div>
-
-<button class="mainBtn">
-	<span>Click Me!</span>
-</button>
 
 <style>
 	.persContainer {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		justify-content: center;
+		margin: 1rem auto;
+		padding: 1rem;
 	}
 	ol {
 		list-style: upper-latin;
 	}
+
+	.display-number {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 1rem auto;
+		padding: 1rem;
+	}
+
+	.personality-test {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		margin: 2rem auto;
+		padding: 1rem;
+	}
+	.back-button{
+		display: flex;
+		align-items: left;
+		justify-content: left;
+		margin: 1rem auto;
+		margin-left: 0;
+		padding: 1rem;
+	}
+
 </style>

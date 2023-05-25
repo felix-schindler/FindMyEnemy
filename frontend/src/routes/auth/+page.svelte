@@ -33,14 +33,30 @@
 		<input type="checkbox" id="remember" />
 		<label for="remember">Remember me</label>
 	</div>
-	<button type="submit">Sign in</button>
+	<button type="submit" class="mainBtn">
+		<span>Sign in</span>
+	</button>
+	<a href="/auth/register" > Don't have an account yet? <b>Take the test! </b>
+	</a>
 </form>
-<a href="/auth/reg">Don't have an account yet?</a>
+</div>
+</main>
+
 
 <style>
-	form {
-		display: flex;
-		flex-direction: column;
-		gap: 1em;
+	a {
+		justify-content: center;
+		text-align: center; 
+		color: #E3DCFF;
 	}
-</style>
+
+	.abc {
+ 	display: flex;
+  	align-items: center;
+	}
+
+	.helpp {
+	 margin: 0px;
+	}
+
+</style> 
