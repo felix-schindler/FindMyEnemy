@@ -48,6 +48,13 @@
 			>
 		{/if}
 	</div>
+	<div class="finish-button">
+		{#if qIndex === 34}
+			<button class="mainBtn" on:click={() =>(window.location.href = '/result')}>
+				<span>See Result</span>
+			</button>
+		{/if}
+	</div>
 </div>
 
 <style>

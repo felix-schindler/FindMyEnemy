@@ -8,7 +8,7 @@
 
 {#if screen === 1}
 	<div>
-		<p>Find your enemnies before they find you</p>
+		<p>Find your enemies before they find you</p>
 		<h1>find my <br /> enemy</h1>
 		<button class="mainBtn" on:click={handleNext}
 			><span><img src="/src/lib/images/next-icon.svg" alt="Next" /></span></button
