@@ -86,13 +86,18 @@ export default class ChallengeController extends Controller {
 
 		// Update challenge score
 		const { score } = await c.req.json();
-		const rowCount = (await db.queryObject<Challenge>(
-			`
-			UPDATE challenges SET user_1_score = $1 WHERE id = $3 AND user_1_score = 0 AND user_1_id = $2;
-			UPDATE challenges SET user_2_score = $1 WHERE id = $3 AND user_2_score = 0 AND user_2_id = $2;
-			`,
+		let rowCount = (await db.queryObject<Challenge>(
+			"UPDATE challenges SET user_1_score = $1 WHERE id = $3 AND user_1_score = 0 AND user_1_id = $2;",
 			[score, user_self, id],
 		)).rowCount ?? 0;
+
+		if (rowCount === 0) {
+			rowCount = (await db.queryObject<Challenge>(
+				"UPDATE challenges SET user_2_score = $1 WHERE id = $3 AND user_2_score = 0 AND user_2_id = $2;",
+				[score, user_self, id],
+			)).rowCount ?? 0;
+		}
+
 		const success = rowCount == 1;
 
 		return c.json<Status>({
