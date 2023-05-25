@@ -16,7 +16,7 @@
 		<button class="mainBtn" style="flex-grow: 1;">
 			<span>Challenge</span>
 		</button>
-		<button class="mainBtn" style="margin-left: 1.25rem;">
+		<button class="mainBtn" style="margin-left: 1.25rem;" on:click={()=> (window.location.href='/clicker-challenge')}>
 			<img src={addEnemy} alt="Add Enemy" style="overflow: visible" />
 		</button>
 	</div>
