@@ -37,7 +37,7 @@
 	window.location.href ="/homepage"}>
 		<span>Sign In</span>
 	</button>
-	<a href="/personality-test"> Don't have an account yet? <b>Take the test! </b> </a>
+	<a href="/onboarding"> Don't have an account yet? <b>Take the test! </b> </a>
 </form>
 
 <style>
