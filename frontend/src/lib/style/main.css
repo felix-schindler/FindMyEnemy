@@ -16,28 +16,121 @@
 	--fs-italic: italic;
 }
 
+.mainBtn span {
+	align-items: center;
+    background: var(--text-icon);
+    padding: 1.5rem;
+    border-radius: 999px;
+    display: flex;
+    justify-content: center;
+}
+
 .mainBtn {
-	background-image: var(--main-gradient);
+	 background-image: var(--main-gradient);
 	border-radius: 999px;
 	border: none;
 	box-sizing: border-box;
-	color: var(--button-content);
+	color: var(--button-content); 
+	margin: 0 auto;
 	display: inline-block;
-	font: 1.25rem var(--font-family);
+	 font: 1.25rem var(--font-family);
 	font-weight: 700;
 	padding: 0.3rem;
 	text-decoration: none;
 	cursor: pointer;
-	z-index: 2;
+	z-index: 2; 
 }
 
-.mainBtn span {
-	align-items: center;
-	background: var(--text-icon);
-	padding: 1rem;
-	border-radius: 999px;
-	display: flex;
-	justify-content: center;
+.form {
+    display: flex;
+    gap: 1.5em;
+    justify-content: center;
+    flex-direction: column;
+}
+
+@media (max-width: 600px) {
+    .form {
+      margin: 0 clamp(10px, 20vw, 200px);
+      margin-top: auto 0; 
+    }
+    p {
+        font-size: 0.8rem; 
+        line-height: 1.5;
+    }
+    h2 {
+        font-size: 1.3rem; 
+        line-height: 1.5;
+    }
+    h1 {
+        font-size: 2rem;
+        line-height: 1.5;
+    } 
+}
+
+
+@media (min-width: 601px) {
+    .form {
+        margin: 0 clamp(10px, 30vw, 450px); 
+    }
+     p {
+         font-size: clamp(13px, 1.5vw, 16px); 
+        line-height: 1.5;
+    }
+    h3 {
+         font-size: clamp(16px, 2vw, 18px); 
+        line-height: 1.5;
+    }
+    h2 {
+         font-size: clamp(18px, 2.5vw, 20px);
+        line-height: 1.5;
+    }
+    h1 {
+         font-size: clamp(20px, 4vw, 34px); 
+        line-height: 1.5;
+    } 
+    
+}
+
+input { padding: 30px;
+    padding-left: 40px ;
+    border: none; 
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    background-position: 10px center;
+    border-radius: 16px;
+    height: 40px;
+    background-color: #201254;
+    color: white; 
+}
+
+input::placeholder {
+    color: #E3DCFF;
+  }
+
+input::-webkit-input-placeholder {
+    color: #E3DCFF;
+}
+
+input[type="text"] {
+    background-image: url('/src/lib/images/userlogin-icon.svg');
+}
+
+input[type="password"] {
+    background-image: url('/src/lib/images/password-icon.svg');
+}
+
+input[type="search"] {
+    background-image: url('/src/lib/images/search-icon.svg');
+}
+
+
+.back-button {
+	top: 2rem;
+	left: 2rem;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	text-align: left;
 }
 
 meter {
@@ -64,6 +157,7 @@ meter::moz-meter-bar {
 	color: white;
 	border: none;
 	padding: 1rem;
+	resize: both;
 }
 
 .questionButton {
@@ -80,6 +174,6 @@ meter::moz-meter-bar {
 }
 
 .reverseButton img {
-	height: 20px;
+	height: 1.5vw;
 	margin: 5px;
 }
