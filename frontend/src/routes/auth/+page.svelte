@@ -36,7 +36,7 @@
 	<button type="submit" class="mainBtn">
 		<span>Sign in</span>
 	</button>
-	<a href="/auth/register"> Don't have an account yet? <b>Take the test! </b> </a>
+	<a href="/personality-test"> Don't have an account yet? <b>Take the test! </b> </a>
 </form>
 
 <style>

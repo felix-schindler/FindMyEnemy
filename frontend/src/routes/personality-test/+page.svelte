@@ -14,7 +14,6 @@
 </script>
 
 <div class="persContainer">
-	<!-- <meter class="meter" min="1" max="35" value={qIndex} /> -->
 	<div class="progress-bar" id="progressBar">
 		<div class="progress" id="progress" style="width: {(qIndex * 100) / 35}%" />
 	</div>
@@ -27,9 +26,9 @@
 		<ol>
 			{#each question.answers as answer, index}
 				<li>
-					<button type="button" class="questionButton" on:click={() => addAnswer(index)}
-						>{answer}</button
-					>
+					<button type="button" class="questionButton" on:click={() => addAnswer(index)}>
+						{answer}
+					</button>
 				</li>
 			{/each}
 		</ol>
