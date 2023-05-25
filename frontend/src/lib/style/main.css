@@ -134,22 +134,19 @@ input[type="search"] {
 	text-align: left;
 }
 
-meter {
-	display: flex;
-	margin-bottom: 1rem;
-	width: 40%;
-	color: var(--primary);
+
+.progress-bar {
+	width: 75%;
+	height: 10px;
+	background-color: var(--primary);
+	border-radius: 16px;
 }
 
-meter::-webkit-meter-bar {
-	background: var(--primary);
-}
-
-meter::-webkit-meter-optimum-value {
-	background: var(--secondary);
-}
-
-meter::moz-meter-bar {
+.progress {
+	width: 50%;
+	height: 100%;
+	background-color:var(--secondary);
+	border-radius: 16px;
 }
 
 .questionButton,
