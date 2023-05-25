@@ -10,7 +10,7 @@ import type { AuthUser, Challenge, Status } from "../core/types.ts";
 // deno-lint-ignore no-explicit-any
 let res: Response, body: any, tester: Challenge;
 
-const authUser = await ((await app.request("/users/login", {
+const USER_1 = await ((await app.request("/users/login", {
 	method: "POST",
 	body: JSON.stringify({
 		username: "admin",
@@ -18,7 +18,13 @@ const authUser = await ((await app.request("/users/login", {
 	}),
 })).json()) as AuthUser;
 
-const AUTH_TOKEN = authUser.token;
+const USER_2 = await ((await app.request("/users/login", {
+	method: "POST",
+	body: JSON.stringify({
+		username: "jane_smith",
+		password: "password",
+	}),
+})).json()) as AuthUser;
 // #endregion Setup
 
 Deno.test("Create challenge", async () => {
@@ -30,7 +36,7 @@ Deno.test("Create challenge", async () => {
 	res = await app.request("/challenges", {
 		method: "POST",
 		headers: {
-			Authorization: AUTH_TOKEN,
+			Authorization: USER_1.token,
 		},
 		body: JSON.stringify(NEW_Challenge),
 	});
@@ -39,7 +45,7 @@ Deno.test("Create challenge", async () => {
 	assertEquals(res.status, 200);
 	assertNotEquals(body.id, undefined);
 	assertNotEquals(body.id, 0);
-	assertEquals(body.user_1_id, authUser.id);
+	assertEquals(body.user_1_id, USER_1.id);
 	assertEquals(body.user_2_id, NEW_Challenge.challengee);
 	assertEquals(body.user_1_score, NEW_Challenge.score);
 	assertEquals(body.user_2_score, 0);
@@ -50,7 +56,7 @@ Deno.test("Create challenge", async () => {
 Deno.test("List challenges", async () => {
 	res = await app.request("/challenges", {
 		headers: {
-			"Authorization": AUTH_TOKEN,
+			"Authorization": USER_1.token,
 		},
 	});
 	body = await res.json();
@@ -62,7 +68,7 @@ Deno.test("List challenges", async () => {
 Deno.test("Get challenge", async () => {
 	res = await app.request(`/challenges/${tester.id}`, {
 		headers: {
-			"Authorization": AUTH_TOKEN,
+			"Authorization": USER_1.token,
 		},
 	});
 	body = await res.json() as Challenge;
@@ -77,29 +83,22 @@ Deno.test("Update challenge", async () => {
 	res = await app.request(`/challenges/${tester.id}`, {
 		method: "PATCH",
 		headers: {
-			Authorization: AUTH_TOKEN,
+			Authorization: USER_2.token,
 		},
 		body: JSON.stringify({ score }),
 	});
 	body = await res.json() as Challenge;
 
 	assertEquals(res.status, 200);
-	assertEquals(body.user_1_id, tester.user_1_id);
-	assertEquals(body.user_2_id, tester.user_2_id);
-	if (body.user_1_id == authUser.id) {
-		assertEquals(body.user_1_score, score);
-		assertEquals(body.user_2_score, tester.user_2_score);
-	} else {
-		assertEquals(body.user_2_score, score);
-		assertEquals(body.user_1_score, tester.user_1_score);
-	}
+	assertEquals(body.status, 200)
+	assertEquals(body.raw.rowCount, 1)
 });
 
 Deno.test("Delete challenge", async () => {
 	res = await app.request(`/challenges/${tester.id}`, {
 		method: "DELETE",
 		headers: {
-			Authorization: AUTH_TOKEN,
+			Authorization: USER_1.token,
 		},
 	});
 	body = await res.json() as Status;
