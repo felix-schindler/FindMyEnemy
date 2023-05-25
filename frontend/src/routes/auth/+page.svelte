@@ -26,7 +26,7 @@
 	}
 </script>
 
-<form on:submit={login}>
+<form class="form" on:submit={login}>
 	<input type="text" placeholder="username" bind:value={username} />
 	<input type="password" placeholder="password" bind:value={password} />
 	<div>
@@ -46,12 +46,8 @@
 		color: #e3dcff;
 	}
 
-	.abc {
+	div {
 		display: flex;
 		align-items: center;
-	}
-
-	.helpp {
-		margin: 0px;
 	}
 </style>
