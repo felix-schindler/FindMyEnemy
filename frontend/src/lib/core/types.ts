@@ -1,7 +1,13 @@
-export interface Status {
+export class Status {
 	status: number;
 	message: string;
 	raw: unknown;
+
+	public constructor(status: number, message: string, raw: unknown) {
+		this.status = status;
+		this.message = message;
+		this.raw = raw;
+	}
 }
 
 // "Database" types
