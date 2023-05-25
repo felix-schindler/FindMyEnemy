@@ -23,8 +23,8 @@ CREATE TABLE IF NOT EXISTS challenges (
     id SERIAL PRIMARY KEY,
     user_1_id INT NOT NULL REFERENCES users(id),
     user_2_id INT NOT NULL REFERENCES users(id),
-    user_1_score INT,
-    user_2_score INT
+    user_1_score INT DEFAULT 0,
+    user_2_score INT DEFAULT 0
 );
 
 INSERT INTO questions (content) VALUES
