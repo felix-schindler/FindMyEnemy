@@ -21,8 +21,8 @@ CREATE TABLE IF NOT EXISTS answers (
 
 CREATE TABLE IF NOT EXISTS challenges (
     id SERIAL PRIMARY KEY,
-    user1_id INT NOT NULL REFERENCES users(id),
-    user2_id INT NOT NULL REFERENCES users(id),
+    user_1_id INT NOT NULL REFERENCES users(id),
+    user_2_id INT NOT NULL REFERENCES users(id),
     user_1_score INT,
     user_2_score INT
 );
