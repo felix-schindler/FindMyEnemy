@@ -19,6 +19,14 @@ CREATE TABLE IF NOT EXISTS answers (
 	category CHAR(1) NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS challenges (
+    id SERIAL PRIMARY KEY,
+    user1_id INT NOT NULL REFERENCES users(id),
+    user2_id INT NOT NULL REFERENCES users(id),
+    user_1_score INT,
+    user_2_score INT
+);
+
 INSERT INTO questions (content) VALUES
 	('At a party do you'),
 	('Are you more'),
