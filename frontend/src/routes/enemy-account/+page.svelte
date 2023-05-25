@@ -13,10 +13,10 @@
 		<p style="font-weight: 400;">You have an incompatible rate of 89%</p>
 	</div>
 	<div class="buttonsContainer">
-		<button class="mainBtn" style="flex-grow: 1;">
+		<button class="mainBtn" style="flex-grow: 1;" on:click={()=> (window.location.href='/clicker-challenge')}>
 			<span>Challenge</span>
 		</button>
-		<button class="mainBtn" style="margin-left: 1.25rem;" on:click={()=> (window.location.href='/clicker-challenge')}>
+		<button class="mainBtn" style="margin-left: 1.25rem;">
 			<img src={addEnemy} alt="Add Enemy" style="overflow: visible" />
 		</button>
 	</div>
