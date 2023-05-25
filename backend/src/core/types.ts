@@ -53,7 +53,7 @@ export type UserAnswer = {
 	category: Category;
 };
 
-export type Challange = {
+export type Challenge = {
 	id: number;
 	user_1_id: number;
 	user_2_id: number;

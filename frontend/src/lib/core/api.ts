@@ -1,5 +1,5 @@
 import { get } from 'svelte/store';
-import type { AuthUser, Challange, Question, Status, User, UserAnswer } from './types';
+import type { AuthUser, Challenge, Question, Status, User, UserAnswer } from './types';
 import { authStore } from './stores';
 
 type RequestMap = {
@@ -99,28 +99,28 @@ type RequestMap = {
 			};
 		};
 	};
-	'/challanges': {
+	'/challenges': {
 		GET: {
 			query: never;
 			body: never;
-			response: Challange[];
+			response: Challenge[];
 		};
 		POST: {
 			query: never;
 			body: {
 				score: number;
-				challangee: number;
+				challengee: number;
 			};
-			reponse: Challange;
+			reponse: Challenge;
 		};
 	};
-	'/challange/:id': {
+	'/challenge/:id': {
 		GET: {
 			query: {
 				id: number;
 			};
 			body: never;
-			response: Challange;
+			response: Challenge;
 		};
 		PATCH: {
 			query: {

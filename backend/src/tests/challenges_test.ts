@@ -4,11 +4,11 @@ import {
 	assertNotEquals,
 	assertObjectMatch,
 } from "$std/testing/asserts.ts";
-import type { AuthUser, Challange, Status } from "../core/types.ts";
+import type { AuthUser, Challenge, Status } from "../core/types.ts";
 
 // #region Setup
 // deno-lint-ignore no-explicit-any
-let res: Response, body: any, tester: Challange;
+let res: Response, body: any, tester: Challenge;
 
 const authUser = await ((await app.request("/users/login", {
 	method: "POST",
@@ -21,34 +21,34 @@ const authUser = await ((await app.request("/users/login", {
 const AUTH_TOKEN = authUser.token;
 // #endregion Setup
 
-Deno.test("Create challange", async () => {
-	const NEW_CHALLANGE = {
+Deno.test("Create challenge", async () => {
+	const NEW_Challenge = {
 		score: 5,
-		challangee: 2,
+		challengee: 2,
 	};
 
-	res = await app.request("/challanges", {
+	res = await app.request("/challenges", {
 		method: "POST",
 		headers: {
 			Authorization: AUTH_TOKEN,
 		},
-		body: JSON.stringify(NEW_CHALLANGE),
+		body: JSON.stringify(NEW_Challenge),
 	});
-	body = await res.json() as Challange;
+	body = await res.json() as Challenge;
 
 	assertEquals(res.status, 200);
 	assertNotEquals(body.id, undefined);
 	assertNotEquals(body.id, 0);
 	assertEquals(body.user_1_id, authUser.id);
-	assertEquals(body.user_2_id, NEW_CHALLANGE.challangee);
-	assertEquals(body.user_1_score, NEW_CHALLANGE.score);
+	assertEquals(body.user_2_id, NEW_Challenge.challengee);
+	assertEquals(body.user_1_score, NEW_Challenge.score);
 	assertEquals(body.user_2_score, 0);
 
 	tester = body;
 });
 
-Deno.test("List challanges", async () => {
-	res = await app.request("/challanges", {
+Deno.test("List challenges", async () => {
+	res = await app.request("/challenges", {
 		headers: {
 			"Authorization": AUTH_TOKEN,
 		},
@@ -59,29 +59,29 @@ Deno.test("List challanges", async () => {
 	assertNotEquals(body.length, 0);
 });
 
-Deno.test("Get challange", async () => {
-	res = await app.request(`/challanges/${tester.id}`, {
+Deno.test("Get challenge", async () => {
+	res = await app.request(`/challenges/${tester.id}`, {
 		headers: {
 			"Authorization": AUTH_TOKEN,
 		},
 	});
-	body = await res.json() as Challange;
+	body = await res.json() as Challenge;
 
 	assertEquals(res.status, 200);
 	assertObjectMatch(body, tester);
 });
 
-Deno.test("Update challange", async () => {
+Deno.test("Update challenge", async () => {
 	const score = 10;
 
-	res = await app.request(`/challanges/${tester.id}`, {
+	res = await app.request(`/challenges/${tester.id}`, {
 		method: "PATCH",
 		headers: {
 			Authorization: AUTH_TOKEN,
 		},
 		body: JSON.stringify({ score }),
 	});
-	body = await res.json() as Challange;
+	body = await res.json() as Challenge;
 
 	assertEquals(res.status, 200);
 	assertEquals(body.user_1_id, tester.user_1_id);
@@ -95,8 +95,8 @@ Deno.test("Update challange", async () => {
 	}
 });
 
-Deno.test("Delete challange", async () => {
-	res = await app.request(`/challanges/${tester.id}`, {
+Deno.test("Delete challenge", async () => {
+	res = await app.request(`/challenges/${tester.id}`, {
 		method: "DELETE",
 		headers: {
 			Authorization: AUTH_TOKEN,
