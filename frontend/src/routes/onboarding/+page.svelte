@@ -1,45 +1,43 @@
 <script>
-    let screen = 1;
-  
-    function handleNext() {
-      screen++;
-    }
+	let screen = 1;
 
-  </script>
-  
-  {#if screen === 1}
-    <div>
-         <p>Find your enemnies before they find you</p>
-        <h1>find my <br> enemy</h1>
-        <button class="mainBtn" 
-        on:click={handleNext}><span><img src='/src/lib/images/next-icon.svg' 
-            alt="Next"></span></button>
-    </div>
-  {/if}
-  
-  {#if screen === 2}
-    <div>
-        <h1>First, let us test your personality</h1>
-        <p>Based on the result, we will help you find your worst enemies.</p>
-        <button class="mainBtn" on:click={() => window.location.href = '/personality-test'}><span>Start test</span></button>
-    </div>
-  {/if}
+	function handleNext() {
+		screen++;
+	}
+</script>
 
-  <style>
+{#if screen === 1}
+	<div>
+		<p>Find your enemnies before they find you</p>
+		<h1>find my <br /> enemy</h1>
+		<button class="mainBtn" on:click={handleNext}
+			><span><img src="/src/lib/images/next-icon.svg" alt="Next" /></span></button
+		>
+	</div>
+{/if}
 
-    div {
-        width: 20%;
-        margin: 0 auto;
-        margin-top: 100px;
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-    }
+{#if screen === 2}
+	<div>
+		<h1>First, let us test your personality</h1>
+		<p>Based on the result, we will help you find your worst enemies.</p>
+		<button class="mainBtn" on:click={() => (window.location.href = '/personality-test')}
+			><span>Start test</span></button
+		>
+	</div>
+{/if}
 
-     div button{
-        margin-top: 20px;
-        margin-left: 0;
-     }
-    
+<style>
+	div {
+		width: 20%;
+		margin: 0 auto;
+		margin-top: 100px;
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+	}
 
-  </style>
+	div button {
+		margin-top: 20px;
+		margin-left: 0;
+	}
+</style>

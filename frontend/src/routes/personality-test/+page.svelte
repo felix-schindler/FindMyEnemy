@@ -15,40 +15,39 @@
 
 <div class="persContainer">
 	<!-- <meter class="meter" min="1" max="35" value={qIndex} /> -->
-	<div class ="progress-bar" id="progressBar">
-		<div class="progress" id="progress" style="width: {(qIndex*100)/35}%" >
-		</div>
+	<div class="progress-bar" id="progressBar">
+		<div class="progress" id="progress" style="width: {(qIndex * 100) / 35}%" />
 	</div>
 	<div class="display-number">
-		<p> {qIndex}/35</p>
+		<p>{qIndex}/35</p>
 	</div>
-	
+
 	<div class="personality-test">
-	<p>{question.question}</p>
-	<ol>
-		{#each question.answers as answer, index}
-			<li>
-				<button type="button" class="questionButton" on:click={() => addAnswer(index)}
-					>{answer}</button
-				>
-			</li>
-		{/each}
-	</ol>
+		<p>{question.question}</p>
+		<ol>
+			{#each question.answers as answer, index}
+				<li>
+					<button type="button" class="questionButton" on:click={() => addAnswer(index)}
+						>{answer}</button
+					>
+				</li>
+			{/each}
+		</ol>
 	</div>
 	<div class="back-button">
-	{#if qIndex > 0}
-		<button
-			type="button"
-			class="reverseButton"
-			on:click={() => {
-				const newIndex = --qIndex;
-				if (newIndex > -1) {
-					question = questions[newIndex];
-					answers.pop();
-				}
-			}}><img src={backButton} alt="Back" /></button
-		>
-	{/if}
+		{#if qIndex > 0}
+			<button
+				type="button"
+				class="reverseButton"
+				on:click={() => {
+					const newIndex = --qIndex;
+					if (newIndex > -1) {
+						question = questions[newIndex];
+						answers.pop();
+					}
+				}}><img src={backButton} alt="Back" /></button
+			>
+		{/if}
 	</div>
 </div>
 
@@ -81,7 +80,7 @@
 		margin: 2rem auto;
 		padding: 1rem;
 	}
-	.back-button{
+	.back-button {
 		display: flex;
 		align-items: left;
 		justify-content: left;
@@ -89,5 +88,4 @@
 		margin-left: 0;
 		padding: 1rem;
 	}
-
 </style>

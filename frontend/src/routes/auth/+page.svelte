@@ -21,7 +21,7 @@
 		} else {
 			// Login successful, set user and redirect
 			$authStore = res;
-			await goto("/");
+			await goto('/');
 		}
 	}
 </script>
@@ -36,27 +36,22 @@
 	<button type="submit" class="mainBtn">
 		<span>Sign in</span>
 	</button>
-	<a href="/auth/register" > Don't have an account yet? <b>Take the test! </b>
-	</a>
+	<a href="/auth/register"> Don't have an account yet? <b>Take the test! </b> </a>
 </form>
-</div>
-</main>
-
 
 <style>
 	a {
 		justify-content: center;
-		text-align: center; 
-		color: #E3DCFF;
+		text-align: center;
+		color: #e3dcff;
 	}
 
 	.abc {
- 	display: flex;
-  	align-items: center;
+		display: flex;
+		align-items: center;
 	}
 
 	.helpp {
-	 margin: 0px;
+		margin: 0px;
 	}
-
-</style> 
+</style>

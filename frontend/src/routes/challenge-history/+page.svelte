@@ -4,10 +4,8 @@
 	import account from '$lib/images/user.svg';
 	import crown from '$lib/images/crown.svg';
 
-    function clicksUser (){
-    }
-    function clicksEnemy (){
-    }
+	function clicksUser() {}
+	function clicksEnemy() {}
 </script>
 
 <!-- <div>
@@ -128,7 +126,7 @@
 		align-items: center;
 		justify-content: center;
 		margin-bottom: 0.5rem;
-        height: 1.5rem;
+		height: 1.5rem;
 	}
 	.crown img {
 		height: 1.5rem;

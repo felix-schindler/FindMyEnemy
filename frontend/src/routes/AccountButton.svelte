@@ -15,24 +15,19 @@
 
 <style>
 	.accountBtnContainer {
-		
-		
 	}
 
-	img{
+	img {
 		height: 3rem;
 		width: 3rem;
 	}
 
-
-	button{
-	position: fixed;
-    top: 5%;
-    right: 1.5rem;
-    transform: translateY(-50%);
-	cursor: pointer;
-	border-radius: 100%
-}
-	
-
+	button {
+		position: fixed;
+		top: 5%;
+		right: 1.5rem;
+		transform: translateY(-50%);
+		cursor: pointer;
+		border-radius: 100%;
+	}
 </style>

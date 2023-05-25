@@ -1,7 +1,7 @@
 <script>
 	import '$lib/style/main.css';
 	import enemyPic from '$lib/images/enemy_account_pic.png';
-    import addEnemy from '$lib/images/add-enemy.svg'
+	import addEnemy from '$lib/images/add-enemy.svg';
 </script>
 
 <div class="content">
@@ -13,38 +13,38 @@
 		<p style="font-weight: 400;">You have an incompatible rate of 89%</p>
 	</div>
 	<div class="buttonsContainer">
-        <button class="mainBtn" style="flex-grow: 1;">
-            <span>Challenge</span>
-        </button>
-        <button class="mainBtn" style="margin-left: 1.25rem;">
-            <img src={addEnemy} alt="Add Enemy" style="overflow: visible"/>
-        </button>
-    </div>
-    <div class="enemyProperties">
-        <table style="width:100%">
-            <tr class="spaceUnder">
-                <td>Enemy Type</td>
-                <td style="text-align: right; font-weight: 400;">...</td>
-            </tr>
-            <tr class="spaceUnder">
-                <td>Personality Type</td>
-                <td style="text-align: right; font-weight: 400;">...</td>
-            </tr>
-            <tr>
-                <td>Distance</td>
-                <td style="text-align: right; font-weight: 400;">...</td>
-            </tr>
-        </table>
-    </div>
+		<button class="mainBtn" style="flex-grow: 1;">
+			<span>Challenge</span>
+		</button>
+		<button class="mainBtn" style="margin-left: 1.25rem;">
+			<img src={addEnemy} alt="Add Enemy" style="overflow: visible" />
+		</button>
+	</div>
+	<div class="enemyProperties">
+		<table style="width:100%">
+			<tr class="spaceUnder">
+				<td>Enemy Type</td>
+				<td style="text-align: right; font-weight: 400;">...</td>
+			</tr>
+			<tr class="spaceUnder">
+				<td>Personality Type</td>
+				<td style="text-align: right; font-weight: 400;">...</td>
+			</tr>
+			<tr>
+				<td>Distance</td>
+				<td style="text-align: right; font-weight: 400;">...</td>
+			</tr>
+		</table>
+	</div>
 </div>
 
 <style>
-    .content {
+	.content {
 		display: flex;
-        flex-direction: column;
-        justify-content: center;
-        width: 20rem;
-        margin: 2rem auto;
+		flex-direction: column;
+		justify-content: center;
+		width: 20rem;
+		margin: 2rem auto;
 		align-items: left;
 	}
 
@@ -54,7 +54,7 @@
 
 	.imageContainer {
 		height: auto;
-        align-items: start;
+		align-items: start;
 	}
 
 	.imageContainer > img {
@@ -68,15 +68,15 @@
 		align-items: center;
 	}
 
-    .enemyProperties {
-        width: 100%;
-        height: auto;
-        background-color: var(--primary);
-        padding: 1rem;
-        border-radius: 1rem;
-    }
+	.enemyProperties {
+		width: 100%;
+		height: auto;
+		background-color: var(--primary);
+		padding: 1rem;
+		border-radius: 1rem;
+	}
 
-    tr.spaceUnder>td {
-        padding-bottom: .5rem;
-    }
+	tr.spaceUnder > td {
+		padding-bottom: 0.5rem;
+	}
 </style>

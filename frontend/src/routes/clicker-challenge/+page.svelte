@@ -1,99 +1,115 @@
 <script lang="ts">
-  import { onMount, onDestroy, afterUpdate } from 'svelte';
+	import { onMount, onDestroy, afterUpdate } from 'svelte';
 
-  let timeLeft = 7;
-  let clickCount = 0;
-  let timerId: number;
-  let clickButton: HTMLButtonElement | null;
-  let isOverlayVisible = false;
+	let timeLeft = 7;
+	let clickCount = 0;
+	let timerId: number;
+	let clickButton: HTMLButtonElement | null;
+	let isOverlayVisible = false;
 
-  function countClicks() {
-    if (!isOverlayVisible) {
-      clickCount++;
-    }
-  }
+	function countClicks() {
+		if (!isOverlayVisible) {
+			clickCount++;
+		}
+	}
 
-  function updateTimer() {
-    const minutes = Math.floor(timeLeft / 60);
-    let seconds: number = timeLeft % 60;
-    seconds = seconds < 10 ? Number(`0${seconds}`) : seconds;
+	function updateTimer() {
+		const minutes = Math.floor(timeLeft / 60);
+		let seconds: number = timeLeft % 60;
+		seconds = seconds < 10 ? Number(`0${seconds}`) : seconds;
 
-    timeLeft = timeLeft - 1;
+		timeLeft = timeLeft - 1;
 
-    if (timeLeft === 0) {
-      clearInterval(timerId as number);
-      if (clickButton) {
-        clickButton.disabled = true;
-      }
-      isOverlayVisible = true;
-    }
-  }
+		if (timeLeft === 0) {
+			clearInterval(timerId as number);
+			if (clickButton) {
+				clickButton.disabled = true;
+			}
+			isOverlayVisible = true;
+		}
+	}
 
-  function startTimer() {
-    timerId = setInterval(updateTimer, 1000) as unknown as number;
-  }
+	function startTimer() {
+		timerId = setInterval(updateTimer, 1000) as unknown as number;
+	}
 
-  onMount(() => {
-    startTimer();
-  });
+	onMount(() => {
+		startTimer();
+	});
 
-  afterUpdate(() => {
-    clickButton = document.querySelector('#clickButton');
-  });
+	afterUpdate(() => {
+		clickButton = document.querySelector('#clickButton');
+	});
 
-  onDestroy(() => {
-    clearInterval(timerId as number);
-  });
+	onDestroy(() => {
+		clearInterval(timerId as number);
+	});
 
-  // Setze den Timer auf 30 Sekunden
-  timeLeft = 7;
+	// Setze den Timer auf 30 Sekunden
+	timeLeft = 7;
 </script>
 
-<style>
-  .clickerContainer {
-    text-align: center;
-    margin-top: 50px;
-  }
-
-  #timer {
-    font-size: 30px;
-  }
-
-  .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
-  }
-
-  .overlay-content {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-  }
-</style>
-
 <div class="clickerContainer">
-  <p id="timer">Time left: {Math.floor(timeLeft / 60)}:{timeLeft % 60 < 10 ? `0${timeLeft % 60}` : timeLeft % 60}</p>
-  <button class="mainBtn" id="clickButton" style="margin-top:2.5rem" on:click={countClicks} disabled={timeLeft === 0 || isOverlayVisible}>
-    <span style="height:50vh; width:50vh; font-size:3rem">{clickCount} <br> Clicks</span>
-  </button>
+	<p id="timer">
+		Time left: {Math.floor(timeLeft / 60)}:{timeLeft % 60 < 10
+			? `0${timeLeft % 60}`
+			: timeLeft % 60}
+	</p>
+	<button
+		class="mainBtn"
+		id="clickButton"
+		style="margin-top:2.5rem"
+		on:click={countClicks}
+		disabled={timeLeft === 0 || isOverlayVisible}
+	>
+		<span style="height:50vh; width:50vh; font-size:3rem">{clickCount} <br /> Clicks</span>
+	</button>
 </div>
 
 {#if isOverlayVisible}
-  <div class="overlay">
-    <div class="overlay-content">
-      <h2 style="color: black">Timer abgelaufen!</h2>
-      <p style="color: black">Ergebnis: {clickCount} Clicks</p>
-      <button style="margin: 1rem " class="mainBtn" on:click={() => { window.location.href = '/weitere-seite'; }}><span>Weiter</span></button>
-    </div>
-  </div>
+	<div class="overlay">
+		<div class="overlay-content">
+			<h2 style="color: black">Timer abgelaufen!</h2>
+			<p style="color: black">Ergebnis: {clickCount} Clicks</p>
+			<button
+				style="margin: 1rem "
+				class="mainBtn"
+				on:click={() => {
+					window.location.href = '/weitere-seite';
+				}}><span>Weiter</span></button
+			>
+		</div>
+	</div>
 {/if}
+
+<style>
+	.clickerContainer {
+		text-align: center;
+		margin-top: 50px;
+	}
+
+	#timer {
+		font-size: 30px;
+	}
+
+	.overlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.5);
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		z-index: 999;
+	}
+
+	.overlay-content {
+		background-color: #fff;
+		padding: 20px;
+		border-radius: 10px;
+		text-align: center;
+	}
+</style>

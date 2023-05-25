@@ -33,12 +33,11 @@
 </script>
 
 <div>
-	<AccountButton/>
+	<AccountButton />
 </div>
 <div>
-	<BackButton/>
+	<BackButton />
 </div>
-
 
 <div class="container">
 	<div class="content">
@@ -102,9 +101,8 @@
 </div>
 
 <style>
-    .container > .back-button{
-        
-    }
+	.container > .back-button {
+	}
 	.content {
 		display: flex;
 		flex-direction: column;
@@ -137,8 +135,7 @@
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
-        font: var(--font-family)
-
+		font: var(--font-family);
 	}
 	.form > button {
 		display: flex;
@@ -147,16 +144,15 @@
 		align-items: center;
 		margin: 1rem;
 		color: white;
-        margin: 0.5rem;
-        border: 0;
-    
+		margin: 0.5rem;
+		border: 0;
 	}
 	.form > button > img {
 		margin-right: 1rem;
 	}
 	.button-container > button {
 		margin-left: 1rem;
-	} 
+	}
 	.username-input {
 		width: 75%;
 		color: white;
