@@ -33,8 +33,9 @@
 		<input type="checkbox" id="remember" />
 		<label for="remember">Remember me</label>
 	</div>
-	<button type="submit" class="mainBtn">
-		<span>Sign in</span>
+	<button type="submit" class="mainBtn" on:click={ ()=> 
+	window.location.href ="/homepage"}>
+		<span>Sign In</span>
 	</button>
 	<a href="/personality-test"> Don't have an account yet? <b>Take the test! </b> </a>
 </form>
