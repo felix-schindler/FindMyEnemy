@@ -63,6 +63,6 @@ export default class QuestionController extends Controller {
 			Object.entries(sums).reduce((a, b) => a[1] > b[1] ? a : b)[0];
 
 		// Return the personality
-		return c.text(personality);
+		return c.json({ personality });
 	}
 }

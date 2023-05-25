@@ -2,15 +2,17 @@
 
 ## Run the app
 
-Start frontend, backend and database (on [:80](http://localhost)) with `docker-compose up`
+```bash
+docker-compose up
+```
 
 ## Services
 
-| Service      | Port      | Directory | Path |
+| Service      | Port      | Directory | Path     |
 |--------------|-----------|-----------|----------|
 | Frontend     | 80:3000   | frontend  | /        |
 | Backend      | 80:8000   | backend   | /api/    |
-| SurrealDB    | 80:8000   | data      | /db/     |
+| Postgres     | 5432:5432 | db        | -        |
 
 ## Team
 
