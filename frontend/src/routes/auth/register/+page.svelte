@@ -1,7 +1,18 @@
 <script>
-	async function register() {}
+	import { page } from '$app/stores';
+	import { goto } from '$app/navigation';
+
 	import '$lib/style/main.css';
 	import abc from '$lib/images/userlogin-icon.svg';
+	import { authStore } from '$lib/core/stores';
+
+	const next = $page.url.searchParams.get("next");
+
+	$: if ($authStore) {
+		goto(next ?? "/");
+	}
+
+	async function register() {}
 </script>
 
 <form class="form" on:submit={register}>

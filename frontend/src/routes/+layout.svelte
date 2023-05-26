@@ -1,6 +1,15 @@
 <script>
 	import Header from './Header.svelte';
 	import '$lib/style/main.css';
+	import { page } from '$app/stores';
+	import { authStore } from '$lib/core/stores';
+	import { goto } from '$app/navigation';
+
+	const AUTH_URL = "/auth";
+
+	$: if (!$page.url.pathname.startsWith(AUTH_URL) && !$authStore) {
+		goto(`/auth?next=${encodeURIComponent($page.url.pathname)}`);
+	}
 </script>
 
 <div class="app">
