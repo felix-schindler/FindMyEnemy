@@ -195,6 +195,7 @@ export async function req<
 				'Content-Type': 'application/json',
 				Authorization: get(authStore).token
 			},
+			mode: 'no-cors',
 			body: JSON.stringify(body)
 		});
 		return (await res.json()) as T | Status;
