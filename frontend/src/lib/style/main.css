@@ -62,13 +62,6 @@ html * {
 	display: flex;
 }
 
-meter {
-	display: flex;
-	margin-bottom: 1rem;
-	width: 40%;
-	color: var(--primary);
-}
-
 @media (max-width: 600px) {
 	.form {
 		margin: 0 clamp(10px, 20vw, 200px);
@@ -194,3 +187,6 @@ input[type='search'] {
 	height: 1.5vw;
 	margin: 5px;
 }
+ .error-message {
+ 	color: red;
+ }
