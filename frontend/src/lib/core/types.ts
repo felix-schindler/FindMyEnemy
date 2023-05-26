@@ -25,7 +25,7 @@ export type AuthUser = User & {
 	token: string;
 };
 
-type Category = 'E' | 'I' | 'S' | 'N' | 'T' | 'F' | 'J' | 'P';
+export type Category = 'E' | 'I' | 'S' | 'N' | 'T' | 'F' | 'J' | 'P';
 
 export type Question = {
 	id: number;

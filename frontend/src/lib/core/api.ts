@@ -13,10 +13,10 @@ type RequestMap = {
 		};
 		POST: {
 			query: never;
-			body: User & {
-				// Auth is a bit different
-				id: never;
+			body: {
+				username: string;
 				password: string;
+				personality: string;
 			};
 			response: AuthUser;
 		};
@@ -189,7 +189,7 @@ export async function req<
 			path = path.concat('?', params.toString());
 		}
 
-		const res = await fetch(path, {
+		const res = await fetch(`http://localhost${path}`, {
 			method: String(method),
 			headers: {
 				'Content-Type': 'application/json',
