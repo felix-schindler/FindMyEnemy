@@ -13,7 +13,8 @@
 	const personality = $page.url.searchParams.get('personality') ?? '';
 	let username = '',
 		password = '',
-		rPassword = '';
+		rPassword = '',
+		errorMessage ='';
 
 	$: if (browser && $authStore) {
 		goto(next ?? '/');
@@ -33,11 +34,15 @@
 			}
 		} else {
 			// TODO: Show error
+			errorMessage = "Passwords do not match";
 		}
 	}
 </script>
 
 <form class="form" on:submit={register}>
+	{#if errorMessage}
+	<p class="error-message">{errorMessage}</p>
+	{/if}
 	<input type="text" placeholder="username" bind:value={username} />
 	<input type="password" placeholder="password" bind:value={password} />
 	<input type="password" placeholder="repeat password" bind:value={rPassword} />

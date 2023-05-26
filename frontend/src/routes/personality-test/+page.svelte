@@ -27,6 +27,7 @@
 
 		if (res instanceof Status) {
 			// TODO: Show error
+			console.error(res);
 		} else {
 			// TODO: Set questions
 			questions = res;
@@ -39,7 +40,7 @@
 
 		// TODO: Check for error -> show message ; else: set personality
 		if (res instanceof Status) {
-			//TODO: Show error
+			console.error(res);
 		} else {
 			personality = res.personality;
 		}
