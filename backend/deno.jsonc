@@ -9,7 +9,7 @@
 		"dev": "DEV=true deno run --watch=src/ --allow-net --allow-read=. --allow-write=. --allow-env --unstable src/main.ts --no-log-file",
 		"start": "DEV=true deno run --allow-net --allow-read=. --allow-write=. --allow-env --unstable src/main.ts --no-log-file",
 		"compile": "deno compile --allow-net --allow-read=. --allow-write=. --allow-env --unstable src/main.ts -o backend",
-		"test": "DEV=true deno test --allow-net --allow-read=. --allow-write=. --allow-env --unstable -- --no-log"
+		"test": "DEV=true deno test --trace-ops --unstable --allow-net --allow-read=. --allow-write=. --allow-env -- --no-log"
 	},
 	"fmt": {
 		"semiColons": true,

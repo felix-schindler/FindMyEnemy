@@ -90,8 +90,8 @@ Deno.test("Update challenge", async () => {
 	body = await res.json() as Challenge;
 
 	assertEquals(res.status, 200);
-	assertEquals(body.status, 200)
-	assertEquals(body.raw.rowCount, 1)
+	assertEquals(body.status, 200);
+	assertEquals(body.raw.rowCount, 1);
 });
 
 Deno.test("Delete challenge", async () => {
