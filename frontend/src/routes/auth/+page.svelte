@@ -1,4 +1,5 @@
 <script>
+	import { browser } from '$app/environment';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 
@@ -10,10 +11,10 @@
 		password = '';
 	let msg = '';
 
-	const next = $page.url.searchParams.get("next");
+	const next = $page.url.searchParams.get('next');
 
-	$: if ($authStore) {
-		goto(next ?? "/");
+	$: if (browser && $authStore) {
+		goto(next ?? '/');
 	}
 
 	async function login() {
@@ -40,8 +41,7 @@
 		<input type="checkbox" id="remember" />
 		<label for="remember">Remember me</label>
 	</div>
-	<button type="submit" class="mainBtn" on:click={ ()=> 
-	window.location.href ="/homepage"}>
+	<button type="submit" class="mainBtn" on:click={() => (window.location.href = '/homepage')}>
 		<span>Sign In</span>
 	</button>
 	<a href="/onboarding"> Don't have an account yet? <b>Take the test! </b> </a>

@@ -4,11 +4,14 @@
 	import { page } from '$app/stores';
 	import { authStore } from '$lib/core/stores';
 	import { goto } from '$app/navigation';
+	import { browser } from '$app/environment';
+	import { redirect } from '@sveltejs/kit';
 
-	const AUTH_URL = "/auth";
+	const AUTH_PATH = '/auth';
 
-	$: if (!$page.url.pathname.startsWith(AUTH_URL) && !$authStore) {
-		goto(`/auth?next=${encodeURIComponent($page.url.pathname)}`);
+	$: if (browser && !$authStore && !$page.url.pathname.startsWith(AUTH_PATH)) {
+		const redir = `${AUTH_PATH}?next=${encodeURIComponent($page.url.pathname)}`;
+		goto(redir);
 	}
 </script>
 
