@@ -41,6 +41,11 @@ app.use(
 if (Log.enabled) app.use("*", logger());
 
 Log.info("Hono", "Registering user routes");
+app.get("/", async (c) => {
+	const html = await Deno.readTextFile(Deno.cwd() + "/src/index.html");
+	return c.html(html);
+});
+
 // Auth routes
 app.post("/users", UserController.shared.register);
 app.post("/users/login", UserController.shared.login);
@@ -91,4 +96,4 @@ if (Deno.args.includes("--show-routes")) {
 // Start web server
 export const ac = new AbortController();
 export const server = Deno.serve({ signal: ac.signal }, app.fetch);
-server.finished.then(() => { });
+server.finished.then(() => {});
