@@ -1,13 +1,13 @@
 <script lang="ts">
 	import '$lib/style/main.css';
-	import BackButton from '../BackButton.svelte';
+	import BackButton from '$lib/components/BackButton.svelte';
 	import openEdit from '$lib/images/edit.svg';
 	import check from '$lib/images/check.svg';
 	import deleteIcon from '$lib/images/delete.svg';
 	import changePasswordIcon from '$lib/images/lock.svg';
 	import challengeHistoryIcon from '$lib/images/star.svg';
 	import frenemiesIcon from '$lib/images/users.svg';
-	import AccountButton from '../AccountButton.svelte';
+	import AccountButton from '$lib/components/AccountButton.svelte';
 
 	let username = 'Username'; // Beispiel-Benutzername
 	let editing = false;
@@ -28,7 +28,7 @@
 		// Logic for viewing frenemies
 	}
 	function logOut() {
-		window.location.href = "/auth";
+		window.location.href = '/auth';
 	}
 </script>
 

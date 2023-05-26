@@ -14,9 +14,6 @@
 </div>
 
 <style>
-	.accountBtnContainer {
-	}
-
 	img {
 		height: 3rem;
 		width: 3rem;

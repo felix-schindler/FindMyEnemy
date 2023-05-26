@@ -1,7 +1,7 @@
 <script>
 	import '$lib/style/main.css';
 	import '$lib/style/homepage.css';
-	import AccountButton from '../AccountButton.svelte';
+	import AccountButton from '$lib/components/AccountButton.svelte';
 
 	import { onMount, onDestroy } from 'svelte';
 

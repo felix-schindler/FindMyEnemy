@@ -1,7 +1,7 @@
 <script>
 	import { onMount, onDestroy } from 'svelte';
-	import AccountButton from '../AccountButton.svelte';
-	import BackButton from '../BackButton.svelte';
+	import AccountButton from '$lib/components/AccountButton.svelte';
+	import BackButton from '$lib/components/BackButton.svelte';
 
 	let enemies = [
 		{
