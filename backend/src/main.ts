@@ -30,14 +30,13 @@ if (Deno.args.includes("--no-log-file")) Log.noFile = true;
 export const app = new Hono();
 
 Log.info("Hono", "Registering std middleware");
-app.use("*", prettyJSON());
-// app.use(
-// 	prettyJSON(),
-// 	cors({
-// 		origin: "localhost",
-// 		allowHeaders: ["Content-Type", "Authorization"],
-// 	}),
-// );
+app.use(
+	prettyJSON(),
+	cors({
+		origin: "*",
+		allowHeaders: ["Content-Type", "Authorization"],
+	}),
+);
 
 if (Log.enabled) app.use("*", logger());
 
