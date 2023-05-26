@@ -88,6 +88,6 @@ if (Deno.args.includes("--show-routes")) {
 }
 
 // Start web server
-const ac = new AbortController();
+export const ac = new AbortController();
 const server = Deno.serve({ signal: ac.signal }, app.fetch);
 server.finished.then(() => console.log("Server closed"));
