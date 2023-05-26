@@ -1,5 +1,6 @@
 <script>
 	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 
 	import { req } from '$lib/core/api';
 	import { authStore } from '$lib/core/stores';
@@ -8,6 +9,12 @@
 	let username = '',
 		password = '';
 	let msg = '';
+
+	const next = $page.url.searchParams.get("next");
+
+	$: if ($authStore) {
+		goto(next ?? "/");
+	}
 
 	async function login() {
 		const res = await req('/users/login', 'POST', {
@@ -21,7 +28,7 @@
 		} else {
 			// Login successful, set user and redirect
 			$authStore = res;
-			await goto('/');
+			await goto(next ?? '/');
 		}
 	}
 </script>
