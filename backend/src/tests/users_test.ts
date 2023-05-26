@@ -1,4 +1,4 @@
-import { ac, app } from "../main.ts";
+import { ac, app, server } from "../main.ts";
 import { assertEquals, assertNotEquals } from "$std/testing/asserts.ts";
 import { AuthUser } from "../core/types.ts";
 
@@ -146,4 +146,11 @@ Deno.test("User delete", async () => {
 	tester = undefined;
 });
 
-ac.abort();
+Deno.test("Cleanup", {
+	sanitizeOps: false,
+	sanitizeResources: false,
+}, async () => {
+	ac.abort();
+	await server.finished;
+	assertEquals(1, 1);
+});

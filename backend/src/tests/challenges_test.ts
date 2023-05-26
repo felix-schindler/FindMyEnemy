@@ -1,4 +1,4 @@
-import { ac, app } from "../main.ts";
+import { ac, app, server } from "../main.ts";
 import {
 	assertEquals,
 	assertNotEquals,
@@ -56,7 +56,7 @@ Deno.test("Create challenge", async () => {
 Deno.test("List challenges", async () => {
 	res = await app.request("/challenges", {
 		headers: {
-			"Authorization": USER_1.token,
+			Authorization: USER_1.token,
 		},
 	});
 	body = await res.json();
@@ -68,7 +68,7 @@ Deno.test("List challenges", async () => {
 Deno.test("Get challenge", async () => {
 	res = await app.request(`/challenges/${tester.id}`, {
 		headers: {
-			"Authorization": USER_1.token,
+			Authorization: USER_1.token,
 		},
 	});
 	body = await res.json() as Challenge;
@@ -107,4 +107,11 @@ Deno.test("Delete challenge", async () => {
 	assertEquals(body.raw.rowCount, 1);
 });
 
-ac.abort();
+Deno.test("Cleanup", {
+	sanitizeOps: false,
+	sanitizeResources: false,
+}, async () => {
+	ac.abort();
+	await server.finished;
+	assertEquals(1, 1);
+});

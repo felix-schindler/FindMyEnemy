@@ -1,4 +1,4 @@
-import { ac, app } from "../main.ts";
+import { ac, app, server } from "../main.ts";
 import { assertEquals } from "$std/testing/asserts.ts";
 
 // deno-lint-ignore no-explicit-any
@@ -166,4 +166,11 @@ Deno.test("Personality", async () => {
 	assertEquals(body.personality, "N");
 });
 
-ac.abort();
+Deno.test("Cleanup", {
+	sanitizeOps: false,
+	sanitizeResources: false,
+}, async () => {
+	ac.abort();
+	await server.finished;
+	assertEquals(1, 1);
+});
