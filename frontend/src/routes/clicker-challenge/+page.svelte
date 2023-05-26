@@ -75,7 +75,7 @@
 				style="margin: 1rem "
 				class="mainBtn"
 				on:click={() => {
-					window.location.href = '/weitere-seite';
+					window.location.href = '/enemy-account';
 				}}><span>Weiter</span></button
 			>
 		</div>

@@ -28,7 +28,7 @@
 		// Logic for viewing frenemies
 	}
 	function logOut() {
-		// Logic for logging out
+		window.location.href = "/auth";
 	}
 </script>
 
