@@ -189,13 +189,14 @@ export async function req<
 			path = path.concat('?', params.toString());
 		}
 
+		// console.debug(method, `http://localhost${path}`, query, body)
+
 		const res = await fetch(`http://localhost${path}`, {
 			method: String(method),
 			headers: {
 				'Content-Type': 'application/json',
 				Authorization: get(authStore).token
 			},
-			mode: 'no-cors',
 			body: JSON.stringify(body)
 		});
 		return (await res.json()) as T | Status;
