@@ -43,12 +43,31 @@
 	    height: 3rem;
 	}
 
-	.crown {
-	    display: flex;
-	    align-items: center;
-	    justify-content: center;
-	}
-
+	
 	.crown img {
 	    height: 1.5rem;
+	}
+	.text {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+
+	@media (min-width: 991px){
+	.user{
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-around;
+		margin-bottom: var(--margin20);
+		padding: var(--padding);
+	}
+
+	.enemy{
+		flex-direction: row-reverse;
+		margin-bottom: var(--margin20);
+		padding: var(--padding);
+	}
+
+	
 	}

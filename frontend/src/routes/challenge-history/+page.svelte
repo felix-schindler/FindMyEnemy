@@ -1,11 +1,12 @@
 <script lang="ts">
+	import '$lib/style/chistory.css';
 	import AccountButton from '$lib/components/AccountButton.svelte';
 	import BackButton from '$lib/components/BackButton.svelte';
 	import account from '$lib/images/user.svg';
 	import crown from '$lib/images/crown.svg';
 	import { req } from '$lib/core/api';
 	import { onMount } from 'svelte';
-	import '$lib/style/chistory.css';
+
 
 	async function getClickAmountUser() {
 		const res = await req('/challenges', 'GET');
@@ -14,7 +15,7 @@
 	let showUserCrown = false;
 	let showEnemyCrown = false;
 
-	let userClicks = 13;
+	let userClicks = 19;
 	let enemyClicks = 18;
 
 	onMount(() => {
@@ -40,9 +41,13 @@
 					<img src={crown} alt="crown" />
 				</div>
 			{/if}
-			<img src={account} alt="user" />
-			<p>Username</p>
-			<p>{userClicks}</p>
+			<div>
+				<img src={account} alt="user" />
+			</div>
+			<div class="text">
+				<p>Username</p>
+				<p>{userClicks}</p>
+			</div>
 		</div>
 		<div class="vs">
 			<p>VS</p>
@@ -53,9 +58,13 @@
 					<img src={crown} alt="crown" />
 				</div>
 			{/if}
-			<img src={account} alt="user" />
-			<p>Enemyname</p>
-			<p>{enemyClicks}</p>
+			<div>
+				<img src={account} alt="user" />
+			</div>
+			<div class="text">
+				<p>Enemyname</p>
+				<p>{enemyClicks}</p>
+			</div>
 		</div>
 	</div>
 	<div class="challenge">
