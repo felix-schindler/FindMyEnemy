@@ -1,77 +1,110 @@
 <script lang="ts">
-	import AccountButton from "$lib/components/AccountButton.svelte";
-	import BackButton from "$lib/components/BackButton.svelte";
+	import AccountButton from '$lib/components/AccountButton.svelte';
+	import BackButton from '$lib/components/BackButton.svelte';
 	import account from '$lib/images/user.svg';
 	import crown from '$lib/images/crown.svg';
+	import { req } from '$lib/core/api';
+	import { onMount } from 'svelte';
 
-	function clicksUser() {}
-	function clicksEnemy() {}
+	async function getClickAmountUser() {
+		const res = await req('/challenges', 'GET');
+	}
+
+	let showUserCrown = false;
+	let showEnemyCrown = false;
+
+	let userClicks = 13;
+	let enemyClicks = 18;
+
+	onMount(() => {
+		showUserCrown = userClicks > enemyClicks;
+		showEnemyCrown = enemyClicks > userClicks;
+	});
+
 </script>
 
 <div>
-    <AccountButton/>
+	<AccountButton />
 </div>
 <div>
-    <BackButton/>
+	<BackButton />
 </div>
 
 <h1>Challenge History</h1>
 <div class="container">
 	<div class="challenge">
 		<div class="user">
-			<div class="crown">
-				<img src={crown} alt="crown" />
-			</div>
+			{#if showUserCrown}
+				<div class="crown">
+					<img src={crown} alt="crown" />
+				</div>
+			{/if}
 			<img src={account} alt="user" />
 			<p>Username</p>
-			<p>Clicks</p>
+			<p>{userClicks}</p>
 		</div>
 		<div class="vs">
 			<p>VS</p>
 		</div>
 		<div class="enemy">
-			<div class="crown" />
+			{#if showEnemyCrown}
+				<div class="crown">
+					<img src={crown} alt="crown" />
+				</div>
+			{/if}
 			<img src={account} alt="user" />
 			<p>Enemyname</p>
-			<p>Clicks</p>
+			<p>{enemyClicks}</p>
 		</div>
 	</div>
 	<div class="challenge">
 		<div class="user">
-			<div class="crown" />
+			{#if showUserCrown}
+				<div class="crown">
+					<img src={crown} alt="crown" />
+				</div>
+			{/if}
 			<img src={account} alt="user" />
 			<p>Username</p>
-			<p>Clicks</p>
+			<p>{userClicks}</p>
 		</div>
 		<div class="vs">
 			<p>VS</p>
 		</div>
 		<div class="enemy">
-			<div class="crown">
-				<img src={crown} alt="crown" />
-			</div>
+			{#if showEnemyCrown}
+				<div class="crown">
+					<img src={crown} alt="crown" />
+				</div>
+			{/if}
 			<img src={account} alt="user" />
 			<p>Enemyname</p>
-			<p>Clicks</p>
+			<p>{enemyClicks}</p>
 		</div>
 	</div>
 	<div class="challenge">
 		<div class="user">
-			<div class="crown" />
+			{#if showUserCrown}
+				<div class="crown">
+					<img src={crown} alt="crown" />
+				</div>
+			{/if}
 			<img src={account} alt="user" />
 			<p>Username</p>
-			<p>Clicks</p>
+			<p>{userClicks}</p>
 		</div>
 		<div class="vs">
 			<p>VS</p>
 		</div>
 		<div class="enemy">
-			<div class="crown">
-				<img src={crown} alt="crown" />
-			</div>
+			{#if showEnemyCrown}
+				<div class="crown">
+					<img src={crown} alt="crown" />
+				</div>
+			{/if}
 			<img src={account} alt="user" />
 			<p>Enemyname</p>
-			<p>Clicks</p>
+			<p>{enemyClicks}</p>
 		</div>
 	</div>
 </div>
@@ -79,8 +112,7 @@
 <style>
 	h1 {
 		text-align: left;
-		margin: 2rem;
-		margin-left: 4rem;
+		margin: var(--fs-title);
 	}
 
 	.container {
@@ -97,11 +129,11 @@
 		flex-direction: row;
 		align-items: stretch;
 		justify-content: space-between;
-		padding: 2.5rem;
+		padding: var(--padding);
 		width: 80%;
 		background-color: var(--primary);
 		border-radius: 1rem;
-		margin-bottom: 1rem;
+		margin-bottom: var(--margin20);
 	}
 
 	.user,
@@ -111,12 +143,12 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		margin-bottom: 1rem;
+		margin-bottom: var(--margin20);
 	}
 
 	.vs {
-		font-size: 2.5rem;
-		font-style: italic;
+		font-size: var(--fs-title);
+		font-style: var(--fs-italic);
 	}
 	img {
 		height: 3rem;
@@ -125,8 +157,6 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		margin-bottom: 0.5rem;
-		height: 1.5rem;
 	}
 	.crown img {
 		height: 1.5rem;
