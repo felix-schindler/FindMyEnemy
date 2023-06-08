@@ -2,6 +2,7 @@
 	import { onMount, onDestroy } from 'svelte';
 	import AccountButton from '$lib/components/AccountButton.svelte';
 	import BackButton from '$lib/components/BackButton.svelte';
+	import '$lib/style/enemieslist.css';
 
 	let enemies = [
 		{
@@ -79,76 +80,4 @@
 	</div>
 </main>
 
-<style>
-	.top-enemies {
-		margin-left: 8%;
-		margin-right: 8%;
-		margin-top: 3%;
-	}
 
-	.grid-container {
-		display: flex;
-		/* flex-direction: column; */
-		flex-wrap: wrap;
-		gap: 3%;
-	}
-
-	.enemy-grid-item {
-		display: flex;
-		flex-basis: 100%;
-		margin-bottom: 34px;
-		border-radius: 10%;
-		background-color: #201254;
-		box-sizing: border-box;
-	}
-
-	.image-container {
-		flex: 1;
-		max-width: 50%;
-	}
-
-	.image-container img {
-		width: 100%;
-		height: auto;
-		display: block;
-		object-fit: cover;
-		padding: 10%;
-		background-color: white;
-		border-top-left-radius: 10%;
-		border-bottom-left-radius: 10%;
-	}
-
-	.enemy-information {
-		flex: 1;
-		max-width: 50%;
-		padding: 30px;
-	}
-
-	.enemy-details {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		margin-bottom: 15%;
-	}
-
-	.filter-button {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		margin-bottom: 5%;
-		margin-top: 5%;
-	}
-
-	.filter-icon {
-		display: inline-block;
-		width: 32px;
-		height: 28px;
-		background-image: url(/src/lib/images/filter-icon.svg);
-		background-size: cover;
-	}
-	@media (min-width: 601px) {
-		.enemy-grid-item {
-			flex-basis: calc(50% - 3%);
-		}
-	}
-</style>
