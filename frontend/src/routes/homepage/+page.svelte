@@ -116,6 +116,13 @@
 			title: 'Benjamin',
 			compatibility: '89%',
 			description: '12km'
+		}, 
+		{
+			id: 5,
+			imageSrc: '/src/lib/images/SpongeBob_SquarePants_character.svg.png',
+			title: 'Benjamin',
+			compatibility: '89%',
+			description: '12km'
 		}
 	];
 </script>
@@ -132,7 +139,7 @@
 	</div>
 
 	<div class="top-enemies">
-		<h1 style="margin-bottom: 24px;">Hi Blablo</h1>
+		<h1>Hi Blablo</h1>
 
 		<div class="moredetails-button">
 			<h2>Discover top enemies</h2>
