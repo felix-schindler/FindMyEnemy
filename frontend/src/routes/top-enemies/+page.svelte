@@ -53,7 +53,7 @@
 
 	<div class="top-enemies">
 		<div class="filter-button">
-			<h1 style="margin-bottom: 24px;">Top Enemies</h1>
+			<h1>Top Enemies</h1>
 			<span class="filter-icon" />
 		</div>
 
