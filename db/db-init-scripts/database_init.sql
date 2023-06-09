@@ -167,6 +167,80 @@ VALUES ('admin', '$2a$10$w3CxnJGRms6YanIeNQnVieoKcIZ0O5TLihB0ZrDA4xwaFIvPBSvei',
 INSERT INTO users (username, password, personality)
 VALUES ('jane_smith', '$2a$10$pgYTn5zQ/TgL9ISqVJ2WeeFtrI8dVH9oB/Jzoljy1WmSkdWlKjbXm', 'ISTP');
 
+-- TODO dont store passwords in plain text
+-- Password: mellowFellow
+INSERT INTO users (username, password, personality) 
+VALUES ('Inspector', 'mellowFellow', 'ISTJ');
+
+-- Password: trustyLemon
+INSERT INTO users (username, password, personality) 
+VALUES ('Protector', 'trustyLemon', 'ISFJ');
+
+-- Password: niftyKitten
+INSERT INTO users (username, password, personality) 
+VALUES ('Counselor', 'niftyKitten', 'INFJ');
+
+-- Password: windyDragon
+INSERT INTO users (username, password, personality) 
+VALUES ('Mastermind', 'windyDragon', 'INTJ');
+
+-- Password: luckyClover
+INSERT INTO users (username, password, personality) 
+VALUES ('Craftsman', 'luckyClover', 'ISTP');
+
+-- Password: cozyDolphin
+INSERT INTO users (username, password, personality) 
+VALUES ('Composer', 'cozyDolphin', 'ISFP');
+
+-- Password: jollyBadger
+INSERT INTO users (username, password, personality) 
+VALUES ('Healer', 'jollyBadger', 'INFP');
+
+-- Password: boldRaven
+INSERT INTO users (username, password, personality) 
+VALUES ('Architect', 'boldRaven', 'INTP');
+
+-- Password: friendlyHawk
+INSERT INTO users (username, password, personality) 
+VALUES ('Dynamo', 'friendlyHawk', 'ESTP');
+
+-- Password: sunnyOtter
+INSERT INTO users (username, password, personality) 
+VALUES ('Performer', 'sunnyOtter', 'ESFP');
+
+-- Password: happyGopher
+INSERT INTO users (username, password, personality) 
+VALUES ('Champion', 'happyGopher', 'ENFP');
+
+-- Password: brightCheetah
+INSERT INTO users (username, password, personality) 
+VALUES ('Visionary', 'brightCheetah', 'ENTP');
+
+-- Password: cleverStork
+INSERT INTO users (username, password, personality) 
+VALUES ('Supervisor', 'cleverStork', 'ESTJ');
+
+-- Password: wiseBadger
+INSERT INTO users (username, password, personality) 
+VALUES ('Provider', 'wiseBadger', 'ESFJ');
+
+-- Password: chillPanda
+INSERT INTO users (username, password, personality) 
+VALUES ('Teacher', 'chillPanda', 'ENFJ');
+
+-- Password: trendyTurtle
+INSERT INTO users (username, password, personality) 
+VALUES ('Commander', 'trendyTurtle', 'ENTJ');
+
+-- Create challenges between admin and all other users
+INSERT INTO challenges (user_1_id, user_2_id)
+SELECT
+    (SELECT id FROM users WHERE username = 'admin'),
+    id
+FROM users
+WHERE username != 'admin';
+
+
 -- Insert all 16 personality types
 INSERT INTO personality_types (type) VALUES
   ('ENFJ'), ('ENFP'), ('ENTJ'), ('ENTP'),
