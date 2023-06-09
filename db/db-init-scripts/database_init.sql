@@ -27,6 +27,29 @@ CREATE TABLE IF NOT EXISTS challenges (
     user_2_score INT DEFAULT 0
 );
 
+CREATE TABLE IF NOT EXISTS personality_types (
+  id SERIAL PRIMARY KEY,
+  "type" VARCHAR(4) NOT NULL
+);
+
+-- Create the compatibilities table
+CREATE TABLE compatibilities (
+    id SERIAL PRIMARY KEY,
+    personality_type_1_id INT REFERENCES personality_types(id),
+    personality_type_2_id INT REFERENCES personality_types(id),
+    "percentage" INT NOT NULL CHECK (percentage >= 0 AND percentage <= 100),
+    UNIQUE(personality_type_1_id, personality_type_2_id)
+);
+
+CREATE TABLE fav_enemies (
+    id SERIAL PRIMARY KEY,
+    user_1_id INT NOT NULL REFERENCES users(id),
+    fav_enemy_id INT NOT NULL REFERENCES users(id),
+    compatibility_id INT REFERENCES compatibilities(id),
+    compatibility_percentage FLOAT NOT, 
+    UNIQUE(user_1_id, fav_enemy_id)
+);
+
 INSERT INTO questions (content) VALUES
 	('At a party do you'),
 	('Are you more'),
@@ -143,5 +166,167 @@ VALUES ('admin', '$2a$10$w3CxnJGRms6YanIeNQnVieoKcIZ0O5TLihB0ZrDA4xwaFIvPBSvei',
 -- Password: password
 INSERT INTO users (username, password, personality)
 VALUES ('jane_smith', '$2a$10$pgYTn5zQ/TgL9ISqVJ2WeeFtrI8dVH9oB/Jzoljy1WmSkdWlKjbXm', 'ISTP');
+
+-- Insert all 16 personality types
+INSERT INTO personality_types (type) VALUES
+  ('ENFJ'), ('ENFP'), ('ENTJ'), ('ENTP'),
+  ('ESFJ'), ('ESFP'), ('ESTJ'), ('ESTP'),
+  ('INFJ'), ('INFP'), ('INTJ'), ('INTP'),
+  ('ISFJ'), ('ISFP'), ('ISTJ'), ('ISTP');
+
+-- Insert compatibility percentages
+INSERT INTO compatibilities (personality_type_1_id, personality_type_2_id, percentage) VALUES
+
+  ((SELECT id FROM personality_types WHERE type = 'ENFJ'), (SELECT id FROM personality_types WHERE type = 'ENFJ'), 86),
+  ((SELECT id FROM personality_types WHERE type = 'ENFJ'), (SELECT id FROM personality_types WHERE type = 'ENFP'), 91),
+  ((SELECT id FROM personality_types WHERE type = 'ENFJ'), (SELECT id FROM personality_types WHERE type = 'ENTJ'), 42),
+  ((SELECT id FROM personality_types WHERE type = 'ENFJ'), (SELECT id FROM personality_types WHERE type = 'ENTP'), 73),
+  ((SELECT id FROM personality_types WHERE type = 'ENFJ'), (SELECT id FROM personality_types WHERE type = 'ESFJ'), 64),
+  ((SELECT id FROM personality_types WHERE type = 'ENFJ'), (SELECT id FROM personality_types WHERE type = 'ESFP'), 80),
+  ((SELECT id FROM personality_types WHERE type = 'ENFJ'), (SELECT id FROM personality_types WHERE type = 'ESTJ'), 22),
+  ((SELECT id FROM personality_types WHERE type = 'ENFJ'), (SELECT id FROM personality_types WHERE type = 'ESTP'), 41),
+  ((SELECT id FROM personality_types WHERE type = 'ENFJ'), (SELECT id FROM personality_types WHERE type = 'INFJ'), 74),
+  ((SELECT id FROM personality_types WHERE type = 'ENFJ'), (SELECT id FROM personality_types WHERE type = 'INFP'), 73),
+  ((SELECT id FROM personality_types WHERE type = 'ENFJ'), (SELECT id FROM personality_types WHERE type = 'INTJ'), 16),
+  ((SELECT id FROM personality_types WHERE type = 'ENFJ'), (SELECT id FROM personality_types WHERE type = 'INTP'), 35),
+  ((SELECT id FROM personality_types WHERE type = 'ENFJ'), (SELECT id FROM personality_types WHERE type = 'ISFJ'), 30),
+  ((SELECT id FROM personality_types WHERE type = 'ENFJ'), (SELECT id FROM personality_types WHERE type = 'ISFP'), 40),
+  ((SELECT id FROM personality_types WHERE type = 'ENFJ'), (SELECT id FROM personality_types WHERE type = 'ISTJ'), 18),
+  ((SELECT id FROM personality_types WHERE type = 'ENFJ'), (SELECT id FROM personality_types WHERE type = 'ISTP'), 9),
+  
+  ((SELECT id FROM personality_types WHERE type = 'ENFP'), (SELECT id FROM personality_types WHERE type = 'ENFP'), 97),
+  ((SELECT id FROM personality_types WHERE type = 'ENFP'), (SELECT id FROM personality_types WHERE type = 'ENTJ'), 37),
+  ((SELECT id FROM personality_types WHERE type = 'ENFP'), (SELECT id FROM personality_types WHERE type = 'ENTP'), 85),
+  ((SELECT id FROM personality_types WHERE type = 'ENFP'), (SELECT id FROM personality_types WHERE type = 'ESFJ'), 42),
+  ((SELECT id FROM personality_types WHERE type = 'ENFP'), (SELECT id FROM personality_types WHERE type = 'ESFP'), 93),
+  ((SELECT id FROM personality_types WHERE type = 'ENFP'), (SELECT id FROM personality_types WHERE type = 'ESTJ'), 27),
+  ((SELECT id FROM personality_types WHERE type = 'ENFP'), (SELECT id FROM personality_types WHERE type = 'ESTP'), 76),
+  ((SELECT id FROM personality_types WHERE type = 'ENFP'), (SELECT id FROM personality_types WHERE type = 'INFJ'), 51),
+  ((SELECT id FROM personality_types WHERE type = 'ENFP'), (SELECT id FROM personality_types WHERE type = 'INFP'), 73),
+  ((SELECT id FROM personality_types WHERE type = 'ENFP'), (SELECT id FROM personality_types WHERE type = 'INTJ'), 13),
+  ((SELECT id FROM personality_types WHERE type = 'ENFP'), (SELECT id FROM personality_types WHERE type = 'INTP'), 36),
+  ((SELECT id FROM personality_types WHERE type = 'ENFP'), (SELECT id FROM personality_types WHERE type = 'ISFJ'), 11),
+  ((SELECT id FROM personality_types WHERE type = 'ENFP'), (SELECT id FROM personality_types WHERE type = 'ISFP'), 49),
+  ((SELECT id FROM personality_types WHERE type = 'ENFP'), (SELECT id FROM personality_types WHERE type = 'ISTJ'), 4),
+  ((SELECT id FROM personality_types WHERE type = 'ENFP'), (SELECT id FROM personality_types WHERE type = 'ISTP'), 14),
+
+  ((SELECT id FROM personality_types WHERE type = 'ENTJ'), (SELECT id FROM personality_types WHERE type = 'ENTJ'), 91),
+  ((SELECT id FROM personality_types WHERE type = 'ENTJ'), (SELECT id FROM personality_types WHERE type = 'ENTP'), 81),
+  ((SELECT id FROM personality_types WHERE type = 'ENTJ'), (SELECT id FROM personality_types WHERE type = 'ESFJ'), 53),
+  ((SELECT id FROM personality_types WHERE type = 'ENTJ'), (SELECT id FROM personality_types WHERE type = 'ESFP'), 51),
+  ((SELECT id FROM personality_types WHERE type = 'ENTJ'), (SELECT id FROM personality_types WHERE type = 'ESTJ'), 87),
+  ((SELECT id FROM personality_types WHERE type = 'ENTJ'), (SELECT id FROM personality_types WHERE type = 'ESTP'), 74),
+  ((SELECT id FROM personality_types WHERE type = 'ENTJ'), (SELECT id FROM personality_types WHERE type = 'INFJ'), 25),
+  ((SELECT id FROM personality_types WHERE type = 'ENTJ'), (SELECT id FROM personality_types WHERE type = 'INFP'), 13),
+  ((SELECT id FROM personality_types WHERE type = 'ENTJ'), (SELECT id FROM personality_types WHERE type = 'INTJ'), 46),
+  ((SELECT id FROM personality_types WHERE type = 'ENTJ'), (SELECT id FROM personality_types WHERE type = 'INTP'), 47),
+  ((SELECT id FROM personality_types WHERE type = 'ENTJ'), (SELECT id FROM personality_types WHERE type = 'ISFJ'), 29),
+  ((SELECT id FROM personality_types WHERE type = 'ENTJ'), (SELECT id FROM personality_types WHERE type = 'ISFP'), 6),
+  ((SELECT id FROM personality_types WHERE type = 'ENTJ'), (SELECT id FROM personality_types WHERE type = 'ISTJ'), 66),
+  ((SELECT id FROM personality_types WHERE type = 'ENTJ'), (SELECT id FROM personality_types WHERE type = 'ISTP'), 41),
+  
+  ((SELECT id FROM personality_types WHERE type = 'ENTP'), (SELECT id FROM personality_types WHERE type = 'ENTP'), 94),
+  ((SELECT id FROM personality_types WHERE type = 'ENTP'), (SELECT id FROM personality_types WHERE type = 'ESFJ'), 32),
+  ((SELECT id FROM personality_types WHERE type = 'ENTP'), (SELECT id FROM personality_types WHERE type = 'ESFP'), 87),
+  ((SELECT id FROM personality_types WHERE type = 'ENTP'), (SELECT id FROM personality_types WHERE type = 'ESTJ'), 70),
+  ((SELECT id FROM personality_types WHERE type = 'ENTP'), (SELECT id FROM personality_types WHERE type = 'ESTP'), 92),
+  ((SELECT id FROM personality_types WHERE type = 'ENTP'), (SELECT id FROM personality_types WHERE type = 'INFJ'), 11),
+  ((SELECT id FROM personality_types WHERE type = 'ENTP'), (SELECT id FROM personality_types WHERE type = 'INFP'), 35),
+  ((SELECT id FROM personality_types WHERE type = 'ENTP'), (SELECT id FROM personality_types WHERE type = 'INTJ'), 22),
+  ((SELECT id FROM personality_types WHERE type = 'ENTP'), (SELECT id FROM personality_types WHERE type = 'INTP'), 51),
+  ((SELECT id FROM personality_types WHERE type = 'ENTP'), (SELECT id FROM personality_types WHERE type = 'ISFJ'), 5),
+  ((SELECT id FROM personality_types WHERE type = 'ENTP'), (SELECT id FROM personality_types WHERE type = 'ISFP'), 14),
+  ((SELECT id FROM personality_types WHERE type = 'ENTP'), (SELECT id FROM personality_types WHERE type = 'ISTJ'), 11),
+  ((SELECT id FROM personality_types WHERE type = 'ENTP'), (SELECT id FROM personality_types WHERE type = 'ISTP'), 35),
+  
+  ((SELECT id FROM personality_types WHERE type = 'ESFJ'), (SELECT id FROM personality_types WHERE type = 'ESFJ'), 94),
+  ((SELECT id FROM personality_types WHERE type = 'ESFJ'), (SELECT id FROM personality_types WHERE type = 'ESFP'), 40),
+  ((SELECT id FROM personality_types WHERE type = 'ESFJ'), (SELECT id FROM personality_types WHERE type = 'ESTJ'), 77),
+  ((SELECT id FROM personality_types WHERE type = 'ESFJ'), (SELECT id FROM personality_types WHERE type = 'ESTP'), 37),
+  ((SELECT id FROM personality_types WHERE type = 'ESFJ'), (SELECT id FROM personality_types WHERE type = 'INFJ'), 74),
+  ((SELECT id FROM personality_types WHERE type = 'ESFJ'), (SELECT id FROM personality_types WHERE type = 'INFP'), 17),
+  ((SELECT id FROM personality_types WHERE type = 'ESFJ'), (SELECT id FROM personality_types WHERE type = 'INTJ'), 32),
+  ((SELECT id FROM personality_types WHERE type = 'ESFJ'), (SELECT id FROM personality_types WHERE type = 'INTP'), 5),
+  ((SELECT id FROM personality_types WHERE type = 'ESFJ'), (SELECT id FROM personality_types WHERE type = 'ISFJ'), 79),
+  ((SELECT id FROM personality_types WHERE type = 'ESFJ'), (SELECT id FROM personality_types WHERE type = 'ISFP'), 57),
+  ((SELECT id FROM personality_types WHERE type = 'ESFJ'), (SELECT id FROM personality_types WHERE type = 'ISTJ'), 71),
+  ((SELECT id FROM personality_types WHERE type = 'ESFJ'), (SELECT id FROM personality_types WHERE type = 'ISTP'), 19),
+  
+  ((SELECT id FROM personality_types WHERE type = 'ESFP'), (SELECT id FROM personality_types WHERE type = 'ESFP'), 70),
+  ((SELECT id FROM personality_types WHERE type = 'ESFP'), (SELECT id FROM personality_types WHERE type = 'ESTJ'), 39),
+  ((SELECT id FROM personality_types WHERE type = 'ESFP'), (SELECT id FROM personality_types WHERE type = 'ESTP'), 75),
+  ((SELECT id FROM personality_types WHERE type = 'ESFP'), (SELECT id FROM personality_types WHERE type = 'INFJ'), 43),
+  ((SELECT id FROM personality_types WHERE type = 'ESFP'), (SELECT id FROM personality_types WHERE type = 'INFP'), 58),
+  ((SELECT id FROM personality_types WHERE type = 'ESFP'), (SELECT id FROM personality_types WHERE type = 'INTJ'), 22),
+  ((SELECT id FROM personality_types WHERE type = 'ESFP'), (SELECT id FROM personality_types WHERE type = 'INTP'), 39),
+  ((SELECT id FROM personality_types WHERE type = 'ESFP'), (SELECT id FROM personality_types WHERE type = 'ISFJ'), 12),
+  ((SELECT id FROM personality_types WHERE type = 'ESFP'), (SELECT id FROM personality_types WHERE type = 'ISFP'), 58),
+  ((SELECT id FROM personality_types WHERE type = 'ESFP'), (SELECT id FROM personality_types WHERE type = 'ISTJ'), 8),
+  ((SELECT id FROM personality_types WHERE type = 'ESFP'), (SELECT id FROM personality_types WHERE type = 'ISTP'), 26),
+
+  ((SELECT id FROM personality_types WHERE type = 'ESTJ'), (SELECT id FROM personality_types WHERE type = 'ESTJ'), 96),
+  ((SELECT id FROM personality_types WHERE type = 'ESTJ'), (SELECT id FROM personality_types WHERE type = 'ESTP'), 78),
+  ((SELECT id FROM personality_types WHERE type = 'ESTJ'), (SELECT id FROM personality_types WHERE type = 'INFJ'), 14),
+  ((SELECT id FROM personality_types WHERE type = 'ESTJ'), (SELECT id FROM personality_types WHERE type = 'INFP'), 3),
+  ((SELECT id FROM personality_types WHERE type = 'ESTJ'), (SELECT id FROM personality_types WHERE type = 'INTJ'), 33),
+  ((SELECT id FROM personality_types WHERE type = 'ESTJ'), (SELECT id FROM personality_types WHERE type = 'INTP'), 22),
+  ((SELECT id FROM personality_types WHERE type = 'ESTJ'), (SELECT id FROM personality_types WHERE type = 'ISFJ'), 48),
+  ((SELECT id FROM personality_types WHERE type = 'ESTJ'), (SELECT id FROM personality_types WHERE type = 'ISFP'), 22),
+  ((SELECT id FROM personality_types WHERE type = 'ESTJ'), (SELECT id FROM personality_types WHERE type = 'ISTJ'), 79),
+  ((SELECT id FROM personality_types WHERE type = 'ESTJ'), (SELECT id FROM personality_types WHERE type = 'ISTP'), 55),
+
+  ((SELECT id FROM personality_types WHERE type = 'ESTP'), (SELECT id FROM personality_types WHERE type = 'ESTP'), 95),
+  ((SELECT id FROM personality_types WHERE type = 'ESTP'), (SELECT id FROM personality_types WHERE type = 'INFJ'), 5),
+  ((SELECT id FROM personality_types WHERE type = 'ESTP'), (SELECT id FROM personality_types WHERE type = 'INFP'), 24),
+  ((SELECT id FROM personality_types WHERE type = 'ESTP'), (SELECT id FROM personality_types WHERE type = 'INTJ'), 17),
+  ((SELECT id FROM personality_types WHERE type = 'ESTP'), (SELECT id FROM personality_types WHERE type = 'INTP'), 39),
+  ((SELECT id FROM personality_types WHERE type = 'ESTP'), (SELECT id FROM personality_types WHERE type = 'ISFJ'), 12),
+  ((SELECT id FROM personality_types WHERE type = 'ESTP'), (SELECT id FROM personality_types WHERE type = 'ISFP'), 43),
+  ((SELECT id FROM personality_types WHERE type = 'ESTP'), (SELECT id FROM personality_types WHERE type = 'ISTJ'), 20),
+  ((SELECT id FROM personality_types WHERE type = 'ESTP'), (SELECT id FROM personality_types WHERE type = 'ISTP'), 62),
+
+  ((SELECT id FROM personality_types WHERE type = 'INFJ'), (SELECT id FROM personality_types WHERE type = 'INFJ'), 95),
+  ((SELECT id FROM personality_types WHERE type = 'INFJ'), (SELECT id FROM personality_types WHERE type = 'INFP'), 85),
+  ((SELECT id FROM personality_types WHERE type = 'INFJ'), (SELECT id FROM personality_types WHERE type = 'INTJ'), 65),
+  ((SELECT id FROM personality_types WHERE type = 'INFJ'), (SELECT id FROM personality_types WHERE type = 'INTP'), 50),
+  ((SELECT id FROM personality_types WHERE type = 'INFJ'), (SELECT id FROM personality_types WHERE type = 'ISFJ'), 85),
+  ((SELECT id FROM personality_types WHERE type = 'INFJ'), (SELECT id FROM personality_types WHERE type = 'ISFP'), 58),
+  ((SELECT id FROM personality_types WHERE type = 'INFJ'), (SELECT id FROM personality_types WHERE type = 'ISTJ'), 53),
+  ((SELECT id FROM personality_types WHERE type = 'INFJ'), (SELECT id FROM personality_types WHERE type = 'ISTP'), 23),
+
+  ((SELECT id FROM personality_types WHERE type = 'INFP'), (SELECT id FROM personality_types WHERE type = 'INFP'), 97),
+  ((SELECT id FROM personality_types WHERE type = 'INFP'), (SELECT id FROM personality_types WHERE type = 'INTJ'), 70),
+  ((SELECT id FROM personality_types WHERE type = 'INFP'), (SELECT id FROM personality_types WHERE type = 'INTP'), 84),
+  ((SELECT id FROM personality_types WHERE type = 'INFP'), (SELECT id FROM personality_types WHERE type = 'ISFJ'), 46),
+  ((SELECT id FROM personality_types WHERE type = 'INFP'), (SELECT id FROM personality_types WHERE type = 'ISFP'), 78),
+  ((SELECT id FROM personality_types WHERE type = 'INFP'), (SELECT id FROM personality_types WHERE type = 'ISTJ'), 21),
+  ((SELECT id FROM personality_types WHERE type = 'INFP'), (SELECT id FROM personality_types WHERE type = 'ISTP'), 49),
+  
+  ((SELECT id FROM personality_types WHERE type = 'INTJ'), (SELECT id FROM personality_types WHERE type = 'INTJ'), 86),
+  ((SELECT id FROM personality_types WHERE type = 'INTJ'), (SELECT id FROM personality_types WHERE type = 'INTP'), 89),
+  ((SELECT id FROM personality_types WHERE type = 'INTJ'), (SELECT id FROM personality_types WHERE type = 'ISFJ'), 79),
+  ((SELECT id FROM personality_types WHERE type = 'INTJ'), (SELECT id FROM personality_types WHERE type = 'ISFP'), 45),
+  ((SELECT id FROM personality_types WHERE type = 'INTJ'), (SELECT id FROM personality_types WHERE type = 'ISTJ'), 85),
+  ((SELECT id FROM personality_types WHERE type = 'INTJ'), (SELECT id FROM personality_types WHERE type = 'ISTP'), 78),
+
+  ((SELECT id FROM personality_types WHERE type = 'INTP'), (SELECT id FROM personality_types WHERE type = 'INTP'), 96),
+  ((SELECT id FROM personality_types WHERE type = 'INTP'), (SELECT id FROM personality_types WHERE type = 'ISFJ'), 38),
+  ((SELECT id FROM personality_types WHERE type = 'INTP'), (SELECT id FROM personality_types WHERE type = 'ISFP'), 43),
+  ((SELECT id FROM personality_types WHERE type = 'INTP'), (SELECT id FROM personality_types WHERE type = 'ISTJ'), 51),
+  ((SELECT id FROM personality_types WHERE type = 'INTP'), (SELECT id FROM personality_types WHERE type = 'ISTP'), 81),
+
+  ((SELECT id FROM personality_types WHERE type = 'ISFJ'), (SELECT id FROM personality_types WHERE type = 'ISFJ'), 95),
+  ((SELECT id FROM personality_types WHERE type = 'ISFJ'), (SELECT id FROM personality_types WHERE type = 'ISFP'), 76),
+  ((SELECT id FROM personality_types WHERE type = 'ISFJ'), (SELECT id FROM personality_types WHERE type = 'ISTJ'), 93),
+  ((SELECT id FROM personality_types WHERE type = 'ISFJ'), (SELECT id FROM personality_types WHERE type = 'ISTP'), 62),
+
+  ((SELECT id FROM personality_types WHERE type = 'ISFP'), (SELECT id FROM personality_types WHERE type = 'ISFP'), 97),
+  ((SELECT id FROM personality_types WHERE type = 'ISFP'), (SELECT id FROM personality_types WHERE type = 'ISTJ'), 47),
+  ((SELECT id FROM personality_types WHERE type = 'ISFP'), (SELECT id FROM personality_types WHERE type = 'ISTP'), 76),
+
+  ((SELECT id FROM personality_types WHERE type = 'ISTJ'), (SELECT id FROM personality_types WHERE type = 'ISTJ'), 96),
+  ((SELECT id FROM personality_types WHERE type = 'ISTJ'), (SELECT id FROM personality_types WHERE type = 'ISTP'), 78),
+
+  ((SELECT id FROM personality_types WHERE type = 'ISTP'), (SELECT id FROM personality_types WHERE type = 'ISTP'), 96);
 
 COMMIT;
