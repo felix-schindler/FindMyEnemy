@@ -4,7 +4,7 @@ import {
 	assertNotEquals,
 	assertObjectMatch,
 } from "$std/testing/asserts.ts";
-import type { AuthUser, Challenge, Status } from "../core/types.ts";
+import { type AuthUser, type Challenge, Status } from "../core/types.ts";
 
 // #region Setup
 // deno-lint-ignore no-explicit-any
@@ -16,7 +16,10 @@ const USER_1 = await ((await app.request("/users/login", {
 		username: "admin",
 		password: "admin",
 	}),
-})).json()) as AuthUser;
+})).json()) as AuthUser | Status;
+if (USER_1 instanceof Status) {
+	Deno.exit(1);
+}
 
 const USER_2 = await ((await app.request("/users/login", {
 	method: "POST",
@@ -24,7 +27,11 @@ const USER_2 = await ((await app.request("/users/login", {
 		username: "jane_smith",
 		password: "password",
 	}),
-})).json()) as AuthUser;
+})).json()) as AuthUser | Status;
+if (USER_2 instanceof Status) {
+	Deno.exit(1);
+}
+
 // #endregion Setup
 
 Deno.test("Create challenge", async () => {
