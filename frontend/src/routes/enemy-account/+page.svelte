@@ -1,7 +1,9 @@
 <script>
 	import '$lib/style/main.css';
+	import '$lib/style/enemy-account.css'
 	import enemyPic from '$lib/images/enemy_account_pic.png';
 	import addEnemy from '$lib/images/add-enemy.svg';
+	
 </script>
 
 <div class="content">
@@ -45,46 +47,3 @@
 		</table>
 	</div>
 </div>
-
-<style>
-	.content {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		width: 20rem;
-		margin: 2rem auto;
-		align-items: left;
-	}
-
-	.content > div {
-		margin-bottom: 1.25rem;
-	}
-
-	.imageContainer {
-		height: auto;
-		align-items: start;
-	}
-
-	.imageContainer > img {
-		max-width: 100%;
-		max-height: 100%;
-		border-radius: 1rem;
-	}
-
-	.buttonsContainer {
-		display: flex;
-		align-items: center;
-	}
-
-	.enemyProperties {
-		width: 100%;
-		height: auto;
-		background-color: var(--primary);
-		padding: 1rem;
-		border-radius: 1rem;
-	}
-
-	tr.spaceUnder > td {
-		padding-bottom: 0.5rem;
-	}
-</style>
