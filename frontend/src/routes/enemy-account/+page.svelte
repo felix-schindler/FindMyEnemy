@@ -6,22 +6,20 @@
 	
 </script>
 
-<div class="content">
-	<div class="mainProperties">
-		<div class="imageContainer">
+<div id="content">
+	<div id="mainProperties">
+		<div id="enemyImageContainer">
 			<img src={enemyPic} alt="Enemy Profile" />
 		</div>
 		<div>
-			<p style="font-size: 2rem;">Fred</p>
+			<p id="enemyAccountName">Fred</p>
 		</div>
 	</div>
 	<div>
-		<p style="font-weight: 400; font-size: 1rem">You have an incompatible rate of 89%</p>
+		<p id="rate">You have an incompatible rate of 89%</p>
 	</div>
-	<div class="buttonsContainer">
-		<button
-			class="mainBtn"
-			style="flex-grow: 1;"
+	<div id="buttonsContainer">
+		<button class="mainBtn" style="flex-grow: 1;"
 			on:click={() => (window.location.href = '/clicker-challenge')}
 		>
 			<span>Challenge</span>
@@ -30,19 +28,19 @@
 			<img src={addEnemy} alt="Add Enemy" style="overflow: visible" />
 		</button>
 	</div>
-	<div class="enemyProperties">
-		<table style="width:100%">
-			<tr class="spaceUnder">
+	<div id="enemyProperties">
+		<table>
+			<tr>
 				<td>Enemy Type</td>
-				<td style="text-align: right; font-weight: 400;">...</td>
+				<td>...</td>
 			</tr>
-			<tr class="spaceUnder">
+			<tr>
 				<td>Personality Type</td>
-				<td style="text-align: right; font-weight: 400;">...</td>
+				<td>...</td>
 			</tr>
 			<tr>
 				<td>Distance</td>
-				<td style="text-align: right; font-weight: 400;">...</td>
+				<td>...</td>
 			</tr>
 		</table>
 	</div>
