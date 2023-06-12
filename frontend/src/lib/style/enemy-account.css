@@ -1,0 +1,70 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 35rem;
+    margin: 2rem auto;
+    padding: 2.5rem;
+  }
+  
+  .content > div {
+    margin-bottom: 1.25rem;
+    width: 100%;
+  }
+  
+  .mainProperties {
+    display: flex;
+    align-items: center;
+  }
+  
+  .imageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+  }
+  
+  .imageContainer > img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 1rem;
+  }
+  
+  .buttonsContainer {
+    display: flex;
+    width: 100%;
+    align-items: center;
+  }
+  
+  .enemyProperties {
+    width: 100%;
+    height: auto;
+    background-color: var(--primary);
+    padding: 1rem;
+    border-radius: 1rem;
+  }
+  
+  tr.spaceUnder > td {
+    padding-bottom: 0.5rem;
+  }
+  
+  @media (min-width: 481px) {
+    .mainProperties {
+      flex-direction: column;
+    }
+
+    .mainProperties :first-child {
+        margin-bottom: 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .imageContainer {
+      max-width: 5rem;
+    }
+
+    .mainProperties :first-child {
+        margin-right: 1rem;
+      }
+  }
+  

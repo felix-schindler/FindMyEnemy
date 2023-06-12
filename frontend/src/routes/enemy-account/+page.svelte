@@ -5,12 +5,16 @@
 </script>
 
 <div class="content">
-	<div class="imageContainer">
-		<img src={enemyPic} alt="Enemy Profile" />
+	<div class="mainProperties">
+		<div class="imageContainer">
+			<img src={enemyPic} alt="Enemy Profile" />
+		</div>
+		<div>
+			<p style="font-size: 2rem;">Fred</p>
+		</div>
 	</div>
 	<div>
-		<p style="font-size: 2rem;">Fred</p>
-		<p style="font-weight: 400;">You have an incompatible rate of 89%</p>
+		<p style="font-weight: 400; font-size: 1rem">You have an incompatible rate of 89%</p>
 	</div>
 	<div class="buttonsContainer">
 		<button
