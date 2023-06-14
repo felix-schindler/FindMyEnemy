@@ -11,7 +11,7 @@
 	let answers: UserAnswer[] = [];
 	let personality: string;
 
-	function addAnswer(qId: number, category: Category) {
+	async function addAnswer(qId: number, category: Category) {
 		question = questions[++qIndex];
 		answers = [
 			...answers,
@@ -20,6 +20,12 @@
 				category: category
 			}
 		];
+
+		// Get personality as soon as user is finished answering questions
+		console.log(qIndex);
+		if (qIndex === 35) {
+			await getPersonality();
+		}
 	}
 
 	async function getQuestions() {
@@ -75,28 +81,28 @@
 				{/each}
 			</ol>
 		</div>
+	{:else if qIndex > 0}
 		<div class="back-button">
-			{#if qIndex > 0}
-				<button
-					type="button"
-					class="reverseButton"
-					on:click={() => {
-						const newIndex = --qIndex;
-						if (newIndex > -1) {
-							question = questions[newIndex];
-							answers.pop();
-						}
-					}}><img src={backButton} alt="Back" /></button
-				>
-			{/if}
+			<button
+				type="button"
+				class="reverseButton"
+				on:click={() => {
+					const newIndex = --qIndex;
+					if (newIndex > -1) {
+						question = questions[newIndex];
+						answers.pop();
+					}
+				}}><img src={backButton} alt="Back" /></button
+			>
 		</div>
-		<div class="finish-button">
-			{#if qIndex === 35}
+		{#if qIndex === 35}
+			<div class="finish-button">
+				<p>You are: {personality}</p>
 				<a href="/auth/register?personality={encodeURIComponent(personality)}" class="mainBtn"
 					>See Result</a
 				>
-			{/if}
-		</div>
+			</div>
+		{/if}
 	{/if}
 </div>
 

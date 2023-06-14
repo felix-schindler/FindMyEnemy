@@ -36,7 +36,7 @@
 		}
 	}
 </script>
-
+<h1>find my <br /> enemy</h1>
 <form class="form" on:submit={register}>
 	<input type="text" placeholder="username" bind:value={username} />
 	<input type="password" placeholder="password" bind:value={password} />

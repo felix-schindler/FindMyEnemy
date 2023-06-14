@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>⚠️ Construction site 🦺</title>
+
+	<style>
+		:root {
+			color-scheme: light dark;
+			font-family: ui-monospace, monospace;
+			accent-color: red;
+		}
+
+		#user {
+			display: none;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>⚠️ Construction site 🦺</h1>
+	<p><em>Please open you're console. Otherwise you won't see what happens.</em></p>
+	<div id="login">
+		<h2>Login</h2>
+		<form onsubmit="login(event)">
+			<input type="text" id="l-user" value="admin">
+			<input type="password" id="l-pass" value="admin">
+			<button type="submit">Login</button>
+		</form>
+	</div>
+	<div id="user">
+		<h2>Username</h2>
+		<p>Username: <span id="u-user"></span></p>
+		<p>Personality: <span id="u-pers"></span></p>
+		<p>Token: <span id="u-token"></span></p>
+
+		<button type="button" onclick="getPersonality()">Personality</button>
+	</div>
+</body>
+
+<script defer>
+	let user = undefined
+
+	const endpoints = Object.freeze({
+		login: "/users/login",
+		personality: "/questions/personality"
+	})
+
+	const authSection = document.getElementById("login")
+	const userInp = document.getElementById("l-user")
+	const passInp = document.getElementById("l-pass")
+
+	const userSection = document.getElementById("user")
+	const userLabel = document.getElementById("u-user")
+	const persLabel = document.getElementById("u-pers")
+	const tokenLabel = document.getElementById("u-token")
+
+	async function login(e) {
+		e.preventDefault()
+
+		const username = userInp.value
+		const password = passInp.value
+		const credentials = { username, password }
+
+		console.debug(endpoints.login, credentials)
+
+		const res = await fetch(endpoints.login, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(credentials)
+		})
+		const body = await res.json()
+
+		if (body.status) {
+			console.error(body)
+		} else {
+			console.debug("Logged in", body)
+			user = body
+
+			// Hide login section
+			authSection.style.display = "none"
+
+			// Set user details
+			userLabel.textContent = user.username
+			persLabel.textContent = user.personality
+			tokenLabel.textContent = user.token
+			// Show user section
+			userSection.style.display = "block"
+
+		}
+	}
+
+	async function getPersonality() {
+		const answers = [
+			{
+				question_id: 1,
+				category: "N",
+			},
+			{
+				question_id: 2,
+				category: "N",
+			},
+			{
+				question_id: 3,
+				category: "N",
+			},
+			{
+				question_id: 4,
+				category: "N",
+			},
+			{
+				question_id: 5,
+				category: "N",
+			},
+			{
+				question_id: 6,
+				category: "N",
+			},
+			{
+				question_id: 7,
+				category: "N",
+			},
+			{
+				question_id: 8,
+				category: "N",
+			},
+			{
+				question_id: 9,
+				category: "N",
+			},
+			{
+				question_id: 10,
+				category: "N",
+			},
+			{
+				question_id: 11,
+				category: "N",
+			},
+			{
+				question_id: 12,
+				category: "N",
+			},
+			{
+				question_id: 13,
+				category: "N",
+			},
+			{
+				question_id: 14,
+				category: "N",
+			},
+			{
+				question_id: 15,
+				category: "N",
+			},
+			{
+				question_id: 16,
+				category: "N",
+			},
+			{
+				question_id: 17,
+				category: "N",
+			},
+			{
+				question_id: 18,
+				category: "N",
+			},
+			{
+				question_id: 19,
+				category: "N",
+			},
+			{
+				question_id: 20,
+				category: "N",
+			},
+			{
+				question_id: 21,
+				category: "N",
+			},
+			{
+				question_id: 22,
+				category: "N",
+			},
+			{
+				question_id: 23,
+				category: "N",
+			},
+			{
+				question_id: 24,
+				category: "N",
+			},
+			{
+				question_id: 25,
+				category: "N",
+			},
+			{
+				question_id: 26,
+				category: "N",
+			},
+			{
+				question_id: 27,
+				category: "N",
+			},
+			{
+				question_id: 28,
+				category: "N",
+			},
+			{
+				question_id: 29,
+				category: "N",
+			},
+			{
+				question_id: 30,
+				category: "N",
+			},
+			{
+				question_id: 31,
+				category: "N",
+			},
+			{
+				question_id: 32,
+				category: "N",
+			},
+			{
+				question_id: 33,
+				category: "N",
+			},
+			{
+				question_id: 34,
+				category: "N",
+			},
+			{
+				question_id: 35,
+				category: "N",
+			},
+		]
+
+		console.debug(endpoints.personality, answers)
+
+		const res = await fetch(endpoints.personality, {
+			method: "POST",
+			headers: {
+				"Authorization": user.token,
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(answers),
+		})
+		const body = await res.json()
+
+		console.log("Personality", body)
+	}
+</script>
+
+</html>
