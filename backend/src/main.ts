@@ -40,6 +40,12 @@ app.use(
 
 if (Log.enabled) app.use("*", logger());
 
+app.get("/", async (c) => {
+	const html = await Deno.readTextFile(Deno.cwd() + "/src/index.html");
+	return c.html(html);
+});
+
+// User routes
 Log.info("Hono", "Registering user routes");
 // Auth routes
 app.post("/users", UserController.shared.register);
@@ -91,4 +97,24 @@ if (Deno.args.includes("--show-routes")) {
 // Start web server
 export const ac = new AbortController();
 export const server = Deno.serve({ signal: ac.signal }, app.fetch);
-server.finished.then(() => { });
+server.finished.then(() => Log.info("Server stopped"));
+/*
+The line above looks stupid but is actually needed.
+Our tests are failing due to leaking resources.
+Sometimes it's an still open TCP connection (of
+the server), sometime it's other things. Anyways,
+this is awaiting the server stop and even tho the
+tests are still failing, I (Felix) suggest to keep
+this in (just in case).
+
+https://github.com/denoland/deno/pull/19189
+https://deno.land/api@v1.34.0?unstable&s=Deno.serve
+*/
+
+function onClose() {
+	Log.info("Closing server...");
+	ac.abort();
+}
+
+Deno.addSignalListener("SIGINT", onClose); // When process is killed using ctrl + c
+Deno.addSignalListener("SIGTERM", onClose); // When process is killed

@@ -1,9 +1,15 @@
 // The most simple API answer
-export type Status = {
+export class Status {
 	status: number;
 	msg: string;
 	raw: unknown;
-};
+
+	public constructor(status: number, msg: string, raw: unknown) {
+		this.status = status;
+		this.msg = msg;
+		this.raw = raw;
+	}
+}
 
 export type User = {
 	id: number;

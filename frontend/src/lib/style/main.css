@@ -16,10 +16,23 @@
 	--fw-reg: '400';
 	--fw-bold: '700';
 	--fs-italic: italic;
+	--fs-title: 2rem;
+	--fs-text: 1.25rem;
+	--padding: 1.25rem;
+	/*margin left right or margin bottom for titles*/
+	--margin40: 2.5rem;
+	/*margin between elements (spacing)*/
+	--margin20:1.25rem;
 }
 
 html * {
 	font-family: var(--main-font);
+}
+
+h1 {
+	margin: 50px;
+	text-align: center;
+	line-height: 1.5em;
 }
 
 .mainBtn span {

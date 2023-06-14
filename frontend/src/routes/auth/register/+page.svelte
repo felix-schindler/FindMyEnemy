@@ -38,7 +38,7 @@
 		}
 	}
 </script>
-
+<h1>find my <br /> enemy</h1>
 <form class="form" on:submit={register}>
 	{#if errorMessage}
 	<p class="error-message">{errorMessage}</p>

@@ -120,7 +120,7 @@
 	];
 </script>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
 
 <main>
 	<AccountButton />
@@ -223,35 +223,3 @@
 	{/if}
 </main>
 
-<style>
-	.buttons {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		margin: auto;
-		width: 100%;
-	}
-
-	.buttons button {
-		margin: 10px;
-	}
-
-	.buttons-mobile {
-		display: none;
-	}
-
-	.moredetails-button {
-		display: flex;
-		align-items: center;
-		margin-bottom: 16px;
-	}
-
-	.moredetails-icon img {
-		/* display:inline-block; */
-		width: 8px; /* Adjust the width and height as needed */
-		height: 12px;
-		/* background-image: url(/src/lib/images/moredetails.svg);    */
-		/* background-size: cover;  */
-		margin-left: 10px;
-	}
-</style>

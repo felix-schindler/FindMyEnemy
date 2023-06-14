@@ -6,10 +6,10 @@
 		"bcrypt": "https://deno.land/x/bcrypt@v0.4.1/mod.ts"
 	},
 	"tasks": {
-		"dev": "DEV=true deno run --watch=src/ --allow-net --allow-read=. --allow-write=. --allow-env --unstable src/main.ts --no-log-file",
-		"start": "DEV=true deno run --allow-net --allow-read=. --allow-write=. --allow-env --unstable src/main.ts --no-log-file",
-		"compile": "deno compile --allow-net --allow-read=. --allow-write=. --allow-env --unstable src/main.ts -o backend",
-		"test": "DEV=true deno test --trace-ops --unstable --allow-net --allow-read=. --allow-write=. --allow-env -- --no-log"
+		"dev": "DEV=true deno run --watch=src/ -A --unstable src/main.ts --no-log-file",
+		"start": "DEV=true deno run -A --unstable src/main.ts --no-log-file",
+		"compile": "deno compile -A --unstable src/main.ts -o backend",
+		"test": "DEV=true deno test -A --unstable --trace-ops -- --no-log"
 	},
 	"fmt": {
 		"semiColons": true,
