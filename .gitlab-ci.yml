@@ -30,4 +30,4 @@ backend_test:
   image: denoland/deno:alpine
   script:
     - cd backend
-    - deno test --unsafe
+    - deno test --unstable
