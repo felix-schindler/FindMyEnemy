@@ -7,22 +7,26 @@
 	import { req } from '$lib/core/api';
 	import { onMount } from 'svelte';
 
+	let userClicks = '';
+	let enemyClicks = '';
 
 	async function getClickAmountUser() {
-		const res = await req('/challenges', 'GET');
+		const res = await req('/challenge/:id', 'GET');
+
+		if (res) {
+			return 'Succeded';
+		} else {
+			throw new Error('Could not fetch Challenge ID');
+		}
 	}
 
 	let showUserCrown = false;
 	let showEnemyCrown = false;
 
-	let userClicks = 19;
-	let enemyClicks = 18;
-
 	onMount(() => {
 		showUserCrown = userClicks > enemyClicks;
 		showEnemyCrown = enemyClicks > userClicks;
 	});
-
 </script>
 
 <div>
