@@ -15,7 +15,7 @@ backend_build:
   image: denoland/deno:alpine
   script:
     - cd backend
-    - deno cache ./backend.ts
+    - deno task compile
 
 frontend_test:
   stage: test
