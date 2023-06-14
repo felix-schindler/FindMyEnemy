@@ -1,4 +1,33 @@
-test-job:
+stages:
+  - build
+  - test
+
+frontend_build:
+  stage: build
+  image: node:19-alpine
   script:
-    - echo "This is my first job!"
-    - date
+    - cd frontend
+    - npm install
+    - npm run build
+
+backend_build:
+  stage: build
+  image: denoland/deno:alpine
+  script:
+    - cd backend
+    - deno cache ./backend.ts
+
+frontend_test:
+  stage: test
+  image: node:19-alpine
+  script:
+    - cd frontend
+    - npm install
+    - npm run test
+
+backend_test:
+  stage: test
+  image: denoland/deno:alpine
+  script:
+    - cd backend
+    - deno test
