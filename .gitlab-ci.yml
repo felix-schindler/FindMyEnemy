@@ -15,7 +15,7 @@ backend_build:
   image: denoland/deno:alpine
   script:
     - cd backend
-    - deno task compile --unstable
+    - deno task compile
 
 frontend_test:
   stage: test
@@ -30,4 +30,4 @@ backend_test:
   image: denoland/deno:alpine
   script:
     - cd backend
-    - deno test
+    - deno test --unsafe
