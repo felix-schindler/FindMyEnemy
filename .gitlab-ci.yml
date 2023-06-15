@@ -43,5 +43,5 @@ backend_test:
     POSTGRES_PASSWORD: DnxctEotDlNsk3FuOoVm
   script:
     - cd backend
-    - DEV=true deno test -A --unstable --trace-ops
+    - deno test -A --unstable --trace-ops
     #- deno task test && deno fmt --check && deno lint
