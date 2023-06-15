@@ -2,91 +2,18 @@
 	import '$lib/style/main.css';
 	import '$lib/style/homepage.css';
 	import AccountButton from '$lib/components/AccountButton.svelte';
+	import { req } from '$lib/core/api';
 
 	import { onMount, onDestroy } from 'svelte';
 
-	let viewportWidth = 0;
-	let vwValue = 0;
-
-	let scrollPosition = 0;
-	let scrollPosition2 = 0;
-
-	onMount(() => {
-		const container = document.querySelector('.grid-container');
-		const container2 = document.querySelector('.grid-container2');
-		const buttonPrev = document.querySelector('.prevButton');
-		const buttonNext = document.querySelector('.nextButton');
-		const buttonPrev2 = document.querySelector('.prevButton2');
-		const buttonNext2 = document.querySelector('.nextButton2');
-
-		if (container && container2 && buttonPrev && buttonNext && buttonPrev2 && buttonNext2) {
-			const scrollLeft = () => {
-				scrollPosition -= container.clientWidth;
-				container.scrollTo({
-					left: scrollPosition,
-					behavior: 'smooth'
-				});
-			};
-
-			const scrollLeft2 = () => {
-				scrollPosition2 -= container2.clientWidth;
-				container2.scrollTo({
-					left: scrollPosition2,
-					behavior: 'smooth'
-				});
-			};
-
-			const scrollRight = () => {
-				scrollPosition += container.clientWidth;
-				container.scrollTo({
-					left: scrollPosition,
-					behavior: 'smooth'
-				});
-			};
-
-			const scrollRight2 = () => {
-				scrollPosition2 += container2.clientWidth;
-				container2.scrollTo({
-					left: scrollPosition2,
-					behavior: 'smooth'
-				});
-			};
-
-			buttonPrev.addEventListener('click', scrollLeft);
-			buttonNext.addEventListener('click', scrollRight);
-			buttonPrev2.addEventListener('click', scrollLeft2);
-			buttonNext2.addEventListener('click', scrollRight2);
+	async function getUsers() {
+		const res = await req('/users', "GET");
+		if (res) {
+			return 'Succeded';
+		} else {
+			throw new Error('Could not fetch users');
 		}
-	});
-
-	$: {
-		viewportWidth = document.documentElement.clientWidth;
 	}
-
-	function getVWValue() {
-		const viewportWidth = document.documentElement.clientWidth;
-		const vwValue = (26 / viewportWidth) * 100;
-		return vwValue;
-	}
-
-	vwValue = getVWValue();
-
-	window.addEventListener('resize', () => {
-		vwValue = getVWValue();
-	});
-
-	const updateViewportWidth = () => {
-		viewportWidth = document.documentElement.clientWidth;
-	};
-
-	onMount(() => {
-		updateViewportWidth();
-		window.addEventListener('resize', updateViewportWidth);
-	});
-
-	onDestroy(() => {
-		window.removeEventListener('resize', updateViewportWidth);
-	});
 
 	let users = [
 		{
@@ -132,8 +59,6 @@
 <main>
 	<AccountButton />
 
-	<!-- <p>The viewport width is: {viewportWidth}px</p>
-  <p>The vw value is: {vwValue}</p>  -->
 	<div class="searchBar">
 		<input type="search" class="search-bar" placeholder="Search..." />
 	</div>
@@ -143,11 +68,7 @@
 
 		<div class="moredetails-button">
 			<h2>Discover top enemies</h2>
-			<!-- <button class="moredetails-icon" on:click={() => {
-  window.location.href = '/top-enemies';
-}}>
-  <img src="/src/lib/images/moredetails.svg" alt="Button" /> 
-</button> -->
+			
 
 			<button
 				class="moredetails-icon"
@@ -175,22 +96,6 @@
 		</div>
 	</div>
 
-	{#if viewportWidth > 601}
-		<div class="buttons">
-			<button class="reverseButton prevButton"
-				><img src="/src/lib/images/back-icon.svg" alt="Back" /></button
-			>
-			<button class="reverseButton nextButton"
-				><img src="/src/lib/images/next-icon.svg" alt="Next" /></button
-			>
-		</div>
-	{:else}
-		<div class="buttons-mobile">
-			<button class="reverseButton"><img src="/src/lib/images/back-icon.svg" alt="Back" /></button>
-			<button class="reverseButton"><img src="/src/lib/images/next-icon.svg" alt="Next" /></button>
-		</div>
-	{/if}
-
 	<div class="top-enemies">
 		<div class="moredetails-button">
 			<h2>Your mortal enemies</h2>
@@ -213,20 +118,6 @@
 		</div>
 	</div>
 
-	{#if viewportWidth > 601}
-		<div class="buttons">
-			<button class="reverseButton prevButton2"
-				><img src="/src/lib/images/back-icon.svg" alt="Back" /></button
-			>
-			<button class="reverseButton nextButton2"
-				><img src="/src/lib/images/next-icon.svg" alt="Next" /></button
-			>
-		</div>
-	{:else}
-		<div class="buttons-mobile">
-			<button class="reverseButton"><img src="/src/lib/images/back-icon.svg" alt="Back" /></button>
-			<button class="reverseButton"><img src="/src/lib/images/next-icon.svg" alt="Next" /></button>
-		</div>
-	{/if}
+	
 </main>
 

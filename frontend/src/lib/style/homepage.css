@@ -19,8 +19,7 @@
 .grid-container2 {
 	display: flex;
 	gap: var(--margin20);
-	/* overflow-x: scroll;  */
-	/* overflow-x: auto; */
+	 overflow-x: auto; 
 }
 
 .grid-item {
