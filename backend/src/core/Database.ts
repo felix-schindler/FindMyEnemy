@@ -8,7 +8,7 @@ export default class Database extends Client {
 			user: "postgres",
 			password: "DnxctEotDlNsk3FuOoVm",
 			database: "postgres",
-			hostname: Deno.env.get("DEV") ? "localhost" : "db",
+			//hostname: Deno.env.get("DEV") ? "localhost" : "db",
 			port: 5432,
 		});
 	}
