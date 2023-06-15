@@ -44,17 +44,6 @@
 		}
 	];
 	
-	async function getClickAmountUser() {
-		const res = await req('/challenges', 'GET');
-		const res = await req('/challenge/:id', 'GET');
-
-		if (res) {
-			return 'Succeded';
-		} else {
-			throw new Error('Could not fetch Challenge ID');
-		}
-	}
-
 </script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />

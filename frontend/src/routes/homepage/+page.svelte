@@ -1,59 +1,24 @@
-<script>
+<script lang="ts">
 	import '$lib/style/main.css';
 	import '$lib/style/homepage.css';
 	import AccountButton from '$lib/components/AccountButton.svelte';
 	import { req } from '$lib/core/api';
 
 	import { onMount, onDestroy } from 'svelte';
+	import { Status, type User } from '$lib/core/types';
+
+	let users: User[];
 
 	async function getUsers() {
 		const res = await req('/users', "GET");
-		if (res) {
-			return 'Succeded';
+
+		if (res instanceof Status) {
+			console.error(res);
 		} else {
-			throw new Error('Could not fetch users');
+			users = res
 		}
 	}
-
-	let users = [
-		{
-			id: 1,
-			imageSrc: '/src/lib/images/SpongeBob_SquarePants_character.svg.png',
-			title: 'Timothy',
-			compatibility: '89%',
-			description: '12km'
-		},
-		{
-			id: 2,
-			imageSrc: '/src/lib/images/SpongeBob_SquarePants_character.svg.png',
-			title: 'Benjamin',
-			compatibility: '89%',
-			description: '12km'
-		},
-		{
-			id: 3,
-			imageSrc: '/src/lib/images/SpongeBob_SquarePants_character.svg.png',
-			title: 'Benjamin',
-			compatibility: '89%',
-			description: '12km'
-		},
-		{
-			id: 4,
-			imageSrc: '/src/lib/images/SpongeBob_SquarePants_character.svg.png',
-			title: 'Benjamin',
-			compatibility: '89%',
-			description: '12km'
-		}, 
-		{
-			id: 5,
-			imageSrc: '/src/lib/images/SpongeBob_SquarePants_character.svg.png',
-			title: 'Benjamin',
-			compatibility: '89%',
-			description: '12km'
-		}
-	];
 </script>
-
 
 
 <main>
@@ -80,20 +45,14 @@
 			</button>
 		</div>
 
-		<div class="grid-container">
-			{#each users as user (user.id)}
-				<div class="grid-item">
-					<img src={user.imageSrc} alt={user.title} />
-					<div class="user-information">
-						<div class="user-details">
-							<p><b>{user.title}</b></p>
-							<p><b>{user.compatibility}</b></p>
-						</div>
-						<p>{user.description}</p>
-					</div>
-				</div>
+		
+			{#each users as user }
+				
+							<p><b>{user.username}</b></p>
+							<p><b>{user.personality}</b></p>
+						
 			{/each}
-		</div>
+		
 	</div>
 
 	<div class="top-enemies">
@@ -102,7 +61,7 @@
 			<span class="moredetails-icon" />
 		</div>
 
-		<div class="grid-container2">
+		<!-- <div class="grid-container2">
 			{#each users as user (user.id)}
 				<div class="grid-item">
 					<img src={user.imageSrc} alt={user.title} />
@@ -115,7 +74,7 @@
 					</div>
 				</div>
 			{/each}
-		</div>
+		</div> -->
 	</div>
 
 	
