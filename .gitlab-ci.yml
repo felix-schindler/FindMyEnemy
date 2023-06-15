@@ -28,7 +28,7 @@ backend_build:
 
 backend_test:
   before_script:
-  - apk update && apk install -y postgresql
+  - apk add postgresql
   - export PGPASSWORD=DnxctEotDlNsk3FuOoVm
   - psql -h "postgres" -U "postgres" -d "postgres" -f ./db/db-init-scripts/
   stage: test
