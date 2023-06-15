@@ -2,13 +2,17 @@ stages:
   - build
   - test
 
-frontend_build:
-  stage: build
-  image: node:19-alpine
-  script:
-    - cd frontend
-    - npm install
-    - npm run build
+services:
+  - postgres:alpine
+
+
+#frontend_build:
+ # stage: build
+  #image: node:19-alpine
+  #script:
+   # - cd frontend
+   # - npm install
+   # - npm run build
 
 backend_build:
   stage: build
