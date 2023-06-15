@@ -47,6 +47,7 @@
 
 	// Setze den Timer auf 30 Sekunden
 	timeLeft = 7;
+
 </script>
 
 <div class="clickerContainer">
