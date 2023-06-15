@@ -37,6 +37,7 @@ backend_test:
   services:
   - postgres:alpine
   variables:
+    POSTGRES_HOST: postgres
     POSTGRES_DB: postgres
     POSTGRES_USER: postgres
     POSTGRES_PASSWORD: DnxctEotDlNsk3FuOoVm
