@@ -30,8 +30,8 @@ backend_test:
   before_script:
   - apk add postgresql
   - export PGPASSWORD=DnxctEotDlNsk3FuOoVm
-  - psql -h "postgres" -U "postgres" -d "postgres" -f ./db/db-init-scripts/database_init.sql
-  - psql -h "postgres" -U "postgres" -d "postgres" -c 'SELECT * FROM users;'
+  - psql -h "db" -U "postgres" -d "postgres" -f ./db/db-init-scripts/database_init.sql
+  - psql -h "db" -U "postgres" -d "postgres" -c 'SELECT * FROM users;'
   stage: test
   image: denoland/deno:alpine
   services:
