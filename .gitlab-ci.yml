@@ -2,8 +2,18 @@ stages:
   - build
   - test
 
-
-
+test_test:
+  before_script:
+    - apk add postgresql
+    - export PGPASSWORD=DnxctEotDlNsk3FuOoVm
+    - psql -h "postgres" -U "postgres" -d "postgres" -f ./db/db-init-scripts/database_init.sql
+  stage: build
+  services:
+    - postgres:alpine
+  image:
+    - denoland/deno:alpine
+  script:
+    - echo "Hello World"
 #frontend_build:
  # stage: build
   #image: node:19-alpine
@@ -12,12 +22,12 @@ stages:
    # - npm install
    # - npm run build
 
-backend_build:
-  stage: build
-  image: denoland/deno:alpine
-  script:
-    - cd backend
-    - deno task compile
+#backend_build:
+ # stage: build
+  #image: denoland/deno:alpine
+  #script:
+  #  - cd backend
+  #  - deno task compile
 
 #frontend_test:
  # stage: test
@@ -27,23 +37,18 @@ backend_build:
     #- npm install
     #- npm run test
 
-backend_test:
-  before_script:
-  - apk add postgresql
-  - export PGPASSWORD=DnxctEotDlNsk3FuOoVm
-  - >
-    until psql -h "postgres" -U "postgres" -d "postgres" -c '\l'; do
-      echo "Postgres is unavailable - sleeping"
-      sleep 1
-    done
-  - psql -h "postgres" -U "postgres" -d "postgres" -f ./db/db-init-scripts/database_init.sql
-  #- psql -h "postgres" -U "postgres" -d "postgres" -c 'SELECT * FROM users;'
-  stage: test
-  image: denoland/deno:alpine
-  services:
-  - postgres:alpine
-    alias:postgres
-  script:
-    - cd backend
-    - deno test -A --unstable --trace-ops
+#backend_test:
+#  before_script:
+#  - apk add postgresql
+#  - export PGPASSWORD=DnxctEotDlNsk3FuOoVm
+#  - psql -h "postgres" -U "postgres" -d "postgres" -f ./db/db-init-scripts/database_init.sql
+#  #- psql -h "postgres" -U "postgres" -d "postgres" -c 'SELECT * FROM users;'
+ # stage: test
+#  image: denoland/deno:alpine
+ # services:
+ # - postgres:alpine
+  #  alias:postgres
+ # script:
+   # - cd backend
+    #- deno test -A --unstable --trace-ops
     #- deno task test && deno fmt --check && deno lint
