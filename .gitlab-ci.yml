@@ -30,17 +30,13 @@ backend_test:
   before_script:
   - apk add postgresql
   - export PGPASSWORD=DnxctEotDlNsk3FuOoVm
-  - psql -h "db" -U "postgres" -d "postgres" -f ./db/db-init-scripts/database_init.sql
-  - psql -h "db" -U "postgres" -d "postgres" -c 'SELECT * FROM users;'
+  - psql -h "postgres" -U "postgres" -d "postgres" -f ./db/db-init-scripts/database_init.sql
+  - psql -h "postgres" -U "postgres" -d "postgres" -c 'SELECT * FROM users;'
   stage: test
   image: denoland/deno:alpine
   services:
   - postgres:alpine
-  variables:
-    POSTGRES_HOST: db
-    POSTGRES_DB: postgres
-    POSTGRES_USER: postgres
-    POSTGRES_PASSWORD: DnxctEotDlNsk3FuOoVm
+    alias:db
   script:
     - cd backend
     - deno test -A --unstable --trace-ops
