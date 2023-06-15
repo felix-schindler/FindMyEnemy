@@ -1,6 +1,6 @@
 postgres test:
   services:
-    - postgres
+    - postgres:alpine
   variables:
     # Configure postgres service (https://hub.docker.com/_/postgres/)
     POSTGRES_DB: postgres
