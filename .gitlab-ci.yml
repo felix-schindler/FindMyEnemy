@@ -11,7 +11,7 @@ test_test:
   services:
     - postgres:alpine
   image:
-    - denoland/deno:alpine
+    denoland/deno:alpine
   script:
     - echo "Hello World"
 #frontend_build:
