@@ -2,9 +2,6 @@ stages:
   - build
   - test
 
-services:
-  - postgres:alpine
-
 
 #frontend_build:
  # stage: build
@@ -30,8 +27,18 @@ backend_build:
     #- npm run test
 
 backend_test:
+  before_script:
+  - apt update && apt install -y postgresql
+  - export PGPASSWORD=DnxctEotDlNsk3FuOoVm
+  - psql -h "postgres" -U "postgres" -d "postgres" -f ./db/db-init-scripts/
   stage: test
   image: denoland/deno:alpine
+  services:
+  - postgres:alpine
+  variables:
+    POSTGRES_DB: postgres
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: DnxctEotDlNsk3FuOoVm
   script:
     - cd backend
     - deno task test && deno fmt --check && deno lint
