@@ -1,3 +1,5 @@
+import { serve } from "$std/http/server.ts";
+
 import { Hono } from "hono/mod.ts";
 import { cors, logger, prettyJSON } from "hono/middleware.ts";
 import { HTTPException } from "hono/http-exception.ts";
@@ -7,6 +9,7 @@ import UserController from "./controllers/UserController.ts";
 import QuestionController from "./controllers/QuestionController.ts";
 import { Status } from "./core/types.ts";
 import ChallengeController from "./controllers/ChallengeController.ts";
+import HttpError from "./core/HttpError.ts";
 
 if (Deno.args.includes("--help")) {
 	console.log(
@@ -79,12 +82,12 @@ app.onError((err, c) => {
 	}
 
 	return c.json<Status>({
-		status: 500,
-		msg: err.message ?? "Internal server error",
+		status: HttpError.INTERNAL.status,
+		msg: err.message ?? HttpError.INTERNAL.message,
 		raw: err,
 	}, {
-		status: 500,
-		statusText: "Internal server error",
+		status: HttpError.INTERNAL.status,
+		statusText: err.message ?? HttpError.INTERNAL.message,
 	});
 });
 
@@ -95,26 +98,4 @@ if (Deno.args.includes("--show-routes")) {
 }
 
 // Start web server
-export const ac = new AbortController();
-export const server = Deno.serve({ signal: ac.signal }, app.fetch);
-server.finished.then(() => Log.info("Server stopped"));
-/*
-The line above looks stupid but is actually needed.
-Our tests are failing due to leaking resources.
-Sometimes it's an still open TCP connection (of
-the server), sometime it's other things. Anyways,
-this is awaiting the server stop and even tho the
-tests are still failing, I (Felix) suggest to keep
-this in (just in case).
-
-https://github.com/denoland/deno/pull/19189
-https://deno.land/api@v1.34.0?unstable&s=Deno.serve
-*/
-
-function onClose() {
-	Log.info("Closing server...");
-	ac.abort();
-}
-
-Deno.addSignalListener("SIGINT", onClose); // When process is killed using ctrl + c
-Deno.addSignalListener("SIGTERM", onClose); // When process is killed
+export const server = serve(app.fetch);

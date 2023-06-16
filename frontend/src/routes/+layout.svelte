@@ -1,18 +1,6 @@
 <script>
 	import Header from './Header.svelte';
 	import '$lib/style/main.css';
-	import { page } from '$app/stores';
-	import { authStore } from '$lib/core/stores';
-	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
-	import { redirect } from '@sveltejs/kit';
-
-	const AUTH_PATH = '/auth';
-
-	$: if (browser && !$authStore && !$page.url.pathname.startsWith(AUTH_PATH)) {
-		const redir = `${AUTH_PATH}?next=${encodeURIComponent($page.url.pathname)}`;
-		goto(redir);
-	}
 </script>
 
 <div class="app">
