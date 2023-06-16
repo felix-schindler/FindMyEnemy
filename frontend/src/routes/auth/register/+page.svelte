@@ -7,6 +7,7 @@
 	import { authStore } from '$lib/core/stores';
 	import { req } from '$lib/core/api';
 	import { Status } from '$lib/core/types';
+	import { onMount } from 'svelte';
 
 	const next = $page.url.searchParams.get('next');
 	const personality = $page.url.searchParams.get('personality') ?? '';
@@ -35,6 +36,7 @@
 		}
 	}
 </script>
+
 <h1>find my <br /> enemy</h1>
 <form class="form" on:submit={register}>
 	<input type="text" placeholder="username" bind:value={username} />

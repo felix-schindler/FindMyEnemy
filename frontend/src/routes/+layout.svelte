@@ -6,6 +6,8 @@
 	import { goto } from '$app/navigation';
 	import { browser } from '$app/environment';
 	import { redirect } from '@sveltejs/kit';
+	import toast, { Toaster } from 'svelte-french-toast';
+	import { onMount } from 'svelte';
 
 	const AUTH_PATH = '/auth';
 
@@ -13,8 +15,9 @@
 		const redir = `${AUTH_PATH}?next=${encodeURIComponent($page.url.pathname)}`;
 		goto(redir);
 	}
-</script>
 
+</script>
+<Toaster />
 <div class="app">
 	<Header />
 	<main>

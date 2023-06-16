@@ -8,6 +8,7 @@
 	import challengeHistoryIcon from '$lib/images/star.svg';
 	import frenemiesIcon from '$lib/images/users.svg';
 	import AccountButton from '$lib/components/AccountButton.svelte';
+	import { goto } from '$app/navigation';
 
 	let username = 'Username'; // Beispiel-Benutzername
 	let editing = false;
@@ -44,65 +45,63 @@
 		<div class="profile-img">
 			<img src="https://via.placeholder.com/150" alt="profile picture" />
 		</div>
-
-		<div class="username-edit">
-			<div class="username-field">
-				{#if editing}
-					<input
-						type="text"
-						class="username-input {editing ? 'editing' : ''}"
-						bind:value={username}
-					/>
-				{:else}
-					<span>{username}</span>
-				{/if}
+		<div class="formBtn">
+			<div class="form">
+				<div class="username-edit">
+					<div class="username-field">
+						{#if editing}
+							<input
+								type="text"
+								class="username-input {editing ? 'editing' : ''}"
+								bind:value={username}
+							/>
+						{:else}
+							<span>{username}</span>
+						{/if}
+					</div>
+					<div class="button-container">
+						{#if editing}
+							<button id="save-button" class="button" on:click={saveUsername}>
+								<img src={check} alt="Back" />
+							</button>
+						{:else}
+							<button
+								id="edit-button"
+								class="button"
+								on:click={() => {
+									editing = true;
+								}}
+							>
+								<img src={openEdit} alt="Back" />
+							</button>
+						{/if}
+					</div>
+				</div>
+				<button class="button" on:click={changePassword}>
+					<img src={changePasswordIcon} alt="Change Password" />
+					Change Password
+				</button>
+				<button class="button" on:click={() => goto('/challenge-history')}>
+					<img src={challengeHistoryIcon} alt="Challenge History" />
+					Challenge History
+				</button>
+				<button class="button" on:click={() => goto('/frenemies')}>
+					<img src={frenemiesIcon} alt="Friend Requests" />
+					Friend Requests
+				</button>
+				<button class="button" on:click={deleteAccount}>
+					<img src={deleteIcon} alt="Delete Account" />
+					Delete Account
+				</button>
 			</div>
-			<div class="button-container">
-				{#if editing}
-					<button id="save-button" class="button" on:click={saveUsername}>
-						<img src={check} alt="Back" />
-					</button>
-				{:else}
-					<button
-						id="edit-button"
-						class="button"
-						on:click={() => {
-							editing = true;
-						}}
-					>
-						<img src={openEdit} alt="Back" />
-					</button>
-				{/if}
-			</div>
-		</div>
-
-		<div class="form">
-			<button class="button" on:click={changePassword}>
-				<img src={changePasswordIcon} alt="Change Password" />
-				Change Password
-			</button>
-			<button class="button" on:click={viewChallengeHistory}>
-				<img src={challengeHistoryIcon} alt="Challenge History" />
-				Challenge History
-			</button>
-			<button class="button" on:click={viewFrenemies}>
-				<img src={frenemiesIcon} alt="My Frenemies" />
-				My Frenemies
-			</button>
-			<button class="button" on:click={deleteAccount}>
-				<img src={deleteIcon} alt="Delete Account" />
-				Delete Account
+			<button class="mainBtn" on:click={logOut}>
+				<span>Log Out</span>
 			</button>
 		</div>
-		<button class="mainBtn" on:click={logOut}>
-			<span>Log Out</span>
-		</button>
 	</div>
 </div>
 
 <style>
-	.container > .back-button {
-	}
 	.content {
 		display: flex;
 		flex-direction: column;
@@ -118,7 +117,6 @@
 		border: none;
 		cursor: pointer;
 		overflow: hidden;
-		outline: none;
 	}
 
 	.profile-img > img {
@@ -142,7 +140,7 @@
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
-		margin: 1rem;
+		margin: var(--margin20);
 		color: white;
 		margin: 0.5rem;
 		border: 0;
@@ -151,7 +149,7 @@
 		margin-right: 1rem;
 	}
 	.button-container > button {
-		margin-left: 1rem;
+		margin-left: var(--margin20);
 	}
 	.username-input {
 		width: 75%;
@@ -160,5 +158,24 @@
 	.username-input.editing {
 		border: none;
 		background-color: transparent;
+	}
+	.formBtn {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.formBtn > button {
+		margin: var(--margin40);
+	}
+
+	@media (min-width: 991px) {
+		.content {
+			flex-direction: row;
+			padding: 0;
+		}
+		.content > div {
+			margin: 0;
+		}
 	}
 </style>
