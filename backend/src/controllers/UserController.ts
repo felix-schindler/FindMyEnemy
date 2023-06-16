@@ -1,11 +1,12 @@
 import { Context, Env } from "hono/mod.ts";
-import { decode, sign, verify } from "hono/utils/jwt/jwt.ts";
+import { sign } from "hono/utils/jwt/jwt.ts";
 import { compare, hash } from "bcrypt";
 
 import { AuthController } from "./Controller.ts";
 import { db } from "../core/Database.ts";
 import HttpError from "../core/HttpError.ts";
 import { JWT_SECRET } from "../core/stores.ts";
+import { verify } from "../core/auth.ts";
 
 import type { AuthUser, ClientUser, Status, User } from "../core/types.ts";
 
@@ -77,7 +78,7 @@ export default class UserController extends AuthController {
 
 	async getList(c: Context<Env, "/users">): Promise<Response> {
 		const token = c.req.header("Authorization");
-		if (!token || !await verify(token, JWT_SECRET)) throw new HttpError(401);
+		const user = await verify(token);
 
 		let where: string, param: string;
 
@@ -88,7 +89,7 @@ export default class UserController extends AuthController {
 			param = search;
 		} else {
 			where = "WHERE personality != $1";
-			param = (decode(token).payload as ClientUser).personality; // Get user from JWT and set param
+			param = user.personality; // Get user from JWT and set param
 		}
 
 		// Create query string
@@ -114,10 +115,7 @@ export default class UserController extends AuthController {
 	async update(c: Context<Env, "/users/:id">): Promise<Response> {
 		// Check if user is authenticated
 		const token = c.req.header("Authorization");
-		if (!token || !await verify(token, JWT_SECRET)) throw new HttpError(401);
-
-		// Get user from JWT
-		const user = decode(token).payload as ClientUser;
+		const user = await verify(token);
 		const id = Number(c.req.param("id"));
 
 		// Check if user is trying to update another user
@@ -175,10 +173,7 @@ export default class UserController extends AuthController {
 	async replace(c: Context<Env, "/users/:id">): Promise<Response> {
 		// Check authentication and access
 		const token = c.req.header("Authorization");
-		if (!token || !verify(token, JWT_SECRET)) throw new HttpError(401);
-
-		// Get user from JWT
-		const user = decode(token).payload as ClientUser;
+		const user = await verify(token);
 		const id = Number(c.req.param("id"));
 
 		// Check if user is trying to update another user
@@ -226,12 +221,8 @@ export default class UserController extends AuthController {
 
 	async delete(c: Context<Env, "/users/:id">): Promise<Response> {
 		const token = c.req.header("Authorization");
-		if (!token || !await verify(token, JWT_SECRET)) {
-			throw new HttpError(401);
-		}
-
+		const user_id = (await verify(token)).id;
 		const id = Number(c.req.param("id"));
-		const user_id: number = decode(token).payload.id;
 
 		if (id !== user_id) {
 			throw new HttpError(403, `${user_id} is not allowed to delete ${id}`);

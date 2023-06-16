@@ -2,11 +2,9 @@ import type { Context, Env } from "hono/mod.ts";
 
 import Controller from "./Controller.ts";
 import { db } from "../core/Database.ts";
-import HttpError from "../core/HttpError.ts";
 
-import { Challenge, ClientUser, Status } from "../core/types.ts";
-import { JWT_SECRET } from "../core/stores.ts";
-import { decode, verify } from "hono/utils/jwt/jwt.ts";
+import { Challenge, Status } from "../core/types.ts";
+import { verify } from "../core/auth.ts";
 
 export default class ChallengeController extends Controller {
 	public static readonly shared = new ChallengeController();
@@ -14,11 +12,7 @@ export default class ChallengeController extends Controller {
 	public async getList(c: Context<Env, "/challenges">): Promise<Response> {
 		// Check token and get user id from token
 		const token = c.req.header("Authorization");
-		if (!(token && await verify(token, JWT_SECRET))) {
-			throw new HttpError(401);
-		}
-
-		const user = decode(token).payload as ClientUser;
+		const user = await verify(token);
 
 		// Get all challenges from database where the user is involved
 		const challenges = (await db.queryObject<Challenge>(
@@ -32,12 +26,9 @@ export default class ChallengeController extends Controller {
 	public async create(c: Context<Env, "/challenges">): Promise<Response> {
 		// Check token and get user id from token
 		const token = c.req.header("Authorization");
-		if (!(token && await verify(token, JWT_SECRET))) {
-			throw new HttpError(401);
-		}
+		const user_self = (await verify(token)).id;
 
 		// Get challenge from req body
-		const user_self: number = decode(token).payload.id;
 		const { score, challengee } = await c.req.json();
 
 		const insert = (await db.queryObject<{ id: number }>(
@@ -57,12 +48,8 @@ export default class ChallengeController extends Controller {
 	public async get(c: Context<Env, "/challenges/:id">): Promise<Response> {
 		// Check token and get user id from token
 		const token = c.req.header("Authorization");
-		if (!(token && await verify(token, JWT_SECRET))) {
-			throw new HttpError(401);
-		}
-
+		const user = await verify(token);
 		const id = c.req.param("id");
-		const user = decode(token).payload as ClientUser;
 
 		// Get challenge from database where the user is involved
 		const challenge = (await db.queryObject<Challenge>(
@@ -76,13 +63,8 @@ export default class ChallengeController extends Controller {
 	public async update(c: Context<Env, "/challenges/:id">): Promise<Response> {
 		// Check token and get user id from token
 		const token = c.req.header("Authorization");
-		if (!(token && await verify(token, JWT_SECRET))) {
-			throw new HttpError(401);
-		}
-
-		// Get challenge from req body
+		const user_self = (await verify(token)).id;
 		const id = c.req.param("id");
-		const user_self: number = decode(token).payload.id;
 
 		// Update challenge score
 		const { score } = await c.req.json();
@@ -112,13 +94,8 @@ export default class ChallengeController extends Controller {
 	public async delete(c: Context<Env, "/challenges/:id">): Promise<Response> {
 		// Check token and get user id from token
 		const token = c.req.header("Authorization");
-		if (!(token && await verify(token, JWT_SECRET))) {
-			throw new HttpError(401);
-		}
-
-		// Get challenge from req body
+		const user_self = (await verify(token)).id;
 		const id = c.req.param("id");
-		const user_self: number = decode(token).payload.id;
 
 		// Delete challenge
 		const rowCount = (await db.queryObject<Challenge>(

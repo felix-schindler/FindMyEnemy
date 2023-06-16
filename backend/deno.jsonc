@@ -1,15 +1,16 @@
 {
+	"lock": false,
 	"imports": {
-		"$std/": "https://deno.land/std@0.189.0/",
-		"hono/": "https://deno.land/x/hono@v3.2.2/",
+		"$std/": "https://deno.land/std@0.192.0/",
+		"hono/": "https://deno.land/x/hono@v3.2.5/",
 		"postgres": "https://deno.land/x/postgres@v0.17.0/mod.ts",
 		"bcrypt": "https://deno.land/x/bcrypt@v0.4.1/mod.ts"
 	},
 	"tasks": {
-		"dev": "DEV=true deno run --watch=src/ -A --unstable src/main.ts --no-log-file",
-		"start": "DEV=true deno run -A --unstable src/main.ts --no-log-file",
-		"compile": "deno compile -A --unstable src/main.ts -o backend",
-		"test": "DEV=true deno test -A --unstable --trace-ops -- --no-log"
+		"dev": "DEV=true deno run --watch=src/ -A src/main.ts --no-log-file",
+		"start": "DEV=true deno run -A src/main.ts --no-log-file",
+		"compile": "deno compile -A src/main.ts -o backend",
+		"test": "DEV=true deno test -A --trace-ops -- --no-log"
 	},
 	"fmt": {
 		"semiColons": true,
