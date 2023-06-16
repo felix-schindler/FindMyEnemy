@@ -10,6 +10,7 @@
 	let question: Question;
 	let answers: UserAnswer[] = [];
 	let personality: string;
+	let msg = '';
 
 	async function addAnswer(qId: number, category: Category) {
 		question = questions[++qIndex];
@@ -32,9 +33,9 @@
 		const res = await req('/questions', 'GET');
 
 		if (res instanceof Status) {
-			// TODO: Show error
+			msg = `${res.status}: ${res.message}`;
 		} else {
-			// TODO: Set questions
+			//Set questions
 			questions = res;
 			question = questions[qIndex];
 		}
@@ -43,9 +44,9 @@
 	async function getPersonality() {
 		const res = await req('/questions/personality', 'POST', answers);
 
-		// TODO: Check for error -> show message ; else: set personality
+		// Check for error -> show message ; else: set personality
 		if (res instanceof Status) {
-			//TODO: Show error
+			msg = `${res.status}: ${res.message}`;
 		} else {
 			personality = res.personality;
 		}
