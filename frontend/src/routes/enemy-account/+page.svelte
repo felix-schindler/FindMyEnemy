@@ -3,8 +3,14 @@
 	import '$lib/style/enemy-account.css'
 	import enemyPic from '$lib/images/enemy_account_pic.png';
 	import addEnemy from '$lib/images/add-enemy.svg';
-	
+	import AccountButton from '$lib/components/AccountButton.svelte';
+	import BackButton from '$lib/components/BackButton.svelte';
 </script>
+
+<div>
+	<BackButton/>
+	<AccountButton/>
+</div>
 
 <div id="content">
 	<div id="mainProperties">

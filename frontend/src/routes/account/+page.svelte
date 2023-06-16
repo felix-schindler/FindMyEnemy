@@ -7,8 +7,7 @@
 	import changePasswordIcon from '$lib/images/lock.svg';
 	import challengeHistoryIcon from '$lib/images/star.svg';
 	import frenemiesIcon from '$lib/images/users.svg';
-	import AccountButton from '$lib/components/AccountButton.svelte';
-
+	
 	let username = 'Username'; // Beispiel-Benutzername
 	let editing = false;
 
@@ -32,9 +31,6 @@
 	}
 </script>
 
-<div>
-	<AccountButton />
-</div>
 <div>
 	<BackButton />
 </div>

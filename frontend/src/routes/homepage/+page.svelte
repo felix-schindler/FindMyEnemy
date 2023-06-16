@@ -20,7 +20,6 @@
 	}
 </script>
 
-
 <main>
 	<AccountButton />
 
@@ -77,6 +76,5 @@
 		</div> -->
 	</div>
 
-	
 </main>
 

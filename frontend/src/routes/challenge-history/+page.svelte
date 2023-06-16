@@ -1,6 +1,6 @@
 <script lang="ts">
-	// import AccountButton from "../AccountButton.svelte";
-	// import BackButton from "../BackButton.svelte";
+	import AccountButton from '$lib/components/AccountButton.svelte';
+	import BackButton from '$lib/components/BackButton.svelte';
 	import account from '$lib/images/user.svg';
 	import crown from '$lib/images/crown.svg';
 
@@ -8,12 +8,10 @@
 	function clicksEnemy() {}
 </script>
 
-<!-- <div>
-    <AccountButton/>
-</div>
 <div>
+    <AccountButton/>
     <BackButton/>
-</div> -->
+</div>
 
 <h1>Challenge History</h1>
 <div class="container">
