@@ -14,5 +14,6 @@ postgres test:
     - psql -h "postgres" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -f ./db/db-init-scripts/database_init.sql 
     - psql -h "postgres" -U "postgres" -d "postgres" -c 'SELECT * FROM users;'
   script:
-    - echo "Hello World"
+    - cd backend
+    - deno test -A --unstable --trace-ops
 
