@@ -4,7 +4,6 @@
 	import { browser } from '$app/environment';
 
 	import '$lib/style/main.css';
-	import abc from '$lib/images/userlogin-icon.svg';
 	import { authStore } from '$lib/core/stores';
 	import { req } from '$lib/core/api';
 	import { Status } from '$lib/core/types';
