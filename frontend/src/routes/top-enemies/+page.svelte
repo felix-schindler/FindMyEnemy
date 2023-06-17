@@ -2,6 +2,7 @@
 	import { onMount, onDestroy } from 'svelte';
 	import AccountButton from '$lib/components/AccountButton.svelte';
 	import BackButton from '$lib/components/BackButton.svelte';
+	import Enemy from '$lib/components/Enemy.svelte';
 
 	let enemies = [
 		{
@@ -58,22 +59,7 @@
 
 		<div class="grid-container">
 			{#each enemies as enemy (enemy.id)}
-				<div class="enemy-grid-item">
-					<div class="image-container">
-						<img src={enemy.imageSrc} alt={enemy.title} />
-					</div>
-
-					<div class="enemy-information">
-						<div class="enemy-details">
-							<p><b>{enemy.title}</b></p>
-							<p><b>{enemy.compatibility}</b></p>
-						</div>
-
-						<p>{enemy.type}</p>
-						<p>{enemy.personality}</p>
-						<p>{enemy.distance}</p>
-					</div>
-				</div>
+				<Enemy {enemy} />
 			{/each}
 		</div>
 	</div>
@@ -91,44 +77,6 @@
 		/* flex-direction: column; */
 		flex-wrap: wrap;
 		gap: 3%;
-	}
-
-	.enemy-grid-item {
-		display: flex;
-		flex-basis: 100%;
-		margin-bottom: 34px;
-		border-radius: 10%;
-		background-color: #201254;
-		box-sizing: border-box;
-	}
-
-	.image-container {
-		flex: 1;
-		max-width: 50%;
-	}
-
-	.image-container img {
-		width: 100%;
-		height: auto;
-		display: block;
-		object-fit: cover;
-		padding: 10%;
-		background-color: white;
-		border-top-left-radius: 10%;
-		border-bottom-left-radius: 10%;
-	}
-
-	.enemy-information {
-		flex: 1;
-		max-width: 50%;
-		padding: 30px;
-	}
-
-	.enemy-details {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		margin-bottom: 15%;
 	}
 
 	.filter-button {
