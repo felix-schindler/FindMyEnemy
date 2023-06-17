@@ -89,24 +89,31 @@
 
 <style>
 	.top-enemies {
-		margin-left: 8%;
-		margin-right: 8%;
-		margin-top: 3%;
-	}
-
-	.grid-container {
-		display: flex;
-		/* flex-direction: column; */
-		flex-wrap: wrap;
-		gap: 3%;
+		margin: var(--margin40);
 	}
 
 	.filter-button {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		margin-bottom: 5%;
-		margin-top: 5%;
 	}
+
+	.filter-icon {
+		display: inline-block;
+		width: 32px;
+		height: 28px;
+		background-image: url(/src/lib/images/filter-icon.svg);
+		background-size: cover;
+	}
+
+
+	.grid-container {
+		display: flex;
+		/* flex-direction: column; */
+		flex-wrap: wrap;
+		gap: var(--margin20);
+	}
+
+	
 </style>
 

@@ -101,4 +101,11 @@
 		align-items: center;
 		margin-bottom: var(--margin40);
 	}
+
+	@media (min-width: 601px) {
+		.enemy-grid-item {
+			flex-basis: calc(50% - 3%);
+		} 
+	}
+
 </style>
