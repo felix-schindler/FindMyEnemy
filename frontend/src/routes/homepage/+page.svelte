@@ -45,14 +45,14 @@
 			</button>
 		</div>
 
-		
-			{#each users as user }
-				
-							<p><b>{user.username}</b></p>
-							<p><b>{user.personality}</b></p>
-						
-			{/each}
-		
+			{#if users}
+				{#each users as user}
+					<p><b>{user.username}</b></p>
+					<p><b>{user.personality}</b></p>
+				{/each}
+			{:else}
+				<p>Loading...</p>
+			{/if}
 	</div>
 
 	<div class="top-enemies">
