@@ -46,7 +46,7 @@ CREATE TABLE fav_enemies (
     user_1_id INT NOT NULL REFERENCES users(id),
     fav_enemy_id INT NOT NULL REFERENCES users(id),
     compatibility_id INT REFERENCES compatibilities(id),
-    compatibility_percentage FLOAT NOT, 
+    compatibility_percentage FLOAT NOT NULL, 
     UNIQUE(user_1_id, fav_enemy_id)
 );
 
