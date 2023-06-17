@@ -1,4 +1,13 @@
-postgres test:
+frontend_test:
+  stage: test
+  image: node:19-alpine
+  script:
+    - cd frontend
+    - npm install
+    - npm run test
+
+backend_test:
+  stage: test
   services:
     - postgres:alpine
   variables:
@@ -15,5 +24,4 @@ postgres test:
     - psql -h "postgres" -U "postgres" -d "postgres" -c 'SELECT * FROM users;'
   script:
     - cd backend
-    - deno test -A --unstable --trace-ops
-
+    - deno task test
