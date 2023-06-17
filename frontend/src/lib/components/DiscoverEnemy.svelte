@@ -1,23 +1,63 @@
 <script lang="ts">
-    export let user: {
-        id: number;
-        imageSrc: string;
-        title: string;
-        compatibility: string;
-        description: string;
-    };
-  </script>
-  
-  <div class="grid-item">
-    <img src={user.imageSrc} alt={user.title} />
-    <div class="user-information">
-      <div class="user-details">
-        <p><b>{user.title}</b></p>
-        <p><b>{user.compatibility}</b></p>
-      </div>
-      <p>{user.description}</p>
+  export let user: {
+      id: number;
+      personality: string;
+      title: string;
+      // compatibility: string;
+      // description: string;
+  };
+
+  function getImageSource(personality: string) {
+  if (personality === 'ENFJ') {
+    return 'ENFJ.svg';
+  } else if (personality === 'ENFP') {
+    return 'ENFP.svg';
+  } else if (personality === 'ENFP') {
+    return 'ENFP.svg';
+  } else if (personality === 'ENTJ'){
+  return 'ENTJ.svg'
+} else if (personality === 'ENTP'){
+  return 'ENTP.svg'
+  } else if (personality === 'ESFJ'){
+  return 'ESFJ.svg'
+} else if (personality === 'ESFP'){
+  return 'ESFP.svg'
+} else if (personality === 'ESTJ'){
+  return 'ESTJ.svg'
+} else if (personality === 'ESTP'){
+  return 'ESTP.svg'
+} else if (personality === 'INFJ'){
+  return 'INFJ.svg'
+} else if (personality === 'INFP'){
+  return  'INFP.svg'
+} else if (personality === 'INTJ'){
+  return 'INTJ.svg'
+} else if (personality === 'INTP'){
+  return 'INTP.svg'
+} else if (personality === 'ISFJ'){
+  return 'ISFJ.svg'
+} else if (personality === 'ISFP'){
+  return 'ISFP.svg'
+} else if (personality === 'ISTJ'){
+  return 'ISTJ.svg'
+} else if (personality === 'ISTP'){
+  return 'ISTP.svg'
+}
+ 
+}
+</script>
+
+<div class="grid-item">
+  <img src={getImageSource(user.personality)} alt={user.title} />
+  <div class="user-information">
+    <div class="user-details">
+      <p><b>{user.title}</b></p>
+      <!-- <p><b>{user.compatibility}</b></p> -->
     </div>
+    <p>{user.personality}</p>
   </div>
+</div>
+
 
 <style>
     .grid-item {
