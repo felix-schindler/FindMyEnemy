@@ -130,10 +130,26 @@
 			</button>
 		</div>
 
-			{#if users}
-				{#each users as user}
-					<p><b>{user.username}</b></p>
-					<p><b>{user.personality}</b></p>
+		<!-- <div class="grid-container">
+			{#each users as user (user.id)}
+			  <div class="grid-item">
+				
+				<img src={getImageSource(user.personality)} alt={user.personality} />
+				<div class="user-information">
+				  <div class="user-details">
+					<p><b>{user.title}</b></p>
+					<p><b>{user.compatibility}</b></p>
+				  </div>
+				  <p>{user.personality}</p>
+				</div>
+			  </div>
+			{/each} 
+		</div> -->
+
+			 {#if enemies}
+				{#each enemies as enemy}
+					<p><b>{enemy.username}</b></p>
+					<p><b>{enemy.personality}</b></p>
 				{/each}
 			{:else}
 				<p>Loading...</p>
