@@ -20,7 +20,6 @@
 		}
 	}
 
-
 	let users = [
 		{
 			id: 1,
@@ -66,47 +65,8 @@
 		}
 	];
 
-	function getImageSource(personality) {
-    if (personality === 'ENFJ') {
-      return 'ENFJ.svg';
-    } else if (personality === 'ENFP') {
-      return 'ENFP.svg';
-    } else if (personality === 'ENFP') {
-      return 'ENFP.svg';
-    } else if (personality === 'ENTJ'){
-		return 'ENTJ.svg'
-	} else if (personality === 'ENTP'){
-		return 'ENTP.svg'
-    } else if (personality === 'ESFJ'){
-		return 'ESFJ.svg'
-	} else if (personality === 'ESFP'){
-		return 'ESFP.svg'
-	} else if (personality === 'ESTJ'){
-		return 'ESTJ.svg'
-	} else if (personality === 'ESTP'){
-		return 'ESTP.svg'
-	} else if (personality === 'INFJ'){
-		return 'INFJ.svg'
-	} else if (personality === 'INFP'){
-		return  'INFP.svg'
-	} else if (personality === 'INTJ'){
-		return 'INTJ.svg'
-	} else if (personality === 'INTP'){
-		return 'INTP.svg'
-	} else if (personality === 'ISFJ'){
-		return 'ISFJ.svg'
-	} else if (personality === 'ISFP'){
-		return 'ISFP.svg'
-	} else if (personality === 'ISTJ'){
-		return 'ISTJ.svg'
-	} else if (personality === 'ISTP'){
-		return 'ISTP.svg'
-	}
-   
-  }
 
 </script>
-
 
 <main>
 	<AccountButton />
@@ -132,11 +92,20 @@
 			</button>
 		</div>
 
-		<!-- <div class="grid-container">
+		 <div class="grid-container">
 			{#each users as user (user.id)}
-				<DiscoverEnemy {user} />
-			{/each}
-		</div>
+			<DiscoverEnemy {user} />
+			{/each} 
+		</div> 
+
+			 <!-- {#if enemies}
+				{#each enemies as enemy}
+					<p><b>{enemy.username}</b></p>
+					<p><b>{enemy.personality}</b></p>
+				{/each}
+			{:else}
+				<p>Loading...</p>
+			{/if} -->
 	</div>
 		
 	<div class="top-enemies">
@@ -154,28 +123,13 @@
 		</button>
 	</div>
 
-		<div class="grid-container2">
-			{#each users as user (user.id)}
-				<DiscoverEnemy {user} />
-			{/each}
-		</div>
-	</div>
+	 <div class="grid-container">
+		{#each users as user (user.id)}
+		<DiscoverEnemy {user} />
+		{/each}
+	</div> 
 
-	{#if viewportWidth > 601}
-		<div class="buttons">
-			<button class="reverseButton prevButton2"
-				><img src="/src/lib/images/back-icon.svg" alt="Back" /></button
-			>
-			<button class="reverseButton nextButton2"
-				><img src="/src/lib/images/next-icon.svg" alt="Next" /></button
-			>
-		</div>
-	{:else}
-		<div class="buttons-mobile">
-			<button class="reverseButton"><img src="/src/lib/images/back-icon.svg" alt="Back" /></button>
-			<button class="reverseButton"><img src="/src/lib/images/next-icon.svg" alt="Next" /></button>
-		</div>
-	{/if}
+	
 </main>
 
 <style>
@@ -269,4 +223,3 @@
 
 
 </style>
-
