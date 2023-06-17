@@ -6,17 +6,104 @@
 	import { onMount, onDestroy } from 'svelte';
 	import { Status, type User } from '$lib/core/types';
 
-	let users: User[];
+	// let users: User[];
 
-	async function getUsers() {
-		const res = await req('/users', "GET");
+	// async function getUsers() {
+	// 	const res = await req('/users', "GET");
 
-		if (res instanceof Status) {
-			console.error(res);
-		} else {
-			users = res
+	// 	if (res instanceof Status) {
+	// 		console.error(res);
+	// 	} else {
+	// 		users = res
+	// 	}
+	// }
+
+	let source;
+
+	let users = [
+		{
+			id: 1,
+			title: 'Timothy',
+			personality: 'ENFJ',
+			compatibility: '89%',
+			description: '12km'
+		},
+		{
+			id: 2,
+			title: 'Benjamin',
+			personality: 'ENFP',
+			compatibility: '89%',
+			description: '12km'
+		},
+		{
+			id: 3,
+			title: 'Natasha',
+			personality: 'INFJ',
+			compatibility: '89%',
+			description: '12km'
+		},
+		{
+			id: 4,
+			title: 'Anna',
+			personality: 'ISTP',
+			compatibility: '89%',
+			description: '12km'
+		},
+		{
+			id: 5,
+			title: 'Kylie',
+			personality: 'ESFP',
+			compatibility: '89%',
+			description: '12km'
+		},
+		{
+			id: 6,
+			title: 'Dan',
+			personality: 'ISTJ',
+			compatibility: '89%',
+			description: '12km'
 		}
+	];
+
+	function getImageSource(personality) {
+    if (personality === 'ENFJ') {
+      return 'ENFJ.svg';
+    } else if (personality === 'ENFP') {
+      return 'ENFP.svg';
+    } else if (personality === 'ENFP') {
+      return 'ENFP.svg';
+    } else if (personality === 'ENTJ'){
+		return 'ENTJ.svg'
+	} else if (personality === 'ENTP'){
+		return 'ENTP.svg'
+    } else if (personality === 'ESFJ'){
+		return 'ESFJ.svg'
+	} else if (personality === 'ESFP'){
+		return 'ESFP.svg'
+	} else if (personality === 'ESTJ'){
+		return 'ESTJ.svg'
+	} else if (personality === 'ESTP'){
+		return 'ESTP.svg'
+	} else if (personality === 'INFJ'){
+		return 'INFJ.svg'
+	} else if (personality === 'INFP'){
+		return  'INFP.svg'
+	} else if (personality === 'INTJ'){
+		return 'INTJ.svg'
+	} else if (personality === 'INTP'){
+		return 'INTP.svg'
+	} else if (personality === 'ISFJ'){
+		return 'ISFJ.svg'
+	} else if (personality === 'ISFP'){
+		return 'ISFP.svg'
+	} else if (personality === 'ISTJ'){
+		return 'ISTJ.svg'
+	} else if (personality === 'ISTP'){
+		return 'ISTP.svg'
 	}
+   
+  }
+
 </script>
 
 
@@ -44,7 +131,24 @@
 			</button>
 		</div>
 
-		
+		<div class="grid-container">
+			{#each users as user (user.id)}
+			  <div class="grid-item">
+				
+				<img src={getImageSource(user.personality)} alt={user.personality} />
+				<div class="user-information">
+				  <div class="user-details">
+					<p><b>{user.title}</b></p>
+					<p><b>{user.compatibility}</b></p>
+				  </div>
+				  <p>{user.personality}</p>
+				</div>
+			  </div>
+			{/each}
+		 
+
+		</div>
+
 			<!-- {#each users as user }
 				
 							<p><b>{user.username}</b></p>
@@ -60,20 +164,20 @@
 			<span class="moredetails-icon" />
 		</div>
 
-		<!-- <div class="grid-container2">
+		 <div class="grid-container">
 			{#each users as user (user.id)}
 				<div class="grid-item">
-					<img src={user.imageSrc} alt={user.title} />
+					<img src={getImageSource(user.personality)} alt={user.personality} />
 					<div class="user-information">
 						<div class="user-details">
 							<p>{user.title}</p>
 							<p><b>{user.compatibility}</b></p>
 						</div>
-						<p>{user.description}</p>
+						<p>{user.personalityn}</p>
 					</div>
 				</div>
 			{/each}
-		</div> -->
+		</div> 
 	</div>
 
 	
@@ -95,8 +199,7 @@
 	margin: var(--margin40);
 }
 
- .grid-container,
-.grid-container2 {
+ .grid-container{
 	display: flex;
 	gap: var(--margin20);
 	 overflow-x: auto; 
@@ -113,14 +216,14 @@
 	border-radius: 10%;
 }
 
-/* .grid-item img {
+ .grid-item img {
 	width: 100%;
 	height: auto;
 	display: block;
 	transition: transform 0.3s ease-in-out;
-} */
+} 
 
-/* .user-information {
+ .user-information {
 	position: absolute;
 	bottom: 0;
 	left: 0;
@@ -149,7 +252,7 @@
 	align-items: center;
 	margin: auto;
 	width: 100%;
-} */
+} 
 
 
 .moredetails-button {
