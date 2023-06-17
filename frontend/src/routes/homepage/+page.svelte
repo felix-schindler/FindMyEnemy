@@ -130,31 +130,14 @@
 			</button>
 		</div>
 
-		<div class="grid-container">
-			{#each users as user (user.id)}
-			  <div class="grid-item">
-				
-				<img src={getImageSource(user.personality)} alt={user.personality} />
-				<div class="user-information">
-				  <div class="user-details">
-					<p><b>{user.title}</b></p>
-					<p><b>{user.compatibility}</b></p>
-				  </div>
-				  <p>{user.personality}</p>
-				</div>
-			  </div>
-			{/each}
-		 
-
-		</div>
-
-			<!-- {#each users as user }
-				
-							<p><b>{user.username}</b></p>
-							<p><b>{user.personality}</b></p>
-						
-			{/each} -->
-		
+			{#if users}
+				{#each users as user}
+					<p><b>{user.username}</b></p>
+					<p><b>{user.personality}</b></p>
+				{/each}
+			{:else}
+				<p>Loading...</p>
+			{/if}
 	</div>
 		
 	<div class="top-enemies">

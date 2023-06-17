@@ -13,10 +13,6 @@
 
 	const next = $page.url.searchParams.get('next');
 
-	$: if (browser && $authStore) {
-		goto(next ?? '/');
-	}
-
 	async function login() {
 		const res = await req('/users/login', 'POST', {
 			username,

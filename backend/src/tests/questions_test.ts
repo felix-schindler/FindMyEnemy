@@ -1,4 +1,4 @@
-import { ac, app, server } from "../main.ts";
+import { app } from "../main.ts";
 import { assertEquals } from "$std/testing/asserts.ts";
 
 // deno-lint-ignore no-explicit-any
@@ -135,27 +135,27 @@ Deno.test("Personality", async () => {
 				},
 				{
 					"question_id": 30,
-					"category": "N",
+					"category": "E",
 				},
 				{
 					"question_id": 31,
-					"category": "N",
+					"category": "E",
 				},
 				{
 					"question_id": 32,
-					"category": "N",
+					"category": "E",
 				},
 				{
 					"question_id": 33,
-					"category": "N",
+					"category": "I",
 				},
 				{
 					"question_id": 34,
-					"category": "N",
+					"category": "I",
 				},
 				{
 					"question_id": 35,
-					"category": "N",
+					"category": "S",
 				},
 			],
 		),
@@ -163,14 +163,5 @@ Deno.test("Personality", async () => {
 	body = await res.json() as { personality: string };
 
 	assertEquals(res.status, 200);
-	assertEquals(body.personality, "N");
-});
-
-Deno.test("Cleanup", {
-	sanitizeOps: false,
-	sanitizeResources: false,
-}, async () => {
-	ac.abort();
-	await server.finished;
-	assertEquals(1, 1);
+	assertEquals(body.personality, "NEIS");
 });
