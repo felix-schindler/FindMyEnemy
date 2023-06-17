@@ -3,7 +3,7 @@ variables:
 
 frontend_test:
   stage: test
-  image: node:19-alpine
+  image: node:20
   script:
     - cd frontend
     - npm ci
