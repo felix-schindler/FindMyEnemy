@@ -173,7 +173,7 @@
 							<p>{user.title}</p>
 							<p><b>{user.compatibility}</b></p>
 						</div>
-						<p>{user.personalityn}</p>
+						<p>{user.personality}</p>
 					</div>
 				</div>
 			{/each}
