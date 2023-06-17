@@ -6,19 +6,18 @@
 	import { onMount, onDestroy } from 'svelte';
 	import { Status, type User } from '$lib/core/types';
 
-	// let users: User[];
+	let enemies: User[];
 
-	// async function getUsers() {
-	// 	const res = await req('/users', "GET");
+	async function getUsers() {
+		const res = await req('/users', "GET");
 
-	// 	if (res instanceof Status) {
-	// 		console.error(res);
-	// 	} else {
-	// 		users = res
-	// 	}
-	// }
+		if (res instanceof Status) {
+			console.error(res);
+		} else {
+			enemies = res
+		}
+	}
 
-	let source;
 
 	let users = [
 		{
@@ -157,28 +156,36 @@
 			{/each} -->
 		
 	</div>
-
+		
 	<div class="top-enemies">
-		<div class="moredetails-button">
-			<h2>Your mortal enemies</h2>
-			<span class="moredetails-icon" />
-		</div>
+	<div class="moredetails-button">
+		<h2>Your mortal enemies</h2>
+		
 
-		 <div class="grid-container">
-			{#each users as user (user.id)}
-				<div class="grid-item">
-					<img src={getImageSource(user.personality)} alt={user.personality} />
-					<div class="user-information">
-						<div class="user-details">
-							<p>{user.title}</p>
-							<p><b>{user.compatibility}</b></p>
-						</div>
-						<p>{user.personality}</p>
-					</div>
-				</div>
-			{/each}
-		</div> 
+		<button
+			class="moredetails-icon"
+			on:click={() => {
+				window.location.href = '/mortal-enemies';
+			}}
+		>
+			<img src="/src/lib/images/moredetails.svg" alt="Back" />
+		</button>
 	</div>
+
+	 <div class="grid-container">
+		{#each users as user (user.id)}
+			<div class="grid-item">
+				<img src={getImageSource(user.personality)} alt={user.personality} />
+				<div class="user-information">
+					<div class="user-details">
+						<p>{user.title}</p>
+						<p><b>{user.compatibility}</b></p>
+					</div>
+					<p>{user.personality}</p>
+				</div>
+			</div>
+		{/each}
+	</div> 
 
 	
 </main>
