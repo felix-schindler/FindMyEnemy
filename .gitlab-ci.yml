@@ -1,5 +1,24 @@
+stages:
+  - build
+  - test
+
 variables:
   CI: "true"
+
+frontend_build:
+  stage: build
+  image: node:19-alpine
+  script:
+    - cd frontend
+    - npm install
+    - npm run build
+
+backend_build:
+  stage: build
+  image: denoland/deno:alpine
+  script:
+    - cd backend
+    - deno task compile
 
 frontend_test:
   stage: test
