@@ -46,12 +46,12 @@
 		</div>
 
 		
-			{#each users as user }
+			<!-- {#each users as user }
 				
 							<p><b>{user.username}</b></p>
 							<p><b>{user.personality}</b></p>
 						
-			{/each}
+			{/each} -->
 		
 	</div>
 
