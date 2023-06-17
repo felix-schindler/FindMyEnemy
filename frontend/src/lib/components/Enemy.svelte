@@ -61,27 +61,29 @@
   </div>
 
   <style>
-    	.enemy-grid-item {
+
+	.enemy-grid-item {
 		display: flex;
 		flex-basis: 100%;
-		margin-bottom: 34px;
+		margin-bottom: var(--margin20);
 		border-radius: 10%;
 		background-color: #201254;
 		box-sizing: border-box;
+        position: relative;
 	}
 
-    
 	.image-container {
-		flex: 1;
-		max-width: 50%;
+		flex: 1; 
+		width: 50%;
+        height: 100%;
 	}
 
 	.image-container img {
 		width: 100%;
-		height: auto;
+        height: 100%;
 		display: block;
 		object-fit: cover;
-		padding: 10%;
+		padding: var(--padding); 
 		background-color: white;
 		border-top-left-radius: 10%;
 		border-bottom-left-radius: 10%;
@@ -90,14 +92,13 @@
 	.enemy-information {
 		flex: 1;
 		max-width: 50%;
-		padding: 30px;
+		padding: var(--padding);
 	}
 
-    .enemy-details {
+	.enemy-details {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		margin-bottom: 15%;
+		margin-bottom: var(--margin40);
 	}
-  </style>
-  
+</style>

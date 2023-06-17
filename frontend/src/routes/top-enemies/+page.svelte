@@ -3,7 +3,6 @@
 	import AccountButton from '$lib/components/AccountButton.svelte';
 	import BackButton from '$lib/components/BackButton.svelte';
 	import { req } from '$lib/core/api';
-	import '$lib/style/enemieslist.css';
 	import Enemy from '$lib/components/Enemy.svelte';
 	import { Status, type User } from '$lib/core/types';
 
