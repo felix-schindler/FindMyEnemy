@@ -1,9 +1,13 @@
+variables:
+  CI: true
+
 frontend_test:
   stage: test
   image: node:19-alpine
   script:
     - cd frontend
-    - npm install
+    - npm ci
+    - npx playwright install --with-deps
     - npm run test
 
 backend_test:
