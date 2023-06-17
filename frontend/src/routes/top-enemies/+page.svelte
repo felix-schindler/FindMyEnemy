@@ -87,16 +87,5 @@
 		margin-top: 5%;
 	}
 
-	.filter-icon {
-		display: inline-block;
-		width: 32px;
-		height: 28px;
-		background-image: url(/src/lib/images/filter-icon.svg);
-		background-size: cover;
-	}
-	@media (min-width: 601px) {
-		.enemy-grid-item {
-			flex-basis: calc(50% - 3%);
-		}
-	}
+
 </style>

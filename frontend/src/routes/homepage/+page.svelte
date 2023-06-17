@@ -1,9 +1,7 @@
 <script>
 	import '$lib/style/main.css';
-	import '$lib/style/homepage.css';
 	import AccountButton from '$lib/components/AccountButton.svelte';
 	import DiscoverEnemy from '$lib/components/DiscoverEnemy.svelte';
-
 
 	import { onMount, onDestroy } from 'svelte';
 			
@@ -93,7 +91,7 @@
 			<span class="moredetails-icon" />
 		</div>
 
-		<div class="grid-container2">
+		<div class="grid-container">
 			{#each users as user (user.id)}
 			<DiscoverEnemy {user} />
 			{/each}
@@ -103,3 +101,41 @@
 	
 </main>
 
+<style>
+	.searchBar {
+	display: flex;
+	justify-content: center;
+	margin-bottom: var(--margin40);
+}
+
+.search-bar {
+	width: 80vw;
+	height: 20px;
+}
+
+.top-enemies {
+	margin-top: var(--margin40);
+	margin-bottom: var(--margin40);
+	margin-left: var(--margin40);
+}
+
+ .grid-container{
+	display: flex;
+	gap: var(--margin20);
+	 overflow-x: auto; 
+} 
+
+.moredetails-button {
+	display: flex;
+	align-items: center;
+}
+
+.moredetails-icon img {
+	width: 8px;
+	height: 12px;
+	margin-left: var(--margin20);
+}
+
+
+
+</style>
