@@ -4,6 +4,7 @@
 	import BackButton from '$lib/components/BackButton.svelte';
 	import { req } from '$lib/core/api';
 	import '$lib/style/enemieslist.css';
+	import Enemy from '$lib/components/Enemy.svelte';
 
 	let enemies = [
 		{
@@ -61,25 +62,31 @@
 
 		<div class="grid-container">
 			{#each enemies as enemy (enemy.id)}
-				<div class="enemy-grid-item">
-					<div class="image-container">
-						<img src={enemy.imageSrc} alt={enemy.title} />
-					</div>
-
-					<div class="enemy-information">
-						<div class="enemy-details">
-							<p><b>{enemy.title}</b></p>
-							<p><b>{enemy.compatibility}</b></p>
-						</div>
-
-						<p>{enemy.type}</p>
-						<p>{enemy.personality}</p>
-						<p>{enemy.distance}</p>
-					</div>
-				</div>
+				<Enemy {enemy} />
 			{/each}
 		</div>
 	</div>
 </main>
 
+<style>
+	.top-enemies {
+		margin-left: 8%;
+		margin-right: 8%;
+		margin-top: 3%;
+	}
+
+	.grid-container {
+		display: flex;
+		/* flex-direction: column; */
+		flex-wrap: wrap;
+		gap: 3%;
+	}
+
+	.filter-button {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 5%;
+		margin-top: 5%;
+	}
 

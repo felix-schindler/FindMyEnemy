@@ -2,6 +2,8 @@
 	import '$lib/style/main.css';
 	import AccountButton from '$lib/components/AccountButton.svelte';
 	import { req } from '$lib/core/api';
+	import DiscoverEnemy from '$lib/components/DiscoverEnemy.svelte';
+
 
 	import { onMount, onDestroy } from 'svelte';
 	import { Status, type User } from '$lib/core/types';
@@ -132,28 +134,9 @@
 
 		<!-- <div class="grid-container">
 			{#each users as user (user.id)}
-			  <div class="grid-item">
-				
-				<img src={getImageSource(user.personality)} alt={user.personality} />
-				<div class="user-information">
-				  <div class="user-details">
-					<p><b>{user.title}</b></p>
-					<p><b>{user.compatibility}</b></p>
-				  </div>
-				  <p>{user.personality}</p>
-				</div>
-			  </div>
-			{/each} 
-		</div> -->
-
-			 {#if enemies}
-				{#each enemies as enemy}
-					<p><b>{enemy.username}</b></p>
-					<p><b>{enemy.personality}</b></p>
-				{/each}
-			{:else}
-				<p>Loading...</p>
-			{/if}
+				<DiscoverEnemy {user} />
+			{/each}
+		</div>
 	</div>
 		
 	<div class="top-enemies">
@@ -171,22 +154,28 @@
 		</button>
 	</div>
 
-	 <div class="grid-container">
-		{#each users as user (user.id)}
-			<div class="grid-item">
-				<img src={getImageSource(user.personality)} alt={user.personality} />
-				<div class="user-information">
-					<div class="user-details">
-						<p>{user.title}</p>
-						<p><b>{user.compatibility}</b></p>
-					</div>
-					<p>{user.personality}</p>
-				</div>
-			</div>
-		{/each}
-	</div> 
+		<div class="grid-container2">
+			{#each users as user (user.id)}
+				<DiscoverEnemy {user} />
+			{/each}
+		</div>
+	</div>
 
-	
+	{#if viewportWidth > 601}
+		<div class="buttons">
+			<button class="reverseButton prevButton2"
+				><img src="/src/lib/images/back-icon.svg" alt="Back" /></button
+			>
+			<button class="reverseButton nextButton2"
+				><img src="/src/lib/images/next-icon.svg" alt="Next" /></button
+			>
+		</div>
+	{:else}
+		<div class="buttons-mobile">
+			<button class="reverseButton"><img src="/src/lib/images/back-icon.svg" alt="Back" /></button>
+			<button class="reverseButton"><img src="/src/lib/images/next-icon.svg" alt="Next" /></button>
+		</div>
+	{/if}
 </main>
 
 <style>
