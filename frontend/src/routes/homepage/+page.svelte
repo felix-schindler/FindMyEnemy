@@ -132,7 +132,7 @@
 	.searchBar {
 	display: flex;
 	justify-content: center;
-	margin-bottom: 32px;
+	margin-bottom: var(--margin40);
 }
 
 .search-bar {
@@ -141,7 +141,9 @@
 }
 
 .top-enemies {
-	margin: var(--margin40);
+	margin-top: var(--margin40);
+	margin-bottom: var(--margin40);
+	margin-left: var(--margin40);
 }
 
  .grid-container{
@@ -153,7 +155,6 @@
 .moredetails-button {
 	display: flex;
 	align-items: center;
-	/* margin-bottom: 16px; */
 }
 
 .moredetails-icon img {

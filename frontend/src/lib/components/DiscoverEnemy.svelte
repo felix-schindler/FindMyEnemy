@@ -64,7 +64,7 @@
         position: relative;
         overflow: hidden;
         margin-right: var(--gap-width);
-        margin-bottom: 20px;
+        margin-bottom: var(--margin20);
         background-color: var(--primary);
         padding: 5%;
         border-radius: 10%;
