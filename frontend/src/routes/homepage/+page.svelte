@@ -2,6 +2,8 @@
 	import '$lib/style/main.css';
 	import '$lib/style/homepage.css';
 	import AccountButton from '$lib/components/AccountButton.svelte';
+	import DiscoverEnemy from '$lib/components/DiscoverEnemy.svelte';
+
 
 	import { onMount, onDestroy } from 'svelte';
 
@@ -154,16 +156,7 @@
 
 		<div class="grid-container">
 			{#each users as user (user.id)}
-				<div class="grid-item">
-					<img src={user.imageSrc} alt={user.title} />
-					<div class="user-information">
-						<div class="user-details">
-							<p><b>{user.title}</b></p>
-							<p><b>{user.compatibility}</b></p>
-						</div>
-						<p>{user.description}</p>
-					</div>
-				</div>
+				<DiscoverEnemy {user} />
 			{/each}
 		</div>
 	</div>
@@ -192,16 +185,7 @@
 
 		<div class="grid-container2">
 			{#each users as user (user.id)}
-				<div class="grid-item">
-					<img src={user.imageSrc} alt={user.title} />
-					<div class="user-information">
-						<div class="user-details">
-							<p>{user.title}</p>
-							<p><b>{user.compatibility}</b></p>
-						</div>
-						<p>{user.description}</p>
-					</div>
-				</div>
+				<DiscoverEnemy {user} />
 			{/each}
 		</div>
 	</div>
