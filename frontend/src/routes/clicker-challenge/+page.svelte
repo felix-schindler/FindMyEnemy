@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount, onDestroy, afterUpdate } from 'svelte';
 
-	let timeLeft = 7;
+	let timeLeft = 10;
 	let clickCount = 0;
 	let timerId: number;
 	let clickButton: HTMLButtonElement | null;
@@ -46,7 +46,7 @@
 	});
 
 	// Setze den Timer auf 30 Sekunden
-	timeLeft = 7;
+	timeLeft = 10;
 
 </script>
 
@@ -56,10 +56,7 @@
 			? `0${timeLeft % 60}`
 			: timeLeft % 60}
 	</p>
-	<button
-		class="mainBtn"
-		id="clickButton"
-		style="margin-top:2.5rem"
+	<button class="mainBtn" id="clickButton" style="margin-top:2.5rem"
 		on:click={countClicks}
 		disabled={timeLeft === 0 || isOverlayVisible}
 	>
@@ -84,33 +81,45 @@
 {/if}
 
 <style>
-	.clickerContainer {
-		text-align: center;
-		margin-top: 50px;
-	}
+.clickerContainer {
+    text-align: center;
+    margin-top: 2.5rem;
+}
 
-	#timer {
-		font-size: 30px;
-	}
+#timer {
+    font-size: var(--fs-title);
+}
 
-	.overlay {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background-color: rgba(0, 0, 0, 0.5);
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		z-index: 999;
-	}
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
 
-	.overlay-content {
-		background-color: #fff;
-		padding: 20px;
-		border-radius: 10px;
-		text-align: center;
-	}
+.overlay-content {
+    background-color: #fff;
+    padding: 1.25rem;
+    border-radius: 0.7rem;
+    text-align: center;
+}
+
+.clickerCircle {
+	height: 40vw;
+    width: 40vw;
+    font-size: 3rem;
+}
+
+@media (max-width: 480px) {
+    .clickerCircle {
+        font-size: 2rem;
+    }
+}
 </style>
