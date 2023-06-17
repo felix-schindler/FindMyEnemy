@@ -3,8 +3,8 @@
         id: number;
         personality: string;
         title: string;
-        compatibility: string;
-        description: string;
+        // compatibility: string;
+        // description: string;
     };
 
     function getImageSource(personality: string) {
@@ -52,9 +52,9 @@
     <div class="user-information">
       <div class="user-details">
         <p><b>{user.title}</b></p>
-        <p><b>{user.compatibility}</b></p>
+        <!-- <p><b>{user.compatibility}</b></p> -->
       </div>
-      <p>{user.description}</p>
+      <p>{user.personality}</p>
     </div>
   </div>
 

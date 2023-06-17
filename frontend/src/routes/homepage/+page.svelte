@@ -3,10 +3,11 @@
 	import AccountButton from '$lib/components/AccountButton.svelte';
 	import { req } from '$lib/core/api';
 	import DiscoverEnemy from '$lib/components/DiscoverEnemy.svelte';
-
+	import Enemy from '$lib/components/Enemy.svelte';
 
 	import { onMount, onDestroy } from 'svelte';
 	import { Status, type User } from '$lib/core/types';
+	
 
 	let enemies: User[];
 
@@ -92,20 +93,15 @@
 			</button>
 		</div>
 
-		 <div class="grid-container">
-			{#each users as user (user.id)}
-			<DiscoverEnemy {user} />
-			{/each} 
-		</div> 
-
-			 <!-- {#if enemies}
-				{#each enemies as enemy}
-					<p><b>{enemy.username}</b></p>
-					<p><b>{enemy.personality}</b></p>
-				{/each}
-			{:else}
-				<p>Loading...</p>
-			{/if} -->
+		{#if enemies}
+		{#each enemies as enemy (enemy.id)}
+		<DiscoverEnemy
+		user={{ id: enemy.id, personality: enemy.personality, title: enemy.username }}
+	  	/>
+		{/each}
+		{:else}
+			<p>Loading...</p>
+		{/if}
 	</div>
 		
 	<div class="top-enemies">
@@ -154,56 +150,6 @@
 	 overflow-x: auto; 
 } 
 
-.grid-item {
-	flex: 0 0 clamp(30px, 50vw, 300px);
-	position: relative;
-	overflow: hidden;
-	/* margin-right: var(--gap-width);
-	margin-bottom: 20px; */
-	background-color: var(--primary);
-	padding: var(--padding);
-	border-radius: 10%;
-}
-
- .grid-item img {
-	width: 100%;
-	height: auto;
-	display: block;
-	transition: transform 0.3s ease-in-out;
-} 
-
- .user-information {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	padding: var(--padding);
-	color: #fff;
-}
-
-.user-details {
-	display: flex;
-	justify-content: space-between;
-}
-
-.user-information h3,
-.user-information p {
-	margin: 0;
-}
-
-.grid-item:hover img {
-	transform: scale(1.1);
-}
-
-.buttons {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin: auto;
-	width: 100%;
-} 
-
-
 .moredetails-button {
 	display: flex;
 	align-items: center;
@@ -211,12 +157,8 @@
 }
 
 .moredetails-icon img {
-	/* display:inline-block; */
 	width: 8px;
-	/* Adjust the width and height as needed */
 	height: 12px;
-	/* background-image: url(/src/lib/images/moredetails.svg);    */
-	/* background-size: cover;  */
 	margin-left: var(--margin20);
 }
 
