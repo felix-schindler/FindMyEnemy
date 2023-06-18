@@ -1,12 +1,9 @@
 <script lang="ts">
-	import '$lib/style/main.css';
 	import AccountButton from '$lib/components/AccountButton.svelte';
 	import { req } from '$lib/core/api';
 	import DiscoverEnemy from '$lib/components/DiscoverEnemy.svelte';
 
-	import Enemy from '$lib/components/Enemy.svelte';
-
-	import { onMount, onDestroy } from 'svelte';
+	import { onMount } from 'svelte';
 	import { Status, type User } from '$lib/core/types';
 
 	let enemies: User[];
@@ -20,6 +17,10 @@
 			enemies = res;
 		}
 	}
+
+	onMount(async () => {
+		await getUsers();
+	});
 </script>
 
 <main>
