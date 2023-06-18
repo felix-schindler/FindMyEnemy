@@ -47,6 +47,7 @@
 
 	// Setze den Timer auf 30 Sekunden
 	timeLeft = 7;
+
 </script>
 
 <div class="clickerContainer">
@@ -62,7 +63,7 @@
 		on:click={countClicks}
 		disabled={timeLeft === 0 || isOverlayVisible}
 	>
-		<span style="height:50vh; width:50vh; font-size:3rem">{clickCount} <br /> Clicks</span>
+		<span class="clickerCircle">{clickCount} <br /> Clicks</span>
 	</button>
 </div>
 

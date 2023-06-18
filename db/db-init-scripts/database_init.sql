@@ -46,7 +46,7 @@ CREATE TABLE fav_enemies (
     user_1_id INT NOT NULL REFERENCES users(id),
     fav_enemy_id INT NOT NULL REFERENCES users(id),
     compatibility_id INT REFERENCES compatibilities(id),
-    compatibility_percentage FLOAT NOT, 
+    compatibility_percentage FLOAT NOT NULL, 
     UNIQUE(user_1_id, fav_enemy_id)
 );
 
@@ -170,75 +170,80 @@ VALUES ('jane_smith', '$2a$10$pgYTn5zQ/TgL9ISqVJ2WeeFtrI8dVH9oB/Jzoljy1WmSkdWlKj
 -- TODO dont store passwords in plain text
 -- Password: mellowFellow
 INSERT INTO users (username, password, personality) 
-VALUES ('Inspector', 'mellowFellow', 'ISTJ');
+VALUES ('Inspector', '$2a$10$uJoCQf9ksE7X.gcsB1zh/O47eGUhQByR0WRhhtaWqzstnMEnGdbVu', 'ISTJ');
 
 -- Password: trustyLemon
 INSERT INTO users (username, password, personality) 
-VALUES ('Protector', 'trustyLemon', 'ISFJ');
+VALUES ('Protector', '$2a$10$JoKTNq8YZjzLoxATO5Hk2.psK9uGFz.IOoeYpmfCDOnkbLStu3vr6', 'ISFJ');
 
 -- Password: niftyKitten
 INSERT INTO users (username, password, personality) 
-VALUES ('Counselor', 'niftyKitten', 'INFJ');
+VALUES ('Counselor', '$2a$10$tldD79yu.QZGExwVk4SNA.rwuYbt5ekAZOmynMTPf2YSql5h2VDoe', 'INFJ');
 
 -- Password: windyDragon
 INSERT INTO users (username, password, personality) 
-VALUES ('Mastermind', 'windyDragon', 'INTJ');
+VALUES ('Mastermind', '$2a$10$ndQYqQdES5NcQNCDVYovYOtZoS5MqBVhWD3uHwVCVJeVh0BLqumZq', 'INTJ');
 
 -- Password: luckyClover
 INSERT INTO users (username, password, personality) 
-VALUES ('Craftsman', 'luckyClover', 'ISTP');
+VALUES ('Craftsman', '$2a$10$vq74Ih83N4ZEtLgu.Ewj7eGEE24/3dCIL6nzCxwlCjhLOFR4qFVIW', 'ISTP');
 
 -- Password: cozyDolphin
 INSERT INTO users (username, password, personality) 
-VALUES ('Composer', 'cozyDolphin', 'ISFP');
+VALUES ('Composer', '$2a$10$rCo56OoN57FFroFhU0PItePLXe5hZcqm.Tzr7wNVEeZAiUZWPtxWy', 'ISFP');
 
 -- Password: jollyBadger
 INSERT INTO users (username, password, personality) 
-VALUES ('Healer', 'jollyBadger', 'INFP');
+VALUES ('Healer', '$2a$10$S6S/Hxg0PzPDuhQvmuj3Rui3RgRgcetTeFkpOx3x8zy12kwar.5pe', 'INFP');
 
 -- Password: boldRaven
 INSERT INTO users (username, password, personality) 
-VALUES ('Architect', 'boldRaven', 'INTP');
+VALUES ('Architect', '$2a$10$IXKTGUUVoq3muAQcdHbJvOeBTmBpltqGsCtx4YKzVCJWKb3hlG6nm', 'INTP');
 
 -- Password: friendlyHawk
 INSERT INTO users (username, password, personality) 
-VALUES ('Dynamo', 'friendlyHawk', 'ESTP');
+VALUES ('Dynamo', '$2a$10$zO0sqwYJz.I536Vfveg.nOgpjxXxKV5sPSi9pJl5z8M07/2u05CAa', 'ESTP');
 
 -- Password: sunnyOtter
 INSERT INTO users (username, password, personality) 
-VALUES ('Performer', 'sunnyOtter', 'ESFP');
+VALUES ('Performer', '$2a$10$DuUVCyQ95PdOyguYjPYYP.Mf0RFgk1KjFvO57iNR5ZtfmNTtcDUjC', 'ESFP');
 
 -- Password: happyGopher
 INSERT INTO users (username, password, personality) 
-VALUES ('Champion', 'happyGopher', 'ENFP');
+VALUES ('Champion', '$2a$10$xazO56SW875OKSNju5yzzuiuP7iWqWmNihl/21oAXD.IV.6YvGmBi', 'ENFP');
 
 -- Password: brightCheetah
 INSERT INTO users (username, password, personality) 
-VALUES ('Visionary', 'brightCheetah', 'ENTP');
+VALUES ('Visionary', '$2a$10$64QH7gf7mQWxwf2wFKS3Y.6f5lNct6xRhjXegQ10t1SjWERDkcgKi', 'ENTP');
 
 -- Password: cleverStork
 INSERT INTO users (username, password, personality) 
-VALUES ('Supervisor', 'cleverStork', 'ESTJ');
+VALUES ('Supervisor', '$2a$10$1id55quKSSNeUMNJ81BeuexS/LM6Pi0AP0KUuNKQCZtF137Fou6Xa', 'ESTJ');
 
 -- Password: wiseBadger
 INSERT INTO users (username, password, personality) 
-VALUES ('Provider', 'wiseBadger', 'ESFJ');
+VALUES ('Provider', '$2a$10$CDgriYSsI3qUIbmAdRr5aeGynZ5lmYGoaYZ6g6fTRtGtGlUPgL40y', 'ESFJ');
 
 -- Password: chillPanda
 INSERT INTO users (username, password, personality) 
-VALUES ('Teacher', 'chillPanda', 'ENFJ');
+VALUES ('Teacher', '$2a$10$hJx8uyQU7i68fU.eRu4dl.thXjzlEDvr9KP9WdSLh5gZWLk9.eD16', 'ENFJ');
 
 -- Password: trendyTurtle
 INSERT INTO users (username, password, personality) 
-VALUES ('Commander', 'trendyTurtle', 'ENTJ');
+VALUES ('Commander', '$2a$10$nRhpEq0Tdyo.5hVrK5iRzO9t9Dg13BnexpCQrU1Pqq5zalNPx.znm', 'ENTJ');
 
--- Create challenges between admin and all other users
-INSERT INTO challenges (user_1_id, user_2_id)
-SELECT
-    (SELECT id FROM users WHERE username = 'admin'),
-    id
-FROM users
-WHERE username != 'admin';
+-- Create challenges between admin and other users
+-- Admin won
+INSERT INTO challenges (user_1_id, user_2_id, user_1_score, user_2_score)
+VALUES ((SELECT id FROM users WHERE username = 'admin'), (SELECT id FROM users WHERE username = 'Inspector'), 3, 1);
+
+-- Admin lost
+INSERT INTO challenges (user_1_id, user_2_id, user_1_score, user_2_score)
+VALUES ((SELECT id FROM users WHERE username = 'admin'), (SELECT id FROM users WHERE username = 'Protector'), 2, 3);
+
+-- Only admin played; Second score empty
+INSERT INTO challenges (user_1_id, user_2_id, user_1_score)
+VALUES ((SELECT id FROM users WHERE username = 'admin'), (SELECT id FROM users WHERE username = 'Counselor'), 3);
 
 
 -- Insert all 16 personality types

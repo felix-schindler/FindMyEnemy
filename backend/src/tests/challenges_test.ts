@@ -1,4 +1,4 @@
-import { ac, app, server } from "../main.ts";
+import { app } from "../main.ts";
 import {
 	assertEquals,
 	assertNotEquals,
@@ -112,13 +112,4 @@ Deno.test("Delete challenge", async () => {
 
 	assertEquals(res.status, 200);
 	assertEquals(body.raw.rowCount, 1);
-});
-
-Deno.test("Cleanup", {
-	sanitizeOps: false,
-	sanitizeResources: false,
-}, async () => {
-	ac.abort();
-	await server.finished;
-	assertEquals(1, 1);
 });

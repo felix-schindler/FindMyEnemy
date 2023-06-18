@@ -58,9 +58,12 @@ export default class QuestionController extends Controller {
 			sums[a.category]++;
 		});
 
-		// Get which letter has the hightest score
-		const personality =
-			Object.entries(sums).reduce((a, b) => a[1] > b[1] ? a : b)[0];
+		// Get the 4 letters with the highest scores
+		const personality = Object.entries(sums)
+			.sort((a, b) => b[1] - a[1])
+			.slice(0, 4)
+			.map((entry) => entry[0])
+			.join("");
 
 		// Return the personality
 		return c.json({ personality });

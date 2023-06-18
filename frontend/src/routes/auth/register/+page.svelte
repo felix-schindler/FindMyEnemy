@@ -15,10 +15,6 @@
 		password = '',
 		rPassword = '';
 
-	$: if (browser && $authStore) {
-		goto(next ?? '/');
-	}
-
 	async function register() {
 		// Check if password match
 		if (password == rPassword) {
