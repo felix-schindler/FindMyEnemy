@@ -1,16 +1,16 @@
 <script lang="ts">
-	import '$lib/style/personality.css';
 	import backButton from '$lib/images/back-icon.svg';
 
 	import { onMount } from 'svelte';
 	import { req } from '$lib/core/api';
 	import { Status, type Question, type UserAnswer, type Category } from '$lib/core/types';
 
+	export let personality: string;
+
 	let questions: Question[] = [];
 	let qIndex = 0;
 	let question: Question;
 	let answers: UserAnswer[] = [];
-	let personality: string;
 	let msg = '';
 
 	async function addAnswer(qId: number, category: Category) {
@@ -24,7 +24,6 @@
 		];
 
 		// Get personality as soon as user is finished answering questions
-		console.log(qIndex);
 		if (qIndex === 35) {
 			await getPersonality();
 		}
@@ -59,10 +58,8 @@
 </script>
 
 <div class="persContainer">
-	<div class="progress-bar" id="progressBar">
-		<div class="progress" id="progress" style="width: {(qIndex * 100) / 35}%" />
-	</div>
-	<div class="display-number">
+	<div class="progress-bar">
+		<div class="progress" style="width: {(qIndex * 100) / 35}%" />
 		<p>{qIndex}/35</p>
 	</div>
 
@@ -83,27 +80,60 @@
 				{/each}
 			</ol>
 		</div>
-	{:else if qIndex > 0}
-		<div class="back-button">
-			<button
-				type="button"
-				class="reverseButton"
-				on:click={() => {
-					const newIndex = --qIndex;
-					if (newIndex > -1) {
-						question = questions[newIndex];
-						answers.pop();
-					}
-				}}><img src={backButton} alt="Back" /></button
-			>
-		</div>
-		{#if qIndex === 35}
-			<div class="finish-button">
-				<p>You are: {personality}</p>
-				<a href="/auth/register?personality={encodeURIComponent(personality)}" class="mainBtn"
-					>See Result</a
+		{#if qIndex > 0}
+			<div class="back-button">
+				<button
+					type="button"
+					class="reverseButton"
+					on:click={() => {
+						const newIndex = --qIndex;
+						if (newIndex > -1) {
+							question = questions[newIndex];
+							answers.pop();
+						}
+					}}><img src={backButton} alt="Back" /></button
 				>
 			</div>
 		{/if}
+	{:else}
+		<div />
 	{/if}
 </div>
+
+<style>
+	div.persContainer {
+		display: grid;
+		grid-template-rows: auto 1fr auto;
+		align-items: center;
+
+		height: 100%;
+		text-align: center;
+	}
+
+	.progress-bar,
+	.personality-test,
+	.back-button {
+		margin: 1rem auto;
+	}
+
+	.personality-test > p {
+		font-size: larger;
+		font-weight: 500;
+	}
+
+	ol {
+		list-style: upper-latin;
+	}
+
+	.back-button {
+		margin-left: 0;
+	}
+
+	.reverseButton {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 100%;
+		cursor: pointer;
+	}
+</style>
