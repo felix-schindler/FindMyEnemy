@@ -1,20 +1,7 @@
 <script>
-	import Header from './Header.svelte';
 	import '$lib/style/main.css';
-	import { page } from '$app/stores';
-	import { authStore } from '$lib/core/stores';
-	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
-	import { redirect } from '@sveltejs/kit';
-	import toast, { Toaster } from 'svelte-french-toast';
-	import { onMount } from 'svelte';
-
-	const AUTH_PATH = '/auth';
-
-	$: if (browser && !$authStore && !$page.url.pathname.startsWith(AUTH_PATH)) {
-		const redir = `${AUTH_PATH}?next=${encodeURIComponent($page.url.pathname)}`;
-		goto(redir);
-	}
+	import Header from './Header.svelte';
+	import { Toaster } from 'svelte-french-toast';
 </script>
 
 <Toaster />
@@ -26,17 +13,17 @@
 </div>
 
 <style>
-	@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,700;1,700&display=swap');
 	.app {
-		background: var(--background-gradient);
-		color: var(--text-icon);
 		display: grid;
-		font-family: 'Rubik', sans-serif;
-		font-weight: 700;
-		font-style: normal;
-		/*font-family: var(--font-family);
-		font-weight: var(--fw-bold);*/
 		grid-template-rows: auto 1fr;
+
+		color: var(--text-icon);
+		background: var(--background-gradient);
+
+		font-family: 'Rubik', sans-serif;
+		font-style: normal;
+
 		min-height: 100vh;
+		padding: 2em;
 	}
 </style>

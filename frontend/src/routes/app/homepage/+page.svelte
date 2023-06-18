@@ -1,9 +1,9 @@
 <script lang="ts">
-	import '$lib/style/main.css';
 	import AccountButton from '$lib/components/AccountButton.svelte';
 	import { req } from '$lib/core/api';
 	import DiscoverEnemy from '$lib/components/DiscoverEnemy.svelte';
-	import { onMount, onDestroy } from 'svelte';
+	import { onMount } from 'svelte';
+
 	import { Status, type User } from '$lib/core/types';
 
 	let enemies: User[];
@@ -18,6 +18,9 @@
 		}
 	}
 
+	onMount(async () => {
+		await getUsers();
+	});
 </script>
 
 <main>
@@ -33,14 +36,9 @@
 		<div class="moredetails-button">
 			<h2>Discover top enemies</h2>
 
-			<button
-				class="moredetails-icon"
-				on:click={() => {
-					window.location.href = '/top-enemies';
-				}}
-			>
+			<a href="/top-enemies" class="moredetails-icon">
 				<img src="/src/lib/images/moredetails.svg" alt="Back" />
-			</button>
+			</a>
 		</div>
 
 		<div class="grid-container">
@@ -58,14 +56,9 @@
 		<div class="moredetails-button">
 			<h2>Your mortal enemies</h2>
 
-			<button
-				class="moredetails-icon"
-				on:click={() => {
-					window.location.href = '/mortal-enemies';
-				}}
-			>
+			<a href="/mortal-enemies" class="moredetails-icon">
 				<img src="/src/lib/images/moredetails.svg" alt="Back" />
-			</button>
+			</a>
 		</div>
 
 		<div class="grid-container">

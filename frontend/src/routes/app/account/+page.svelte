@@ -1,6 +1,4 @@
 <script lang="ts">
-	import '$lib/style/main.css';
-
 	import BackButton from '$lib/components/BackButton.svelte';
 	import openEdit from '$lib/images/edit.svg';
 	import check from '$lib/images/check.svg';

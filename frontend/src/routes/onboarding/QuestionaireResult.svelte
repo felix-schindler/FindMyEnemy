@@ -1,7 +1,8 @@
 <script lang="ts">
-	import '$lib/style/main.css';
 	import '$lib/style/questionaire-result.css';
 	import enfjimg from '$lib/images/enfj.png';
+
+	export let personality: string;
 </script>
 
 <div class="wrapper">
@@ -12,12 +13,12 @@
 		<img id="typeImage" src={enfjimg} alt="Type" />
 	</div>
 	<div>
-		<h1>ENFJ</h1>
+		<h1>{personality}</h1>
 	</div>
 	<div>
-		<button class="mainBtn">
+		<a href="/auth/register?personality={encodeURIComponent(personality)}" class="mainBtn">
 			<span>Create my Account</span>
-		</button>
+		</a>
 	</div>
 </div>
 

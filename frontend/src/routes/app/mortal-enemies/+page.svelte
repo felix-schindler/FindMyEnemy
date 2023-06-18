@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
 	import AccountButton from '$lib/components/AccountButton.svelte';
 	import BackButton from '$lib/components/BackButton.svelte';
-	import { req } from '$lib/core/api';
 	import Enemy from '$lib/components/Enemy.svelte';
-	import { Status, type User } from '$lib/core/types';
+	// import { req } from '$lib/core/api';
+	// import { Status, type User } from '$lib/core/types';
+	// import { onMount } from 'svelte';
 
 	// let enemies: User[];
 
@@ -83,5 +83,3 @@
 		</div>
 	</div>
 </main>
-
-

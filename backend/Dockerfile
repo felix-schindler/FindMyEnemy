@@ -8,7 +8,8 @@ WORKDIR /app
 COPY . .
 
 # Compile into a single executable
-RUN deno task compile
+# RUN deno task compile
 
 # Run the app
-CMD ["./backend"]
+# CMD ["./backend"]
+CMD ["deno", "task", "start"]

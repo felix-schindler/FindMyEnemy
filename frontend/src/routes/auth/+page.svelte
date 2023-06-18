@@ -30,27 +30,34 @@
 </script>
 
 <form class="form" on:submit={login}>
-	<input type="text" placeholder="username" bind:value={username} />
-	<input type="password" placeholder="password" bind:value={password} />
-	<div>
+	<input type="text" autocomplete="username" placeholder="username" bind:value={username} />
+	<input
+		type="password"
+		autocomplete="current-password"
+		placeholder="password"
+		bind:value={password}
+	/>
+	<div class="il">
 		<input type="checkbox" id="remember" />
 		<label for="remember">Remember me</label>
 	</div>
 	<button type="submit" class="mainBtn">
 		<span>Sign In</span>
 	</button>
-	<a href="/onboarding"> Don't have an account yet? <b>Take the test! </b> </a>
+	<a href="/onboarding">Don't have an account yet? <b>Take the test!</b></a>
 </form>
 
 <style>
 	a {
-		justify-content: center;
-		text-align: center;
+		font-weight: normal;
+		text-decoration: none;
 		color: #e3dcff;
 	}
 
-	div {
+	div.il {
 		display: flex;
 		align-items: center;
+		gap: 0.25rem;
+		justify-content: start;
 	}
 </style>
