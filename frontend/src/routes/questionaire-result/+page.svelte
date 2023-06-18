@@ -1,14 +1,15 @@
 <script lang="ts">
     import '$lib/style/main.css';
     import '$lib/style/questionaire-result.css';
+    import enfjimg from '$lib/images/enfj.png'
 </script>
 
 <div class="wrapper">
     <div>
-        Looks like your type is
+        <h2>Looks like your type is</h2>
     </div>
     <div>
-        <img alt="Type">
+        <img id="typeImage" src={enfjimg} alt="Type">
     </div>
     <div>
         <h1>ENFJ</h1>
@@ -19,3 +20,29 @@
         </button>
     </div>
 </div>
+
+<style>
+    #typeImage {
+        width: 100%;
+        height: auto;
+        border-radius: 5%;
+    }
+
+    .wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2.5rem;
+    align-items: center;
+}
+
+.wrapper > div {
+    margin-bottom: 1.25rem;
+}
+
+    @media (min-width: 481px) {
+    #typeImage {
+        max-width: 25vw;
+    }
+}
+</style>
