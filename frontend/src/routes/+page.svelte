@@ -1,8 +1,10 @@
 <script lang="ts">
-	import AccountButton from '$lib/components/AccountButton.svelte';
-	import { req } from '$lib/core/api';
-	import DiscoverEnemy from '$lib/components/DiscoverEnemy.svelte';
 	import { onMount } from 'svelte';
+	import { req } from '$lib/core/api';
+
+	import AccountButton from '$lib/components/AccountButton.svelte';
+	import DiscoverEnemy from '$lib/components/DiscoverEnemy.svelte';
+	import ChevronRight from '$lib/images/moredetails.svg';
 
 	import { Status, type User } from '$lib/core/types';
 
@@ -32,17 +34,13 @@
 
 	<div class="top-enemies">
 		<h1>Hi Blablo</h1>
-
-		<div class="moredetails-button">
+		<a href="/top-enemies" class="moredetails-button">
 			<h2>Discover top enemies</h2>
-
-			<a href="/top-enemies" class="moredetails-icon">
-				<img src="/src/lib/images/moredetails.svg" alt="Back" />
-			</a>
-		</div>
+			<img src={ChevronRight} class="moredetails-icon" alt="Back" />
+		</a>
 
 		<div class="grid-container">
-			{#if enemies}
+			{#if enemies && enemies.length > 0}
 				{#each enemies as user}
 					<DiscoverEnemy {user} />
 				{/each}
@@ -53,16 +51,13 @@
 	</div>
 
 	<div class="top-enemies">
-		<div class="moredetails-button">
-			<h2>Your mortal enemies</h2>
-
-			<a href="/mortal-enemies" class="moredetails-icon">
-				<img src="/src/lib/images/moredetails.svg" alt="Back" />
-			</a>
-		</div>
+		<a href="/mortal-enemies" class="moredetails-button">
+			<h2>Discover mortal enemies</h2>
+			<img src={ChevronRight} class="moredetails-icon" alt="Back" />
+		</a>
 
 		<div class="grid-container">
-			{#if enemies}
+			{#if enemies && enemies.length > 0}
 				{#each enemies as user}
 					<DiscoverEnemy {user} />
 				{/each}
@@ -74,10 +69,22 @@
 </main>
 
 <style>
+	h1 {
+		margin-block: var(--margin40);
+	}
+
+	.moredetails-button {
+		margin-block-start: var(--margin20);
+	}
+
+	a {
+		text-decoration: none;
+		color: var(--text-color);
+	}
+
 	.searchBar {
 		display: flex;
 		justify-content: center;
-		margin-bottom: var(--margin40);
 	}
 
 	.search-bar {
@@ -85,26 +92,29 @@
 		height: 20px;
 	}
 
-	.top-enemies {
-		margin-top: var(--margin40);
-		margin-bottom: var(--margin40);
-		margin-left: var(--margin40);
+	.grid-container {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+		grid-gap: var(--margin20);
+		padding-top: var(--margin20);
+		padding-bottom: var(--margin20);
 	}
 
-	.grid-container {
-		display: flex;
-		gap: var(--margin20);
-		overflow-x: auto;
+	@media (min-width: 768px) {
+		.grid-container {
+			grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+		}
 	}
 
 	.moredetails-button {
 		display: flex;
 		align-items: center;
+		gap: 2rem;
 	}
 
 	.moredetails-icon img {
 		width: 8px;
 		height: 12px;
-		margin-left: var(--margin20);
+		/* margin-left: var(--margin20); */
 	}
 </style>

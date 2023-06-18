@@ -20,8 +20,8 @@
 		flex: 0 0 clamp(30px, 50vw, 300px);
 		position: relative;
 		overflow: hidden;
-		margin-right: var(--gap-width);
-		margin-bottom: var(--margin20);
+		/* margin-right: var(--gap-width);
+		margin-bottom: var(--margin20); */
 		background-color: var(--primary);
 		padding: 5%;
 		border-radius: 10%;

@@ -1,24 +1,20 @@
 <script lang="ts">
-	export let enemy: {
-		id: number;
-		title: string;
-		personality: string;
-		compatibility: string;
-		description: string;
-	};
+	import type { User } from '$lib/core/types';
+
+	export let enemy: User;
 </script>
 
 <div class="enemy-grid-item">
 	<div class="image-container">
-		<img src={`${enemy.personality}.svg`} alt={enemy.title} />
+		<img src={`${enemy.personality}.svg`} alt={enemy.username} />
 	</div>
 	<div class="enemy-information">
 		<div class="enemy-details">
-			<p><b>{enemy.title}</b></p>
-			<p><b>{enemy.compatibility}</b></p>
+			<p>{enemy.username}</p>
+			<!-- <p>{enemy.compatibility}</p> -->
 		</div>
 		<p>{enemy.personality}</p>
-		<p>{enemy.description}</p>
+		<!-- <p>{enemy.description}</p> -->
 	</div>
 </div>
 
@@ -26,7 +22,7 @@
 	.enemy-grid-item {
 		display: flex;
 		flex-basis: 100%;
-		margin-bottom: var(--margin20);
+		/* margin-bottom: var(--margin20); */
 		border-radius: 10%;
 		background-color: #201254;
 		box-sizing: border-box;
@@ -60,6 +56,7 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		font-weight: bold;
 		margin-bottom: var(--margin40);
 	}
 

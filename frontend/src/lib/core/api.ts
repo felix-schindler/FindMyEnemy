@@ -2,6 +2,9 @@ import { get } from 'svelte/store';
 import type { AuthUser, Challenge, Question, Status, User, UserAnswer } from './types';
 import { authStore } from './stores';
 
+// const BASE = 'http://localhost/api';
+const BASE = 'http://localhost:8000';
+
 type RequestMap = {
 	'/users': {
 		GET: {
@@ -171,7 +174,7 @@ export async function req<
 	query?: RequestQuery<Path, Method>
 ): Promise<T | Status> {
 	try {
-		let path = `/api${endpoint}`;
+		let path: string = endpoint;
 
 		// Build query params from Record<string, string>
 		if (query) {
@@ -189,9 +192,10 @@ export async function req<
 			path = path.concat('?', params.toString());
 		}
 
-		// console.debug(method, `http://localhost${path}`, query, body)
+		const reqUrl: string = `${BASE}${path}`;
+		console.debug(`${String(method)} ${reqUrl}`, { query, body });
 
-		const res = await fetch(`http://localhost${path}`, {
+		const res = await fetch(reqUrl, {
 			method: String(method),
 			headers: {
 				'Content-Type': 'application/json',
