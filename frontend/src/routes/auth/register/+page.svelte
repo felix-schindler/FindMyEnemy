@@ -44,7 +44,7 @@
 		placeholder="repeat password"
 		bind:value={rPassword}
 	/>
-	<button type="submit" class="mainBtn">
+	<button type="submit" class="mainBtn" disabled={!personality}>
 		<span>Sign Up</span>
 	</button>
 	<a href="/auth">Already registered?</a>
