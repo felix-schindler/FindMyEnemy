@@ -84,29 +84,3 @@
 	</div>
 </main>
 
-<style>
-	.top-enemies {
-		margin: var(--margin40);
-	}
-
-	.filter-button {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-	}
-
-	.filter-icon {
-		display: inline-block;
-		width: 32px;
-		height: 28px;
-		background-image: url(/src/lib/images/filter-icon.svg);
-		background-size: cover;
-	}
-
-	.grid-container {
-		display: flex;
-		/* flex-direction: column; */
-		flex-wrap: wrap;
-		gap: var(--margin20);
-	}
-</style>
