@@ -30,6 +30,9 @@
 </script>
 
 <form class="form" on:submit={login}>
+	{#if msg}
+		<p class="error-message">{msg}</p>
+	{/if}
 	<input type="text" autocomplete="username" placeholder="username" bind:value={username} />
 	<input
 		type="password"
@@ -44,7 +47,7 @@
 	<button type="submit" class="mainBtn">
 		<span>Sign In</span>
 	</button>
-	<a href="/onboarding">Don't have an account yet? <b>Take the test!</b></a>
+	<a href="/auth/onboarding">Don't have an account yet? <b>Take the test!</b></a>
 </form>
 
 <style>

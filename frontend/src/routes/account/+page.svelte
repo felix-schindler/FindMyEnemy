@@ -6,20 +6,22 @@
 	import changePasswordIcon from '$lib/images/lock.svg';
 	import challengeHistoryIcon from '$lib/images/star.svg';
 	import frenemiesIcon from '$lib/images/users.svg';
-	import AccountButton from '$lib/components/AccountButton.svelte';
 
 	import { goto } from '$app/navigation';
 	import { req } from '$lib/core/api';
+	import { Status } from '$lib/core/types';
+	import { authStore } from '$lib/core/stores';
 
 	let username = '';
-	let password = '';
 	let editing = false;
 
-	async function fetchUsername() {
-		const res = await req('/users/login', 'POST', { username, password });
-	}
+	async function saveUsername() {
+		const res = await req('/users/:id', 'PATCH', { username }, { id: $authStore.id });
 
-	function saveUsername() {
+		if (res instanceof Status) {
+			// TODO: Handle error
+		} else {
+		}
 		editing = false;
 	}
 	function deleteAccount() {
@@ -30,6 +32,8 @@
 	}
 	function logOut() {
 		// Logic for logging out
+		// @ts-ignore
+		authStore.set(null);
 	}
 </script>
 
@@ -39,9 +43,7 @@
 
 <div class="container">
 	<div class="content">
-		<div class="profile-img">
-			<img src="https://via.placeholder.com/150" alt="profile picture" />
-		</div>
+		<img class="profile-img" src={`${$authStore.personality}.svg`} alt="Yourself" />
 		<div class="formBtn">
 			<div class="form">
 				<div class="username-edit">
@@ -53,7 +55,7 @@
 								bind:value={username}
 							/>
 						{:else}
-							<span>{username}</span>
+							<span>{$authStore.username}</span>
 						{/if}
 					</div>
 					<div class="button-container">
@@ -99,32 +101,26 @@
 </div>
 
 <style>
-	.content {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		margin: 2rem;
+	div.content {
+		text-align: center;
 	}
-	.content > div {
-		margin-bottom: 1.25rem;
+
+	.form {
+		margin-block: var(--margin40);
 	}
+
 	.button {
 		background-color: transparent;
 		border: none;
 		cursor: pointer;
-		overflow: hidden;
 	}
 
-	.profile-img > img {
+	img.profile-img {
+		max-width: 150px;
+		max-height: 150px;
 		border-radius: 100%;
 	}
 
-	.image {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
 	.username-edit {
 		display: flex;
 		flex-direction: row;
@@ -133,6 +129,7 @@
 		font: var(--font-family);
 		outline: none;
 	}
+
 	.form > button {
 		display: flex;
 		flex-direction: row;
@@ -143,9 +140,11 @@
 		margin: 0.5rem;
 		border: 0;
 	}
+
 	.form > button > img {
 		margin-right: 1rem;
 	}
+
 	.button-container > button {
 		margin-left: var(--margin20);
 	}
@@ -156,15 +155,6 @@
 	.username-input.editing {
 		border: none;
 		background-color: transparent;
-	}
-	.formBtn {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
-
-	.formBtn > button {
-		margin: var(--margin40);
 	}
 
 	@media (min-width: 991px) {
