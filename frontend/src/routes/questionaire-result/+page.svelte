@@ -1,48 +1,48 @@
 <script lang="ts">
-    import '$lib/style/main.css';
-    import '$lib/style/questionaire-result.css';
-    import enfjimg from '$lib/images/enfj.png'
+	import '$lib/style/main.css';
+	import '$lib/style/questionaire-result.css';
+	import enfjimg from '$lib/images/enfj.png';
 </script>
 
 <div class="wrapper">
-    <div>
-        <h2>Looks like your type is</h2>
-    </div>
-    <div>
-        <img id="typeImage" src={enfjimg} alt="Type">
-    </div>
-    <div>
-        <h1>ENFJ</h1>
-    </div>
-    <div>
-        <button class= "mainBtn">
-            <span>Create my Account</span>
-        </button>
-    </div>
+	<div>
+		<h2>Looks like your type is</h2>
+	</div>
+	<div>
+		<img id="typeImage" src={enfjimg} alt="Type" />
+	</div>
+	<div>
+		<h1>ENFJ</h1>
+	</div>
+	<div>
+		<button class="mainBtn">
+			<span>Create my Account</span>
+		</button>
+	</div>
 </div>
 
 <style>
-    #typeImage {
-        width: 100%;
-        height: auto;
-        border-radius: 5%;
-    }
+	#typeImage {
+		width: 100%;
+		height: auto;
+		border-radius: 5%;
+	}
 
-    .wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 2.5rem;
-    align-items: center;
-}
+	.wrapper {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		padding: 2.5rem;
+		align-items: center;
+	}
 
-.wrapper > div {
-    margin-bottom: 1.25rem;
-}
+	.wrapper > div {
+		margin-bottom: 1.25rem;
+	}
 
-    @media (min-width: 481px) {
-    #typeImage {
-        max-width: 25vw;
-    }
-}
+	@media (min-width: 481px) {
+		#typeImage {
+			max-width: 25vw;
+		}
+	}
 </style>

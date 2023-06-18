@@ -15,8 +15,8 @@
 		const redir = `${AUTH_PATH}?next=${encodeURIComponent($page.url.pathname)}`;
 		goto(redir);
 	}
-
 </script>
+
 <Toaster />
 <div class="app">
 	<Header />

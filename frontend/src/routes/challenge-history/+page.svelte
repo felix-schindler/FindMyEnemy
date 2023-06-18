@@ -12,8 +12,6 @@
 	let enemyClicks = '1';
 	let enemyname: string;
 
-	
-
 	async function getClickAmountUser() {
 		const res = await req('/challenge/:id', 'GET');
 
@@ -24,38 +22,37 @@
 		}
 	}
 
-
 	const showUserCrown = writable(false);
 	const showEnemyCrown = writable(false);
 
 	function updateCrownDisplay() {
-    const isMobileWidth = window.innerWidth <= 991;
+		const isMobileWidth = window.innerWidth <= 991;
 
-    if (isMobileWidth) {
-      showUserCrown.set(userClicks > enemyClicks);
-      showEnemyCrown.set(enemyClicks > userClicks);
-    } else {
-      showUserCrown.set(false);
-      showEnemyCrown.set(false);
-    }
-  }
+		if (isMobileWidth) {
+			showUserCrown.set(userClicks > enemyClicks);
+			showEnemyCrown.set(enemyClicks > userClicks);
+		} else {
+			showUserCrown.set(false);
+			showEnemyCrown.set(false);
+		}
+	}
 
-  onMount(() => {
-    updateCrownDisplay();
-    window.addEventListener('resize', updateCrownDisplay);
+	onMount(() => {
+		updateCrownDisplay();
+		window.addEventListener('resize', updateCrownDisplay);
 
-    return () => {
-      window.removeEventListener('resize', updateCrownDisplay);
-    };
-  });
+		return () => {
+			window.removeEventListener('resize', updateCrownDisplay);
+		};
+	});
 </script>
 
 <div>
 	<div>
-		<AccountButton/>
-		<BackButton/>
+		<AccountButton />
+		<BackButton />
 	</div>
-	
+
 	<h1>Challenge History</h1>
 	<div class="container">
 		<div class="challenge">
@@ -182,58 +179,57 @@
 			</div>
 		</div>
 	</div>
-	</div>
+</div>
 
 <style>
 	h1 {
-	    text-align: left;
-	    margin: var(--fs-title);
+		text-align: left;
+		margin: var(--fs-title);
 		margin-left: var(--margin40);
 	}
 
 	.container {
-	    display: flex;
-	    flex-direction: column;
-	    align-items: center;
-	    justify-content: center;
-	    font-size: large;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		font-size: large;
 	}
 
 	.challenge {
-	    display: flex;
-	    flex: 1;
-	    flex-direction: row;
-	    align-items: stretch;
-	    justify-content: space-between;
-	    padding: var(--padding);
-	    width: 80%;
-	    background-color: var(--primary);
-	    border-radius: 1rem;
-	    margin-bottom: var(--margin20);
+		display: flex;
+		flex: 1;
+		flex-direction: row;
+		align-items: stretch;
+		justify-content: space-between;
+		padding: var(--padding);
+		width: 80%;
+		background-color: var(--primary);
+		border-radius: 1rem;
+		margin-bottom: var(--margin20);
 	}
 
 	.user,
 	.enemy,
 	.vs {
-	    display: flex;
-	    flex-direction: column;
-	    align-items: center;
-	    justify-content: center;
-	    margin-bottom: var(--margin20);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		margin-bottom: var(--margin20);
 	}
 
 	.vs p {
-	    font-size: var(--fs-title);
-	    font-style: var(--fs-italic);
+		font-size: var(--fs-title);
+		font-style: var(--fs-italic);
 	}
 
 	img {
-	    height: 3rem;
+		height: 3rem;
 	}
 
-	
 	.crown img {
-	    height: 1.5rem;
+		height: 1.5rem;
 	}
 	.text {
 		display: flex;
@@ -242,19 +238,19 @@
 		justify-content: center;
 	}
 
-	@media (min-width: 991px){
-	.user{
-		flex-direction: row;
-		align-items: center;
-		justify-content: space-around;
-		margin-bottom: var(--margin20);
-		padding: var(--padding);
-	}
+	@media (min-width: 991px) {
+		.user {
+			flex-direction: row;
+			align-items: center;
+			justify-content: space-around;
+			margin-bottom: var(--margin20);
+			padding: var(--padding);
+		}
 
-	.enemy{
-		flex-direction: row-reverse;
-		margin-bottom: var(--margin20);
-		padding: var(--padding);
-	}
+		.enemy {
+			flex-direction: row-reverse;
+			margin-bottom: var(--margin20);
+			padding: var(--padding);
+		}
 	}
 </style>

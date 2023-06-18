@@ -6,7 +6,6 @@
 	import Enemy from '$lib/components/Enemy.svelte';
 	import { Status, type User } from '$lib/core/types';
 
-
 	// let enemies: User[];
 
 	// async function getUsers() {
@@ -63,7 +62,6 @@
 			description: '12km'
 		}
 	];
-
 </script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -104,7 +102,6 @@
 		background-image: url(/src/lib/images/filter-icon.svg);
 		background-size: cover;
 	}
-
 
 	.grid-container {
 		display: flex;

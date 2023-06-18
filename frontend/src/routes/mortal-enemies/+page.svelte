@@ -51,45 +51,42 @@
 	];
 
 	function getImageSource(personality) {
-    if (personality === 'ENFJ') {
-      return 'ENFJ.svg';
-    } else if (personality === 'ENFP') {
-      return 'ENFP.svg';
-    } else if (personality === 'ENFP') {
-      return 'ENFP.svg';
-    } else if (personality === 'ENTJ'){
-		return 'ENTJ.svg'
-	} else if (personality === 'ENTP'){
-		return 'ENTP.svg'
-    } else if (personality === 'ESFJ'){
-		return 'ESFJ.svg'
-	} else if (personality === 'ESFP'){
-		return 'ESFP.svg'
-	} else if (personality === 'ESTJ'){
-		return 'ESTJ.svg'
-	} else if (personality === 'ESTP'){
-		return 'ESTP.svg'
-	} else if (personality === 'INFJ'){
-		return 'INFJ.svg'
-	} else if (personality === 'INFP'){
-		return  'INFP.svg'
-	} else if (personality === 'INTJ'){
-		return 'INTJ.svg'
-	} else if (personality === 'INTP'){
-		return 'INTP.svg'
-	} else if (personality === 'ISFJ'){
-		return 'ISFJ.svg'
-	} else if (personality === 'ISFP'){
-		return 'ISFP.svg'
-	} else if (personality === 'ISTJ'){
-		return 'ISTJ.svg'
-	} else if (personality === 'ISTP'){
-		return 'ISTP.svg'
+		if (personality === 'ENFJ') {
+			return 'ENFJ.svg';
+		} else if (personality === 'ENFP') {
+			return 'ENFP.svg';
+		} else if (personality === 'ENFP') {
+			return 'ENFP.svg';
+		} else if (personality === 'ENTJ') {
+			return 'ENTJ.svg';
+		} else if (personality === 'ENTP') {
+			return 'ENTP.svg';
+		} else if (personality === 'ESFJ') {
+			return 'ESFJ.svg';
+		} else if (personality === 'ESFP') {
+			return 'ESFP.svg';
+		} else if (personality === 'ESTJ') {
+			return 'ESTJ.svg';
+		} else if (personality === 'ESTP') {
+			return 'ESTP.svg';
+		} else if (personality === 'INFJ') {
+			return 'INFJ.svg';
+		} else if (personality === 'INFP') {
+			return 'INFP.svg';
+		} else if (personality === 'INTJ') {
+			return 'INTJ.svg';
+		} else if (personality === 'INTP') {
+			return 'INTP.svg';
+		} else if (personality === 'ISFJ') {
+			return 'ISFJ.svg';
+		} else if (personality === 'ISFP') {
+			return 'ISFP.svg';
+		} else if (personality === 'ISTJ') {
+			return 'ISTJ.svg';
+		} else if (personality === 'ISTP') {
+			return 'ISTP.svg';
+		}
 	}
-   
-  }
-
-	
 </script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -118,14 +115,10 @@
 							<p><b>{enemy.compatibility}</b></p>
 						</div>
 
-						
 						<p>{enemy.personality}</p>
-						
 					</div>
 				</div>
 			{/each}
 		</div>
 	</div>
 </main>
-
-

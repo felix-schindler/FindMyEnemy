@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let enemy: {
+	export let enemy: {
 		id: number;
 		title: string;
 		personality: string;
@@ -8,19 +8,19 @@
 	};
 </script>
 
-  <div class="enemy-grid-item">
-    <div class="image-container">
-	<img src={`${enemy.personality}.svg`} alt={enemy.title} />
-    </div>
-    <div class="enemy-information">
-      <div class="enemy-details">
-        <p><b>{enemy.title}</b></p>
-		  <p><b>{enemy.compatibility}</b></p> 
-      </div>
-      <p>{enemy.personality}</p>
-	   <p>{enemy.description}</p>
-    </div>
-  </div>
+<div class="enemy-grid-item">
+	<div class="image-container">
+		<img src={`${enemy.personality}.svg`} alt={enemy.title} />
+	</div>
+	<div class="enemy-information">
+		<div class="enemy-details">
+			<p><b>{enemy.title}</b></p>
+			<p><b>{enemy.compatibility}</b></p>
+		</div>
+		<p>{enemy.personality}</p>
+		<p>{enemy.description}</p>
+	</div>
+</div>
 
 <style>
 	.enemy-grid-item {
@@ -34,17 +34,17 @@
 	}
 
 	.image-container {
-		flex: 1; 
+		flex: 1;
 		width: 50%;
-        height: 100%;
+		height: 100%;
 	}
 
 	.image-container img {
 		width: 100%;
-        height: 100%;
+		height: 100%;
 		display: block;
 		object-fit: cover;
-		padding: var(--padding); 
+		padding: var(--padding);
 		background-color: white;
 		border-top-left-radius: 10%;
 		border-bottom-left-radius: 10%;
@@ -66,7 +66,6 @@
 	@media (min-width: 601px) {
 		.enemy-grid-item {
 			flex-basis: calc(50% - 3%);
-		} 
+		}
 	}
-
 </style>

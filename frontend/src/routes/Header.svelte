@@ -5,7 +5,7 @@
 
 <header>
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<img src={logo} alt="FindMyEnemy" class="logo" on:click={()=> goto('/homepage')}/>
+	<img src={logo} alt="FindMyEnemy" class="logo" on:click={() => goto('/homepage')} />
 </header>
 
 <style>

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import '$lib/style/main.css';
-	
+
 	import BackButton from '$lib/components/BackButton.svelte';
 	import openEdit from '$lib/images/edit.svg';
 	import check from '$lib/images/check.svg';
@@ -9,7 +9,7 @@
 	import challengeHistoryIcon from '$lib/images/star.svg';
 	import frenemiesIcon from '$lib/images/users.svg';
 	import AccountButton from '$lib/components/AccountButton.svelte';
-	
+
 	import { goto } from '$app/navigation';
 	import { req } from '$lib/core/api';
 
