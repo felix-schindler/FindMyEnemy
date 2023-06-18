@@ -1,8 +1,23 @@
 <script>
 	import Header from './Header.svelte';
 	import '$lib/style/main.css';
-</script>
+	import { page } from '$app/stores';
+	import { authStore } from '$lib/core/stores';
+	import { goto } from '$app/navigation';
+	import { browser } from '$app/environment';
+	import { redirect } from '@sveltejs/kit';
+	import toast, { Toaster } from 'svelte-french-toast';
+	import { onMount } from 'svelte';
 
+	const AUTH_PATH = '/auth';
+
+	$: if (browser && !$authStore && !$page.url.pathname.startsWith(AUTH_PATH)) {
+		const redir = `${AUTH_PATH}?next=${encodeURIComponent($page.url.pathname)}`;
+		goto(redir);
+	}
+
+</script>
+<Toaster />
 <div class="app">
 	<Header />
 	<main>
