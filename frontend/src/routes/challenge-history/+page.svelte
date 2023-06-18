@@ -1,5 +1,5 @@
 <script lang="ts">
-	import '$lib/style/chistory.css';
+	// import '$lib/style/chistory.css';
 	import AccountButton from '$lib/components/AccountButton.svelte';
 	import BackButton from '$lib/components/BackButton.svelte';
 	import account from '$lib/images/user.svg';
@@ -51,133 +51,138 @@
 </script>
 
 <div>
-  <h1>Challenge History</h1>
-  <div class="container">
-    <div class="challenge">
-      <div class="user">
-        {#if $showUserCrown}
-          {#if window.innerWidth < 991}
-            <div class="crown">
-              <img src={crown} alt="crown" />
-            </div>
-          {:else}
-            <p>Winner</p>
-          {/if}
-        {/if}
-        <div>
-          <img src={account} alt="user" />
-        </div>
-        <div class="text">
-          <p>Username</p>
-          <p>{userClicks}</p>
-        </div>
-      </div>
-      <div class="vs">
-        <p>VS</p>
-      </div>
-      <div class="enemy">
-        {#if $showEnemyCrown}
-          {#if window.innerWidth > 991}
-            <div class="crown">
-              <img src={crown} alt="crown" />
-            </div>
-          {:else}
-            <p>Loser</p>
-          {/if}
-        {/if}
-        <div>
-          <img src={account} alt="user" />
-        </div>
-        <div class="text">
-          <p>Enemyname</p>
-          <p>{enemyClicks}</p>
-        </div>
-      </div>
-    </div>
-	    <div class="challenge">
-      <div class="user">
-        {#if $showUserCrown}
-          {#if window.innerWidth < 991}
-            <div class="crown">
-              <img src={crown} alt="crown" />
-            </div>
-          {:else}
-            <p>Winner</p>
-          {/if}
-        {/if}
-        <div>
-          <img src={account} alt="user" />
-        </div>
-        <div class="text">
-          <p>Username</p>
-          <p>{userClicks}</p>
-        </div>
-      </div>
-      <div class="vs">
-        <p>VS</p>
-      </div>
-      <div class="enemy">
-        {#if $showEnemyCrown}
-          {#if window.innerWidth > 991}
-            <div class="crown">
-              <img src={crown} alt="crown" />
-            </div>
-          {:else}
-            <p>Loser</p>
-          {/if}
-        {/if}
-        <div>
-          <img src={account} alt="user" />
-        </div>
-        <div class="text">
-          <p>Enemyname</p>
-          <p>{enemyClicks}</p>
-        </div>
-      </div>
-    </div>
-	    <div class="challenge">
-      <div class="user">
-        {#if $showUserCrown}
-          {#if window.innerWidth < 991}
-            <div class="crown">
-              <img src={crown} alt="crown" />
-            </div>
-          {:else}
-            <p>Winner</p>
-          {/if}
-        {/if}
-        <div>
-          <img src={account} alt="user" />
-        </div>
-        <div class="text">
-          <p>Username</p>
-          <p>{userClicks}</p>
-        </div>
-      </div>
-      <div class="vs">
-        <p>VS</p>
-      </div>
-      <div class="enemy">
-        {#if $showEnemyCrown}
-          {#if window.innerWidth > 991}
-            <div class="crown">
-              <img src={crown} alt="crown" />
-            </div>
-          {:else}
-            <p>Loser</p>
-          {/if}
-        {/if}
-        <div>
-          <img src={account} alt="user" />
-        </div>
-        <div class="text">
-          <p>Enemyname</p>
-          <p>{enemyClicks}</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+	<div>
+		<AccountButton/>
+		<BackButton/>
+	</div>
+	
+	<h1>Challenge History</h1>
+	<div class="container">
+		<div class="challenge">
+			<div class="user">
+				{#if $showUserCrown}
+					{#if window.innerWidth < 991}
+						<div class="crown">
+							<img src={crown} alt="crown" />
+						</div>
+					{:else}
+						<p>Winner</p>
+					{/if}
+				{/if}
+				<div>
+					<img src={account} alt="user" />
+				</div>
+				<div class="text">
+					<p>Username</p>
+					<p>{userClicks}</p>
+				</div>
+			</div>
+			<div class="vs">
+				<p>VS</p>
+			</div>
+			<div class="enemy">
+				{#if $showEnemyCrown}
+					{#if window.innerWidth > 991}
+						<div class="crown">
+							<img src={crown} alt="crown" />
+						</div>
+					{:else}
+						<p>Loser</p>
+					{/if}
+				{/if}
+				<div>
+					<img src={account} alt="user" />
+				</div>
+				<div class="text">
+					<p>Enemyname</p>
+					<p>{enemyClicks}</p>
+				</div>
+			</div>
+		</div>
+		<div class="challenge">
+			<div class="user">
+				{#if $showUserCrown}
+					{#if window.innerWidth < 991}
+						<div class="crown">
+							<img src={crown} alt="crown" />
+						</div>
+					{:else}
+						<p>Winner</p>
+					{/if}
+				{/if}
+				<div>
+					<img src={account} alt="user" />
+				</div>
+				<div class="text">
+					<p>Username</p>
+					<p>{userClicks}</p>
+				</div>
+			</div>
+			<div class="vs">
+				<p>VS</p>
+			</div>
+			<div class="enemy">
+				{#if $showEnemyCrown}
+					{#if window.innerWidth > 991}
+						<div class="crown">
+							<img src={crown} alt="crown" />
+						</div>
+					{:else}
+						<p>Loser</p>
+					{/if}
+				{/if}
+				<div>
+					<img src={account} alt="user" />
+				</div>
+				<div class="text">
+					<p>Enemyname</p>
+					<p>{enemyClicks}</p>
+				</div>
+			</div>
+		</div>
+		<div class="challenge">
+			<div class="user">
+				{#if $showUserCrown}
+					{#if window.innerWidth < 991}
+						<div class="crown">
+							<img src={crown} alt="crown" />
+						</div>
+					{:else}
+						<p>Winner</p>
+					{/if}
+				{/if}
+				<div>
+					<img src={account} alt="user" />
+				</div>
+				<div class="text">
+					<p>Username</p>
+					<p>{userClicks}</p>
+				</div>
+			</div>
+			<div class="vs">
+				<p>VS</p>
+			</div>
+			<div class="enemy">
+				{#if $showEnemyCrown}
+					{#if window.innerWidth > 991}
+						<div class="crown">
+							<img src={crown} alt="crown" />
+						</div>
+					{:else}
+						<p>Loser</p>
+					{/if}
+				{/if}
+				<div>
+					<img src={account} alt="user" />
+				</div>
+				<div class="text">
+					<p>Enemyname</p>
+					<p>{enemyClicks}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
 
 <style>
 	h1 {

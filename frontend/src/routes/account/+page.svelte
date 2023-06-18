@@ -36,9 +36,6 @@
 </script>
 
 <div>
-	<AccountButton />
-</div>
-<div>
 	<BackButton />
 </div>
 

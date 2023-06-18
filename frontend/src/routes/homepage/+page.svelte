@@ -20,52 +20,6 @@
 			enemies = res
 		}
 	}
-
-
-	let users = [
-		{
-			id: 1,
-			title: 'Timothy',
-			personality: 'ENFJ',
-			compatibility: '89%',
-			description: '12km'
-		},
-		{
-			id: 2,
-			title: 'Benjamin',
-			personality: 'ENFP',
-			compatibility: '89%',
-			description: '12km'
-		},
-		{
-			id: 3,
-			title: 'Natasha',
-			personality: 'INFJ',
-			compatibility: '89%',
-			description: '12km'
-		},
-		{
-			id: 4,
-			title: 'Anna',
-			personality: 'ISTP',
-			compatibility: '89%',
-			description: '12km'
-		},
-		{
-			id: 5,
-			title: 'Kylie',
-			personality: 'ESFP',
-			compatibility: '89%',
-			description: '12km'
-		},
-		{
-			id: 6,
-			title: 'Dan',
-			personality: 'ISTJ',
-			compatibility: '89%',
-			description: '12km'
-		}
-	];
 </script>
 
 <main>
@@ -93,7 +47,7 @@
 
 		<div class="grid-container">
 			{#if enemies}
-				{#each users as user}
+				{#each enemies as user}
 					<DiscoverEnemy {user} />
 				{/each}
 			{:else}
@@ -102,7 +56,6 @@
 		</div>
 	</div>
 
-	
 	<div class="top-enemies">
 	<div class="moredetails-button">
 		<h2>Your mortal enemies</h2>
@@ -119,7 +72,7 @@
 	</div>
 
 	 <div class="grid-container">
-		{#each users as user}
+		{#each enemies as user}
 			<DiscoverEnemy {user} />
 		{/each}
 	</div> 

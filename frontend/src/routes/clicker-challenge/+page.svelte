@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { onMount, onDestroy, afterUpdate } from 'svelte';
+	import AccountButton from '$lib/components/AccountButton.svelte';
+	import BackButton from '$lib/components/BackButton.svelte';
 
 	let timeLeft = 10;
 	let clickCount = 0;
@@ -49,6 +51,11 @@
 	timeLeft = 10;
 
 </script>
+
+<div>
+	<BackButton/>
+	<AccountButton/>
+</div>
 
 <div class="clickerContainer">
 	<p id="timer">

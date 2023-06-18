@@ -70,7 +70,6 @@
 
 <main>
 	<AccountButton />
-
 	<BackButton />
 
 	<div class="top-enemies">
