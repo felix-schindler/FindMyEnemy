@@ -44,7 +44,7 @@
 	<button type="submit" class="mainBtn">
 		<span>Sign In</span>
 	</button>
-	<a href="/auth/onboarding">Don't have an account yet? <b>Take the test!</b></a>
+	<a href="/onboarding">Don't have an account yet? <b>Take the test!</b></a>
 </form>
 
 <style>
