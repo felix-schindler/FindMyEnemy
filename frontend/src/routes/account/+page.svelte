@@ -1,5 +1,6 @@
 <script lang="ts">
 	import '$lib/style/main.css';
+	
 	import BackButton from '$lib/components/BackButton.svelte';
 	import openEdit from '$lib/images/edit.svg';
 	import check from '$lib/images/check.svg';
@@ -8,10 +9,17 @@
 	import challengeHistoryIcon from '$lib/images/star.svg';
 	import frenemiesIcon from '$lib/images/users.svg';
 	import AccountButton from '$lib/components/AccountButton.svelte';
+	
 	import { goto } from '$app/navigation';
+	import { req } from '$lib/core/api';
 
-	let username = 'Username'; // Beispiel-Benutzername
+	let username = '';
+	let password = '';
 	let editing = false;
+
+	async function fetchUsername() {
+		const res = await req('/users/login', 'POST', { username, password });
+	}
 
 	function saveUsername() {
 		editing = false;
@@ -22,14 +30,8 @@
 	function changePassword() {
 		// Logic for changing the password
 	}
-	function viewChallengeHistory() {
-		// Logic for viewing the challenge history
-	}
-	function viewFrenemies() {
-		// Logic for viewing frenemies
-	}
 	function logOut() {
-		window.location.href = '/auth';
+		// Logic for logging out
 	}
 </script>
 
@@ -134,6 +136,7 @@
 		justify-content: center;
 		align-items: center;
 		font: var(--font-family);
+		outline: none;
 	}
 	.form > button {
 		display: flex;
