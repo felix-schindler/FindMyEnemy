@@ -1,12 +1,7 @@
 <script lang="ts">
-	
-	export let user: {
-		id: number;
-		personality: string;
-		username: string;
-		// compatibility: string;
-		// description: string;
-	};
+	import type { User } from '$lib/core/types';
+
+	export let user: User;
 </script>
 
 <div class="grid-item">
