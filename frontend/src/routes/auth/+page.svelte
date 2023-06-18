@@ -1,5 +1,4 @@
 <script>
-	import { browser } from '$app/environment';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 
@@ -37,7 +36,7 @@
 		<input type="checkbox" id="remember" />
 		<label for="remember">Remember me</label>
 	</div>
-	<button type="submit" class="mainBtn" on:click={() => goto('/homepage')}>
+	<button type="submit" class="mainBtn">
 		<span>Sign In</span>
 	</button>
 	<a href="/onboarding"> Don't have an account yet? <b>Take the test! </b> </a>

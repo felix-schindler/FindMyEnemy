@@ -4,6 +4,7 @@
 	import backButton from '$lib/images/back-icon.svg';
 	import { req } from '$lib/core/api';
 	import { onMount } from 'svelte';
+	import '$lib/style/personality.css';
 
 	let questions: Question[] = [];
 	let qIndex = 0;
@@ -106,42 +107,3 @@
 		{/if}
 	{/if}
 </div>
-
-<style>
-	.persContainer {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		margin: 1rem auto;
-		padding: 1rem;
-	}
-	ol {
-		list-style: upper-latin;
-	}
-
-	.display-number {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		margin: 1rem auto;
-		padding: 1rem;
-	}
-
-	.personality-test {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		margin: 2rem auto;
-		padding: 1rem;
-	}
-	.back-button {
-		display: flex;
-		align-items: left;
-		justify-content: left;
-		margin: 1rem auto;
-		margin-left: 0;
-		padding: 1rem;
-	}
-</style>

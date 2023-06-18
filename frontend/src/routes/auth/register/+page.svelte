@@ -13,7 +13,8 @@
 	const personality = $page.url.searchParams.get('personality') ?? '';
 	let username = '',
 		password = '',
-		rPassword = '';
+		rPassword = '',
+		errorMessage ='';
 
 	async function register() {
 		// Check if password match
@@ -29,12 +30,16 @@
 			}
 		} else {
 			// TODO: Show error
+			errorMessage = "Passwords do not match";
 		}
 	}
 </script>
 
 <h1>find my <br /> enemy</h1>
 <form class="form" on:submit={register}>
+	{#if errorMessage}
+	<p class="error-message">{errorMessage}</p>
+	{/if}
 	<input type="text" placeholder="username" bind:value={username} />
 	<input type="password" placeholder="password" bind:value={password} />
 	<input type="password" placeholder="repeat password" bind:value={rPassword} />
