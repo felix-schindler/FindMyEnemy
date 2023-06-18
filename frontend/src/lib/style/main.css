@@ -191,3 +191,32 @@ input[type='search'] {
 .error-message {
 	color: red;
 }
+
+.enemies-list {
+	margin: var(--margin40);
+}
+
+
+.grid-container {
+	display: flex;
+	/* flex-direction: column; */
+	flex-wrap: wrap;
+	margin: var(--margin40);
+	gap: var(--margin20);
+}
+
+.filter-button {
+	display: flex;
+	margin: var(--margin40);
+	justify-content: space-between;
+	align-items: center;
+}
+
+.filter-icon {
+	display: inline-block;
+	width: 32px;
+	height: 28px;
+	background-image: url(/src/lib/images/filter-icon.svg);
+	background-size: cover;
+}
+

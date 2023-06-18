@@ -1,18 +1,19 @@
 <script lang="ts">
+	
 	export let user: {
 		id: number;
 		personality: string;
-		title: string;
+		username: string;
 		// compatibility: string;
 		// description: string;
 	};
 </script>
 
 <div class="grid-item">
-	<img src={`${user.personality}.svg`} alt={user.title} />
+	<img src={`${user.personality}.svg`} alt={user.username} />
 	<div class="user-information">
 		<div class="user-details">
-			<p><b>{user.title}</b></p>
+			<p><b>{user.username}</b></p>
 			<!-- <p><b>{user.compatibility}</b></p> -->
 		</div>
 		<p>{user.personality}</p>

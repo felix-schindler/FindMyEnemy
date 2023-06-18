@@ -2,8 +2,8 @@
 	import AccountButton from '$lib/components/AccountButton.svelte';
 	import { req } from '$lib/core/api';
 	import DiscoverEnemy from '$lib/components/DiscoverEnemy.svelte';
-
 	import { onMount } from 'svelte';
+
 	import { Status, type User } from '$lib/core/types';
 
 	let enemies: User[];
@@ -62,9 +62,13 @@
 		</div>
 
 		<div class="grid-container">
-			{#each enemies as user}
-				<DiscoverEnemy {user} />
-			{/each}
+			{#if enemies}
+				{#each enemies as user}
+					<DiscoverEnemy {user} />
+				{/each}
+			{:else}
+				<p>Loading...</p>
+			{/if}
 		</div>
 	</div>
 </main>
