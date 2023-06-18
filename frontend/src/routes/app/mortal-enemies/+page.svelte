@@ -3,7 +3,7 @@
 	import AccountButton from '$lib/components/AccountButton.svelte';
 	import BackButton from '$lib/components/BackButton.svelte';
 	import { req } from '$lib/core/api';
-	import '$lib/style/enemieslist.css';
+	// import '$lib/style/enemieslist.css';
 
 	let enemies = [
 		{
