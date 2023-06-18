@@ -36,14 +36,9 @@
 		<div class="moredetails-button">
 			<h2>Discover top enemies</h2>
 
-			<button
-				class="moredetails-icon"
-				on:click={() => {
-					window.location.href = '/top-enemies';
-				}}
-			>
+			<a href="/top-enemies" class="moredetails-icon">
 				<img src="/src/lib/images/moredetails.svg" alt="Back" />
-			</button>
+			</a>
 		</div>
 
 		<div class="grid-container">
@@ -61,14 +56,9 @@
 		<div class="moredetails-button">
 			<h2>Your mortal enemies</h2>
 
-			<button
-				class="moredetails-icon"
-				on:click={() => {
-					window.location.href = '/mortal-enemies';
-				}}
-			>
+			<a href="/mortal-enemies" class="moredetails-icon">
 				<img src="/src/lib/images/moredetails.svg" alt="Back" />
-			</button>
+			</a>
 		</div>
 
 		<div class="grid-container">

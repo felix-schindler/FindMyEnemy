@@ -5,6 +5,7 @@
 <div class="backBtnContainer">
 	<!-- TODO: change on click to goto -->
 	<button
+		type="button"
 		class="back-button"
 		on:click={() => {
 			window.history.back();

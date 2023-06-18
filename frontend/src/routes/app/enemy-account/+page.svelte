@@ -24,13 +24,9 @@
 		<p id="rate">You have an incompatible rate of 89%</p>
 	</div>
 	<div id="buttonsContainer">
-		<button
-			class="mainBtn"
-			style="flex-grow: 1;"
-			on:click={() => (window.location.href = '/clicker-challenge')}
-		>
+		<a class="mainBtn" href="/clicker-challenge" style="flex-grow: 1;">
 			<span>Challenge</span>
-		</button>
+		</a>
 		<button class="mainBtn" style="margin-left: 1.25rem;">
 			<img src={addEnemy} alt="Add Enemy" style="overflow: visible" />
 		</button>

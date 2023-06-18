@@ -78,13 +78,7 @@
 		<div class="overlay-content">
 			<h2 style="color: black">Timer abgelaufen!</h2>
 			<p style="color: black">Ergebnis: {clickCount} Clicks</p>
-			<button
-				style="margin: 1rem "
-				class="mainBtn"
-				on:click={() => {
-					window.location.href = '/enemy-account';
-				}}><span>Weiter</span></button
-			>
+			<a href="/enemy-account" style="margin: 1rem " class="mainBtn"><span>Weiter</span></a>
 		</div>
 	</div>
 {/if}
