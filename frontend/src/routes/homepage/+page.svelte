@@ -1,25 +1,26 @@
 <script lang="ts">
 	import '$lib/style/main.css';
-	import '$lib/style/homepage.css';
 	import AccountButton from '$lib/components/AccountButton.svelte';
 	import { req } from '$lib/core/api';
+	import DiscoverEnemy from '$lib/components/DiscoverEnemy.svelte';
+
+	import Enemy from '$lib/components/Enemy.svelte';
 
 	import { onMount, onDestroy } from 'svelte';
 	import { Status, type User } from '$lib/core/types';
 
-	let users: User[];
+	let enemies: User[];
 
 	async function getUsers() {
-		const res = await req('/users', "GET");
+		const res = await req('/users', 'GET');
 
 		if (res instanceof Status) {
 			console.error(res);
 		} else {
-			users = res
+			enemies = res;
 		}
 	}
 </script>
-
 
 <main>
 	<AccountButton />
@@ -33,7 +34,6 @@
 
 		<div class="moredetails-button">
 			<h2>Discover top enemies</h2>
-			
 
 			<button
 				class="moredetails-icon"
@@ -45,38 +45,71 @@
 			</button>
 		</div>
 
-			{#if users}
-				{#each users as user}
-					<p><b>{user.username}</b></p>
-					<p><b>{user.personality}</b></p>
+		<div class="grid-container">
+			{#if enemies}
+				{#each enemies as user}
+					<DiscoverEnemy {user} />
 				{/each}
 			{:else}
 				<p>Loading...</p>
 			{/if}
+		</div>
 	</div>
 
 	<div class="top-enemies">
 		<div class="moredetails-button">
 			<h2>Your mortal enemies</h2>
-			<span class="moredetails-icon" />
+
+			<button
+				class="moredetails-icon"
+				on:click={() => {
+					window.location.href = '/mortal-enemies';
+				}}
+			>
+				<img src="/src/lib/images/moredetails.svg" alt="Back" />
+			</button>
 		</div>
 
-		<!-- <div class="grid-container2">
-			{#each users as user (user.id)}
-				<div class="grid-item">
-					<img src={user.imageSrc} alt={user.title} />
-					<div class="user-information">
-						<div class="user-details">
-							<p>{user.title}</p>
-							<p><b>{user.compatibility}</b></p>
-						</div>
-						<p>{user.description}</p>
-					</div>
-				</div>
+		<div class="grid-container">
+			{#each enemies as user}
+				<DiscoverEnemy {user} />
 			{/each}
-		</div> -->
+		</div>
 	</div>
-
-	
 </main>
 
+<style>
+	.searchBar {
+		display: flex;
+		justify-content: center;
+		margin-bottom: var(--margin40);
+	}
+
+	.search-bar {
+		width: 80vw;
+		height: 20px;
+	}
+
+	.top-enemies {
+		margin-top: var(--margin40);
+		margin-bottom: var(--margin40);
+		margin-left: var(--margin40);
+	}
+
+	.grid-container {
+		display: flex;
+		gap: var(--margin20);
+		overflow-x: auto;
+	}
+
+	.moredetails-button {
+		display: flex;
+		align-items: center;
+	}
+
+	.moredetails-icon img {
+		width: 8px;
+		height: 12px;
+		margin-left: var(--margin20);
+	}
+</style>

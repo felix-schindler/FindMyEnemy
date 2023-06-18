@@ -1,10 +1,16 @@
 <script>
 	import '$lib/style/main.css';
-	import '$lib/style/enemy-account.css'
+	import '$lib/style/enemy-account.css';
 	import enemyPic from '$lib/images/enemy_account_pic.png';
 	import addEnemy from '$lib/images/add-enemy.svg';
-	
+	import AccountButton from '$lib/components/AccountButton.svelte';
+	import BackButton from '$lib/components/BackButton.svelte';
 </script>
+
+<div>
+	<BackButton />
+	<AccountButton />
+</div>
 
 <div id="content">
 	<div id="mainProperties">
@@ -19,7 +25,9 @@
 		<p id="rate">You have an incompatible rate of 89%</p>
 	</div>
 	<div id="buttonsContainer">
-		<button class="mainBtn" style="flex-grow: 1;"
+		<button
+			class="mainBtn"
+			style="flex-grow: 1;"
 			on:click={() => (window.location.href = '/clicker-challenge')}
 		>
 			<span>Challenge</span>

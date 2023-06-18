@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { onMount, onDestroy, afterUpdate } from 'svelte';
+	import AccountButton from '$lib/components/AccountButton.svelte';
+	import BackButton from '$lib/components/BackButton.svelte';
 
-	let timeLeft = 7;
+	let timeLeft = 10;
 	let clickCount = 0;
 	let timerId: number;
 	let clickButton: HTMLButtonElement | null;
@@ -46,9 +48,13 @@
 	});
 
 	// Setze den Timer auf 30 Sekunden
-	timeLeft = 7;
-
+	timeLeft = 10;
 </script>
+
+<div>
+	<BackButton />
+	<AccountButton />
+</div>
 
 <div class="clickerContainer">
 	<p id="timer">
@@ -86,11 +92,11 @@
 <style>
 	.clickerContainer {
 		text-align: center;
-		margin-top: 50px;
+		margin-top: 2.5rem;
 	}
 
 	#timer {
-		font-size: 30px;
+		font-size: var(--fs-title);
 	}
 
 	.overlay {
@@ -109,8 +115,20 @@
 
 	.overlay-content {
 		background-color: #fff;
-		padding: 20px;
-		border-radius: 10px;
+		padding: 1.25rem;
+		border-radius: 0.7rem;
 		text-align: center;
+	}
+
+	.clickerCircle {
+		height: 40vw;
+		width: 40vw;
+		font-size: 3rem;
+	}
+
+	@media (max-width: 480px) {
+		.clickerCircle {
+			font-size: 2rem;
+		}
 	}
 </style>

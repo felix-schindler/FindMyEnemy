@@ -3,6 +3,7 @@
 </script>
 
 <div class="backBtnContainer">
+	<!-- TODO: change on click to goto -->
 	<button
 		class="back-button"
 		on:click={() => {

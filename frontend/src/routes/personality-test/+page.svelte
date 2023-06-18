@@ -4,12 +4,14 @@
 	import backButton from '$lib/images/back-icon.svg';
 	import { req } from '$lib/core/api';
 	import { onMount } from 'svelte';
+	import '$lib/style/personality.css';
 
 	let questions: Question[] = [];
 	let qIndex = 0;
 	let question: Question;
 	let answers: UserAnswer[] = [];
 	let personality: string;
+	let msg = '';
 
 	async function addAnswer(qId: number, category: Category) {
 		question = questions[++qIndex];
@@ -32,9 +34,9 @@
 		const res = await req('/questions', 'GET');
 
 		if (res instanceof Status) {
-			// TODO: Show error
+			msg = `${res.status}: ${res.message}`;
 		} else {
-			// TODO: Set questions
+			//Set questions
 			questions = res;
 			question = questions[qIndex];
 		}
@@ -43,9 +45,9 @@
 	async function getPersonality() {
 		const res = await req('/questions/personality', 'POST', answers);
 
-		// TODO: Check for error -> show message ; else: set personality
+		// Check for error -> show message ; else: set personality
 		if (res instanceof Status) {
-			//TODO: Show error
+			msg = `${res.status}: ${res.message}`;
 		} else {
 			personality = res.personality;
 		}
@@ -105,42 +107,3 @@
 		{/if}
 	{/if}
 </div>
-
-<style>
-	.persContainer {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		margin: 1rem auto;
-		padding: 1rem;
-	}
-	ol {
-		list-style: upper-latin;
-	}
-
-	.display-number {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		margin: 1rem auto;
-		padding: 1rem;
-	}
-
-	.personality-test {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		margin: 2rem auto;
-		padding: 1rem;
-	}
-	.back-button {
-		display: flex;
-		align-items: left;
-		justify-content: left;
-		margin: 1rem auto;
-		margin-left: 0;
-		padding: 1rem;
-	}
-</style>

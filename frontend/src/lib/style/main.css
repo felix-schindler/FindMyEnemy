@@ -22,7 +22,7 @@
 	/*margin left right or margin bottom for titles*/
 	--margin40: 2.5rem;
 	/*margin between elements (spacing)*/
-	--margin20:1.25rem;
+	--margin20: 1.25rem;
 }
 
 html * {
@@ -30,8 +30,6 @@ html * {
 }
 
 h1 {
-	/* margin: 50px;
-	text-align: center;  */
 	line-height: 1.5em;
 }
 
@@ -73,13 +71,6 @@ h1 {
 	padding: 1rem;
 	border-radius: 999px;
 	display: flex;
-}
-
-meter {
-	display: flex;
-	margin-bottom: 1rem;
-	width: 40%;
-	color: var(--primary);
 }
 
 @media (max-width: 600px) {
@@ -206,4 +197,7 @@ input[type='search'] {
 .reverseButton img {
 	height: 1.5vw;
 	margin: 5px;
+}
+.error-message {
+	color: red;
 }

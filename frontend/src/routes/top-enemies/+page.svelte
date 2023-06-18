@@ -1,56 +1,73 @@
-<script>
+<script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 	import AccountButton from '$lib/components/AccountButton.svelte';
 	import BackButton from '$lib/components/BackButton.svelte';
 	import { req } from '$lib/core/api';
-	import '$lib/style/enemieslist.css';
+	import Enemy from '$lib/components/Enemy.svelte';
+	import { Status, type User } from '$lib/core/types';
+
+	// let enemies: User[];
+
+	// async function getUsers() {
+	// 	const res = await req('/users', "GET");
+
+	// 	if (res instanceof Status) {
+	// 		console.error(res);
+	// 	} else {
+	// 		enemies = res
+	// 	}
+	// }
 
 	let enemies = [
 		{
 			id: 1,
-			imageSrc: '/src/lib/images/SpongeBob_SquarePants_character.svg.png',
 			title: 'Timothy',
-			type: 'Mortal Enemy',
-			personality: 'ISTP',
+			personality: 'ENFJ',
 			compatibility: '89%',
-			distance: '12km'
+			description: '12km'
 		},
 		{
 			id: 2,
-			imageSrc: '/src/lib/images/SpongeBob_SquarePants_character.svg.png',
 			title: 'Benjamin',
-			type: 'Mortal Enemy',
-			personality: 'ISTP',
+			personality: 'ENFP',
 			compatibility: '89%',
-			distance: '12km'
+			description: '12km'
 		},
 		{
 			id: 3,
-			imageSrc: '/src/lib/images/SpongeBob_SquarePants_character.svg.png',
-			title: 'Benjamin',
-			type: 'Mortal Enemy',
-			personality: 'ISTP',
+			title: 'Natasha',
+			personality: 'INFJ',
 			compatibility: '89%',
-			distance: '12km'
+			description: '12km'
 		},
 		{
 			id: 4,
-			imageSrc: '/src/lib/images/SpongeBob_SquarePants_character.svg.png',
-			title: 'Benjamin',
-			type: 'Mortal Enemy',
+			title: 'Anna',
 			personality: 'ISTP',
 			compatibility: '89%',
-			distance: '12km'
+			description: '12km'
+		},
+		{
+			id: 5,
+			title: 'Kylie',
+			personality: 'ESFP',
+			compatibility: '89%',
+			description: '12km'
+		},
+		{
+			id: 6,
+			title: 'Dan',
+			personality: 'ISTJ',
+			compatibility: '89%',
+			description: '12km'
 		}
 	];
-	
 </script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <main>
 	<AccountButton />
-
 	<BackButton />
 
 	<div class="top-enemies">
@@ -61,25 +78,35 @@
 
 		<div class="grid-container">
 			{#each enemies as enemy (enemy.id)}
-				<div class="enemy-grid-item">
-					<div class="image-container">
-						<img src={enemy.imageSrc} alt={enemy.title} />
-					</div>
-
-					<div class="enemy-information">
-						<div class="enemy-details">
-							<p><b>{enemy.title}</b></p>
-							<p><b>{enemy.compatibility}</b></p>
-						</div>
-
-						<p>{enemy.type}</p>
-						<p>{enemy.personality}</p>
-						<p>{enemy.distance}</p>
-					</div>
-				</div>
+				<Enemy {enemy} />
 			{/each}
 		</div>
 	</div>
 </main>
 
+<style>
+	.top-enemies {
+		margin: var(--margin40);
+	}
 
+	.filter-button {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.filter-icon {
+		display: inline-block;
+		width: 32px;
+		height: 28px;
+		background-image: url(/src/lib/images/filter-icon.svg);
+		background-size: cover;
+	}
+
+	.grid-container {
+		display: flex;
+		/* flex-direction: column; */
+		flex-wrap: wrap;
+		gap: var(--margin20);
+	}
+</style>

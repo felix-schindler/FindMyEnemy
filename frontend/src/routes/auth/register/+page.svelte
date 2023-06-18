@@ -4,16 +4,17 @@
 	import { browser } from '$app/environment';
 
 	import '$lib/style/main.css';
-	import abc from '$lib/images/userlogin-icon.svg';
 	import { authStore } from '$lib/core/stores';
 	import { req } from '$lib/core/api';
 	import { Status } from '$lib/core/types';
+	import { onMount } from 'svelte';
 
 	const next = $page.url.searchParams.get('next');
 	const personality = $page.url.searchParams.get('personality') ?? '';
 	let username = '',
 		password = '',
-		rPassword = '';
+		rPassword = '',
+		errorMessage = '';
 
 	async function register() {
 		// Check if password match
@@ -29,11 +30,16 @@
 			}
 		} else {
 			// TODO: Show error
+			errorMessage = 'Passwords do not match';
 		}
 	}
 </script>
+
 <h1>find my <br /> enemy</h1>
 <form class="form" on:submit={register}>
+	{#if errorMessage}
+		<p class="error-message">{errorMessage}</p>
+	{/if}
 	<input type="text" placeholder="username" bind:value={username} />
 	<input type="password" placeholder="password" bind:value={password} />
 	<input type="password" placeholder="repeat password" bind:value={rPassword} />
