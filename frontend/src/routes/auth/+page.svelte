@@ -30,8 +30,8 @@
 </script>
 
 <form class="form" on:submit={login}>
-	<input type="text" placeholder="username" bind:value={username} />
-	<input type="password" placeholder="password" bind:value={password} />
+	<input type="text" autocomplete="username" placeholder="username" bind:value={username} />
+	<input type="password" autocomplete="current-password" placeholder="password" bind:value={password} />
 	<div>
 		<input type="checkbox" id="remember" />
 		<label for="remember">Remember me</label>

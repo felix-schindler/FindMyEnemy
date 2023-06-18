@@ -1,13 +1,11 @@
 <script>
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
 
 	import '$lib/style/main.css';
 	import { authStore } from '$lib/core/stores';
 	import { req } from '$lib/core/api';
 	import { Status } from '$lib/core/types';
-	import { onMount } from 'svelte';
 
 	const next = $page.url.searchParams.get('next');
 	const personality = $page.url.searchParams.get('personality') ?? '';
@@ -40,9 +38,9 @@
 	{#if errorMessage}
 		<p class="error-message">{errorMessage}</p>
 	{/if}
-	<input type="text" placeholder="username" bind:value={username} />
-	<input type="password" placeholder="password" bind:value={password} />
-	<input type="password" placeholder="repeat password" bind:value={rPassword} />
+	<input type="text" autocomplete="username" placeholder="username" bind:value={username} />
+	<input type="password" autocomplete="new-password" placeholder="password" bind:value={password} />
+	<input type="password" autocomplete="new-password" placeholder="repeat password" bind:value={rPassword} />
 	<button type="submit" class="mainBtn">
 		<span>Sign Up</span>
 	</button>
