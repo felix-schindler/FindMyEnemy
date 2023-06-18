@@ -37,25 +37,27 @@
 		placeholder="password"
 		bind:value={password}
 	/>
-	<div>
+	<div class="il">
 		<input type="checkbox" id="remember" />
 		<label for="remember">Remember me</label>
 	</div>
 	<button type="submit" class="mainBtn">
 		<span>Sign In</span>
 	</button>
-	<a href="/onboarding"> Don't have an account yet? <b>Take the test! </b> </a>
+	<a href="/auth/onboarding">Don't have an account yet? <b>Take the test!</b></a>
 </form>
 
 <style>
 	a {
-		justify-content: center;
-		text-align: center;
+		font-weight: normal;
+		text-decoration: none;
 		color: #e3dcff;
 	}
 
-	div {
+	div.il {
 		display: flex;
 		align-items: center;
+		gap: 0.25rem;
+		justify-content: start;
 	}
 </style>
