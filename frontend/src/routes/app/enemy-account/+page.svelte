@@ -1,5 +1,4 @@
 <script>
-	import '$lib/style/main.css';
 	import '$lib/style/enemy-account.css';
 	import enemyPic from '$lib/images/enemy_account_pic.png';
 	import addEnemy from '$lib/images/add-enemy.svg';

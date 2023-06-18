@@ -2,7 +2,6 @@
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 
-	import '$lib/style/main.css';
 	import { authStore } from '$lib/core/stores';
 	import { req } from '$lib/core/api';
 	import { Status } from '$lib/core/types';
@@ -40,7 +39,12 @@
 	{/if}
 	<input type="text" autocomplete="username" placeholder="username" bind:value={username} />
 	<input type="password" autocomplete="new-password" placeholder="password" bind:value={password} />
-	<input type="password" autocomplete="new-password" placeholder="repeat password" bind:value={rPassword} />
+	<input
+		type="password"
+		autocomplete="new-password"
+		placeholder="repeat password"
+		bind:value={rPassword}
+	/>
 	<button type="submit" class="mainBtn">
 		<span>Sign Up</span>
 	</button>

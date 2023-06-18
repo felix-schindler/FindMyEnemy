@@ -1,6 +1,6 @@
 <script>
-	import Header from './Header.svelte';
 	import '$lib/style/main.css';
+	import Header from './Header.svelte';
 	import { Toaster } from 'svelte-french-toast';
 </script>
 

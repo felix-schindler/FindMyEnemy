@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { Status, type Question, type UserAnswer, type Category } from '$lib/core/types';
-	import '$lib/style/main.css';
-	import backButton from '$lib/images/back-icon.svg';
-	import { req } from '$lib/core/api';
-	import { onMount } from 'svelte';
 	import '$lib/style/personality.css';
+	import backButton from '$lib/images/back-icon.svg';
+
+	import { onMount } from 'svelte';
+	import { req } from '$lib/core/api';
+	import { Status, type Question, type UserAnswer, type Category } from '$lib/core/types';
 
 	let questions: Question[] = [];
 	let qIndex = 0;

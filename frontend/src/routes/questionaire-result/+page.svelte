@@ -1,5 +1,4 @@
 <script lang="ts">
-	import '$lib/style/main.css';
 	import '$lib/style/questionaire-result.css';
 	import enfjimg from '$lib/images/enfj.png';
 </script>
