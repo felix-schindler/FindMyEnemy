@@ -113,7 +113,4 @@
 		flex-wrap: wrap;
 		gap: var(--margin20);
 	}
-
-	
 </style>
-

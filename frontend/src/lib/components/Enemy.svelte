@@ -1,54 +1,16 @@
 <script lang="ts">
   export let enemy: {
-        id: number;
+		id: number;
 		title: string;
-        personality: string;
-        compatibility: string;
-        description: string;
-    };
-
-	function getImageSource(personality: string) {
-    if (personality === 'ENFJ') {
-      return 'ENFJ.svg';
-    } else if (personality === 'ENFP') {
-      return 'ENFP.svg';
-    } else if (personality === 'ENFP') {
-      return 'ENFP.svg';
-    } else if (personality === 'ENTJ'){
-		return 'ENTJ.svg'
-	} else if (personality === 'ENTP'){
-		return 'ENTP.svg'
-    } else if (personality === 'ESFJ'){
-		return 'ESFJ.svg'
-	} else if (personality === 'ESFP'){
-		return 'ESFP.svg'
-	} else if (personality === 'ESTJ'){
-		return 'ESTJ.svg'
-	} else if (personality === 'ESTP'){
-		return 'ESTP.svg'
-	} else if (personality === 'INFJ'){
-		return 'INFJ.svg'
-	} else if (personality === 'INFP'){
-		return  'INFP.svg'
-	} else if (personality === 'INTJ'){
-		return 'INTJ.svg'
-	} else if (personality === 'INTP'){
-		return 'INTP.svg'
-	} else if (personality === 'ISFJ'){
-		return 'ISFJ.svg'
-	} else if (personality === 'ISFP'){
-		return 'ISFP.svg'
-	} else if (personality === 'ISTJ'){
-		return 'ISTJ.svg'
-	} else if (personality === 'ISTP'){
-		return 'ISTP.svg'
-	}
-}
+		personality: string;
+		compatibility: string;
+		description: string;
+	};
 </script>
-  
+
   <div class="enemy-grid-item">
     <div class="image-container">
-	<img src={getImageSource(enemy.personality)} alt={enemy.title} />
+	<img src={`${enemy.personality}.svg`} alt={enemy.title} />
     </div>
     <div class="enemy-information">
       <div class="enemy-details">
@@ -60,8 +22,7 @@
     </div>
   </div>
 
-  <style>
-
+<style>
 	.enemy-grid-item {
 		display: flex;
 		flex-basis: 100%;
@@ -69,7 +30,7 @@
 		border-radius: 10%;
 		background-color: #201254;
 		box-sizing: border-box;
-        position: relative;
+		position: relative;
 	}
 
 	.image-container {
