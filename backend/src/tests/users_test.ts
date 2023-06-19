@@ -11,7 +11,7 @@ Deno.test("User register", async () => {
 		body: JSON.stringify({
 			username: "test_user-" + Math.floor(Math.random() * 1000),
 			password: "test_user",
-			personality: "JKLÖ",
+			personality: "ENTP",
 		}),
 	});
 	body = await res.json();
@@ -52,7 +52,7 @@ Deno.test("User update", async () => {
 			Authorization: tester.token,
 		},
 		body: JSON.stringify({
-			personality: "ADSF",
+			personality: "ESFP",
 		}),
 	});
 	body = await res.json();
@@ -101,9 +101,13 @@ Deno.test("User get (enemy list)", async () => {
 		headers: { Authorization: tester.token },
 	});
 	body = await res.json();
-
 	assertEquals(res.status, 200);
 	assertNotEquals(body.length, 0);
+
+	for (let user of body) {
+		assertNotEquals(user.compatibility, undefined);
+		assertEquals(user.compatibility > 0 && user.compatibility < 100, true);
+	} 
 });
 
 Deno.test("User get (enemy list)", async () => {
@@ -114,6 +118,11 @@ Deno.test("User get (enemy list)", async () => {
 
 	assertEquals(res.status, 200);
 	assertNotEquals(body.length, 0);
+
+    for (let user of body) {
+			assertNotEquals(user.compatibility, undefined);
+			assertEquals(user.compatibility > 0 && user.compatibility < 100, true);
+	} 
 });
 
 Deno.test("User get (single)", async () => {

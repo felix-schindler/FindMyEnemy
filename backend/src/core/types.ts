@@ -16,12 +16,14 @@ export type User = {
 	username: string;
 	password: string;
 	personality: string;
+	compatibility?: number;
 };
 
 export type ClientUser = {
 	id: number;
 	username: string;
 	personality: string;
+	compatibility?: number;
 };
 
 export type AuthUser = ClientUser & {

@@ -19,6 +19,7 @@ type Base = {
 export type User = Base & {
 	username: string;
 	personality: string;
+	compatibility?: number;
 };
 
 export type AuthUser = User & {

@@ -109,15 +109,17 @@ export default class UserController extends AuthController {
 		WHERE pt1."type" = $1 OR pt2."type" = $1;
 		`;
 
-		console.log(user.personality);
-		
 		const compatibilityMap = new Map<string, number>();
 		
 		const compatibilities = await db.queryObject<{ personality_type: string, percentage: number }>(compatibilityQuery, [user.personality]);
 		
-		// Add compatibility percentage to each user
+		for (let compatibility of compatibilities.rows) {
+			compatibilityMap.set(compatibility.personality_type, compatibility.percentage);
+		}
+
+		
 		for (let user of users) {
-		user.compatibility = compatibilityMap.get(user.personality) || 0;
+			user.compatibility = compatibilityMap.get(user.personality) || 0;
 		}
 
 		return c.json<ClientUser[]>(users);
