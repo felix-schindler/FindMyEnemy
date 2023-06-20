@@ -37,8 +37,8 @@ export default class ChallengeController extends Controller {
 			WHERE c.user_1_id = $1 OR c.user_2_id = $1;
 		`;
 
-		// @ts-ignore abc
 		const challenges: ClientChallenge[] =
+			// @ts-ignore It works.
 			(await db.queryObject(query, [user.id])).rows[0].challenges;
 		return c.json<ClientChallenge[]>(challenges);
 	}
