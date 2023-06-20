@@ -4,7 +4,7 @@
 	export let user: User;
 </script>
 
-<div class="grid-item">
+<a href="/enemy-account/{user.id}" class="grid-item">
 	<img src={`${user.personality}.svg`} alt={user.username} />
 	<div class="user-information">
 		<div class="user-details">
@@ -13,7 +13,7 @@
 		</div>
 		<p>{user.personality}</p>
 	</div>
-</div>
+</a>
 
 <style>
 	.grid-item {

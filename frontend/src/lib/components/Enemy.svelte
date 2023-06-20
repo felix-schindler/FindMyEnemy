@@ -4,7 +4,7 @@
 	export let enemy: User;
 </script>
 
-<div class="enemy-grid-item">
+<a href="/enemy-account/{enemy.id}" class="enemy-grid-item">
 	<div class="image-container">
 		<img src={`${enemy.personality}.svg`} alt={enemy.username} />
 	</div>
@@ -16,9 +16,14 @@
 		<p>{enemy.personality}</p>
 		<!-- <p>{enemy.description}</p> -->
 	</div>
-</div>
+</a>
 
 <style>
+	a.enemy-grid-item {
+		text-decoration: none;
+		color: inherit;
+	}
+
 	.enemy-grid-item {
 		display: flex;
 		flex-basis: 100%;
