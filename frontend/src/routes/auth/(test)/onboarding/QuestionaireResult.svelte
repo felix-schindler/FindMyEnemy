@@ -1,7 +1,4 @@
 <script lang="ts">
-	import '$lib/style/questionaire-result.css';
-	import enfjimg from '$lib/images/enfj.png';
-
 	export let personality: string;
 </script>
 
@@ -10,7 +7,7 @@
 		<h2>Looks like your type is</h2>
 	</div>
 	<div>
-		<img id="typeImage" src={enfjimg} alt="Type" />
+		<img id="typeImage" src="/{personality}.svg" alt="Type" />
 	</div>
 	<div>
 		<h1>{personality}</h1>
