@@ -49,7 +49,7 @@
 		justify-content: space-between;
 	}
 
-	.user-information h3,
+	/* .user-information h3, */
 	.user-information p {
 		margin: 0;
 	}

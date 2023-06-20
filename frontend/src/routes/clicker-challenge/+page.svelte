@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount, onDestroy, afterUpdate } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 	import AccountButton from '$lib/components/AccountButton.svelte';
 	import BackButton from '$lib/components/BackButton.svelte';
 
@@ -37,10 +37,6 @@
 
 	onMount(() => {
 		startTimer();
-	});
-
-	afterUpdate(() => {
-		clickButton = document.querySelector('#clickButton');
 	});
 
 	onDestroy(() => {

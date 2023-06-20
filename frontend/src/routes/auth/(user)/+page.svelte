@@ -20,7 +20,7 @@
 
 		if (res instanceof Status) {
 			// Error occured, show message
-			msg = `${res.status}: ${res.message}`;
+			msg = `${res.status}: ${res.msg}`;
 		} else {
 			// Login successful, set user and redirect
 			$authStore = res;
@@ -55,6 +55,10 @@
 		font-weight: normal;
 		text-decoration: none;
 		color: #e3dcff;
+	}
+
+	a:hover {
+		text-decoration: underline;
 	}
 
 	div.il {

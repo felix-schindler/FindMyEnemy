@@ -1,11 +1,11 @@
 export class Status {
 	status: number;
-	message: string;
+	msg: string;
 	raw: unknown;
 
 	public constructor(status: number, message: string, raw: unknown) {
 		this.status = status;
-		this.message = message;
+		this.msg = message;
 		this.raw = raw;
 	}
 }
@@ -45,6 +45,22 @@ export type UserAnswer = {
 };
 
 export type Challenge = {
+	id: number;
+	user_1: {
+		id: number;
+		username: string;
+		score: number;
+		won: boolean;
+	};
+	user_2: {
+		id: number;
+		username: string;
+		score: number;
+		won: boolean;
+	};
+};
+
+export type DBChallenge = {
 	id: number;
 	user_1_id: number;
 	user_2_id: number;

@@ -1,9 +1,16 @@
 import { get } from 'svelte/store';
-import type { AuthUser, Challenge, Question, Status, User, UserAnswer } from './types';
+import {
+	Status,
+	type AuthUser,
+	type Challenge,
+	type Question,
+	type User,
+	type UserAnswer
+} from './types';
 import { authStore } from './stores';
 
-// const BASE = 'http://localhost/api';
-const BASE = 'http://localhost:8000';
+const BASE = 'http://localhost/api';
+// const BASE = 'http://localhost:8000';
 
 type RequestMap = {
 	'/users': {
@@ -117,7 +124,7 @@ type RequestMap = {
 			reponse: Challenge;
 		};
 	};
-	'/challenge/:id': {
+	'/challenges/:id': {
 		GET: {
 			query: {
 				id: number;
@@ -203,11 +210,19 @@ export async function req<
 			},
 			body: JSON.stringify(body)
 		});
-		return (await res.json()) as T | Status;
+
+		const resBody = await res.json();
+
+		if (resBody.status && resBody.message) {
+			console.log('Returning status');
+			return new Status(resBody.status, resBody.message, resBody.raw);
+		}
+
+		return resBody as T;
 	} catch (e: any) {
 		return {
 			status: 418,
-			message: e.message ?? 'Something unexpected happened, please try again.',
+			msg: e.message ?? 'Something unexpected happened, please try again.',
 			raw: e
 		};
 	}

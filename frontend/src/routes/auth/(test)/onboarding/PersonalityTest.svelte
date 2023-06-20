@@ -33,7 +33,7 @@
 		const res = await req('/questions', 'GET');
 
 		if (res instanceof Status) {
-			msg = `${res.status}: ${res.message}`;
+			msg = `${res.status}: ${res.msg}`;
 		} else {
 			//Set questions
 			questions = res;
@@ -46,7 +46,7 @@
 
 		// Check for error -> show message ; else: set personality
 		if (res instanceof Status) {
-			msg = `${res.status}: ${res.message}`;
+			msg = `${res.status}: ${res.msg}`;
 		} else {
 			personality = res.personality;
 		}
