@@ -7,6 +7,7 @@
 	import ChevronRight from '$lib/images/moredetails.svg';
 
 	import { Status, type User } from '$lib/core/types';
+	import { authStore } from '$lib/core/stores';
 
 	let enemies: User[];
 
@@ -33,7 +34,7 @@
 	</div>
 
 	<div class="top-enemies">
-		<h1>Hi Blablo</h1>
+		<h1>Hi {$authStore.username}</h1>
 		<a href="/top-enemies" class="moredetails-button">
 			<h2>Discover top enemies</h2>
 			<img src={ChevronRight} class="moredetails-icon" alt="Back" />
@@ -112,9 +113,9 @@
 		gap: 2rem;
 	}
 
-	.moredetails-icon img {
+	/* .moredetails-icon img {
 		width: 8px;
 		height: 12px;
-		/* margin-left: var(--margin20); */
-	}
+		// margin-left: var(--margin20);
+	} */
 </style>
