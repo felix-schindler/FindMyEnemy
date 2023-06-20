@@ -1,6 +1,7 @@
 <script lang="ts">
 	import PersonalityTest from './PersonalityTest.svelte';
 	import QuestionaireResult from './QuestionaireResult.svelte';
+	import NextIcon from '$lib/images/next-icon.svg';
 
 	let screen = 3,
 		personality: string;
@@ -18,7 +19,7 @@
 			<p>Find your enemies before they find you</p>
 			<h1>find my <br /> enemy</h1>
 			<button class="mainBtn" on:click={handleNext}>
-				<img src="/src/lib/images/next-icon.svg" alt="Next" />
+				<img src={NextIcon} alt="Next" />
 			</button>
 		</div>
 	</div>
