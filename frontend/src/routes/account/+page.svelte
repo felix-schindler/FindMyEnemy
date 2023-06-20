@@ -11,30 +11,62 @@
 	import { req } from '$lib/core/api';
 	import { Status } from '$lib/core/types';
 	import { authStore } from '$lib/core/stores';
+	import { onMount } from 'svelte';
 
-	let username = '';
+	let username: string;
 	let editing = false;
 
 	async function saveUsername() {
 		const res = await req('/users/:id', 'PATCH', { username }, { id: $authStore.id });
 
-		if (res instanceof Status) {
-			// TODO: Handle error
+		if (res.status === 200) {
+			// Update authStore with new username
+			// @ts-ignore
+			authStore.set(res.raw.user);
 		} else {
+			// TODO: Handle error
 		}
+
 		editing = false;
 	}
-	function deleteAccount() {
+
+	async function deleteAccount() {
 		// Logic for deleting the account
+		const res = await req('/users/:id', 'DELETE', undefined, { id: $authStore.id });
+
+		if (res.status === 200) {
+			logOut();
+		} else {
+			// TODO: Handle error
+		}
 	}
-	function changePassword() {
+
+	async function changePassword() {
 		// Logic for changing the password
+		const password = prompt('Enter your new password');
+
+		if (password) {
+			const res = await req('/users/:id', 'PATCH', { password }, { id: $authStore.id });
+
+			if (res.status === 200) {
+				// @ts-ignore Update authStore
+				authStore.set(res.raw.user);
+			} else {
+				// TODO: Handle error
+			}
+		} else {
+			// TODO: Show error
+		}
 	}
 	function logOut() {
 		// Logic for logging out
 		// @ts-ignore
 		authStore.set(null);
 	}
+
+	onMount(() => {
+		username = $authStore.username;
+	});
 </script>
 
 <div>
