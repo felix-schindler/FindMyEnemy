@@ -23,6 +23,10 @@
 		}
 	}
 
+	async function addFav() {
+		console.error('Not implemented');
+	}
+
 	onMount(async () => {
 		await getUser();
 	});
@@ -43,10 +47,10 @@
 			<p id="rate">You have an incompatible rate of 89%</p>
 		</div>
 		<div id="buttonsContainer">
-			<a class="mainBtn" href="/clicker-challenge" style="flex-grow: 1;">
+			<a class="mainBtn" href="/clicker-challenge?user={user.id}" style="flex-grow: 1;">
 				<span>Challenge</span>
 			</a>
-			<button class="mainBtn" style="margin-left: 1.25rem;">
+			<button type="button" on:click={addFav} class="mainBtn" style="margin-left: 1.25rem;">
 				<img src={AddEnemyIcon} alt="Add Enemy" style="overflow: visible" />
 			</button>
 		</div>

@@ -2,6 +2,12 @@
 	import { onMount, onDestroy } from 'svelte';
 	import AccountButton from '$lib/components/AccountButton.svelte';
 	import BackButton from '$lib/components/BackButton.svelte';
+	import { page } from '$app/stores';
+	import { goto } from '$app/navigation';
+	import { req } from '$lib/core/api';
+	import { Status } from '$lib/core/types';
+
+	let opponent: number = Number($page.url.searchParams.get('user') ?? '');
 
 	let timeLeft = 10;
 	let clickCount = 0;
@@ -15,8 +21,16 @@
 		}
 	}
 
-	function updateTimer() {
-		const minutes = Math.floor(timeLeft / 60);
+	async function saveScore() {
+		const res = await req('/challenges', 'POST', { score: clickCount, challengee: opponent });
+
+		if (res instanceof Status) {
+			// TODO: Handle error
+		} else {
+		}
+	}
+
+	async function updateTimer() {
 		let seconds: number = timeLeft % 60;
 		seconds = seconds < 10 ? Number(`0${seconds}`) : seconds;
 
@@ -27,6 +41,7 @@
 			if (clickButton) {
 				clickButton.disabled = true;
 			}
+			await saveScore();
 			isOverlayVisible = true;
 		}
 	}
@@ -35,7 +50,10 @@
 		timerId = setInterval(updateTimer, 1000) as unknown as number;
 	}
 
-	onMount(() => {
+	onMount(async () => {
+		if (!opponent) {
+			await goto('/');
+		}
 		startTimer();
 	});
 
@@ -73,8 +91,10 @@
 	<div class="overlay">
 		<div class="overlay-content">
 			<h2 style="color: black">Timer abgelaufen!</h2>
-			<p style="color: black">Ergebnis: {clickCount} Clicks</p>
-			<a href="/enemy-account" style="margin: 1rem " class="mainBtn"><span>Weiter</span></a>
+			<p style="color: black">Ergebnis: {clickCount} Clicks ({clickCount / 10} CPS)</p>
+			<a href="/enemy-account/{opponent}" style="margin: 1rem " class="mainBtn"
+				><span>Weiter</span></a
+			>
 		</div>
 	</div>
 {/if}
