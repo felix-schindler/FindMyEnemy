@@ -1,57 +1,41 @@
 <script lang="ts">
 	import UserIcon from '$lib/images/user.svg';
 	import CrownIcon from '$lib/images/crown.svg';
-	import { onMount } from 'svelte';
 	import type { Challenge } from '$lib/core/types';
-	import { authStore } from '$lib/core/stores';
 
 	export let challenge: Challenge;
-
-	let ownScore =
-		challenge.user_1_id == $authStore.id ? challenge.user_1_score : challenge.user_2_score;
-	let enemyScore =
-		challenge.user_1_id == $authStore.id ? challenge.user_2_score : challenge.user_1_score;
-	let winner = ownScore > enemyScore;
 </script>
 
 <div class="challenge">
 	<div class="user">
-		{#if winner}
-			{#if window.innerWidth < 991}
-				<div class="crown">
-					<img src={CrownIcon} alt="crown" />
-				</div>
-			{:else}
-				<p>Winner</p>
-			{/if}
+		{#if challenge.user_1.won}
+			<div class="crown">
+				<img src={CrownIcon} alt="crown" />
+			</div>
 		{/if}
 		<div>
 			<img src={UserIcon} alt="user" />
 		</div>
 		<div class="text">
-			<p>{$authStore.username}</p>
-			<p>{ownScore}</p>
+			<p>{challenge.user_1.username}</p>
+			<p>{challenge.user_1.score}</p>
 		</div>
 	</div>
 	<div class="vs">
 		<p>VS</p>
 	</div>
 	<div class="enemy">
-		{#if !winner}
-			{#if window.innerWidth > 991}
-				<div class="crown">
-					<img src={CrownIcon} alt="crown" />
-				</div>
-			{:else}
-				<p>Loser</p>
-			{/if}
+		{#if challenge.user_2.won}
+			<div class="crown">
+				<img src={CrownIcon} alt="crown" />
+			</div>
 		{/if}
 		<div>
 			<img src={UserIcon} alt="user" />
 		</div>
 		<div class="text">
-			<p>Enemyname</p>
-			<p>{enemyClicks}</p>
+			<p>{challenge.user_2.username}</p>
+			<p>{challenge.user_2.score}</p>
 		</div>
 	</div>
 </div>

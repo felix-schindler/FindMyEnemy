@@ -1,48 +1,26 @@
 <script lang="ts">
 	import { req } from '$lib/core/api';
 	import { onMount } from 'svelte';
-	import { writable } from 'svelte/store';
 
 	import AccountButton from '$lib/components/AccountButton.svelte';
 	import BackButton from '$lib/components/BackButton.svelte';
 	import ChallengeResult from './ChallengeResult.svelte';
+	import { Status, type Challenge } from '$lib/core/types';
 
-	let userClicks = '12';
-	let enemyClicks = '1';
-	let enemyname: string;
+	let challenges: Challenge[];
 
-	async function getClickAmountUser() {
-		const res = await req('/challenge/:id', 'GET');
+	async function getChallenges() {
+		const res = await req('/challenges', 'GET');
 
-		if (res) {
-			return 'Succeeded';
+		if (res instanceof Status) {
+			// TODO: Handle error
 		} else {
-			throw new Error('Could not fetch Challenge ID');
+			challenges = res;
 		}
 	}
 
-	const showUserCrown = writable(false);
-	const showEnemyCrown = writable(false);
-
-	function updateCrownDisplay() {
-		const isMobileWidth = window.innerWidth <= 991;
-
-		if (isMobileWidth) {
-			showUserCrown.set(userClicks > enemyClicks);
-			showEnemyCrown.set(enemyClicks > userClicks);
-		} else {
-			showUserCrown.set(false);
-			showEnemyCrown.set(false);
-		}
-	}
-
-	onMount(() => {
-		updateCrownDisplay();
-		window.addEventListener('resize', updateCrownDisplay);
-
-		return () => {
-			window.removeEventListener('resize', updateCrownDisplay);
-		};
+	onMount(async () => {
+		getChallenges();
 	});
 </script>
 
@@ -54,7 +32,15 @@
 
 	<h1>Challenge History</h1>
 	<div class="container">
-		<ChallengeResult />
+		{#if !challenges}
+			<p>Loading...</p>
+		{:else if challenges.length == 0}
+			<p>No challenges yet</p>
+		{:else}
+			{#each challenges as challenge}
+				<ChallengeResult {challenge} />
+			{/each}
+		{/if}
 	</div>
 </div>
 
