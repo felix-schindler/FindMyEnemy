@@ -116,7 +116,7 @@ h1 {
 	}
 }
 
-input {
+input:not([type='checkbox']) {
 	padding: 30px;
 	padding-left: 40px;
 	border: none;
