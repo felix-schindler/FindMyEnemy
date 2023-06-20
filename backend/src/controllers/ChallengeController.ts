@@ -38,7 +38,8 @@ export default class ChallengeController extends Controller {
 		`;
 
 		// @ts-ignore abc
-		const challenges: ClientChallenge[] = (await db.queryObject(query, [user.id])).rows[0].challenges;
+		const challenges: ClientChallenge[] =
+			(await db.queryObject(query, [user.id])).rows[0].challenges;
 		return c.json<ClientChallenge[]>(challenges);
 	}
 
@@ -55,6 +56,7 @@ export default class ChallengeController extends Controller {
 			[user_self, challengee, score],
 		)).rows[0];
 
+		// TODO: Return status
 		return c.json<Challenge>({
 			id: insert.id,
 			user_1_id: user_self,

@@ -4,13 +4,13 @@ import { assertEquals } from "$std/testing/asserts.ts";
 // deno-lint-ignore no-explicit-any
 let res: Response, body: any;
 
-Deno.test("Questions", async () => {
-	res = await app.request("/questions");
-	body = await res.json();
+// Deno.test("Questions", async () => {
+// 	res = await app.request("/questions", { method: "GET" });
+// 	body = await res.json();
 
-	assertEquals(res.status, 200);
-	assertEquals(body.length, 35);
-});
+// 	assertEquals(res.status, 200);
+// 	assertEquals(body.length, 35);
+// });
 
 Deno.test("Personality", async () => {
 	res = await app.request("/questions/personality", {

@@ -1,6 +1,6 @@
 import { Client } from "postgres";
 
-export default class Database extends Client {
+class Database extends Client {
 	public static shared = new Database();
 
 	private constructor() {
