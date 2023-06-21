@@ -58,12 +58,45 @@ export default class QuestionController extends Controller {
 			sums[a.category]++;
 		});
 
-		// Get the 4 letters with the highest scores
-		const personality = Object.entries(sums)
-			.sort((a, b) => b[1] - a[1])
-			.slice(0, 4)
-			.map((entry) => entry[0])
-			.join("");
+		/*
+			There are 4 pairs
+			E or I
+			S or N
+			T or F
+			J or P
+			First Character is either E or I, depending on which is higher
+			Second S or N, depending on which is higher
+			and so on ...
+
+			Get the personality from the sums
+		*/
+
+		let personality = "";
+
+		if (sums.E > sums.I) {
+			personality += "E";
+		} else {
+			personality += "I";
+		}
+
+		if (sums.S > sums.N) {
+			personality += "S";
+		} else {
+			personality += "N";
+		}
+
+		if (sums.T > sums.F) {
+			personality += "T";
+		} else {
+			personality += "F";
+		}
+
+		if (sums.J > sums.P) {
+			personality += "J";
+		} else {
+			personality += "P";
+		}
+
 
 		// Return the personality
 		return c.json({ personality });
