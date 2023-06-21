@@ -3,7 +3,7 @@
 	import QuestionaireResult from './QuestionaireResult.svelte';
 	import NextIcon from '$lib/images/next-icon.svg';
 
-	let screen = 3,
+	let screen = 1,
 		personality: string;
 
 	function handleNext() {
