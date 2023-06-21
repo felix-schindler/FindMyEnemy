@@ -206,7 +206,7 @@ export async function req<
 			method: String(method),
 			headers: {
 				'Content-Type': 'application/json',
-				Authorization: get(authStore).token
+				Authorization: get(authStore)?.token
 			},
 			body: JSON.stringify(body)
 		});
@@ -214,7 +214,7 @@ export async function req<
 		const resBody = await res.json();
 
 		if (resBody.status && resBody.message) {
-			console.log('Returning status');
+			console.debug('Returning status');
 			return new Status(resBody.status, resBody.message, resBody.raw);
 		}
 
