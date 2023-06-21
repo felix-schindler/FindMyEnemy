@@ -79,7 +79,6 @@
 	<button
 		class="mainBtn"
 		id="clickButton"
-		style="margin-top:2.5rem"
 		on:click={countClicks}
 		disabled={timeLeft === 0 || isOverlayVisible}
 	>
@@ -90,11 +89,11 @@
 {#if isOverlayVisible}
 	<div class="overlay">
 		<div class="overlay-content">
-			<h2 style="color: black">Timer abgelaufen!</h2>
-			<p style="color: black">Ergebnis: {clickCount} Clicks ({clickCount / 10} CPS)</p>
-			<a href="/enemy-account/{opponent}" style="margin: 1rem " class="mainBtn"
-				><span>Weiter</span></a
-			>
+			<h2>Time is up</h2>
+			<p>Result: {clickCount} Clicks ({clickCount / 10} CPS)</p>
+			<a href="/enemy-account/{opponent}" class="mainBtn">
+				<span>Continue</span>
+			</a>
 		</div>
 	</div>
 {/if}
@@ -124,20 +123,40 @@
 	}
 
 	.overlay-content {
-		background-color: #fff;
+		color: black;
+		background-color: white;
 		padding: 1.25rem;
 		border-radius: 0.7rem;
 		text-align: center;
 	}
 
+	button#clickButton {
+		margin-top: 2.5rem;
+		transition: scale 200ms;
+	}
+
+	button#clickButton:active {
+		scale: 0.975;
+	}
+
+	a.mainBtn {
+		margin: 1rem;
+	}
+
 	.clickerCircle {
-		height: 40vw;
-		width: 40vw;
+		height: 35vw;
+		width: 35vw;
 		font-size: 3rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
 	}
 
 	@media (max-width: 480px) {
 		.clickerCircle {
+			height: 80vw;
+			width: 80vw;
 			font-size: 2rem;
 		}
 	}
