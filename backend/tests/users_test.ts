@@ -1,6 +1,6 @@
-import { app } from "../main.ts";
+import { app } from "../src/main.ts";
 import { assertEquals, assertNotEquals } from "$std/testing/asserts.ts";
-import { AuthUser } from "../core/types.ts";
+import { AuthUser } from "../src/core/types.ts";
 
 // deno-lint-ignore no-explicit-any
 let res: Response, body: any, tester: AuthUser;

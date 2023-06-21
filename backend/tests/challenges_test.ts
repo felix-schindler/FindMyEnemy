@@ -1,10 +1,10 @@
-import { app } from "../main.ts";
+import { app } from "../src/main.ts";
 import {
 	assertEquals,
 	assertNotEquals,
 	assertObjectMatch,
 } from "$std/testing/asserts.ts";
-import { type AuthUser, type Challenge, Status } from "../core/types.ts";
+import { type AuthUser, type Challenge, Status } from "../src/core/types.ts";
 
 // #region Setup
 // deno-lint-ignore no-explicit-any

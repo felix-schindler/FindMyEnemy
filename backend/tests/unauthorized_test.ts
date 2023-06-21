@@ -1,8 +1,8 @@
 import { assertEquals, assertInstanceOf } from "$std/testing/asserts.ts";
 
 import { HTTPException } from "hono/http-exception.ts";
-import HttpError from "../core/HttpError.ts";
-import type { Status } from "../core/types.ts";
+import HttpError from "../src/core/HttpError.ts";
+import type { Status } from "../src/core/types.ts";
 
 Deno.test("HttpError status code", async () => {
 	const tester = new HttpError(401);
@@ -30,7 +30,7 @@ Deno.test("HttpError status code and message", async () => {
 	assertEquals(body.msg, "Unauthorized");
 });
 
-import { app } from "../main.ts";
+import { app } from "../src/main.ts";
 
 Deno.test("Create challenge fails with 401", async () => {
 	const res = await app.request("/challenges", {

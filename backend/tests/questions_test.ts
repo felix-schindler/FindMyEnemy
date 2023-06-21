@@ -1,4 +1,4 @@
-import { app } from "../main.ts";
+import { app } from "../src/main.ts";
 import { assertEquals } from "$std/testing/asserts.ts";
 
 // deno-lint-ignore no-explicit-any
