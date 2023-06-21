@@ -31,6 +31,8 @@
 	}
 
 	async function deleteAccount() {
+		if (!confirm('Are you sure you want to delete your account?')) return;
+
 		// Logic for deleting the account
 		const res = await req('/users/:id', 'DELETE', undefined, { id: $authStore.id });
 
