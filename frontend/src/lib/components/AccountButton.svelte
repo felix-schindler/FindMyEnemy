@@ -15,7 +15,7 @@
 	}
 
 	a {
-		position: fixed;
+		position: absolute;
 		top: 5%;
 		right: 1.5rem;
 		transform: translateY(-50%);
