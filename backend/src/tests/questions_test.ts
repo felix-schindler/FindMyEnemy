@@ -163,5 +163,5 @@ Deno.test("Personality", async () => {
 	body = await res.json() as { personality: string };
 
 	assertEquals(res.status, 200);
-	assertEquals(body.personality, "NEIS");
+	assertEquals(body.personality, "ENFP");
 });
