@@ -100,9 +100,6 @@
 		justify-content: center;
 		align-items: center;
 		height: auto;
-	}
-
-	#enemyImageContainer > img {
 		max-width: 100%;
 		max-height: 100%;
 		border-radius: 1rem;
