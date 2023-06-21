@@ -38,6 +38,7 @@
 		<p>Token: <span id="u-token"></span></p>
 
 		<button type="button" onclick="getPersonality()">Personality</button>
+		<button type="button" onclick="getChallenges()">Challenges</button>
 	</div>
 </body>
 
@@ -46,7 +47,8 @@
 
 	const endpoints = Object.freeze({
 		login: "/users/login",
-		personality: "/questions/personality"
+		personality: "/questions/personality",
+		challenges: "/challenges",
 	})
 
 	const authSection = document.getElementById("login")
@@ -93,6 +95,38 @@
 			userSection.style.display = "block"
 
 		}
+	}
+
+	async function getChallenges() {
+		const res = await fetch(endpoints.challenges, { headers: { Authorization: user.token } })
+		const body = await res.json()
+
+		if (body.status) {
+			console.error(body)
+		} else {
+			console.debug("Challenges", body)
+			challenges = body
+
+			// Display challenges
+			challenges.forEach(challenge => {
+				const challengeEl = document.createElement("div")
+				challengeEl.innerHTML = `
+					<h3>${challenge.id}</h3>
+					<p>${challenge.user_1.username} VS ${challenge.user_2.username}</p>
+					<p>Won ${challenge.user_1.won} ${challenge.user_2.won}</p>
+					<p><button type="button" onclick="getChallenge(${challenge.id})">Get challenge</button></p>
+				`
+				userSection.appendChild(challengeEl)
+			})
+		}
+	}
+
+	async function getChallenge(id) {
+		if (!id) console.error("ID is required")
+
+		const res = await fetch(`${endpoints.challenges}/${id}`, { headers: { Authorization: user.token } })
+		const body = await res.json()
+		console.log(body)
 	}
 
 	async function getPersonality() {

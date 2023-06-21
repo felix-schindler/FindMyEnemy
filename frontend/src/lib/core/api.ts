@@ -5,7 +5,8 @@ import {
 	type Challenge,
 	type Question,
 	type User,
-	type UserAnswer
+	type UserAnswer,
+	type DBChallenge
 } from './types';
 import { authStore } from './stores';
 
@@ -121,7 +122,7 @@ type RequestMap = {
 				score: number;
 				challengee: number;
 			};
-			reponse: Challenge;
+			reponse: Status;
 		};
 	};
 	'/challenges/:id': {
@@ -131,6 +132,13 @@ type RequestMap = {
 			};
 			body: never;
 			response: Challenge;
+		};
+		PUT: {
+			query: {
+				id: number;
+			};
+			body: DBChallenge;
+			response: Status;
 		};
 		PATCH: {
 			query: {

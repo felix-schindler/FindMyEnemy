@@ -70,6 +70,7 @@ Log.info("Hono", "Registering challenge routes");
 app.get("/challenges", ChallengeController.shared.getList);
 app.post("/challenges", ChallengeController.shared.create);
 app.get("/challenges/:id", ChallengeController.shared.get);
+app.put("/challenges/:id", ChallengeController.shared.replace);
 app.patch("/challenges/:id", ChallengeController.shared.update);
 app.delete("/challenges/:id", ChallengeController.shared.delete);
 

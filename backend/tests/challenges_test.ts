@@ -2,13 +2,13 @@ import { app } from "../src/main.ts";
 import {
 	assertEquals,
 	assertNotEquals,
-	assertObjectMatch,
+	// assertObjectMatch,
 } from "$std/testing/asserts.ts";
 import { type AuthUser, type Challenge, Status } from "../src/core/types.ts";
 
 // #region Setup
 // deno-lint-ignore no-explicit-any
-let res: Response, body: any, tester: Challenge;
+let res: Response, body: any, tester: string;
 
 const USER_1 = await ((await app.request("/users/login", {
 	method: "POST",
@@ -50,14 +50,10 @@ Deno.test("Create challenge", async () => {
 	body = await res.json() as Challenge;
 
 	assertEquals(res.status, 200);
-	assertNotEquals(body.id, undefined);
-	assertNotEquals(body.id, 0);
-	assertEquals(body.user_1_id, USER_1.id);
-	assertEquals(body.user_2_id, NEW_Challenge.challengee);
-	assertEquals(body.user_1_score, NEW_Challenge.score);
-	assertEquals(body.user_2_score, 0);
+	assertEquals(body.status, 200);
+	assertEquals(body.msg, "Challenge created");
 
-	tester = body;
+	tester = body.raw;
 });
 
 Deno.test("List challenges", async () => {
@@ -73,21 +69,25 @@ Deno.test("List challenges", async () => {
 });
 
 Deno.test("Get challenge", async () => {
-	res = await app.request(`/challenges/${tester.id}`, {
+	res = await app.request(`/challenges/${tester}`, {
 		headers: {
 			Authorization: USER_1.token,
 		},
 	});
 	body = await res.json() as Challenge;
+	console.log(body);
 
 	assertEquals(res.status, 200);
-	assertObjectMatch(body, tester);
+	assertNotEquals(body.id, undefined);
+	assertNotEquals(body.user_1, undefined);
+	assertNotEquals(body.user_2, undefined);
+	// assertObjectMatch(body, tester);
 });
 
 Deno.test("Update challenge", async () => {
 	const score = 10;
 
-	res = await app.request(`/challenges/${tester.id}`, {
+	res = await app.request(`/challenges/${tester}`, {
 		method: "PATCH",
 		headers: {
 			Authorization: USER_2.token,
@@ -102,7 +102,7 @@ Deno.test("Update challenge", async () => {
 });
 
 Deno.test("Delete challenge", async () => {
-	res = await app.request(`/challenges/${tester.id}`, {
+	res = await app.request(`/challenges/${tester}`, {
 		method: "DELETE",
 		headers: {
 			Authorization: USER_1.token,
