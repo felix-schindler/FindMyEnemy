@@ -46,17 +46,13 @@
 	}
 
 	@media (min-width: 768px) {
-		div {
-			width: 20%;
-			margin-top: 100px;
-			display: flex;
-			flex-direction: column;
-			gap: 15px;
+		div.layout {
+			align-items: center;
+			justify-content: center;
 		}
 	}
 
 	div button {
-		margin-top: 20px;
-		margin-left: 0;
+		margin-top: 1.25rem;
 	}
 </style>
