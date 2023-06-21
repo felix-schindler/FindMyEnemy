@@ -24,9 +24,8 @@
 	async function saveScore() {
 		const res = await req('/challenges', 'POST', { score: clickCount, challengee: opponent });
 
-		if (res instanceof Status) {
+		if (res.status !== 200) {
 			// TODO: Handle error
-		} else {
 		}
 	}
 
