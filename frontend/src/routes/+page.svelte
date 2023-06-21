@@ -9,7 +9,8 @@
 	import { Status, type User } from '$lib/core/types';
 	import { authStore } from '$lib/core/stores';
 
-	let enemies: User[];
+	let topEnemies: User[];
+	let mortalEnemies: User[];
 
 	async function getUsers() {
 		const res = await req('/users', 'GET');
@@ -17,7 +18,8 @@
 		if (res instanceof Status) {
 			console.error(res);
 		} else {
-			enemies = res;
+			topEnemies = res.slice(0, 6);
+			mortalEnemies = res.slice(-6);
 		}
 	}
 
@@ -40,14 +42,16 @@
 			<img src={ChevronRight} class="moredetails-icon" alt="Back" />
 		</a>
 
-		<div class="grid-container">
-			{#if enemies && enemies.length > 0}
-				{#each enemies as user}
-					<DiscoverEnemy {user} />
-				{/each}
-			{:else}
-				<p>Loading...</p>
-			{/if}
+		<div style="overflow-x: auto;">
+			<div class="grid-container">
+				{#if topEnemies && topEnemies.length > 0}
+					{#each topEnemies as user}
+						<DiscoverEnemy {user} />
+					{/each}
+				{:else}
+					<p>Loading...</p>
+				{/if}
+			</div>
 		</div>
 	</div>
 
@@ -58,8 +62,8 @@
 		</a>
 
 		<div class="grid-container">
-			{#if enemies && enemies.length > 0}
-				{#each enemies as user}
+			{#if mortalEnemies && mortalEnemies.length > 0}
+				{#each mortalEnemies as user}
 					<DiscoverEnemy {user} />
 				{/each}
 			{:else}
