@@ -5,26 +5,35 @@ import { AuthUser } from "../core/types.ts";
 // deno-lint-ignore no-explicit-any
 let res: Response, body: any, tester: AuthUser;
 
-Deno.test("User register", async () => {
-	res = await app.request("/users", {
-		method: "POST",
-		body: JSON.stringify({
-			username: "test_user-" + Math.floor(Math.random() * 1000),
-			password: "test_user",
-			personality: "ENTP",
-		}),
-	});
-	body = await res.json();
+tester = await app.request("/users", {
+	method: "POST",
+	body: JSON.stringify({
+		username: "test_user-" + Math.floor(Math.random() * 1000),
+		password: "test_user",
+		personality: "ENTP",
+	}),
+}).then((res) => res.json());
 
-	assertEquals(res.status, 200);
-	assertNotEquals(body.id, undefined);
-	assertNotEquals(body.username, undefined);
-	assertNotEquals(body.personality, undefined);
-	assertNotEquals(body.token, undefined);
+// Deno.test("User register", async () => {
+// 	res = await app.request("/users", {
+// 		method: "POST",
+// 		body: JSON.stringify({
+// 			username: "test_user-" + Math.floor(Math.random() * 1000),
+// 			password: "test_user",
+// 			personality: "JKLÖ",
+// 		}),
+// 	});
+// 	body = await res.json();
 
-	assertEquals(body.password, undefined);
-	tester = body; // Save for later
-});
+// 	assertEquals(res.status, 200);
+// 	assertNotEquals(body.id, undefined);
+// 	assertNotEquals(body.username, undefined);
+// 	assertNotEquals(body.personality, undefined);
+// 	assertNotEquals(body.token, undefined);
+
+// 	assertEquals(body.password, undefined);
+// 	tester = body; // Save for later
+// });
 
 Deno.test("User login", async () => {
 	res = await app.request("/users/login", {

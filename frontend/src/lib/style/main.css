@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,500;0,700;1,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,700;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
 
 :root {
 	--primary: #201254;
@@ -22,7 +21,7 @@
 	/*margin left right or margin bottom for titles*/
 	--margin40: 2.5rem;
 	/*margin between elements (spacing)*/
-	--margin20:1.25rem;
+	--margin20: 1.25rem;
 }
 
 html * {
@@ -30,34 +29,41 @@ html * {
 }
 
 h1 {
-	/* margin: 50px;
-	text-align: center;  */
 	line-height: 1.5em;
 }
 
-.mainBtn span {
-	align-items: center;
-	background: var(--text-icon);
-	padding: 1.5rem;
-	border-radius: 999px;
-	display: flex;
-	justify-content: center;
-}
-
 .mainBtn {
-	background-image: var(--main-gradient);
-	border-radius: 999px;
-	border: none;
+	display: inline-grid;
 	box-sizing: border-box;
+
 	color: var(--button-content);
-	margin: 0 auto;
-	display: inline-block;
-	font-size: 1.25rem;
+	background-image: var(--main-gradient);
+
+	border: none;
+	border-radius: 999px;
+
+	padding: 0.25rem;
+
+	text-align: center;
 	font-weight: 700;
-	padding: 0.3rem;
 	text-decoration: none;
+
 	cursor: pointer;
 	z-index: 2;
+}
+
+.mainBtn span {
+	background: var(--text-icon);
+	padding: 1rem 2rem;
+	font-size: 1.25rem;
+	border-radius: 999px;
+}
+
+.mainBtn img {
+	background: var(--text-icon);
+	padding: 1rem;
+	border-radius: 999px;
+	vertical-align: middle;
 }
 
 .form {
@@ -67,34 +73,17 @@ h1 {
 	flex-direction: column;
 }
 
-.mainBtn img {
-	align-items: center;
-	background: var(--text-icon);
-	padding: 1rem;
-	border-radius: 999px;
-	display: flex;
-}
-
-meter {
-	display: flex;
-	margin-bottom: 1rem;
-	width: 40%;
-	color: var(--primary);
-}
-
 @media (max-width: 600px) {
-	.form {
-		margin: 0 clamp(10px, 20vw, 200px);
-		margin-top: auto 0;
-	}
 	p {
 		font-size: 0.8rem;
 		line-height: 1.5;
 	}
+
 	h2 {
 		font-size: 1.3rem;
 		line-height: 1.5;
 	}
+
 	h1 {
 		font-size: 2rem;
 		line-height: 1.5;
@@ -105,25 +94,29 @@ meter {
 	.form {
 		margin: 0 clamp(10px, 30vw, 450px);
 	}
+
 	p {
 		font-size: clamp(13px, 1.5vw, 16px);
 		line-height: 1.5;
 	}
+
 	h3 {
 		font-size: clamp(16px, 2vw, 18px);
 		line-height: 1.5;
 	}
+
 	h2 {
 		font-size: clamp(18px, 2.5vw, 20px);
 		line-height: 1.5;
 	}
+
 	h1 {
 		font-size: clamp(20px, 4vw, 34px);
 		line-height: 1.5;
 	}
 }
 
-input {
+input:not([type='checkbox']) {
 	padding: 30px;
 	padding-left: 40px;
 	border: none;
@@ -195,15 +188,6 @@ input[type='search'] {
 	cursor: pointer;
 }
 
-.reverseButton {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	border-radius: 100%;
-	cursor: pointer;
-}
-
-.reverseButton img {
-	height: 1.5vw;
-	margin: 5px;
+.error-message {
+	color: red;
 }

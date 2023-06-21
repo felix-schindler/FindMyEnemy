@@ -3,7 +3,9 @@
 </script>
 
 <header>
-	<img src={logo} alt="FindMyEnemy" class="logo" />
+	<a href="/">
+		<img src={logo} alt="FindMyEnemy" class="logo" />
+	</a>
 </header>
 
 <style>

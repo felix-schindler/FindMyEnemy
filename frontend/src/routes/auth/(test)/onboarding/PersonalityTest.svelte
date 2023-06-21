@@ -1,15 +1,17 @@
 <script lang="ts">
-	import { Status, type Question, type UserAnswer, type Category } from '$lib/core/types';
-	import '$lib/style/main.css';
 	import backButton from '$lib/images/back-icon.svg';
-	import { req } from '$lib/core/api';
+
 	import { onMount } from 'svelte';
+	import { req } from '$lib/core/api';
+	import { Status, type Question, type UserAnswer, type Category } from '$lib/core/types';
+
+	export let personality: string;
 
 	let questions: Question[] = [];
 	let qIndex = 0;
 	let question: Question;
 	let answers: UserAnswer[] = [];
-	let personality: string;
+	let msg = '';
 
 	async function addAnswer(qId: number, category: Category) {
 		question = questions[++qIndex];
@@ -22,7 +24,6 @@
 		];
 
 		// Get personality as soon as user is finished answering questions
-		console.log(qIndex);
 		if (qIndex === 35) {
 			await getPersonality();
 		}
@@ -32,9 +33,9 @@
 		const res = await req('/questions', 'GET');
 
 		if (res instanceof Status) {
-			// TODO: Show error
+			msg = `${res.status}: ${res.msg}`;
 		} else {
-			// TODO: Set questions
+			//Set questions
 			questions = res;
 			question = questions[qIndex];
 		}
@@ -43,9 +44,9 @@
 	async function getPersonality() {
 		const res = await req('/questions/personality', 'POST', answers);
 
-		// TODO: Check for error -> show message ; else: set personality
+		// Check for error -> show message ; else: set personality
 		if (res instanceof Status) {
-			//TODO: Show error
+			msg = `${res.status}: ${res.msg}`;
 		} else {
 			personality = res.personality;
 		}
@@ -57,10 +58,8 @@
 </script>
 
 <div class="persContainer">
-	<div class="progress-bar" id="progressBar">
-		<div class="progress" id="progress" style="width: {(qIndex * 100) / 35}%" />
-	</div>
-	<div class="display-number">
+	<div class="progress-bar">
+		<div class="progress" style="width: {(qIndex * 100) / 35}%" />
 		<p>{qIndex}/35</p>
 	</div>
 
@@ -81,66 +80,60 @@
 				{/each}
 			</ol>
 		</div>
-	{:else if qIndex > 0}
-		<div class="back-button">
-			<button
-				type="button"
-				class="reverseButton"
-				on:click={() => {
-					const newIndex = --qIndex;
-					if (newIndex > -1) {
-						question = questions[newIndex];
-						answers.pop();
-					}
-				}}><img src={backButton} alt="Back" /></button
-			>
-		</div>
-		{#if qIndex === 35}
-			<div class="finish-button">
-				<p>You are: {personality}</p>
-				<a href="/auth/register?personality={encodeURIComponent(personality)}" class="mainBtn"
-					>See Result</a
+		{#if qIndex > 0}
+			<div class="back-button">
+				<button
+					type="button"
+					class="reverseButton"
+					on:click={() => {
+						const newIndex = --qIndex;
+						if (newIndex > -1) {
+							question = questions[newIndex];
+							answers.pop();
+						}
+					}}><img src={backButton} alt="Back" /></button
 				>
 			</div>
 		{/if}
+	{:else}
+		<div />
 	{/if}
 </div>
 
 <style>
-	.persContainer {
-		display: flex;
-		flex-direction: column;
+	div.persContainer {
+		display: grid;
+		grid-template-rows: auto 1fr auto;
 		align-items: center;
-		justify-content: center;
-		margin: 1rem auto;
-		padding: 1rem;
+
+		height: 100%;
+		text-align: center;
 	}
+
+	.progress-bar,
+	.personality-test,
+	.back-button {
+		margin: 1rem auto;
+	}
+
+	.personality-test > p {
+		font-size: larger;
+		font-weight: 500;
+	}
+
 	ol {
 		list-style: upper-latin;
 	}
 
-	.display-number {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		margin: 1rem auto;
-		padding: 1rem;
+	.back-button {
+		margin-left: 0;
 	}
 
-	.personality-test {
-		display: flex;
-		flex-direction: column;
+	.reverseButton {
+		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		margin: 2rem auto;
-		padding: 1rem;
-	}
-	.back-button {
-		display: flex;
-		align-items: left;
-		justify-content: left;
-		margin: 1rem auto;
-		margin-left: 0;
-		padding: 1rem;
+		border-radius: 100%;
+		cursor: pointer;
 	}
 </style>

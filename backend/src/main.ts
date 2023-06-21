@@ -98,4 +98,4 @@ if (Deno.args.includes("--show-routes")) {
 }
 
 // Start web server
-export const server = serve(app.fetch);
+serve(app.fetch);

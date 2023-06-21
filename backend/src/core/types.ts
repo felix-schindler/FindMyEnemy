@@ -61,6 +61,22 @@ export type UserAnswer = {
 	category: Category;
 };
 
+export type ClientChallenge = {
+	id: number;
+	user_1: {
+		id: number;
+		username: string;
+		score: number;
+		won: boolean;
+	};
+	user_2: {
+		id: number;
+		username: string;
+		score: number;
+		won: boolean;
+	};
+};
+
 export type Challenge = {
 	id: number;
 	user_1_id: number;

@@ -3,14 +3,9 @@
 </script>
 
 <div class="accountBtnContainer">
-	<button
-		class="account-button"
-		on:click={() => {
-			window.location.href = '/account';
-		}}
-	>
+	<a class="account-button" href="/account">
 		<img src={accountButton} alt="Account Button" />
-	</button>
+	</a>
 </div>
 
 <style>
@@ -19,7 +14,7 @@
 		width: 3rem;
 	}
 
-	button {
+	a {
 		position: fixed;
 		top: 5%;
 		right: 1.5rem;

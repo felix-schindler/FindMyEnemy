@@ -1,7 +1,15 @@
 <script lang="ts">
-	import { onMount, onDestroy, afterUpdate } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
+	import AccountButton from '$lib/components/AccountButton.svelte';
+	import BackButton from '$lib/components/BackButton.svelte';
+	import { page } from '$app/stores';
+	import { goto } from '$app/navigation';
+	import { req } from '$lib/core/api';
+	import { Status } from '$lib/core/types';
 
-	let timeLeft = 7;
+	let opponent: number = Number($page.url.searchParams.get('user') ?? '');
+
+	let timeLeft = 10;
 	let clickCount = 0;
 	let timerId: number;
 	let clickButton: HTMLButtonElement | null;
@@ -13,8 +21,16 @@
 		}
 	}
 
-	function updateTimer() {
-		const minutes = Math.floor(timeLeft / 60);
+	async function saveScore() {
+		const res = await req('/challenges', 'POST', { score: clickCount, challengee: opponent });
+
+		if (res instanceof Status) {
+			// TODO: Handle error
+		} else {
+		}
+	}
+
+	async function updateTimer() {
 		let seconds: number = timeLeft % 60;
 		seconds = seconds < 10 ? Number(`0${seconds}`) : seconds;
 
@@ -25,6 +41,7 @@
 			if (clickButton) {
 				clickButton.disabled = true;
 			}
+			await saveScore();
 			isOverlayVisible = true;
 		}
 	}
@@ -33,12 +50,11 @@
 		timerId = setInterval(updateTimer, 1000) as unknown as number;
 	}
 
-	onMount(() => {
+	onMount(async () => {
+		if (!opponent) {
+			await goto('/');
+		}
 		startTimer();
-	});
-
-	afterUpdate(() => {
-		clickButton = document.querySelector('#clickButton');
 	});
 
 	onDestroy(() => {
@@ -46,9 +62,13 @@
 	});
 
 	// Setze den Timer auf 30 Sekunden
-	timeLeft = 7;
-
+	timeLeft = 10;
 </script>
+
+<div>
+	<BackButton />
+	<AccountButton />
+</div>
 
 <div class="clickerContainer">
 	<p id="timer">
@@ -71,13 +91,9 @@
 	<div class="overlay">
 		<div class="overlay-content">
 			<h2 style="color: black">Timer abgelaufen!</h2>
-			<p style="color: black">Ergebnis: {clickCount} Clicks</p>
-			<button
-				style="margin: 1rem "
-				class="mainBtn"
-				on:click={() => {
-					window.location.href = '/enemy-account';
-				}}><span>Weiter</span></button
+			<p style="color: black">Ergebnis: {clickCount} Clicks ({clickCount / 10} CPS)</p>
+			<a href="/enemy-account/{opponent}" style="margin: 1rem " class="mainBtn"
+				><span>Weiter</span></a
 			>
 		</div>
 	</div>
@@ -86,11 +102,11 @@
 <style>
 	.clickerContainer {
 		text-align: center;
-		margin-top: 50px;
+		margin-top: 2.5rem;
 	}
 
 	#timer {
-		font-size: 30px;
+		font-size: var(--fs-title);
 	}
 
 	.overlay {
@@ -109,8 +125,20 @@
 
 	.overlay-content {
 		background-color: #fff;
-		padding: 20px;
-		border-radius: 10px;
+		padding: 1.25rem;
+		border-radius: 0.7rem;
 		text-align: center;
+	}
+
+	.clickerCircle {
+		height: 40vw;
+		width: 40vw;
+		font-size: 3rem;
+	}
+
+	@media (max-width: 480px) {
+		.clickerCircle {
+			font-size: 2rem;
+		}
 	}
 </style>

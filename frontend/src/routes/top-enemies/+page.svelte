@@ -1,85 +1,57 @@
-<script>
-	import { onMount, onDestroy } from 'svelte';
+<script lang="ts">
+	import { onMount } from 'svelte';
+	import { req } from '$lib/core/api';
+	import { Status, type User } from '$lib/core/types';
+
 	import AccountButton from '$lib/components/AccountButton.svelte';
 	import BackButton from '$lib/components/BackButton.svelte';
-	import { req } from '$lib/core/api';
-	import '$lib/style/enemieslist.css';
+	import Enemy from '$lib/components/Enemy.svelte';
+	import FilerIcon from '$lib/images/filter-icon.svg';
 
-	let enemies = [
-		{
-			id: 1,
-			imageSrc: '/src/lib/images/SpongeBob_SquarePants_character.svg.png',
-			title: 'Timothy',
-			type: 'Mortal Enemy',
-			personality: 'ISTP',
-			compatibility: '89%',
-			distance: '12km'
-		},
-		{
-			id: 2,
-			imageSrc: '/src/lib/images/SpongeBob_SquarePants_character.svg.png',
-			title: 'Benjamin',
-			type: 'Mortal Enemy',
-			personality: 'ISTP',
-			compatibility: '89%',
-			distance: '12km'
-		},
-		{
-			id: 3,
-			imageSrc: '/src/lib/images/SpongeBob_SquarePants_character.svg.png',
-			title: 'Benjamin',
-			type: 'Mortal Enemy',
-			personality: 'ISTP',
-			compatibility: '89%',
-			distance: '12km'
-		},
-		{
-			id: 4,
-			imageSrc: '/src/lib/images/SpongeBob_SquarePants_character.svg.png',
-			title: 'Benjamin',
-			type: 'Mortal Enemy',
-			personality: 'ISTP',
-			compatibility: '89%',
-			distance: '12km'
+	let enemies: User[];
+
+	async function getUsers() {
+		const res = await req('/users', 'GET');
+
+		if (res instanceof Status) {
+			console.error(res);
+		} else {
+			enemies = res;
 		}
-	];
-	
+	}
+
+	onMount(async () => {
+		await getUsers();
+	});
 </script>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<AccountButton />
+<BackButton />
 
-<main>
-	<AccountButton />
+<div class="filter-button">
+	<h1>Top Enemies</h1>
+	<img src={FilerIcon} alt="Filter" />
+</div>
 
-	<BackButton />
+<div class="grid-container">
+	{#if enemies}
+		{#each enemies as enemy}
+			<Enemy {enemy} />
+		{/each}
+	{/if}
+</div>
 
-	<div class="top-enemies">
-		<div class="filter-button">
-			<h1>Top Enemies</h1>
-			<span class="filter-icon" />
-		</div>
+<style>
+	.grid-container {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+		grid-gap: 1rem;
+	}
 
-		<div class="grid-container">
-			{#each enemies as enemy (enemy.id)}
-				<div class="enemy-grid-item">
-					<div class="image-container">
-						<img src={enemy.imageSrc} alt={enemy.title} />
-					</div>
-
-					<div class="enemy-information">
-						<div class="enemy-details">
-							<p><b>{enemy.title}</b></p>
-							<p><b>{enemy.compatibility}</b></p>
-						</div>
-
-						<p>{enemy.type}</p>
-						<p>{enemy.personality}</p>
-						<p>{enemy.distance}</p>
-					</div>
-				</div>
-			{/each}
-		</div>
-	</div>
-</main>
-
-
+	.filter-button {
+		display: flex;
+		margin: var(--margin40);
+		justify-content: space-between;
+		align-items: center;
+	}
+</style>

@@ -3,7 +3,7 @@ import type { Context, Env } from "hono/mod.ts";
 import Controller from "./Controller.ts";
 import { db } from "../core/Database.ts";
 
-import { Challenge, Status } from "../core/types.ts";
+import { Challenge, ClientChallenge, Status } from "../core/types.ts";
 import { verify } from "../core/auth.ts";
 
 export default class ChallengeController extends Controller {
@@ -14,13 +14,33 @@ export default class ChallengeController extends Controller {
 		const token = c.req.header("Authorization");
 		const user = await verify(token);
 
-		// Get all challenges from database where the user is involved
-		const challenges = (await db.queryObject<Challenge>(
-			"SELECT * FROM challenges WHERE user_1_id = $1 OR user_2_id = $1;",
-			[user.id],
-		)).rows;
+		// Fetch challenges with usernames, scores, and winner information in a single query
+		const query = `
+			SELECT json_agg(json_build_object(
+				'id', c.id,
+				'user_1', json_build_object(
+					'id', u1.id,
+					'username', u1.username,
+					'score', c.user_1_score,
+					'won', (c.user_1_id = $1 AND c.user_1_score > c.user_2_score)
+				),
+				'user_2', json_build_object(
+					'id', u2.id,
+					'username', u2.username,
+					'score', c.user_2_score,
+					'won', (c.user_2_id = $1 AND c.user_2_score > c.user_1_score)
+				)
+			)) AS challenges
+			FROM challenges c
+			JOIN users u1 ON c.user_1_id = u1.id
+			JOIN users u2 ON c.user_2_id = u2.id
+			WHERE c.user_1_id = $1 OR c.user_2_id = $1;
+		`;
 
-		return c.json<Challenge[]>(challenges);
+		const challenges: ClientChallenge[] =
+			// @ts-ignore It works.
+			(await db.queryObject(query, [user.id])).rows[0].challenges;
+		return c.json<ClientChallenge[]>(challenges);
 	}
 
 	public async create(c: Context<Env, "/challenges">): Promise<Response> {
@@ -36,6 +56,7 @@ export default class ChallengeController extends Controller {
 			[user_self, challengee, score],
 		)).rows[0];
 
+		// TODO: Return status
 		return c.json<Challenge>({
 			id: insert.id,
 			user_1_id: user_self,

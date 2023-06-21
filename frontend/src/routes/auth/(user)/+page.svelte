@@ -1,5 +1,4 @@
 <script>
-	import { browser } from '$app/environment';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 
@@ -13,10 +12,6 @@
 
 	const next = $page.url.searchParams.get('next');
 
-	$: if (browser && $authStore) {
-		goto(next ?? '/');
-	}
-
 	async function login() {
 		const res = await req('/users/login', 'POST', {
 			username,
@@ -25,7 +20,7 @@
 
 		if (res instanceof Status) {
 			// Error occured, show message
-			msg = `${res.status}: ${res.message}`;
+			msg = `${res.status}: ${res.msg}`;
 		} else {
 			// Login successful, set user and redirect
 			$authStore = res;
@@ -35,27 +30,41 @@
 </script>
 
 <form class="form" on:submit={login}>
-	<input type="text" placeholder="username" bind:value={username} />
-	<input type="password" placeholder="password" bind:value={password} />
-	<div>
+	{#if msg}
+		<p class="error-message">{msg}</p>
+	{/if}
+	<input type="text" autocomplete="username" placeholder="username" bind:value={username} />
+	<input
+		type="password"
+		autocomplete="current-password"
+		placeholder="password"
+		bind:value={password}
+	/>
+	<div class="il">
 		<input type="checkbox" id="remember" />
 		<label for="remember">Remember me</label>
 	</div>
-	<button type="submit" class="mainBtn" on:click={() => (window.location.href = '/homepage')}>
+	<button type="submit" class="mainBtn">
 		<span>Sign In</span>
 	</button>
-	<a href="/onboarding"> Don't have an account yet? <b>Take the test! </b> </a>
+	<a href="/auth/onboarding">Don't have an account yet? <b>Take the test!</b></a>
 </form>
 
 <style>
 	a {
-		justify-content: center;
-		text-align: center;
+		font-weight: normal;
+		text-decoration: none;
 		color: #e3dcff;
 	}
 
-	div {
+	a:hover {
+		text-decoration: underline;
+	}
+
+	div.il {
 		display: flex;
 		align-items: center;
+		gap: 0.25rem;
+		justify-content: start;
 	}
 </style>
