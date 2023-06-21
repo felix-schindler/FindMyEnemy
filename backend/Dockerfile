@@ -8,6 +8,7 @@ WORKDIR /app
 COPY . .
 
 # Compile into a single executable
+# RUN deno cache ./src/main.ts
 # RUN deno task compile
 
 # Run the app

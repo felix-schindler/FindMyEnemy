@@ -48,4 +48,4 @@ backend_test:
     - psql -h "postgres" -U "postgres" -d "postgres" -c 'SELECT * FROM users;'
   script:
     - cd backend
-    - deno task test
+    - deno task ok

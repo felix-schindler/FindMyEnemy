@@ -97,7 +97,6 @@ export default class QuestionController extends Controller {
 			personality += "P";
 		}
 
-
 		// Return the personality
 		return c.json({ personality });
 	}

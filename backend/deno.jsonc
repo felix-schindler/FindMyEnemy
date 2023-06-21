@@ -10,7 +10,8 @@
 		"dev": "DEV=true deno run --watch=src/ -A src/main.ts --no-log-file",
 		"start": "DEV=true deno run -A src/main.ts --no-log-file",
 		"compile": "deno compile -A src/main.ts -o backend",
-		"test": "DEV=true deno test -A --trace-ops -- --no-log"
+		"test": "DEV=true deno test -A --trace-ops -- --no-log",
+		"ok": "DEV=true deno task test && deno fmt --check && deno lint && deno check src/main.ts"
 	},
 	"fmt": {
 		"semiColons": true,
