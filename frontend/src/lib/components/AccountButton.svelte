@@ -1,10 +1,10 @@
 <script>
-	import accountButton from '$lib/images/account.svg';
+	import AccountIcon from '$lib/images/account.svg';
 </script>
 
 <div class="accountBtnContainer">
 	<a class="account-button" href="/account">
-		<img src={accountButton} alt="Account Button" />
+		<img src={AccountIcon} alt="Account Button" />
 	</a>
 </div>
 

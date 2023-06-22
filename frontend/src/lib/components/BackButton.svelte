@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { goto, afterNavigate } from '$app/navigation';
+	import { afterNavigate } from '$app/navigation';
 	import { base } from '$app/paths';
 	import backbutton from '$lib/images/left-cheveron.svg';
 	let previousPage: string = base;
