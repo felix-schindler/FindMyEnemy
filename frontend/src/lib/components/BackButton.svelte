@@ -1,18 +1,18 @@
-<script>
+<script lang="ts">
+	import { goto, afterNavigate } from '$app/navigation';
+	import { base } from '$app/paths';
 	import backbutton from '$lib/images/left-cheveron.svg';
+	let previousPage: string = base;
+
+	afterNavigate(({ from }) => {
+		previousPage = from?.url.pathname || previousPage;
+	});
 </script>
 
 <div class="backBtnContainer">
-	<!-- TODO: change on click to goto -->
-	<button
-		type="button"
-		class="back-button"
-		on:click={() => {
-			window.history.back();
-		}}
-	>
+	<a href={previousPage} class="back-button">
 		<img src={backbutton} alt="Back" />
-	</button>
+	</a>
 </div>
 
 <style>

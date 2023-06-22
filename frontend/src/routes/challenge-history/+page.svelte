@@ -6,6 +6,7 @@
 	import BackButton from '$lib/components/BackButton.svelte';
 	import ChallengeResult from './ChallengeResult.svelte';
 	import { Status, type Challenge } from '$lib/core/types';
+	import { toast } from 'svelte-french-toast';
 
 	let challenges: Challenge[];
 
@@ -13,7 +14,7 @@
 		const res = await req('/challenges', 'GET');
 
 		if (res instanceof Status) {
-			// TODO: Handle error
+			toast.error(`${res.status} ${res.msg}`);
 		} else {
 			challenges = res;
 		}

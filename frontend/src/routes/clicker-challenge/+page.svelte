@@ -5,7 +5,7 @@
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import { req } from '$lib/core/api';
-	import { Status } from '$lib/core/types';
+	import toast from 'svelte-french-toast';
 
 	let opponent: number = Number($page.url.searchParams.get('user') ?? '');
 
@@ -25,7 +25,7 @@
 		const res = await req('/challenges', 'POST', { score: clickCount, challengee: opponent });
 
 		if (res.status !== 200) {
-			// TODO: Handle error
+			toast.error(`${res.status} ${res.msg}`);
 		}
 	}
 

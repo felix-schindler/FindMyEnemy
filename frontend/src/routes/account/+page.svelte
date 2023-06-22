@@ -9,9 +9,9 @@
 
 	import { goto } from '$app/navigation';
 	import { req } from '$lib/core/api';
-	import { Status } from '$lib/core/types';
 	import { authStore } from '$lib/core/stores';
 	import { onMount } from 'svelte';
+	import toast from 'svelte-french-toast';
 
 	let username: string;
 	let editing = false;
@@ -24,7 +24,7 @@
 			// @ts-ignore
 			authStore.set(res.raw.user);
 		} else {
-			// TODO: Handle error
+			toast.error(`${res.status} ${res.msg}`);
 		}
 
 		editing = false;
@@ -39,7 +39,7 @@
 		if (res.status === 200) {
 			logOut();
 		} else {
-			// TODO: Handle error
+			toast.error(`${res.status} ${res.msg}`);
 		}
 	}
 
@@ -54,10 +54,10 @@
 				// @ts-ignore Update authStore
 				authStore.set(res.raw.user);
 			} else {
-				// TODO: Handle error
+				toast.error(`${res.status} ${res.msg}`);
 			}
 		} else {
-			// TODO: Show error
+			toast.error('You need to enter a password');
 		}
 	}
 	function logOut() {

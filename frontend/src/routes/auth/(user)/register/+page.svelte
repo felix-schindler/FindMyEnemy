@@ -5,6 +5,7 @@
 	import { authStore } from '$lib/core/stores';
 	import { req } from '$lib/core/api';
 	import { Status } from '$lib/core/types';
+	import toast from 'svelte-french-toast';
 
 	const next = $page.url.searchParams.get('next');
 	const personality = $page.url.searchParams.get('personality') ?? '';
@@ -19,15 +20,13 @@
 			const res = await req('/users', 'POST', { username, password, personality });
 
 			if (res instanceof Status) {
-				// TODO: Show error message as toast or sth
-				console.error(res);
+				toast.error(`${res.status} ${res.msg}`);
 			} else {
 				$authStore = res;
 				await goto(next ?? '/');
 			}
 		} else {
-			// TODO: Show error
-			errorMessage = 'Passwords do not match';
+			toast.error('Passwords do not match');
 		}
 	}
 </script>

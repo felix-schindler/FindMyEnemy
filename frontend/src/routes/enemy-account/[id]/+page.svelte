@@ -9,6 +9,7 @@
 	import BackButton from '$lib/components/BackButton.svelte';
 
 	import AddEnemyIcon from '$lib/images/add-enemy.svg';
+	import toast from 'svelte-french-toast';
 
 	let id: string, user: User;
 	$: id = $page.params.id;
@@ -17,7 +18,7 @@
 		const res = await req('/users/:id', 'GET', undefined, { id });
 
 		if (res instanceof Status) {
-			// TODO: Handle error
+			toast.error(`${res.status} ${res.msg}`);
 		} else {
 			user = res;
 		}
