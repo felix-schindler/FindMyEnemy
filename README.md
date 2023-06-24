@@ -8,7 +8,9 @@ based on the 16 personalities test. Enemies are based on the result of your
 test. It is a project for the course "Mobile Web Applications" at the Stuttgart
 Media University.
 
-## Run the app
+## Getting started
+
+### Run the app
 
 ```bash
 git clone https://gitlab.mi.hdm-stuttgart.de/mwa/ss23/findmyenemy.git
@@ -16,6 +18,8 @@ cd findmyenemy
 docker-compose up      # wait a few seconds until the DB is initialized
 open http://localhost  # only works on mac, otherwise open the URL in your favorite browser
 ```
+
+After opening in your browser, you can login with `admin:admin`
 
 ### Services
 
@@ -27,14 +31,14 @@ open http://localhost  # only works on mac, otherwise open the URL in your favor
 
 ## Team
 
-| Name                    | Short  | Responsibilites                               |
-| ----------------------- | ------ | --------------------------------------------- |
-| Marina Banti            | @mb421 | Project management, Frontend (UI, Logic)      |
-| Felix Schindler         | @fs146 | Project management, Frontend (Logic), Backend |
-| Cornelius Moritz Kiefer | @ck184 | Database, Backend                             |
-| Vi Anh Nguyen           | @vn013 | Design, Frontend (UI)                         |
-| Ayse Erorhan            | @ae074 | Design, Frontend (UI)                         |
-| Tomas Yepes Mendez      | @ty008 | Design, Testing                               |
+| Name                    | Short  | matriculation number | Responsibilites                               |
+| ----------------------- | ------ | -------------------- | --------------------------------------------- |
+| Marina Banti            | @mb421 | 45489                | Project management, Frontend (UI, Logic)      |
+| Felix Schindler         | @fs146 | 40892                | Project management, Frontend (Logic), Backend |
+| Cornelius Moritz Kiefer | @ck184 | 39521                | Database, Backend                             |
+| Vi Anh Nguyen           | @vn013 | 42908                | Design, Frontend (UI)                         |
+| Ayse Erorhan            | @ae074 | 41736                | Design, Frontend (UI)                         |
+| Tomas Yepes Mendez      | @ty008 | 5010639              | Design, Testing                               |
 
 > Design means UI/UX design, not software design.
 
@@ -43,3 +47,7 @@ open http://localhost  # only works on mac, otherwise open the URL in your favor
 - Frontend: SvelteKit, TypeScript, CSS (NodeJS)
 - Backend: Hono, TypeScript (Deno)
 - Database: Postgres
+
+## Test
+
+> TODO: Which components are tested?
