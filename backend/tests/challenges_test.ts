@@ -1,10 +1,16 @@
 import { app } from "../src/main.ts";
 import {
+	assert,
 	assertEquals,
 	assertNotEquals,
 	// assertObjectMatch,
 } from "$std/testing/asserts.ts";
-import { type AuthUser, type Challenge, Status } from "../src/core/types.ts";
+import {
+	type AuthUser,
+	type Challenge,
+	ClientChallenge,
+	Status,
+} from "../src/core/types.ts";
 
 // #region Setup
 // deno-lint-ignore no-explicit-any
@@ -56,16 +62,48 @@ Deno.test("Create challenge", async () => {
 	tester = body.raw;
 });
 
-Deno.test("List challenges", async () => {
-	res = await app.request("/challenges", {
-		headers: {
-			Authorization: USER_1.token,
-		},
-	});
-	body = await res.json();
+Deno.test("List challenges", async (t) => {
+	await t.step("all", async () => {
+		res = await app.request("/challenges", {
+			headers: {
+				Authorization: USER_1.token,
+			},
+		});
+		body = await res.json();
 
-	assertEquals(res.status, 200);
-	assertNotEquals(body.length, 0);
+		assertEquals(res.status, 200);
+		assertNotEquals(body.length, 0);
+	});
+
+	await t.step("pending", async () => {
+		res = await app.request("/challenges?pending", {
+			headers: {
+				Authorization: USER_1.token,
+			},
+		});
+		body = await res.json();
+
+		assertEquals(res.status, 200);
+		assertNotEquals(body.length, 0);
+		body.map((challenge: ClientChallenge) => {
+			assert(challenge.user_1.score === 0 || challenge.user_2.score === 0);
+		});
+	});
+
+	await t.step("finished", async () => {
+		res = await app.request("/challenges?finished", {
+			headers: {
+				Authorization: USER_1.token,
+			},
+		});
+		body = await res.json();
+
+		assertEquals(res.status, 200);
+		assertNotEquals(body.length, 0);
+		body.map((challenge: ClientChallenge) => {
+			assert(challenge.user_1.score !== 0 && challenge.user_2.score !== 0);
+		});
+	});
 });
 
 Deno.test("Get challenge", async () => {
@@ -75,7 +113,6 @@ Deno.test("Get challenge", async () => {
 		},
 	});
 	body = await res.json() as Challenge;
-	console.log(body);
 
 	assertEquals(res.status, 200);
 	assertNotEquals(body.id, undefined);

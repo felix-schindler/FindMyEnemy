@@ -14,7 +14,19 @@ export default class ChallengeController extends Controller {
 		const token = c.req.header("Authorization");
 		const user = await verify(token);
 
+		// Get query parameters
+		const pending = c.req.query("pending") !== undefined;
+		const finished = c.req.query("finished") !== undefined;
+
 		// Fetch challenges with usernames, scores, and winner information in a single query
+		let whereStr = "";
+
+		if (pending) {
+			whereStr = "(c.user_1_score = 0 OR c.user_2_score = 0) AND";
+		} else if (finished) {
+			whereStr = "(c.user_1_score <> 0 AND c.user_2_score <> 0) AND";
+		}
+
 		const query = `
 			SELECT json_agg(json_build_object(
 				'id', c.id,
@@ -34,7 +46,7 @@ export default class ChallengeController extends Controller {
 			FROM challenges c
 			JOIN users u1 ON c.user_1_id = u1.id
 			JOIN users u2 ON c.user_2_id = u2.id
-			WHERE c.user_1_id = $1 OR c.user_2_id = $1;
+			WHERE ${whereStr} c.user_1_id = $1 OR c.user_2_id = $1;
 		`;
 
 		const challenges: ClientChallenge[] =
