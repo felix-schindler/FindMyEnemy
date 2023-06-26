@@ -235,15 +235,15 @@ VALUES ('fluffy_cookie', '$2a$10$nRhpEq0Tdyo.5hVrK5iRzO9t9Dg13BnexpCQrU1Pqq5zalN
 -- Create challenges between admin and other users
 -- Admin won
 INSERT INTO challenges (user_1_id, user_2_id, user_1_score, user_2_score)
-VALUES ((SELECT id FROM users WHERE username = 'admin'), (SELECT id FROM users WHERE username = 'Inspector'), 3, 1);
+VALUES ((SELECT id FROM users WHERE username = 'admin'), (SELECT id FROM users WHERE username = 'diavolo4'), 3, 1);
 
 -- Admin lost
 INSERT INTO challenges (user_1_id, user_2_id, user_1_score, user_2_score)
-VALUES ((SELECT id FROM users WHERE username = 'admin'), (SELECT id FROM users WHERE username = 'Protector'), 2, 3);
+VALUES ((SELECT id FROM users WHERE username = 'admin'), (SELECT id FROM users WHERE username = 'HairyPoppins'), 2, 3);
 
 -- Only admin played; Second score empty
 INSERT INTO challenges (user_1_id, user_2_id, user_1_score)
-VALUES ((SELECT id FROM users WHERE username = 'admin'), (SELECT id FROM users WHERE username = 'Counselor'), 3);
+VALUES ((SELECT id FROM users WHERE username = 'admin'), (SELECT id FROM users WHERE username = 'fluffy_cookie'), 3);
 
 
 -- Insert all 16 personality types
