@@ -5,7 +5,12 @@ import {
 	assertNotEquals,
 	// assertObjectMatch,
 } from "$std/testing/asserts.ts";
-import { type AuthUser, type Challenge, Status, ClientChallenge } from "../src/core/types.ts";
+import {
+	type AuthUser,
+	type Challenge,
+	ClientChallenge,
+	Status,
+} from "../src/core/types.ts";
 
 // #region Setup
 // deno-lint-ignore no-explicit-any
