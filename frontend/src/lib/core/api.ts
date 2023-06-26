@@ -112,7 +112,10 @@ type RequestMap = {
 	};
 	'/challenges': {
 		GET: {
-			query: never;
+			query: {
+				finished?: boolean;
+				pending?: boolean;
+			};
 			body: never;
 			response: Challenge[];
 		};
