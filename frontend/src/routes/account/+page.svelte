@@ -5,7 +5,6 @@
 	import deleteIcon from '$lib/images/delete.svg';
 	import changePasswordIcon from '$lib/images/lock.svg';
 	import challengeHistoryIcon from '$lib/images/star.svg';
-	import frenemiesIcon from '$lib/images/users.svg';
 
 	import { goto } from '$app/navigation';
 	import { req } from '$lib/core/api';
@@ -117,10 +116,6 @@
 				<button class="button" on:click={() => goto('/challenge-history')}>
 					<img src={challengeHistoryIcon} alt="Challenge History" />
 					Challenge History
-				</button>
-				<button class="button" on:click={() => goto('/frenemies')}>
-					<img src={frenemiesIcon} alt="Friend Requests" />
-					Friend Requests
 				</button>
 				<button class="button" on:click={deleteAccount}>
 					<img src={deleteIcon} alt="Delete Account" />

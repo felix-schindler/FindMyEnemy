@@ -105,7 +105,7 @@ Deno.test("User replace", async () => {
 	body = await res.json();
 });
 
-Deno.test("User get (enemy list)", async () => {
+Deno.test("User get list", async () => {
 	res = await app.request("/users", {
 		headers: { Authorization: tester.token },
 	});
@@ -115,7 +115,7 @@ Deno.test("User get (enemy list)", async () => {
 	assertNotEquals(body.length, 0);
 });
 
-Deno.test("User get (enemy list)", async () => {
+Deno.test("User get list (search)", async () => {
 	res = await app.request("/users?q=test", {
 		headers: { Authorization: tester.token },
 	});
@@ -137,6 +137,37 @@ Deno.test("User get (single)", async () => {
 	assertNotEquals(body.personality, undefined);
 	assertEquals(body.token, undefined);
 	assertEquals(body.password, undefined);
+});
+
+Deno.test("Frenemies", async () => {
+	for (let i = 0; i < 2; i++) {
+		res = await app.request("/users/2/fav", {
+			method: "PUT",
+			headers: { Authorization: tester.token },
+		});
+		body = await res.json();
+
+		assertEquals(res.status, body.status);
+		assertEquals(body.raw.rowCount, 1);
+
+		if (res.status === 200) {
+			res = await app.request("/users?frenemies", {
+				headers: { Authorization: tester.token },
+			});
+			body = await res.json();
+
+			assertEquals(body.length, 0);
+		} else if (res.status === 201) {
+			res = await app.request("/users?frenemies", {
+				headers: { Authorization: tester.token },
+			});
+			body = await res.json();
+
+			assertEquals(body.length, 1);
+		} else {
+			throw Error("Unexpected status: " + res.status);
+		}
+	}
 });
 
 Deno.test("User delete", async () => {

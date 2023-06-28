@@ -59,6 +59,7 @@ app.get("/users/:id", UserController.shared.get);
 app.put("/users/:id", UserController.shared.replace);
 app.patch("/users/:id", UserController.shared.update);
 app.delete("/users/:id", UserController.shared.delete);
+app.put("/users/:id/fav", UserController.shared.toggleFav);
 
 // Question and answer routes
 Log.info("Hono", "Registering question and answer routes");

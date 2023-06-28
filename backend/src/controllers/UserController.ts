@@ -80,23 +80,42 @@ export default class UserController extends AuthController {
 		const token = c.req.header("Authorization");
 		const user = await verify(token);
 
-		let where: string, param: string;
+		const frenemies = c.req.query("frenemies") !== undefined;
+		if (frenemies) {
+			// Get all users that the user saved as frenemy
+			const users = (await db.queryObject<ClientUser>(
+				`
+				SELECT u.id, u.username, u.personality
+				FROM users u
+				JOIN frenemies f ON u.id = f.enemy_id
+				WHERE f.user_id = $1;
+			`,
+				[user.id],
+			)).rows;
+			return c.json<ClientUser[]>(users);
+		}
+
+		// Build where clause and query parameters
+		const where: string[] = [], params: string[] = [];
 
 		// Get search query from url, if set
 		const search = c.req.query("q");
 		if (search) {
-			where = "WHERE username LIKE '%' || $1 || '%'";
-			param = search;
+			params.push(search);
+			where.push(`username LIKE '%' || $${params.length} || '%'`);
 		} else {
-			where = "WHERE personality != $1";
-			param = user.personality; // Get user from JWT and set param
+			params.push(user.personality); // Get user from JWT and set param
+			where.push(`personality != $${params.length}`);
 		}
 
 		// Create query string
-		const qStr = `SELECT id, username, personality FROM users ${where};`;
+		const qStr = `SELECT id, username, personality FROM users WHERE (${
+			where.join(") AND (")
+		});`;
+		console.log(qStr, params);
 
 		// Get all users with different personality from database
-		const users = (await db.queryObject<ClientUser>(qStr, [param])).rows;
+		const users = (await db.queryObject<ClientUser>(qStr, params)).rows;
 
 		return c.json<ClientUser[]>(users);
 	}
@@ -238,5 +257,41 @@ export default class UserController extends AuthController {
 			msg: success ? "User deleted" : "Failed to delete user",
 			raw: { rowCount },
 		});
+	}
+
+	async toggleFav(c: Context<Env, "/users/:id/fav">): Promise<Response> {
+		const token = c.req.header("Authorization");
+		const user_id = (await verify(token)).id;
+		const enemy_id = Number(c.req.param("id"));
+		let status = 500;
+
+		const delQuery =
+			`DELETE FROM frenemies WHERE user_id = $1 AND enemy_id = $2;`;
+		let rowCount =
+			(await db.queryObject(delQuery, [user_id, enemy_id])).rowCount ?? 0;
+		let success = rowCount == 1;
+		if (success) {
+			status = 200;
+		}
+
+		if (rowCount === 0) {
+			const insQuery =
+				`INSERT INTO frenemies (user_id, enemy_id) VALUES ($1, $2);`;
+			rowCount =
+				(await db.queryObject(insQuery, [user_id, enemy_id])).rowCount ?? 0;
+			success = rowCount == 1;
+			if (success) {
+				status = 201;
+			}
+		}
+
+		const msg = success
+			? (status == 200 ? "Frenemy removed" : "Frenemy added")
+			: "Failed to toggle frenemy";
+		return c.json<Status>({
+			status,
+			msg: msg,
+			raw: { rowCount },
+		}, { status, statusText: msg });
 	}
 }

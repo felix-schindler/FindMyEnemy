@@ -24,8 +24,16 @@
 		}
 	}
 
-	async function addFav() {
-		console.error('Not implemented');
+	async function toggleFav() {
+		const res = await req('/users/:id/fav', 'PUT', undefined, { id });
+
+		if (res.status === 201) {
+			toast.success('Fenemy added');
+		} else if (res.status === 200) {
+			toast.success('Fenemy removed');
+		} else {
+			toast.error('Failed to add fenemy');
+		}
 	}
 
 	onMount(async () => {
@@ -51,7 +59,7 @@
 			<a class="mainBtn" href="/clicker-challenge?user={user.id}" style="flex-grow: 1;">
 				<span>Challenge</span>
 			</a>
-			<button type="button" on:click={addFav} class="mainBtn" style="margin-left: 1.25rem;">
+			<button type="button" on:click={toggleFav} class="mainBtn" style="margin-left: 1.25rem;">
 				<img src={AddEnemyIcon} alt="Add Enemy" style="overflow: visible" />
 			</button>
 		</div>

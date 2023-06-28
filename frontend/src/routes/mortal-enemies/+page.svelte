@@ -11,7 +11,7 @@
 	let enemies: User[];
 
 	async function getUsers() {
-		const res = await req('/users', 'GET');
+		const res = await req('/users', 'GET', undefined, { frenemies: true });
 
 		if (res instanceof Status) {
 			console.error(res);
