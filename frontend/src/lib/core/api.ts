@@ -17,7 +17,8 @@ type RequestMap = {
 	'/users': {
 		GET: {
 			query: {
-				q: string;
+				q?: string;
+				frenemies?: boolean;
 			};
 			body: never;
 			response: User[];
@@ -92,6 +93,15 @@ type RequestMap = {
 					rowCount: number;
 				};
 			};
+		};
+	};
+	'/users/:id/fav': {
+		PUT: {
+			query: {
+				id: number | string;
+			};
+			body: never;
+			response: Status;
 		};
 	};
 	'/questions': {

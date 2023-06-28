@@ -2,7 +2,7 @@
 	"lock": false,
 	"imports": {
 		"$std/": "https://deno.land/std@0.192.0/",
-		"hono/": "https://deno.land/x/hono@v3.2.5/",
+		"hono/": "https://deno.land/x/hono@v3.2.6/",
 		"postgres": "https://deno.land/x/postgres@v0.17.0/mod.ts",
 		"bcrypt": "https://deno.land/x/bcrypt@v0.4.1/mod.ts"
 	},

@@ -8,6 +8,7 @@
 
 	import { Status, type User } from '$lib/core/types';
 	import { authStore } from '$lib/core/stores';
+	import toast from 'svelte-french-toast';
 
 	let topEnemies: User[];
 	let mortalEnemies: User[];
@@ -16,10 +17,17 @@
 		const res = await req('/users', 'GET');
 
 		if (res instanceof Status) {
-			console.error(res);
+			toast.error('Failed to load enemies');
 		} else {
-			topEnemies = res.slice(0, 6);
-			mortalEnemies = res.slice(-6);
+			topEnemies = res.slice(0, 8);
+		}
+
+		const res2 = await req('/users', 'GET', undefined, { frenemies: true });
+
+		if (res2 instanceof Status) {
+			toast.error('Failed to load mortal enemies');
+		} else {
+			mortalEnemies = res2;
 		}
 	}
 
@@ -44,10 +52,14 @@
 
 		<div style="overflow-x: auto;">
 			<div class="grid-container">
-				{#if topEnemies && topEnemies.length > 0}
-					{#each topEnemies as user}
-						<DiscoverEnemy {user} />
-					{/each}
+				{#if topEnemies}
+					{#if topEnemies.length > 0}
+						{#each topEnemies as user}
+							<DiscoverEnemy {user} />
+						{/each}
+					{:else}
+						<p>No enemies found</p>
+					{/if}
 				{:else}
 					<p>Loading...</p>
 				{/if}
@@ -62,10 +74,14 @@
 		</a>
 
 		<div class="grid-container">
-			{#if mortalEnemies && mortalEnemies.length > 0}
-				{#each mortalEnemies as user}
-					<DiscoverEnemy {user} />
-				{/each}
+			{#if mortalEnemies}
+				{#if mortalEnemies.length > 0}
+					{#each mortalEnemies as user}
+						<DiscoverEnemy {user} />
+					{/each}
+				{:else}
+					<p>No enemies found</p>
+				{/if}
 			{:else}
 				<p>Loading...</p>
 			{/if}
