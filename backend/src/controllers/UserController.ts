@@ -73,7 +73,7 @@ export default class UserController extends AuthController {
 		return c.json<AuthUser>({
 			...cUser,
 			token: await sign(cUser, JWT_SECRET),
-		});
+		}, { status: 201 });
 	}
 
 	async getList(c: Context<Env, "/users">): Promise<Response> {

@@ -98,6 +98,6 @@ export default class QuestionController extends Controller {
 		}
 
 		// Return the personality
-		return c.json({ personality });
+		return c.json<{ personality: string }>({ personality });
 	}
 }

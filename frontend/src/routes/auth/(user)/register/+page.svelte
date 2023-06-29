@@ -1,10 +1,9 @@
-<script>
+<script lang="ts">
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 
 	import { authStore } from '$lib/core/stores';
 	import { req } from '$lib/core/api';
-	import { Status } from '$lib/core/types';
 	import toast from 'svelte-french-toast';
 
 	const next = $page.url.searchParams.get('next');
@@ -17,13 +16,13 @@
 	async function register() {
 		// Check if password match
 		if (password == rPassword) {
-			const res = await req('/users', 'POST', { username, password, personality });
-
-			if (res instanceof Status) {
-				toast.error(`${res.status} ${res.msg}`);
-			} else {
+			try {
+				const res = await req('/users', 'POST', { username, password, personality });
 				$authStore = res;
 				await goto(next ?? '/');
+				return;
+			} catch (e: any) {
+				toast.error(e.message);
 			}
 		} else {
 			toast.error('Passwords do not match');

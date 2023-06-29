@@ -3,7 +3,7 @@
 	import { onMount } from 'svelte';
 
 	import { req } from '$lib/core/api';
-	import { Status, type User } from '$lib/core/types';
+	import type { User } from '$lib/core/types';
 
 	import AccountButton from '$lib/components/AccountButton.svelte';
 	import BackButton from '$lib/components/BackButton.svelte';
@@ -15,12 +15,10 @@
 	$: id = $page.params.id;
 
 	async function getUser() {
-		const res = await req('/users/:id', 'GET', undefined, { id });
-
-		if (res instanceof Status) {
-			toast.error(`${res.status} ${res.msg}`);
-		} else {
-			user = res;
+		try {
+			user = await req('/users/:id', 'GET', undefined, { id });
+		} catch (e: any) {
+			toast.error(e.message);
 		}
 	}
 

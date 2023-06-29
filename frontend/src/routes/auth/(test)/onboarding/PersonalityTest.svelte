@@ -3,7 +3,8 @@
 
 	import { onMount } from 'svelte';
 	import { req } from '$lib/core/api';
-	import { Status, type Question, type UserAnswer, type Category } from '$lib/core/types';
+	import type { Question, UserAnswer, Category } from '$lib/core/types';
+	import toast from 'svelte-french-toast';
 
 	export let personality: string;
 
@@ -30,25 +31,19 @@
 	}
 
 	async function getQuestions() {
-		const res = await req('/questions', 'GET');
-
-		if (res instanceof Status) {
-			msg = `${res.status}: ${res.msg}`;
-		} else {
-			//Set questions
-			questions = res;
+		try {
+			questions = await req('/questions', 'GET');
 			question = questions[qIndex];
+		} catch (e: any) {
+			toast.error(e.message);
 		}
 	}
 
 	async function getPersonality() {
-		const res = await req('/questions/personality', 'POST', answers);
-
-		// Check for error -> show message ; else: set personality
-		if (res instanceof Status) {
-			msg = `${res.status}: ${res.msg}`;
-		} else {
-			personality = res.personality;
+		try {
+			personality = (await req('/questions/personality', 'POST', answers)).personality;
+		} catch (e: any) {
+			toast.error(e.message);
 		}
 	}
 

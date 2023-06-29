@@ -1,38 +1,32 @@
-<script>
+<script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 
 	import { req } from '$lib/core/api';
 	import { authStore } from '$lib/core/stores';
-	import { Status } from '$lib/core/types';
+	import toast from 'svelte-french-toast';
 
 	let username = '',
 		password = '';
-	let msg = '';
 
 	const next = $page.url.searchParams.get('next');
 
 	async function login() {
-		const res = await req('/users/login', 'POST', {
-			username,
-			password
-		});
-
-		if (res instanceof Status) {
-			// Error occured, show message
-			msg = `${res.status}: ${res.msg}`;
-		} else {
-			// Login successful, set user and redirect
+		try {
+			const res = await req('/users/login', 'POST', {
+				username,
+				password
+			});
 			$authStore = res;
 			await goto(next ?? '/');
+			return;
+		} catch (e: any) {
+			toast.success(e.message);
 		}
 	}
 </script>
 
 <form class="form" on:submit={login}>
-	{#if msg}
-		<p class="error-message">{msg}</p>
-	{/if}
 	<input type="text" autocomplete="username" placeholder="username" bind:value={username} />
 	<input
 		type="password"

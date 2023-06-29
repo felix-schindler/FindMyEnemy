@@ -69,10 +69,10 @@ export default class ChallengeController extends Controller {
 		)).rows[0];
 
 		return c.json<Status>({
-			status: 200,
+			status: 201,
 			msg: "Challenge created",
 			raw: insert.id,
-		});
+		}, { status: 201 });
 	}
 
 	public async get(c: Context<Env, "/challenges/:id">): Promise<Response> {

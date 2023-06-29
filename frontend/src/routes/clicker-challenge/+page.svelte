@@ -22,10 +22,11 @@
 	}
 
 	async function saveScore() {
-		const res = await req('/challenges', 'POST', { score: clickCount, challengee: opponent });
-
-		if (res.status !== 200) {
-			toast.error(`${res.status} ${res.msg}`);
+		try {
+			const res = await req('/challenges', 'POST', { score: clickCount, challengee: opponent });
+			toast.success(`${res.status}: ${res.msg}`);
+		} catch (e: any) {
+			toast.error(e.message);
 		}
 	}
 

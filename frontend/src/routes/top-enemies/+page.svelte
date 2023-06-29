@@ -1,22 +1,21 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { req } from '$lib/core/api';
-	import { Status, type User } from '$lib/core/types';
+	import type { User } from '$lib/core/types';
 
 	import AccountButton from '$lib/components/AccountButton.svelte';
 	import BackButton from '$lib/components/BackButton.svelte';
 	import Enemy from '$lib/components/Enemy.svelte';
 	import FilerIcon from '$lib/images/filter-icon.svg';
+	import toast from 'svelte-french-toast';
 
 	let enemies: User[];
 
 	async function getUsers() {
-		const res = await req('/users', 'GET');
-
-		if (res instanceof Status) {
-			console.error(res);
-		} else {
-			enemies = res;
+		try {
+			enemies = await req('/users', 'GET');
+		} catch (e: any) {
+			toast.error(e.message);
 		}
 	}
 

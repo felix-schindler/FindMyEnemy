@@ -6,7 +6,7 @@
 	import DiscoverEnemy from '$lib/components/DiscoverEnemy.svelte';
 	import ChevronRight from '$lib/images/moredetails.svg';
 
-	import { Status, type User } from '$lib/core/types';
+	import type { User } from '$lib/core/types';
 	import { authStore } from '$lib/core/stores';
 	import toast from 'svelte-french-toast';
 
@@ -14,20 +14,16 @@
 	let mortalEnemies: User[];
 
 	async function getUsers() {
-		const res = await req('/users', 'GET');
-
-		if (res instanceof Status) {
-			toast.error('Failed to load enemies');
-		} else {
-			topEnemies = res.slice(0, 8);
+		try {
+			topEnemies = await req('/users', 'GET');
+		} catch (e: any) {
+			toast.error(`Failed to load top enemies ${e.message}`);
 		}
 
-		const res2 = await req('/users', 'GET', undefined, { frenemies: true });
-
-		if (res2 instanceof Status) {
-			toast.error('Failed to load mortal enemies');
-		} else {
-			mortalEnemies = res2;
+		try {
+			mortalEnemies = await req('/users', 'GET', undefined, { frenemies: true });
+		} catch (e: any) {
+			toast.error(`Failed to load mortal enemies ${e.message}`);
 		}
 	}
 

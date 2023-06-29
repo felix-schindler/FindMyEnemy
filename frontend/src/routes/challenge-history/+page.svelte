@@ -5,18 +5,16 @@
 	import AccountButton from '$lib/components/AccountButton.svelte';
 	import BackButton from '$lib/components/BackButton.svelte';
 	import ChallengeResult from './ChallengeResult.svelte';
-	import { Status, type Challenge } from '$lib/core/types';
-	import { toast } from 'svelte-french-toast';
+	import type { Challenge } from '$lib/core/types';
+	import toast from 'svelte-french-toast';
 
 	let challenges: Challenge[];
 
 	async function getChallenges() {
-		const res = await req('/challenges', 'GET');
-
-		if (res instanceof Status) {
-			toast.error(`${res.status} ${res.msg}`);
-		} else {
-			challenges = res;
+		try {
+			challenges = await req('/challenges', 'GET');
+		} catch (e: any) {
+			toast.error(e.message);
 		}
 	}
 

@@ -1,13 +1,5 @@
 import { get } from 'svelte/store';
-import {
-	Status,
-	type AuthUser,
-	type Challenge,
-	type Question,
-	type User,
-	type UserAnswer,
-	type DBChallenge
-} from './types';
+import type { Status, AuthUser, Challenge, Question, User, UserAnswer, DBChallenge } from './types';
 import { authStore } from './stores';
 
 const BASE = 'http://localhost/api';
@@ -135,7 +127,7 @@ type RequestMap = {
 				score: number;
 				challengee: number;
 			};
-			reponse: Status;
+			response: Status;
 		};
 	};
 	'/challenges/:id': {
@@ -200,51 +192,40 @@ export async function req<
 	method: Method,
 	body?: RequestBody<Path, Method>,
 	query?: RequestQuery<Path, Method>
-): Promise<T | Status> {
-	try {
-		let path: string = endpoint;
+): Promise<T> {
+	let path: string = endpoint;
 
-		// Build query params from Record<string, string>
-		if (query) {
-			const params = new URLSearchParams();
-			for (const [key, value] of Object.entries(query)) {
-				if (path.includes(`:${key}`)) {
-					// Check if path needs this query param
-					path = path.replace(`:${key}`, String(value));
-				} else {
-					// Otherwise, add it to the query params
-					params.append(key, String(value));
-				}
+	// Build query params from Record<string, string>
+	if (query) {
+		const params = new URLSearchParams();
+		for (const [key, value] of Object.entries(query)) {
+			if (path.includes(`:${key}`)) {
+				// Check if path needs this query param
+				path = path.replace(`:${key}`, String(value));
+			} else {
+				// Otherwise, add it to the query params
+				params.append(key, String(value));
 			}
-
-			path = path.concat('?', params.toString());
 		}
 
-		const reqUrl: string = `${BASE}${path}`;
-		console.debug(`${String(method)} ${reqUrl}`, { query, body });
-
-		const res = await fetch(reqUrl, {
-			method: String(method),
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: get(authStore)?.token
-			},
-			body: JSON.stringify(body)
-		});
-
-		const resBody = await res.json();
-
-		if (resBody.status && resBody.message) {
-			console.debug('Returning status');
-			return new Status(resBody.status, resBody.message, resBody.raw);
-		}
-
-		return resBody as T;
-	} catch (e: any) {
-		return {
-			status: 418,
-			msg: e.message ?? 'Something unexpected happened, please try again.',
-			raw: e
-		};
+		path = path.concat('?', params.toString());
 	}
+
+	const reqUrl: string = `${BASE}${path}`;
+	console.debug(`${String(method)} ${reqUrl}`, { query, body });
+
+	const res = await fetch(reqUrl, {
+		method: String(method),
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: get(authStore)?.token
+		},
+		body: JSON.stringify(body)
+	});
+
+	if (res.status < 200 || res.status >= 300) {
+		throw new Error(`${res.status}: ${res.statusText}`);
+	}
+
+	return (await res.json()) as T;
 }
