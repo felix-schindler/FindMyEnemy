@@ -15,13 +15,15 @@
 
 	async function getUsers() {
 		try {
-			topEnemies = await req('/users', 'GET');
+			let topEnemiesRes = await req('/users', 'GET');
+			topEnemies = topEnemiesRes.slice(0, 6);
 		} catch (e: any) {
 			toast.error(`Failed to load top enemies ${e.message}`);
 		}
 
 		try {
-			mortalEnemies = await req('/users', 'GET', undefined, { frenemies: true });
+			let mortalEnemiesRes = await req('/users', 'GET', undefined, { frenemies: true });
+			mortalEnemies = mortalEnemiesRes.slice(-6);
 		} catch (e: any) {
 			toast.error(`Failed to load mortal enemies ${e.message}`);
 		}
@@ -72,7 +74,7 @@
 		<div class="grid-container">
 			{#if mortalEnemies}
 				{#if mortalEnemies.length > 0}
-					{#each mortalEnemies as user}
+				{#each mortalEnemies as user}
 						<DiscoverEnemy {user} />
 					{/each}
 				{:else}
