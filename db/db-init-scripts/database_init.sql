@@ -244,6 +244,10 @@ VALUES ((SELECT id FROM users WHERE username = 'admin'), (SELECT id FROM users W
 INSERT INTO challenges (user_1_id, user_2_id, user_1_score)
 VALUES ((SELECT id FROM users WHERE username = 'admin'), (SELECT id FROM users WHERE username = 'fluffy_cookie'), 3);
 
+--  Admin score empty; Only second played
+INSERT INTO challenges (user_1_id, user_2_id, user_2_score)
+VALUES ((SELECT id FROM users WHERE username = 'admin'), (SELECT id FROM users WHERE username = 'lisa_meyer'), 0, 6);
+
 
 -- Insert all 16 personality types
 INSERT INTO personality_types (type) VALUES

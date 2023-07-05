@@ -11,13 +11,16 @@
 
 	let challenges: Challenge[];
 
-	async function getChallenges() {
+	 async function getChallenges() {
 		try {
-			challenges = await req('/challenges', 'GET', undefined, { pending: true });
-		} catch (e: any) {
+			challenges = await req('/challenges', 'GET');
+			challenges = challenges.filter((challenge) => {
+			return challenge.user_1.score === 0;
+			});
+  		}  catch (e: any) {
 			toast.error(e.message);
 		}
-	}
+	} 
 
 	onMount(async () => {
 		getChallenges();
