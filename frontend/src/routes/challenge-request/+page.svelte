@@ -30,7 +30,7 @@
 		<BackButton />
 	</div>
 
-	<h1>Challenge History</h1>
+	<h1>Challenge Requests</h1>
 	<div class="container">
 		{#if !challenges}
 			<p>Loading...</p>
