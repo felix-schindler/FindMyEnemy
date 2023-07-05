@@ -18,7 +18,9 @@
 			<p>Decline</p>
 		</div>
 		<div class="accept">
-			<img src={acceptIcon} alt="accept" />
+			<a href="/clicker-challenge?user={challenge.user_2.id}">
+				<img src={acceptIcon} alt="accept" />
+			</a>
 			<p>Accept</p>
 		</div>
 	</div>
@@ -60,7 +62,7 @@
 		height: 3rem;
 	}
 
-
+	
 	@media (min-width: 991px) {
 		.enemy {
 			align-items: center;

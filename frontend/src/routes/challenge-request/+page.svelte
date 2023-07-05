@@ -7,12 +7,13 @@
 	import ChallengeRequest from './ChallengeRequest.svelte';
 	import type { Challenge } from '$lib/core/types';
 	import toast from 'svelte-french-toast';
+	import { redirect } from '@sveltejs/kit';
 
 	let challenges: Challenge[];
 
 	async function getChallenges() {
 		try {
-			challenges = await req('/challenges', 'GET');
+			challenges = await req('/challenges', 'GET', undefined, { pending: true });
 		} catch (e: any) {
 			toast.error(e.message);
 		}
