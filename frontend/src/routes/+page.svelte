@@ -48,7 +48,7 @@
 			<img src={ChevronRight} class="moredetails-icon" alt="Back" />
 		</a>
 
-		<div style="overflow-x: auto;">
+		<div>
 			<div class="grid-container">
 				{#if topEnemies}
 					{#if topEnemies.length > 0}
@@ -112,16 +112,18 @@
 	}
 
 	.grid-container {
-		display: grid;
+		display: flex;
 		grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
 		grid-gap: var(--margin20);
 		padding-top: var(--margin20);
 		padding-bottom: var(--margin20);
+		overflow-x: auto;
 	}
 
 	@media (min-width: 768px) {
 		.grid-container {
 			grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+			overflow-x: auto;
 		}
 	}
 
