@@ -38,7 +38,7 @@
 		{#if !challenges}
 			<p>Loading...</p>
 		{:else if challenges.length == 0}
-			<p>No challenges yet</p>
+			<p>No challenge requests yet</p>
 		{:else}
 			{#each challenges as challenge}
 				<ChallengeRequest {challenge} />
