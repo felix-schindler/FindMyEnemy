@@ -5,10 +5,13 @@
 	import AccountButton from '$lib/components/AccountButton.svelte';
 	import DiscoverEnemy from '$lib/components/DiscoverEnemy.svelte';
 	import ChevronRight from '$lib/images/moredetails.svg';
+	import SearchResults from './SearchResults.svelte';
 
 	import type { User } from '$lib/core/types';
 	import { authStore } from '$lib/core/stores';
 	import toast from 'svelte-french-toast';
+	let query = '';
+  	let searchResults: User[];
 
 	let topEnemies: User[];
 	let mortalEnemies: User[];
@@ -32,15 +35,32 @@
 	onMount(async () => {
 		await getUsers();
 	});
+
+	
+	async function search() {
+  	searchResults = topEnemies.filter((user) => user.username.toLowerCase().includes(query.toLowerCase()));
+	}
+
 </script>
 
 <main>
 	<AccountButton />
 
 	<div class="searchBar">
-		<input type="search" class="search-bar" placeholder="Search..." />
-	</div>
+		<div class="search-bar-container">
+		  <input type="search" class="search-bar" placeholder="Search..." bind:value={query} />
+	
+		  <button type="button" class="search-button" on:click={search}>
+			<img src="/src/lib/images/search-icon.svg" alt="Search" />
+		  </button>
 
+		</div>
+	</div>
+	  
+
+	{#if searchResults && searchResults.length > 0}
+    <SearchResults query={query} searchedUsers={searchResults} />
+  	{:else}
 	<div class="top-enemies">
 		<h1>Hi {$authStore.username}</h1>
 		<a href="/top-enemies" class="moredetails-button">
@@ -85,6 +105,8 @@
 			{/if}
 		</div>
 	</div>
+
+	{/if} 
 </main>
 
 <style>
@@ -102,14 +124,31 @@
 	}
 
 	.searchBar {
-		display: flex;
-		justify-content: center;
+	display: flex;
+	justify-content: center;
+	}
+
+	.search-bar-container {
+	position: relative;
+	justify-content: space-between;
 	}
 
 	.search-bar {
-		width: 80vw;
-		height: 20px;
+	width: 80vw;
+	height: 20px;
+	padding-right: var(--padding);
 	}
+
+	.search-button {
+	background: transparent;
+	border: none;
+	position: absolute;
+	appearance: none;
+	top: 50%;
+	right: var(--margin40);
+	transform: translateY(-50%);
+	}
+
 
 	.grid-container {
 		display: grid;
