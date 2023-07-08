@@ -30,6 +30,9 @@
 		} catch (e: any) {
 			toast.error(`Failed to load mortal enemies ${e.message}`);
 		}
+
+		query = '';
+ 		searchResults = [];
 	}
 
 	onMount(async () => {
@@ -54,6 +57,10 @@
 			<img src="/src/lib/images/search-icon.svg" alt="Search" />
 		  </button>
 
+		  <button type="button" class="deleteSearch-button" on:click={getUsers}>
+			<img src="/src/lib/images/deleteSearch.svg" alt="delete" />
+		  </button>
+
 		</div>
 	</div>
 	  
@@ -68,7 +75,7 @@
 			<img src={ChevronRight} class="moredetails-icon" alt="Back" />
 		</a>
 
-		<div style="overflow-x: auto;">
+		<div>
 			<div class="grid-container">
 				{#if topEnemies}
 					{#if topEnemies.length > 0}
@@ -149,18 +156,30 @@
 	transform: translateY(-50%);
 	}
 
+	.deleteSearch-button {
+	background: transparent;
+	border: none;
+	position: absolute;
+	appearance: none;
+	top: 50%;
+	right: var(--margin20);
+	transform: translateY(-50%);
+	}
+
 
 	.grid-container {
-		display: grid;
+		display: flex;
 		grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
 		grid-gap: var(--margin20);
 		padding-top: var(--margin20);
 		padding-bottom: var(--margin20);
+		overflow-x: auto;
 	}
 
 	@media (min-width: 768px) {
 		.grid-container {
 			grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+			overflow-x: auto;
 		}
 	}
 
