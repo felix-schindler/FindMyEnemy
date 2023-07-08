@@ -13,13 +13,14 @@
 	let query = '';
   	let searchResults: User[];
 
+	let allEnemies: User[];
 	let topEnemies: User[];
 	let mortalEnemies: User[];
 
 	async function getUsers() {
 		try {
-			let topEnemiesRes = await req('/users', 'GET');
-			topEnemies = topEnemiesRes.slice(0, 6);
+			allEnemies = await req('/users', 'GET');
+			topEnemies = allEnemies.slice(0, 6);
 		} catch (e: any) {
 			toast.error(`Failed to load top enemies ${e.message}`);
 		}
@@ -41,7 +42,10 @@
 
 	
 	async function search() {
-  	searchResults = topEnemies.filter((user) => user.username.toLowerCase().includes(query.toLowerCase()));
+  	searchResults = allEnemies.filter((user) => user.username.toLowerCase().includes(query.toLowerCase()));
+	if (searchResults.length === 0) {
+      toast.error('No matching search results');
+    }
 	}
 
 </script>
@@ -152,7 +156,7 @@
 	position: absolute;
 	appearance: none;
 	top: 50%;
-	right: var(--margin40);
+	right: 3.5rem;
 	transform: translateY(-50%);
 	}
 
@@ -189,9 +193,4 @@
 		gap: 2rem;
 	}
 
-	/* .moredetails-icon img {
-		width: 8px;
-		height: 12px;
-		// margin-left: var(--margin20);
-	} */
 </style>
