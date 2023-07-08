@@ -2,8 +2,8 @@ import { get } from 'svelte/store';
 import type { Status, AuthUser, Challenge, Question, User, UserAnswer, DBChallenge } from './types';
 import { authStore } from './stores';
 
-// const BASE = 'http://localhost/api';
-const BASE = 'http://localhost:8000';
+const BASE = 'http://localhost/api';
+// const BASE = 'http://localhost:8000';
 
 type RequestMap = {
 	'/users': {

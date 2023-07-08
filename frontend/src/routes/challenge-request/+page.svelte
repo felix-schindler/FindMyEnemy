@@ -7,7 +7,6 @@
 	import ChallengeRequest from './ChallengeRequest.svelte';
 	import type { Challenge } from '$lib/core/types';
 	import { toast } from 'svelte-french-toast';
-	import { redirect } from '@sveltejs/kit';
 
 	let challenges: Challenge[];
 
@@ -41,7 +40,17 @@
 			<p>No challenge requests yet</p>
 		{:else}
 			{#each challenges as challenge}
-				<ChallengeRequest {challenge} />
+				<ChallengeRequest
+					{challenge}
+					onDelete={async () => {
+						try {
+							await req('/challenges/:id', 'DELETE', undefined, { id: challenge.id });
+							challenges = challenges.filter((c) => c.id !== challenge.id);
+						} catch (e) {
+							toast.error(`Failed to delete challenge ${e}`);
+						}
+					}}
+				/>
 			{/each}
 		{/if}
 	</div>

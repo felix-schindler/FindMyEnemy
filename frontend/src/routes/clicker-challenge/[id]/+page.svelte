@@ -8,6 +8,7 @@
 	import { toast } from 'svelte-french-toast';
 
 	let opponent: number = Number($page.url.searchParams.get('user') ?? '');
+	let id = $page.params.id;
 
 	let timeLeft = 10;
 	let clickCount = 0;
@@ -22,11 +23,25 @@
 	}
 
 	async function saveScore() {
-		try {
-			const res = await req('/challenges', 'POST', { score: clickCount, challengee: opponent });
-			toast.success(`${res.status}: ${res.msg}`);
-		} catch (e: any) {
-			toast.error(e.message);
+		if (id === 'new') {
+			try {
+				await req('/challenges', 'POST', { score: clickCount, challengee: opponent });
+			} catch (e: any) {
+				toast.error(`Failed to create challange: ${e.message}`);
+			}
+		} else {
+			try {
+				await req(
+					'/challenges/:id',
+					'PATCH',
+					{
+						score: clickCount
+					},
+					{ id: Number(id) }
+				);
+			} catch (e: any) {
+				toast.error(`Failed to save challange: ${e.message}`);
+			}
 		}
 	}
 

@@ -5,6 +5,7 @@
 	import type { Challenge } from '$lib/core/types';
 
 	export let challenge: Challenge;
+	export let onDelete: () => Promise<void>;
 </script>
 
 <div class="challenge">
@@ -13,16 +14,14 @@
 		<p style="margin-top: var(--margin20);">{challenge.user_2.username}</p>
 	</div>
 	<div class="response">
-		<div class="decline">
-			<img src={declineIcon} alt="decline" />
+		<button type="button" on:click={onDelete}>
+			<img src={declineIcon} alt="" />
 			<p>Decline</p>
-		</div>
-		<div class="accept">
-			<a href="/clicker-challenge?user={challenge.user_2.id}">
-				<img src={acceptIcon} alt="accept" />
-			</a>
+		</button>
+		<a href="/clicker-challenge/{challenge.id}?user={challenge.user_2.id}">
+			<img src={acceptIcon} alt="" />
 			<p>Accept</p>
-		</div>
+		</a>
 	</div>
 </div>
 
@@ -55,6 +54,29 @@
 		align-items: center;
 		justify-content: center;
 		margin: var(--margin20);
+	}
+
+	.response button {
+		/* Overwrite default styles */
+		cursor: pointer;
+		background: none;
+		border: none;
+
+		color: red;
+	}
+
+	.response a {
+		/* Overwrite default styles */
+		text-decoration: none;
+
+		color: lightgreen;
+	}
+
+	.response button,
+	.response a {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
 
 	img {

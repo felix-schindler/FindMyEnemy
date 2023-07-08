@@ -54,7 +54,7 @@
 			<p id="rate">You have an incompatible rate of 89%</p>
 		</div>
 		<div id="buttonsContainer">
-			<a class="mainBtn" href="/clicker-challenge?user={user.id}" style="flex-grow: 1;">
+			<a class="mainBtn" href="/clicker-challenge/new?user={user.id}" style="flex-grow: 1;">
 				<span>Challenge</span>
 			</a>
 			<button type="button" on:click={toggleFav} class="mainBtn" style="margin-left: 1.25rem;">
