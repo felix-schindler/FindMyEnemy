@@ -70,7 +70,7 @@ Deno.test("User update", async () => {
 	assertEquals(body.raw.rowCount, 1);
 	assertNotEquals(body.raw.user.id, undefined);
 	assertNotEquals(body.raw.user.username, undefined);
-	assertEquals(body.raw.user.personality, "ADSF");
+	assertEquals(body.raw.user.personality, "ESFP");
 	assertNotEquals(body.raw.user.personality, undefined);
 	assertNotEquals(body.raw.user.personality, tester.personality);
 	assertNotEquals(body.raw.user.token, tester.token);
