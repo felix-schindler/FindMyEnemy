@@ -76,7 +76,15 @@ export default class UserController extends AuthController {
 		}, { status: 201 });
 	}
 
+	static getEnemyCategory(compatibility: number): string {
+		if (compatibility <= 25) return 'Nuisance';
+		else if (compatibility <= 50) return 'Adversary';
+		else if (compatibility <= 75) return 'Rival';
+		else return 'Nemesis';
+	}
+
 	async getList(c: Context<Env, "/users">): Promise<Response> {
+		// Check if user is authenticated
 		const token = c.req.header("Authorization");
 		const user = await verify(token);
 		const search = c.req.query("q");
@@ -125,18 +133,69 @@ export default class UserController extends AuthController {
 		// Get all users with different personality from database
 		const users = (await db.queryObject<ClientUser>(qStr, params)).rows;
 
+		// Create query to get compatibility percentages
+		const compatibilityQuery = `
+		SELECT 
+			CASE WHEN pt1."type" = $1 THEN pt2."type" ELSE pt1."type" END as personality_type,
+			c.percentage
+		FROM compatibilities as c
+		JOIN personality_types as pt1 ON c.personality_type_1_id = pt1.id
+		JOIN personality_types as pt2 ON c.personality_type_2_id = pt2.id
+		WHERE pt1."type" = $1 OR pt2."type" = $1;
+		`;
+
+		const compatibilityMap = new Map<string, number>();
+		
+		const compatibilities = await db.queryObject<{ personality_type: string, percentage: number }>(compatibilityQuery, [user.personality]);
+		
+		for (let compatibility of compatibilities.rows) {
+			compatibilityMap.set(compatibility.personality_type, compatibility.percentage);
+		}
+
+		
+		for (let user of users) {
+			user.compatibility = compatibilityMap.get(user.personality) || 0;
+			user.enemyCategory = UserController.getEnemyCategory(user.compatibility);
+		}
+
 		return c.json<ClientUser[]>(users);
 	}
 
 	async get(c: Context<Env, "/users/:id">): Promise<Response> {
+		// Check if user is authenticated
+		const token = c.req.header("Authorization");
+		const authUser = await verify(token);
+		
 		const id = c.req.param("id");
-		const user = (await db.queryObject<ClientUser>(
+		const requestedUser = (await db.queryObject<ClientUser>(
 			`SELECT id, username, personality FROM users WHERE id = $1;`,
 			[id],
 		))
 			.rows[0];
+		
+		// Create query to get compatibility percentage
+		const compatibilityQuery = `
+		SELECT 
+			c.percentage
+		FROM compatibilities as c
+		JOIN personality_types as pt1 ON c.personality_type_1_id = pt1.id
+		JOIN personality_types as pt2 ON c.personality_type_2_id = pt2.id
+		WHERE (pt1."type" = $1 AND pt2."type" = $2) OR (pt1."type" = $2 AND pt2."type" = $1);
+		`;
 
-		return c.json<ClientUser>(user);
+		// Query the compatibility between the authenticated user and the requested user
+		const compatibilityResult = await db.queryObject<{percentage: number}>(
+			compatibilityQuery,
+			[authUser.personality, requestedUser.personality],
+		);
+		
+		const compatibility = compatibilityResult.rows[0]?.percentage || 0;
+
+		// Add compatibility to the user object
+		requestedUser.compatibility = compatibility;
+		requestedUser.enemyCategory = UserController.getEnemyCategory(compatibility);
+
+		return c.json<ClientUser>(requestedUser);
 	}
 
 	async update(c: Context<Env, "/users/:id">): Promise<Response> {

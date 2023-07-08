@@ -10,7 +10,7 @@ tester = await app.request("/users", {
 	body: JSON.stringify({
 		username: "test_user-" + Math.floor(Math.random() * 1000),
 		password: "test_user",
-		personality: "JKLÖ",
+		personality: "ENTP",
 	}),
 }).then((res) => res.json());
 
@@ -61,7 +61,7 @@ Deno.test("User update", async () => {
 			Authorization: tester.token,
 		},
 		body: JSON.stringify({
-			personality: "ADSF",
+			personality: "ESFP",
 		}),
 	});
 	body = await res.json();
@@ -70,7 +70,7 @@ Deno.test("User update", async () => {
 	assertEquals(body.raw.rowCount, 1);
 	assertNotEquals(body.raw.user.id, undefined);
 	assertNotEquals(body.raw.user.username, undefined);
-	assertEquals(body.raw.user.personality, "ADSF");
+	assertEquals(body.raw.user.personality, "ESFP");
 	assertNotEquals(body.raw.user.personality, undefined);
 	assertNotEquals(body.raw.user.personality, tester.personality);
 	assertNotEquals(body.raw.user.token, tester.token);
@@ -110,9 +110,13 @@ Deno.test("User get list", async () => {
 		headers: { Authorization: tester.token },
 	});
 	body = await res.json();
-
 	assertEquals(res.status, 200);
 	assertNotEquals(body.length, 0);
+
+	for (let user of body) {
+		assertNotEquals(user.compatibility, undefined);
+		assertEquals(user.compatibility > 0 && user.compatibility < 100, true);
+	} 
 });
 
 Deno.test("User get list (search)", async () => {
@@ -123,6 +127,11 @@ Deno.test("User get list (search)", async () => {
 
 	assertEquals(res.status, 200);
 	assertNotEquals(body.length, 0);
+
+    for (let user of body) {
+			assertNotEquals(user.compatibility, undefined);
+			assertEquals(user.compatibility > 0 && user.compatibility < 100, true);
+	} 
 });
 
 Deno.test("User get (single)", async () => {

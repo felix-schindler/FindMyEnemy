@@ -9,7 +9,7 @@
 	<div class="user-information">
 		<div class="user-details">
 			<p><b>{user.username}</b></p>
-			<!-- <p><b>{user.compatibility}</b></p> -->
+			<p><b>{user.compatibility}%</b></p>
 		</div>
 		<p>{user.personality}</p>
 	</div>

@@ -51,7 +51,7 @@
 			<p id="enemyAccountName">{user.username}</p>
 		</div>
 		<div>
-			<p id="rate">You have an incompatible rate of 89%</p>
+			<p id="rate">You have an incompatibility rate of {user.compatibility}%</p>
 		</div>
 		<div id="buttonsContainer">
 			<a class="mainBtn" href="/clicker-challenge/new?user={user.id}" style="flex-grow: 1;">
@@ -65,7 +65,7 @@
 			<table>
 				<tr>
 					<td>Enemy Type</td>
-					<td>...</td>
+					<td>{user.enemyCategory}</td>
 				</tr>
 				<tr>
 					<td>Personality Type</td>
@@ -73,7 +73,7 @@
 				</tr>
 				<tr>
 					<td>Distance</td>
-					<td>...</td>
+					<td>{user.compatibility}%</td>
 				</tr>
 			</table>
 		</div>

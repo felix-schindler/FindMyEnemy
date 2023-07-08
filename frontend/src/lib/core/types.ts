@@ -13,6 +13,8 @@ type Base = {
 export type User = Base & {
 	username: string;
 	personality: string;
+	compatibility?: number;
+	enemyCategory?: string;
 };
 
 export type AuthUser = User & {

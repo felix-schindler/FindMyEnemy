@@ -16,12 +16,16 @@ export type User = {
 	username: string;
 	password: string;
 	personality: string;
+	compatibility?: number;
+	enemyCategory?: string;
 };
 
 export type ClientUser = {
 	id: number;
 	username: string;
 	personality: string;
+	compatibility?: number;
+	enemyCategory?: string;
 };
 
 export type AuthUser = ClientUser & {
