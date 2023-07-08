@@ -36,7 +36,7 @@ After opening in your browser, you can login with `admin:admin`
 | Marina Banti            | @mb421 | 45489                | Project management, Frontend (UI, Logic)      |
 | Felix Schindler         | @fs146 | 40892                | Project management, Frontend (Logic), Backend |
 | Cornelius Moritz Kiefer | @ck184 | 39521                | Database, Backend                             |
-| Vi Anh Nguyen           | @vn013 | 42908                | Design, Frontend (UI)                         |
+| Vi Anh Nguyen           | @vn013 | 42908                | Design, Frontend (UI, Logic)                  |
 | Ayse Erorhan            | @ae074 | 41736                | Design, Frontend (UI)                         |
 | Tomas Yepes Mendez      | @ty008 | 5010639              | Design, Testing                               |
 
