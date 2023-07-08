@@ -5,6 +5,7 @@
 	import deleteIcon from '$lib/images/delete.svg';
 	import changePasswordIcon from '$lib/images/lock.svg';
 	import challengeHistoryIcon from '$lib/images/star.svg';
+	import PasswordDialog from '$lib/components/PasswordDialog.svelte';
 
 	import { goto } from '$app/navigation';
 	import { req } from '$lib/core/api';
@@ -43,6 +44,10 @@
 	}
 
 	async function changePassword() {
+		PasswordDialog.$set({ isVisible: true, id: $authStore.id });
+	}
+	/**
+	async function changePassword() {
 		// Logic for changing the password
 		const password = prompt('Enter your new password');
 
@@ -59,6 +64,7 @@
 			toast.error('You need to enter a password');
 		}
 	}
+	**/
 	function logOut() {
 		// Logic for logging out
 		// @ts-ignore
@@ -111,6 +117,7 @@
 				</div>
 				<button class="button" on:click={changePassword}>
 					<img src={changePasswordIcon} alt="Change Password" />
+					<PasswordDialog on:close={() => PasswordDialog.$set({ isVisible: false })} />
 					Change Password
 				</button>
 				<button class="button" on:click={() => goto('/challenge-request')}>
