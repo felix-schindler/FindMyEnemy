@@ -1,0 +1,282 @@
+[
+	{
+		"id": 1,
+		"content": "At a party do you",
+		"answers": [
+			{ "id": 2, "content": "Interact with a few, known to you", "category": "I" },
+			{ "id": 1, "content": "Interact with many, including strangers", "category": "E" }
+		]
+	},
+	{
+		"id": 2,
+		"content": "Are you more",
+		"answers": [
+			{ "id": 4, "content": "Speculative than realistic", "category": "N" },
+			{ "id": 3, "content": "Realistic than speculative", "category": "S" }
+		]
+	},
+	{
+		"id": 3,
+		"content": "Is it worse to",
+		"answers": [
+			{ "id": 6, "content": "Be 'in a rut'", "category": "S" },
+			{ "id": 5, "content": "Have your 'head in the clouds'", "category": "N" }
+		]
+	},
+	{
+		"id": 4,
+		"content": "Are you more impressed by",
+		"answers": [
+			{ "id": 8, "content": "Emotions", "category": "F" },
+			{ "id": 7, "content": "Principles", "category": "T" }
+		]
+	},
+	{
+		"id": 5,
+		"content": "Are more drawn toward the",
+		"answers": [
+			{ "id": 10, "content": "Touching", "category": "F" },
+			{ "id": 9, "content": "Convincing", "category": "T" }
+		]
+	},
+	{
+		"id": 6,
+		"content": "Do you prefer to work",
+		"answers": [
+			{ "id": 12, "content": "Just 'whenever'", "category": "P" },
+			{ "id": 11, "content": "To deadlines", "category": "J" }
+		]
+	},
+	{
+		"id": 7,
+		"content": "Do you need to choose",
+		"answers": [
+			{ "id": 14, "content": "Somewhat impulsively", "category": "P" },
+			{ "id": 13, "content": "Rather carefully", "category": "J" }
+		]
+	},
+	{
+		"id": 8,
+		"content": "At parties do you",
+		"answers": [
+			{ "id": 16, "content": "Leave early with decreased energy", "category": "I" },
+			{ "id": 15, "content": "Stay late, with increasing energy", "category": "E" }
+		]
+	},
+	{
+		"id": 9,
+		"content": "Are you more attracted to",
+		"answers": [
+			{ "id": 18, "content": "Imaginative people", "category": "N" },
+			{ "id": 17, "content": "Sensible people", "category": "S" }
+		]
+	},
+	{
+		"id": 10,
+		"content": "Are you more interested in",
+		"answers": [
+			{ "id": 20, "content": "What is possible", "category": "N" },
+			{ "id": 19, "content": "What is actual", "category": "S" }
+		]
+	},
+	{
+		"id": 11,
+		"content": "In judging others are you more swayed by",
+		"answers": [
+			{ "id": 22, "content": "Circumstances than laws", "category": "F" },
+			{ "id": 21, "content": "Laws than circumstances", "category": "T" }
+		]
+	},
+	{
+		"id": 12,
+		"content": "In approaching others is your inclination to be somewhat",
+		"answers": [
+			{ "id": 24, "content": "Personal", "category": "F" },
+			{ "id": 23, "content": "Objective", "category": "T" }
+		]
+	},
+	{
+		"id": 13,
+		"content": "Are you more",
+		"answers": [
+			{ "id": 26, "content": "Leisurely", "category": "P" },
+			{ "id": 25, "content": "Punctual", "category": "J" }
+		]
+	},
+	{
+		"id": 14,
+		"content": "Does it bother you more having things",
+		"answers": [
+			{ "id": 28, "content": "Complete", "category": "P" },
+			{ "id": 27, "content": "Incomplete", "category": "J" }
+		]
+	},
+	{
+		"id": 15,
+		"content": "In your social groups do you",
+		"answers": [
+			{ "id": 30, "content": "Get behind on the news", "category": "I" },
+			{ "id": 29, "content": "Keep abreast of other's happenings", "category": "E" }
+		]
+	},
+	{
+		"id": 16,
+		"content": "In doing ordinary things are you more likely to",
+		"answers": [
+			{ "id": 32, "content": "Do it your own way", "category": "N" },
+			{ "id": 31, "content": "Do it the usual way", "category": "S" }
+		]
+	},
+	{
+		"id": 17,
+		"content": "Writers should",
+		"answers": [
+			{ "id": 34, "content": "Express things more by use of analogy", "category": "N" },
+			{ "id": 33, "content": "Say what they mean and mean what they say", "category": "S" }
+		]
+	},
+	{
+		"id": 18,
+		"content": "Which appeals to you more",
+		"answers": [
+			{ "id": 36, "content": "Harmonious human relationships", "category": "F" },
+			{ "id": 35, "content": "Consistency of thought", "category": "T" }
+		]
+	},
+	{
+		"id": 19,
+		"content": "Are you more comfortable in making",
+		"answers": [
+			{ "id": 38, "content": "Value judgments", "category": "F" },
+			{ "id": 37, "content": "Logical judgments", "category": "T" }
+		]
+	},
+	{
+		"id": 20,
+		"content": "Do you want things",
+		"answers": [
+			{ "id": 40, "content": "Unsettled and undecided", "category": "P" },
+			{ "id": 39, "content": "Settled and decided", "category": "J" }
+		]
+	},
+	{
+		"id": 21,
+		"content": "Would you say you are more",
+		"answers": [
+			{ "id": 42, "content": "Easy-going", "category": "P" },
+			{ "id": 41, "content": "Serious and determined", "category": "J" }
+		]
+	},
+	{
+		"id": 22,
+		"content": "In phoning do you:",
+		"answers": [
+			{ "id": 44, "content": "Rehearse what you'll say", "category": "I" },
+			{ "id": 43, "content": "Rarely question that it will all be said", "category": "E" }
+		]
+	},
+	{
+		"id": 23,
+		"content": "Facts",
+		"answers": [
+			{ "id": 46, "content": "Illustrate principles", "category": "N" },
+			{ "id": 45, "content": "Speak for themselves", "category": "S" }
+		]
+	},
+	{
+		"id": 24,
+		"content": "Are visionaries",
+		"answers": [
+			{ "id": 48, "content": "Rather fascinating", "category": "N" },
+			{ "id": 47, "content": "Somewhat annoying", "category": "S" }
+		]
+	},
+	{
+		"id": 25,
+		"content": "Are you more often",
+		"answers": [
+			{ "id": 50, "content": "A warm-hearted person", "category": "F" },
+			{ "id": 49, "content": "A cool-headed person", "category": "T" }
+		]
+	},
+	{
+		"id": 26,
+		"content": "Is it worse to be",
+		"answers": [
+			{ "id": 52, "content": "Merciless", "category": "F" },
+			{ "id": 51, "content": "Unjust", "category": "T" }
+		]
+	},
+	{
+		"id": 27,
+		"content": "Should one usually let events occur",
+		"answers": [
+			{ "id": 54, "content": "Randomly and by chance", "category": "P" },
+			{ "id": 53, "content": "By careful selection and choice", "category": "J" }
+		]
+	},
+	{
+		"id": 28,
+		"content": "Do you feel better about",
+		"answers": [
+			{ "id": 56, "content": "Having the option to buy", "category": "P" },
+			{ "id": 55, "content": "Having purchased", "category": "J" }
+		]
+	},
+	{
+		"id": 29,
+		"content": "In company do you",
+		"answers": [
+			{ "id": 58, "content": "Wait to be approached", "category": "I" },
+			{ "id": 57, "content": "Initiate conversation", "category": "E" }
+		]
+	},
+	{
+		"id": 30,
+		"content": "Common sense is",
+		"answers": [
+			{ "id": 60, "content": "Frequently questionable", "category": "N" },
+			{ "id": 59, "content": "Rarely questionable", "category": "S" }
+		]
+	},
+	{
+		"id": 31,
+		"content": "Children often do not",
+		"answers": [
+			{ "id": 62, "content": "Exercise their fantasy enough", "category": "N" },
+			{ "id": 61, "content": "Make themselves useful enough", "category": "S" }
+		]
+	},
+	{
+		"id": 32,
+		"content": "In making decisions do you feel more comfortable with",
+		"answers": [
+			{ "id": 64, "content": "Feelings", "category": "F" },
+			{ "id": 63, "content": "Standards", "category": "T" }
+		]
+	},
+	{
+		"id": 33,
+		"content": "Are you more",
+		"answers": [
+			{ "id": 66, "content": "Gentle than firm", "category": "F" },
+			{ "id": 65, "content": "A firm than gentle", "category": "T" }
+		]
+	},
+	{
+		"id": 34,
+		"content": "Which is more admirable",
+		"answers": [
+			{ "id": 68, "content": "The ability to adapt and make do", "category": "P" },
+			{ "id": 67, "content": "The ability to organize and be methodical", "category": "J" }
+		]
+	},
+	{
+		"id": 35,
+		"content": "Do you put more value on",
+		"answers": [
+			{ "id": 70, "content": "Open-minded", "category": "P" },
+			{ "id": 69, "content": "Infinite", "category": "J" }
+		]
+	}
+]

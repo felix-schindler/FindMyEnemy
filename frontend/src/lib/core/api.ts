@@ -196,24 +196,30 @@ export async function req<
 	let path: string = endpoint;
 
 	// Build query params from Record<string, string>
-	if (query) {
-		const params = new URLSearchParams();
-		for (const [key, value] of Object.entries(query)) {
-			if (path.includes(`:${key}`)) {
-				// Check if path needs this query param
-				path = path.replace(`:${key}`, String(value));
-			} else {
-				// Otherwise, add it to the query params
-				params.append(key, String(value));
+	let reqUrl: string;
+	if (process.env.NODE_ENV === 'development' && method === 'GET') {
+		reqUrl = '/api/' + path + '.json';
+	} else {
+		if (query) {
+			const params = new URLSearchParams();
+			for (const [key, value] of Object.entries(query)) {
+				if (path.includes(`:${key}`)) {
+					// Check if path needs this query param
+					path = path.replace(`:${key}`, String(value));
+				} else {
+					// Otherwise, add it to the query params
+					params.append(key, String(value));
+				}
 			}
+
+			const paramStr = params.toString();
+			if (paramStr) path = path.concat('?', paramStr);
 		}
 
-		path = path.concat('?', params.toString());
+		reqUrl = `${BASE}${path}`;
 	}
 
-	const reqUrl: string = `${BASE}${path}`;
 	console.debug(`${String(method)} ${reqUrl}`, { query, body });
-
 	const res = await fetch(reqUrl, {
 		method: String(method),
 		headers: {

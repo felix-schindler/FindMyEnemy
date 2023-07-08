@@ -1,0 +1,5 @@
+{
+	"id": 1,
+	"user_1": { "id": 1, "username": "admin", "score": 3, "won": true },
+	"user_2": { "id": 16, "username": "diavolo4", "score": 1, "won": false }
+}

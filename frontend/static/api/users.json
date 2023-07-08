@@ -1,0 +1,128 @@
+[
+	{
+		"id": 2,
+		"username": "jane_smith",
+		"personality": "ISTP",
+		"compatibility": 9,
+		"enemyCategory": "Nuisance"
+	},
+	{
+		"id": 3,
+		"username": "papaya_flannels",
+		"personality": "ISTJ",
+		"compatibility": 18,
+		"enemyCategory": "Nuisance"
+	},
+	{
+		"id": 4,
+		"username": "queen_elizabeth3",
+		"personality": "ISFJ",
+		"compatibility": 30,
+		"enemyCategory": "Adversary"
+	},
+	{
+		"id": 5,
+		"username": "mandy-candy",
+		"personality": "INFJ",
+		"compatibility": 74,
+		"enemyCategory": "Rival"
+	},
+	{
+		"id": 6,
+		"username": "steph_curry",
+		"personality": "INTJ",
+		"compatibility": 16,
+		"enemyCategory": "Nuisance"
+	},
+	{
+		"id": 7,
+		"username": "peety",
+		"personality": "ISTP",
+		"compatibility": 9,
+		"enemyCategory": "Nuisance"
+	},
+	{
+		"id": 8,
+		"username": "duck_lover20",
+		"personality": "ISFP",
+		"compatibility": 40,
+		"enemyCategory": "Adversary"
+	},
+	{
+		"id": 9,
+		"username": "olsen_oatmeal",
+		"personality": "INFP",
+		"compatibility": 73,
+		"enemyCategory": "Rival"
+	},
+	{
+		"id": 10,
+		"username": "angry_pasta",
+		"personality": "INTP",
+		"compatibility": 35,
+		"enemyCategory": "Adversary"
+	},
+	{
+		"id": 11,
+		"username": "wizard_of_oz",
+		"personality": "ESTP",
+		"compatibility": 41,
+		"enemyCategory": "Adversary"
+	},
+	{
+		"id": 12,
+		"username": "naruto-uzumaki",
+		"personality": "ESFP",
+		"compatibility": 80,
+		"enemyCategory": "Nemesis"
+	},
+	{
+		"id": 13,
+		"username": "lisa_meyer",
+		"personality": "ENFP",
+		"compatibility": 91,
+		"enemyCategory": "Nemesis"
+	},
+	{
+		"id": 14,
+		"username": "catgirl420",
+		"personality": "ENTP",
+		"compatibility": 73,
+		"enemyCategory": "Rival"
+	},
+	{
+		"id": 15,
+		"username": "malfoy_alley",
+		"personality": "ESTJ",
+		"compatibility": 22,
+		"enemyCategory": "Nuisance"
+	},
+	{
+		"id": 16,
+		"username": "diavolo4",
+		"personality": "ESFJ",
+		"compatibility": 64,
+		"enemyCategory": "Rival"
+	},
+	{
+		"id": 18,
+		"username": "fluffy_cookie",
+		"personality": "ENTJ",
+		"compatibility": 42,
+		"enemyCategory": "Adversary"
+	},
+	{
+		"id": 19,
+		"username": "test_user-579bc46f-bee2-4a05-a02b-a472345e1b1d",
+		"personality": "INFP",
+		"compatibility": 73,
+		"enemyCategory": "Rival"
+	},
+	{
+		"id": 20,
+		"username": "test_user-f6603a81-8095-4063-a27a-c33f93809f26",
+		"personality": "INFP",
+		"compatibility": 73,
+		"enemyCategory": "Rival"
+	}
+]

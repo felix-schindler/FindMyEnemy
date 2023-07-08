@@ -1,0 +1,32 @@
+[
+	{
+		"id": 8,
+		"user_1": { "id": 1, "username": "admin", "score": 49, "won": true },
+		"user_2": { "id": 4, "username": "queen_elizabeth3", "score": 0, "won": false }
+	},
+	{
+		"id": 7,
+		"user_1": { "id": 1, "username": "admin", "score": 0, "won": false },
+		"user_2": { "id": 15, "username": "malfoy_alley", "score": 0, "won": false }
+	},
+	{
+		"id": 6,
+		"user_1": { "id": 1, "username": "admin", "score": 14, "won": false },
+		"user_2": { "id": 15, "username": "malfoy_alley", "score": 17, "won": false }
+	},
+	{
+		"id": 1,
+		"user_1": { "id": 1, "username": "admin", "score": 3, "won": true },
+		"user_2": { "id": 16, "username": "diavolo4", "score": 1, "won": false }
+	},
+	{
+		"id": 2,
+		"user_1": { "id": 1, "username": "admin", "score": 2, "won": false },
+		"user_2": { "id": 17, "username": "HairyPoppins", "score": 3, "won": false }
+	},
+	{
+		"id": 3,
+		"user_1": { "id": 1, "username": "admin", "score": 3, "won": true },
+		"user_2": { "id": 18, "username": "fluffy_cookie", "score": 0, "won": false }
+	}
+]
