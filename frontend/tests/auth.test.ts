@@ -30,7 +30,7 @@ test.describe('User authenitcation', () => {
 		await page.waitForNavigation();
 		const { pathname: regPath, search: regSearch } = new URL(page.url());
 		expect(regPath).toBe('/auth/register');
-		expect(regSearch).toBe("?personality=INFP");
+		expect(regSearch).toBe('?personality=INFP');
 
 		await page.close();
 	});

@@ -9,11 +9,11 @@
 
 <div class="challenge">
 	<div class="enemy">
-			<img src={UserIcon} alt="user" />
-			<p style="margin-top: var(--margin20);">{challenge.user_2.username}</p>
+		<img src={UserIcon} alt="user" />
+		<p style="margin-top: var(--margin20);">{challenge.user_2.username}</p>
 	</div>
 	<div class="response">
-		 <div class="decline">
+		<div class="decline">
 			<img src={declineIcon} alt="decline" />
 			<p>Decline</p>
 		</div>
@@ -40,29 +40,27 @@
 		margin-bottom: var(--margin20);
 	}
 
-	
 	.enemy {
 		display: flex;
-  		flex-direction: column;
-  		align-items: center;
-  		justify-content: center;
-  		text-align: center;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
 	}
 
 	.response {
 		display: flex;
 		gap: var(--padding);
-  		flex-direction: row;
-  		align-items: center;
-  		justify-content: center;
-		 margin: var(--margin20); 
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		margin: var(--margin20);
 	}
 
 	img {
 		height: 3rem;
 	}
 
-	
 	@media (min-width: 991px) {
 		.enemy {
 			align-items: center;
@@ -70,6 +68,5 @@
 			margin-bottom: var(--margin20);
 			padding: var(--padding);
 		}
-
 	}
 </style>

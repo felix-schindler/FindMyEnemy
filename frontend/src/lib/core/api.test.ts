@@ -6,6 +6,6 @@ import { test, expect } from 'vitest';
 // 	expect(await req('/questions', 'GET')).toThrow();
 // });
 
-test("", () => {
+test('', () => {
 	expect(true).toBe(true);
-})
+});
