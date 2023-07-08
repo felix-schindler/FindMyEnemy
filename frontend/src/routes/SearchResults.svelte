@@ -3,6 +3,7 @@
     import type { User } from '$lib/core/types';
     import DiscoverEnemy from '$lib/components/DiscoverEnemy.svelte';
 
+    export let query;
     export let searchedUsers: User[];
 </script>
 
@@ -17,7 +18,8 @@
         {:else}
             <p>No enemies found</p>
         {/if}
-  
+    {:else}
+        <p>Loading...</p>
     {/if}
 </div>
 </main>
