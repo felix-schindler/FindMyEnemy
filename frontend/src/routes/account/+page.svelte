@@ -94,7 +94,7 @@
 						{/if}
 					</div>
 				</div>
-				<PasswordDialog isVisible={changePass} />
+				<PasswordDialog bind:isVisible={changePass} />
 				<button class="button" on:click={() => (changePass = true)}>
 					<img src={changePasswordIcon} alt="Change Password" />
 					Change Password

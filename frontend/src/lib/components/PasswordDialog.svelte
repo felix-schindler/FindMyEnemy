@@ -19,6 +19,8 @@
 
 			// @ts-expect-error Update authStore (even if it's undefined)
 			authStore.set(res.raw.user);
+			isVisible = false;
+			toast.success('Password changed');
 		} catch (e: any) {
 			toast.error(`Failed to update password ${e.message}`);
 		}
@@ -29,11 +31,24 @@
 	<div class="modal-overlay">
 		<div class="modal">
 			<h3>Enter Your New Password</h3>
-			<input type="password" bind:value={newPassword} />
-			<div class="button-container">
-				<button on:click={changePassword}>Change Password</button>
-				<button on:click={close}>Cancel</button>
-			</div>
+			<form on:submit={changePassword}>
+				<input type="password" placeholder="new password" bind:value={newPassword} />
+				<div class="button-container">
+					<button
+						type="button"
+						class="mainBtn secondary"
+						on:click={() => {
+							newPassword = '';
+							isVisible = false;
+						}}
+					>
+						<span>Cancel</span></button
+					>
+					<button type="submit" class="mainBtn">
+						<span>Change Password</span>
+					</button>
+				</div>
+			</form>
 		</div>
 	</div>
 {/if}
@@ -48,11 +63,12 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		background-color: var(--primary);
+		background-color: transparent;
+		backdrop-filter: blur(8px);
 	}
 
 	.modal {
-		background-color: white;
+		background-color: var(--background);
 		padding: 20px;
 		border-radius: 4px;
 		text-align: center;
@@ -66,22 +82,23 @@
 		width: 100%;
 		margin-bottom: var(--margin20);
 		padding: var(--padding);
+		padding-left: 2.5rem;
 		border-radius: var(--margin20);
 	}
 
 	.button-container {
 		display: flex;
-		justify-content: center;
+		align-items: center;
+		gap: var(--padding);
 	}
 
-	.button-container button {
-		margin: var(--margin20);
-		padding: var(--padding);
-		background-color: var(--primary);
-		color: var(--secondary);
-		border: none;
-		border-radius: (--margin20);
-		cursor: pointer;
+	.mainBtn.secondary {
+		background: var(--secondary);
+	}
+
+	.mainBtn.secondary > span {
+		color: var(--primary);
+		padding: 0.5rem 1rem;
 	}
 
 	.button-container button:hover {
