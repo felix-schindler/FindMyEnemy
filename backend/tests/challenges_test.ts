@@ -55,8 +55,8 @@ Deno.test("Create challenge", async () => {
 	});
 	body = await res.json() as Challenge;
 
-	assertEquals(res.status, 200);
-	assertEquals(body.status, 200);
+	assertEquals(res.status, 201);
+	assertEquals(body.status, 201);
 	assertEquals(body.msg, "Challenge created");
 
 	tester = body.raw;
