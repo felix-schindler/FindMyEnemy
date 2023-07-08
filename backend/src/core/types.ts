@@ -17,6 +17,7 @@ export type User = {
 	password: string;
 	personality: string;
 	compatibility?: number;
+	enemyCategory?: string;
 };
 
 export type ClientUser = {
