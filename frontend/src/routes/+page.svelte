@@ -8,7 +8,6 @@
 	import AccountButton from '$lib/components/AccountButton.svelte';
 	import DiscoverEnemy from '$lib/components/DiscoverEnemy.svelte';
 	import ChevronRight from '$lib/images/moredetails.svg';
-	import SearchResults from './SearchResults.svelte';
 
 	let search: string;
 
