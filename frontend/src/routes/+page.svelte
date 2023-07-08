@@ -5,18 +5,22 @@
 	import AccountButton from '$lib/components/AccountButton.svelte';
 	import DiscoverEnemy from '$lib/components/DiscoverEnemy.svelte';
 	import ChevronRight from '$lib/images/moredetails.svg';
+	import SearchResults from './SearchResults.svelte';
 
 	import type { User } from '$lib/core/types';
 	import { authStore } from '$lib/core/stores';
 	import toast from 'svelte-french-toast';
+	let query = '';
+  	let searchResults: User[];
 
+	let allEnemies: User[];
 	let topEnemies: User[];
 	let mortalEnemies: User[];
 
 	async function getUsers() {
 		try {
-			let topEnemiesRes = await req('/users', 'GET');
-			topEnemies = topEnemiesRes.slice(0, 6);
+			allEnemies = await req('/users', 'GET');
+			topEnemies = allEnemies.slice(0, 6);
 		} catch (e: any) {
 			toast.error(`Failed to load top enemies ${e.message}`);
 		}
@@ -27,20 +31,47 @@
 		} catch (e: any) {
 			toast.error(`Failed to load mortal enemies ${e.message}`);
 		}
+
+		query = '';
+ 		searchResults = [];
 	}
 
 	onMount(async () => {
 		await getUsers();
 	});
+
+	
+	async function search() {
+  	searchResults = allEnemies.filter((user) => user.username.toLowerCase().includes(query.toLowerCase()));
+	if (searchResults.length === 0) {
+      toast.error('No matching search results');
+    }
+	}
+
 </script>
 
 <main>
 	<AccountButton />
 
 	<div class="searchBar">
-		<input type="search" class="search-bar" placeholder="Search..." />
-	</div>
+		<div class="search-bar-container">
+		  <input type="search" class="search-bar" placeholder="Search..." bind:value={query} />
+	
+		  <button type="button" class="search-button" on:click={search}>
+			<img src="/src/lib/images/search-icon.svg" alt="Search" />
+		  </button>
 
+		  <button type="button" class="deleteSearch-button" on:click={getUsers}>
+			<img src="/src/lib/images/deleteSearch.svg" alt="delete" />
+		  </button>
+
+		</div>
+	</div>
+	  
+
+	{#if searchResults && searchResults.length > 0}
+    <SearchResults query={query} searchedUsers={searchResults} />
+  	{:else}
 	<div class="top-enemies">
 		<h1>Hi {$authStore.username}</h1>
 		<a href="/top-enemies" class="moredetails-button">
@@ -85,6 +116,8 @@
 			{/if}
 		</div>
 	</div>
+
+	{/if} 
 </main>
 
 <style>
@@ -102,14 +135,41 @@
 	}
 
 	.searchBar {
-		display: flex;
-		justify-content: center;
+	display: flex;
+	justify-content: center;
+	}
+
+	.search-bar-container {
+	position: relative;
+	justify-content: space-between;
 	}
 
 	.search-bar {
-		width: 80vw;
-		height: 20px;
+	width: 80vw;
+	height: 20px;
+	padding-right: var(--padding);
 	}
+
+	.search-button {
+	background: transparent;
+	border: none;
+	position: absolute;
+	appearance: none;
+	top: 50%;
+	right: 3.5rem;
+	transform: translateY(-50%);
+	}
+
+	.deleteSearch-button {
+	background: transparent;
+	border: none;
+	position: absolute;
+	appearance: none;
+	top: 50%;
+	right: var(--margin20);
+	transform: translateY(-50%);
+	}
+
 
 	.grid-container {
 		display: flex;
@@ -133,9 +193,4 @@
 		gap: 2rem;
 	}
 
-	/* .moredetails-icon img {
-		width: 8px;
-		height: 12px;
-		// margin-left: var(--margin20);
-	} */
 </style>
