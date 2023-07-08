@@ -48,6 +48,13 @@ After opening in your browser, you can login with `admin:admin`
 - Backend: Hono, TypeScript (Deno)
 - Database: Postgres
 
-## Test
+## Tests
 
-> TODO: Which components are tested?
+### Frontend
+
+- End-to-End account life cycle (Quiz, Register, Logout, Login, Delete Account)
+- Components: AccountButton, DiscoverEnemy
+
+### Backend
+
+- All API endpoints
