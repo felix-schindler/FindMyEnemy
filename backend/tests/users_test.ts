@@ -113,7 +113,7 @@ Deno.test("User get list", async () => {
 	assertEquals(res.status, 200);
 	assertNotEquals(body.length, 0);
 
-	for (let user of body) {
+	for (const user of body) {
 		assertNotEquals(user.compatibility, undefined);
 		assertEquals(user.compatibility > 0 && user.compatibility < 100, true);
 	}
@@ -128,7 +128,7 @@ Deno.test("User get list (search)", async () => {
 	assertEquals(res.status, 200);
 	assertNotEquals(body.length, 0);
 
-	for (let user of body) {
+	for (const user of body) {
 		assertNotEquals(user.compatibility, undefined);
 		assertEquals(user.compatibility > 0 && user.compatibility < 100, true);
 	}
