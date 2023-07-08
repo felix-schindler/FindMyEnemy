@@ -1,18 +1,19 @@
 <script lang="ts">
-    import from '$lib/style/main.css';
+	import '$lib/style/main.css';
 	import { createEventDispatcher } from 'svelte';
 	import { req } from '$lib/core/api';
 	import { authStore } from '$lib/core/stores';
 	import toast from 'svelte-french-toast';
 
 	export let isVisible = false;
-	export let id = null;
+	export let id: null = null;
 
 	const dispatch = createEventDispatcher();
 	let newPassword = '';
 
 	async function changePassword() {
 		// Logic for changing the password
+		const password = prompt('Enter your new password');
 		if (password) {
 			const res = await req('/users/:id', 'PATCH', { password: newPassword }, { id });
 
