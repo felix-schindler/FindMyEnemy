@@ -9,9 +9,9 @@
 
 	import type { User } from '$lib/core/types';
 	import { authStore } from '$lib/core/stores';
-	import toast from 'svelte-french-toast';
+	import { toast } from 'svelte-french-toast';
 	let query = '';
-  	let searchResults: User[];
+	let searchResults: User[];
 
 	let allEnemies: User[];
 	let topEnemies: User[];
@@ -33,21 +33,21 @@
 		}
 
 		query = '';
- 		searchResults = [];
+		searchResults = [];
 	}
 
 	onMount(async () => {
 		await getUsers();
 	});
 
-	
 	async function search() {
-  	searchResults = allEnemies.filter((user) => user.username.toLowerCase().includes(query.toLowerCase()));
-	if (searchResults.length === 0) {
-      toast.error('No matching search results');
-    }
+		searchResults = allEnemies.filter((user) =>
+			user.username.toLowerCase().includes(query.toLowerCase())
+		);
+		if (searchResults.length === 0) {
+			toast.error('No matching search results');
+		}
 	}
-
 </script>
 
 <main>
@@ -55,35 +55,55 @@
 
 	<div class="searchBar">
 		<div class="search-bar-container">
-		  <input type="search" class="search-bar" placeholder="Search..." bind:value={query} />
-	
-		  <button type="button" class="search-button" on:click={search}>
-			<img src="/src/lib/images/search-icon.svg" alt="Search" />
-		  </button>
+			<input type="search" class="search-bar" placeholder="Search..." bind:value={query} />
 
-		  <button type="button" class="deleteSearch-button" on:click={getUsers}>
-			<img src="/src/lib/images/deleteSearch.svg" alt="delete" />
-		  </button>
+			<button type="button" class="search-button" on:click={search}>
+				<img src="/src/lib/images/search-icon.svg" alt="Search" />
+			</button>
 
+			<button type="button" class="deleteSearch-button" on:click={getUsers}>
+				<img src="/src/lib/images/deleteSearch.svg" alt="delete" />
+			</button>
 		</div>
 	</div>
-	  
 
 	{#if searchResults && searchResults.length > 0}
-    <SearchResults query={query} searchedUsers={searchResults} />
-  	{:else}
-	<div class="top-enemies">
-		<h1>Hi {$authStore.username}</h1>
-		<a href="/top-enemies" class="moredetails-button">
-			<h2>Discover top enemies</h2>
-			<img src={ChevronRight} class="moredetails-icon" alt="Back" />
-		</a>
+		<SearchResults {query} searchedUsers={searchResults} />
+	{:else}
+		<div class="top-enemies">
+			<h1>Hi {$authStore.username}</h1>
+			<a href="/top-enemies" class="moredetails-button">
+				<h2>Discover top enemies</h2>
+				<img src={ChevronRight} class="moredetails-icon" alt="Back" />
+			</a>
 
-		<div>
+			<div>
+				<div class="grid-container">
+					{#if topEnemies}
+						{#if topEnemies.length > 0}
+							{#each topEnemies as user}
+								<DiscoverEnemy {user} />
+							{/each}
+						{:else}
+							<p>No enemies found</p>
+						{/if}
+					{:else}
+						<p>Loading...</p>
+					{/if}
+				</div>
+			</div>
+		</div>
+
+		<div class="top-enemies">
+			<a href="/mortal-enemies" class="moredetails-button">
+				<h2>Discover mortal enemies</h2>
+				<img src={ChevronRight} class="moredetails-icon" alt="Back" />
+			</a>
+
 			<div class="grid-container">
-				{#if topEnemies}
-					{#if topEnemies.length > 0}
-						{#each topEnemies as user}
+				{#if mortalEnemies}
+					{#if mortalEnemies.length > 0}
+						{#each mortalEnemies as user}
 							<DiscoverEnemy {user} />
 						{/each}
 					{:else}
@@ -94,30 +114,7 @@
 				{/if}
 			</div>
 		</div>
-	</div>
-
-	<div class="top-enemies">
-		<a href="/mortal-enemies" class="moredetails-button">
-			<h2>Discover mortal enemies</h2>
-			<img src={ChevronRight} class="moredetails-icon" alt="Back" />
-		</a>
-
-		<div class="grid-container">
-			{#if mortalEnemies}
-				{#if mortalEnemies.length > 0}
-				{#each mortalEnemies as user}
-						<DiscoverEnemy {user} />
-					{/each}
-				{:else}
-					<p>No enemies found</p>
-				{/if}
-			{:else}
-				<p>Loading...</p>
-			{/if}
-		</div>
-	</div>
-
-	{/if} 
+	{/if}
 </main>
 
 <style>
@@ -135,41 +132,40 @@
 	}
 
 	.searchBar {
-	display: flex;
-	justify-content: center;
+		display: flex;
+		justify-content: center;
 	}
 
 	.search-bar-container {
-	position: relative;
-	justify-content: space-between;
+		position: relative;
+		justify-content: space-between;
 	}
 
 	.search-bar {
-	width: 80vw;
-	height: 20px;
-	padding-right: var(--padding);
+		width: 80vw;
+		height: 20px;
+		padding-right: var(--padding);
 	}
 
 	.search-button {
-	background: transparent;
-	border: none;
-	position: absolute;
-	appearance: none;
-	top: 50%;
-	right: 3.5rem;
-	transform: translateY(-50%);
+		background: transparent;
+		border: none;
+		position: absolute;
+		appearance: none;
+		top: 50%;
+		right: 3.5rem;
+		transform: translateY(-50%);
 	}
 
 	.deleteSearch-button {
-	background: transparent;
-	border: none;
-	position: absolute;
-	appearance: none;
-	top: 50%;
-	right: var(--margin20);
-	transform: translateY(-50%);
+		background: transparent;
+		border: none;
+		position: absolute;
+		appearance: none;
+		top: 50%;
+		right: var(--margin20);
+		transform: translateY(-50%);
 	}
-
 
 	.grid-container {
 		display: flex;
@@ -192,5 +188,4 @@
 		align-items: center;
 		gap: 2rem;
 	}
-
 </style>

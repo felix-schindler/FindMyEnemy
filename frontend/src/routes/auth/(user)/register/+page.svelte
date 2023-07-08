@@ -4,7 +4,7 @@
 
 	import { authStore } from '$lib/core/stores';
 	import { req } from '$lib/core/api';
-	import toast from 'svelte-french-toast';
+	import { toast } from 'svelte-french-toast';
 
 	const next = $page.url.searchParams.get('next');
 	const personality = $page.url.searchParams.get('personality') ?? '';

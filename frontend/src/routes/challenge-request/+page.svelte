@@ -6,21 +6,21 @@
 	import BackButton from '$lib/components/BackButton.svelte';
 	import ChallengeRequest from './ChallengeRequest.svelte';
 	import type { Challenge } from '$lib/core/types';
-	import toast from 'svelte-french-toast';
+	import { toast } from 'svelte-french-toast';
 	import { redirect } from '@sveltejs/kit';
 
 	let challenges: Challenge[];
 
-	 async function getChallenges() {
+	async function getChallenges() {
 		try {
 			challenges = await req('/challenges', 'GET');
 			challenges = challenges.filter((challenge) => {
-			return challenge.user_1.score === 0;
+				return challenge.user_1.score === 0;
 			});
-  		}  catch (e: any) {
+		} catch (e: any) {
 			toast.error(e.message);
 		}
-	} 
+	}
 
 	onMount(async () => {
 		getChallenges();

@@ -7,7 +7,7 @@
 	import BackButton from '$lib/components/BackButton.svelte';
 	import Enemy from '$lib/components/Enemy.svelte';
 	import FilerIcon from '$lib/images/filter-icon.svg';
-	import toast from 'svelte-french-toast';
+	import { toast } from 'svelte-french-toast';
 
 	let enemies: User[];
 
@@ -55,9 +55,9 @@
 
 	@media (min-width: 601px) {
 		.grid-container {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		grid-gap: var(--padding);
-	}
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			grid-gap: var(--padding);
+		}
 	}
 </style>

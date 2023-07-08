@@ -11,10 +11,11 @@
 	import { req } from '$lib/core/api';
 	import { authStore } from '$lib/core/stores';
 	import { onMount } from 'svelte';
-	import toast from 'svelte-french-toast';
+	import { toast } from 'svelte-french-toast';
 
 	let username: string;
 	let editing = false;
+	let changePass = false;
 
 	async function saveUsername() {
 		const res = await req('/users/:id', 'PATCH', { username }, { id: $authStore.id });
@@ -43,28 +44,6 @@
 		}
 	}
 
-	async function changePassword() {
-		PasswordDialog.$set({ isVisible: true, id: $authStore.id });
-	}
-	/**
-	async function changePassword() {
-		// Logic for changing the password
-		const password = prompt('Enter your new password');
-
-		if (password) {
-			const res = await req('/users/:id', 'PATCH', { password }, { id: $authStore.id });
-
-			if (res.status === 200) {
-				// @ts-ignore Update authStore
-				authStore.set(res.raw.user);
-			} else {
-				toast.error(`${res.status} ${res.msg}`);
-			}
-		} else {
-			toast.error('You need to enter a password');
-		}
-	}
-	**/
 	function logOut() {
 		// Logic for logging out
 		// @ts-ignore
@@ -115,9 +94,9 @@
 						{/if}
 					</div>
 				</div>
-				<button class="button" on:click={changePassword}>
+				<PasswordDialog isVisible={changePass} />
+				<button class="button" on:click={() => (changePass = true)}>
 					<img src={changePasswordIcon} alt="Change Password" />
-					<PasswordDialog on:close={() => PasswordDialog.$set({ isVisible: false })} />
 					Change Password
 				</button>
 				<button class="button" on:click={() => goto('/challenge-request')}>

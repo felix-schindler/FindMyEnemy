@@ -4,7 +4,7 @@
 	import { onMount } from 'svelte';
 	import { req } from '$lib/core/api';
 	import type { Question, UserAnswer, Category } from '$lib/core/types';
-	import toast from 'svelte-french-toast';
+	import { toast } from 'svelte-french-toast';
 
 	export let personality: string;
 

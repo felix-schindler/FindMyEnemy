@@ -4,7 +4,7 @@
 
 	import { req } from '$lib/core/api';
 	import { authStore } from '$lib/core/stores';
-	import toast from 'svelte-french-toast';
+	import { toast } from 'svelte-french-toast';
 
 	let username = '',
 		password = '';

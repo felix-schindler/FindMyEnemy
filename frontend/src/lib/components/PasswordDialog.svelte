@@ -1,35 +1,27 @@
 <script lang="ts">
 	import '$lib/style/main.css';
-	import { createEventDispatcher } from 'svelte';
 	import { req } from '$lib/core/api';
 	import { authStore } from '$lib/core/stores';
-	import toast from 'svelte-french-toast';
+	import { toast } from 'svelte-french-toast';
 
 	export let isVisible = false;
-	export let id: null = null;
-
-	const dispatch = createEventDispatcher();
-	let newPassword = '';
+	let newPassword: string;
 
 	async function changePassword() {
-		// Logic for changing the password
-		const password = prompt('Enter your new password');
-		if (password) {
-			const res = await req('/users/:id', 'PATCH', { password: newPassword }, { id });
+		try {
+			// Logic for changing the password
+			const res = await req(
+				'/users/:id',
+				'PATCH',
+				{ password: newPassword },
+				{ id: $authStore.id }
+			);
 
-			if (res.status === 200) {
-				authStore.set(res.raw.user);
-			} else {
-				toast.error(`${res.status} ${res.msg}`);
-			}
-		} else {
-			toast.error('You need to enter a password');
+			// @ts-expect-error Update authStore (even if it's undefined)
+			authStore.set(res.raw.user);
+		} catch (e: any) {
+			toast.error(`Failed to update password ${e.message}`);
 		}
-		dispatch('close');
-	}
-
-	function close() {
-		dispatch('close');
 	}
 </script>
 
@@ -37,7 +29,7 @@
 	<div class="modal-overlay">
 		<div class="modal">
 			<h3>Enter Your New Password</h3>
-			<input type="password" bind:value={password} />
+			<input type="password" bind:value={newPassword} />
 			<div class="button-container">
 				<button on:click={changePassword}>Change Password</button>
 				<button on:click={close}>Cancel</button>

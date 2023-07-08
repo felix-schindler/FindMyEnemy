@@ -5,7 +5,7 @@
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import { req } from '$lib/core/api';
-	import toast from 'svelte-french-toast';
+	import { toast } from 'svelte-french-toast';
 
 	let opponent: number = Number($page.url.searchParams.get('user') ?? '');
 

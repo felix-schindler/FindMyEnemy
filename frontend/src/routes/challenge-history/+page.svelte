@@ -6,7 +6,7 @@
 	import BackButton from '$lib/components/BackButton.svelte';
 	import ChallengeResult from './ChallengeResult.svelte';
 	import type { Challenge } from '$lib/core/types';
-	import toast from 'svelte-french-toast';
+	import { toast } from 'svelte-french-toast';
 
 	let challenges: Challenge[];
 
