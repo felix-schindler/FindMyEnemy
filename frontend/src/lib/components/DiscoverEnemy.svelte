@@ -23,7 +23,7 @@
 		/* margin-right: var(--gap-width);
 		margin-bottom: var(--margin20); */
 		background-color: var(--primary);
-		padding: 5%;
+		padding: var(--padding);
 		border-radius: 10%;
 	}
 

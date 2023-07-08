@@ -1,51 +1,44 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { toast } from 'svelte-french-toast';
+
 	import { req } from '$lib/core/api';
+	import type { User } from '$lib/core/types';
+	import { authStore } from '$lib/core/stores';
 
 	import AccountButton from '$lib/components/AccountButton.svelte';
 	import DiscoverEnemy from '$lib/components/DiscoverEnemy.svelte';
 	import ChevronRight from '$lib/images/moredetails.svg';
 	import SearchResults from './SearchResults.svelte';
 
-	import type { User } from '$lib/core/types';
-	import { authStore } from '$lib/core/stores';
-	import { toast } from 'svelte-french-toast';
-	let query = '';
-	let searchResults: User[];
+	let search: string;
 
-	let allEnemies: User[];
 	let topEnemies: User[];
 	let mortalEnemies: User[];
 
-	async function getUsers() {
+	// Get users whenever the search query changes
+	$: void getUsers(search);
+
+	/**
+	 * Load top and mortal enemies from the backend
+	 * @param search
+	 */
+	async function getUsers(search: string) {
+		let query = {};
+
+		if (search) {
+			query = { q: search };
+		}
+
 		try {
-			allEnemies = await req('/users', 'GET');
-			topEnemies = allEnemies.slice(0, 6);
+			topEnemies = await req('/users', 'GET', undefined, query);
 		} catch (e: any) {
 			toast.error(`Failed to load top enemies ${e.message}`);
 		}
 
 		try {
-			let mortalEnemiesRes = await req('/users', 'GET', undefined, { frenemies: true });
-			mortalEnemies = mortalEnemiesRes.slice(-6);
+			mortalEnemies = await req('/users', 'GET', undefined, { frenemies: true, ...query });
 		} catch (e: any) {
 			toast.error(`Failed to load mortal enemies ${e.message}`);
-		}
-
-		query = '';
-		searchResults = [];
-	}
-
-	onMount(async () => {
-		await getUsers();
-	});
-
-	async function search() {
-		searchResults = allEnemies.filter((user) =>
-			user.username.toLowerCase().includes(query.toLowerCase())
-		);
-		if (searchResults.length === 0) {
-			toast.error('No matching search results');
 		}
 	}
 </script>
@@ -55,55 +48,22 @@
 
 	<div class="searchBar">
 		<div class="search-bar-container">
-			<input type="search" class="search-bar" placeholder="Search..." bind:value={query} />
-
-			<button type="button" class="search-button" on:click={search}>
-				<img src="/src/lib/images/search-icon.svg" alt="Search" />
-			</button>
-
-			<button type="button" class="deleteSearch-button" on:click={getUsers}>
-				<img src="/src/lib/images/deleteSearch.svg" alt="delete" />
-			</button>
+			<input type="search" class="search-bar" placeholder="Search..." bind:value={search} />
 		</div>
 	</div>
 
-	{#if searchResults && searchResults.length > 0}
-		<SearchResults {query} searchedUsers={searchResults} />
-	{:else}
-		<div class="top-enemies">
-			<h1>Hi {$authStore.username}</h1>
-			<a href="/top-enemies" class="moredetails-button">
-				<h2>Discover top enemies</h2>
-				<img src={ChevronRight} class="moredetails-icon" alt="Back" />
-			</a>
+	<div class="top-enemies">
+		<h1>Hi {$authStore.username}</h1>
+		<a href="/top-enemies" class="moredetails-button">
+			<h2>Discover top enemies</h2>
+			<img src={ChevronRight} class="moredetails-icon" alt="Back" />
+		</a>
 
-			<div>
-				<div class="grid-container">
-					{#if topEnemies}
-						{#if topEnemies.length > 0}
-							{#each topEnemies as user}
-								<DiscoverEnemy {user} />
-							{/each}
-						{:else}
-							<p>No enemies found</p>
-						{/if}
-					{:else}
-						<p>Loading...</p>
-					{/if}
-				</div>
-			</div>
-		</div>
-
-		<div class="top-enemies">
-			<a href="/mortal-enemies" class="moredetails-button">
-				<h2>Discover mortal enemies</h2>
-				<img src={ChevronRight} class="moredetails-icon" alt="Back" />
-			</a>
-
+		<div>
 			<div class="grid-container">
-				{#if mortalEnemies}
-					{#if mortalEnemies.length > 0}
-						{#each mortalEnemies as user}
+				{#if topEnemies}
+					{#if topEnemies.length > 0}
+						{#each topEnemies as user}
 							<DiscoverEnemy {user} />
 						{/each}
 					{:else}
@@ -114,7 +74,28 @@
 				{/if}
 			</div>
 		</div>
-	{/if}
+	</div>
+
+	<div class="top-enemies">
+		<a href="/mortal-enemies" class="moredetails-button">
+			<h2>Discover mortal enemies</h2>
+			<img src={ChevronRight} class="moredetails-icon" alt="Back" />
+		</a>
+
+		<div class="grid-container">
+			{#if mortalEnemies}
+				{#if mortalEnemies.length > 0}
+					{#each mortalEnemies as user}
+						<DiscoverEnemy {user} />
+					{/each}
+				{:else}
+					<p>No enemies found</p>
+				{/if}
+			{:else}
+				<p>Loading...</p>
+			{/if}
+		</div>
+	</div>
 </main>
 
 <style>

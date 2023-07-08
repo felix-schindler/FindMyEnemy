@@ -79,18 +79,27 @@ export default class UserController extends AuthController {
 	async getList(c: Context<Env, "/users">): Promise<Response> {
 		const token = c.req.header("Authorization");
 		const user = await verify(token);
+		const search = c.req.query("q");
 
 		const frenemies = c.req.query("frenemies") !== undefined;
 		if (frenemies) {
+			let where = "WHERE f.user_id = $1";
+			const params = [String(user.id)];
+
+			if (search) {
+				where += ` AND username LIKE '%' || $2 || '%'`;
+				params.push(search);
+			}
+
 			// Get all users that the user saved as frenemy
 			const users = (await db.queryObject<ClientUser>(
 				`
 				SELECT u.id, u.username, u.personality
 				FROM users u
 				JOIN frenemies f ON u.id = f.enemy_id
-				WHERE f.user_id = $1;
+				${where}
 			`,
-				[user.id],
+				params,
 			)).rows;
 			return c.json<ClientUser[]>(users);
 		}
@@ -99,7 +108,6 @@ export default class UserController extends AuthController {
 		const where: string[] = [], params: string[] = [];
 
 		// Get search query from url, if set
-		const search = c.req.query("q");
 		if (search) {
 			params.push(search);
 			where.push(`username LIKE '%' || $${params.length} || '%'`);
