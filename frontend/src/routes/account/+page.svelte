@@ -113,6 +113,10 @@
 					<img src={changePasswordIcon} alt="Change Password" />
 					Change Password
 				</button>
+				<button class="button" on:click={() => goto('/challenge-request')}>
+					<img src={challengeHistoryIcon} alt="Challenge Requests" />
+					Challenge Requests
+				</button>
 				<button class="button" on:click={() => goto('/challenge-history')}>
 					<img src={challengeHistoryIcon} alt="Challenge History" />
 					Challenge History

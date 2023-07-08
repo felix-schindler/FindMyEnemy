@@ -43,7 +43,6 @@
 <style>
 	.grid-container {
 		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 		grid-gap: 1rem;
 	}
 
@@ -52,5 +51,13 @@
 		margin: var(--margin40);
 		justify-content: space-between;
 		align-items: center;
+	}
+
+	@media (min-width: 601px) {
+		.grid-container {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		grid-gap: var(--padding);
+	}
 	}
 </style>

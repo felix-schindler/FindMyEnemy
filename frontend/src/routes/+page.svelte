@@ -15,13 +15,15 @@
 
 	async function getUsers() {
 		try {
-			topEnemies = await req('/users', 'GET');
+			let topEnemiesRes = await req('/users', 'GET');
+			topEnemies = topEnemiesRes.slice(0, 6);
 		} catch (e: any) {
 			toast.error(`Failed to load top enemies ${e.message}`);
 		}
 
 		try {
-			mortalEnemies = await req('/users', 'GET', undefined, { frenemies: true });
+			let mortalEnemiesRes = await req('/users', 'GET', undefined, { frenemies: true });
+			mortalEnemies = mortalEnemiesRes.slice(-6);
 		} catch (e: any) {
 			toast.error(`Failed to load mortal enemies ${e.message}`);
 		}
@@ -46,7 +48,7 @@
 			<img src={ChevronRight} class="moredetails-icon" alt="Back" />
 		</a>
 
-		<div style="overflow-x: auto;">
+		<div>
 			<div class="grid-container">
 				{#if topEnemies}
 					{#if topEnemies.length > 0}
@@ -72,7 +74,7 @@
 		<div class="grid-container">
 			{#if mortalEnemies}
 				{#if mortalEnemies.length > 0}
-					{#each mortalEnemies as user}
+				{#each mortalEnemies as user}
 						<DiscoverEnemy {user} />
 					{/each}
 				{:else}
@@ -110,16 +112,18 @@
 	}
 
 	.grid-container {
-		display: grid;
+		display: flex;
 		grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
 		grid-gap: var(--margin20);
 		padding-top: var(--margin20);
 		padding-bottom: var(--margin20);
+		overflow-x: auto;
 	}
 
 	@media (min-width: 768px) {
 		.grid-container {
 			grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+			overflow-x: auto;
 		}
 	}
 
