@@ -246,7 +246,11 @@ VALUES ((SELECT id FROM users WHERE username = 'admin'), (SELECT id FROM users W
 
 --  Admin score empty; Only second played
 INSERT INTO challenges (user_1_id, user_2_id, user_2_score)
-VALUES ((SELECT id FROM users WHERE username = 'admin'), (SELECT id FROM users WHERE username = 'lisa_meyer'), 0, 6);
+VALUES ((SELECT id FROM users WHERE username = 'admin'), (SELECT id FROM users WHERE username = 'lisa_meyer'), 6);
+INSERT INTO challenges (user_1_id, user_2_id, user_2_score)
+VALUES ((SELECT id FROM users WHERE username = 'admin'), (SELECT id FROM users WHERE username = 'naruto-uzumaki'), 24);
+INSERT INTO challenges (user_1_id, user_2_id, user_2_score)
+VALUES ((SELECT id FROM users WHERE username = 'admin'), (SELECT id FROM users WHERE username = 'malfoy_alley'), 17);
 
 
 -- Insert all 16 personality types
