@@ -13,6 +13,13 @@ import type { AuthUser, ClientUser, Status, User } from "../core/types.ts";
 export default class UserController extends AuthController {
 	public static readonly shared = new UserController();
 
+	static getEnemyCategory(compatibility: number): string {
+		if (compatibility <= 25) return "Nuisance";
+		else if (compatibility <= 50) return "Adversary";
+		else if (compatibility <= 75) return "Rival";
+		else return "Nemesis";
+	}
+
 	override async login(c: Context<Env, "/users/login">): Promise<Response> {
 		const { username, password } = await c.req.json();
 
@@ -74,13 +81,6 @@ export default class UserController extends AuthController {
 			...cUser,
 			token: await sign(cUser, JWT_SECRET),
 		}, { status: 201 });
-	}
-
-	static getEnemyCategory(compatibility: number): string {
-		if (compatibility <= 25) return 'Nuisance';
-		else if (compatibility <= 50) return 'Adversary';
-		else if (compatibility <= 75) return 'Rival';
-		else return 'Nemesis';
 	}
 
 	async getList(c: Context<Env, "/users">): Promise<Response> {
@@ -145,15 +145,19 @@ export default class UserController extends AuthController {
 		`;
 
 		const compatibilityMap = new Map<string, number>();
-		
-		const compatibilities = await db.queryObject<{ personality_type: string, percentage: number }>(compatibilityQuery, [user.personality]);
-		
-		for (let compatibility of compatibilities.rows) {
-			compatibilityMap.set(compatibility.personality_type, compatibility.percentage);
+
+		const compatibilities = await db.queryObject<
+			{ personality_type: string; percentage: number }
+		>(compatibilityQuery, [user.personality]);
+
+		for (const compatibility of compatibilities.rows) {
+			compatibilityMap.set(
+				compatibility.personality_type,
+				compatibility.percentage,
+			);
 		}
 
-		
-		for (let user of users) {
+		for (const user of users) {
 			user.compatibility = compatibilityMap.get(user.personality) || 0;
 			user.enemyCategory = UserController.getEnemyCategory(user.compatibility);
 		}
@@ -165,14 +169,14 @@ export default class UserController extends AuthController {
 		// Check if user is authenticated
 		const token = c.req.header("Authorization");
 		const authUser = await verify(token);
-		
+
 		const id = c.req.param("id");
 		const requestedUser = (await db.queryObject<ClientUser>(
 			`SELECT id, username, personality FROM users WHERE id = $1;`,
 			[id],
 		))
 			.rows[0];
-		
+
 		// Create query to get compatibility percentage
 		const compatibilityQuery = `
 		SELECT 
@@ -184,16 +188,18 @@ export default class UserController extends AuthController {
 		`;
 
 		// Query the compatibility between the authenticated user and the requested user
-		const compatibilityResult = await db.queryObject<{percentage: number}>(
+		const compatibilityResult = await db.queryObject<{ percentage: number }>(
 			compatibilityQuery,
 			[authUser.personality, requestedUser.personality],
 		);
-		
+
 		const compatibility = compatibilityResult.rows[0]?.percentage || 0;
 
 		// Add compatibility to the user object
 		requestedUser.compatibility = compatibility;
-		requestedUser.enemyCategory = UserController.getEnemyCategory(compatibility);
+		requestedUser.enemyCategory = UserController.getEnemyCategory(
+			compatibility,
+		);
 
 		return c.json<ClientUser>(requestedUser);
 	}
