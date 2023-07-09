@@ -109,39 +109,65 @@ export default class UserController extends AuthController {
 			`,
 				params,
 			)).rows;
-			return c.json<ClientUser[]>(users);
-		}
 
-		// Build where clause and query parameters
-		const where: string[] = [], params: string[] = [];
-
-		// Get search query from url, if set
-		if (search) {
-			params.push(search);
-			where.push(`username LIKE '%' || $${params.length} || '%'`);
-		} else {
-			params.push(user.personality); // Get user from JWT and set param
-			where.push(`personality != $${params.length}`);
-		}
-
-		// Create query string
-		const qStr = `SELECT id, username, personality FROM users WHERE (${
-			where.join(") AND (")
-		});`;
-		console.log(qStr, params);
-
-		// Get all users with different personality from database
-		const users = (await db.queryObject<ClientUser>(qStr, params)).rows;
-
-		// Create query to get compatibility percentages
-		const compatibilityQuery = `
-		SELECT 
+			// Create query to get compatibility percentages
+			const compatibilityQuery = `
+		SELECT
 			CASE WHEN pt1."type" = $1 THEN pt2."type" ELSE pt1."type" END as personality_type,
 			c.percentage
 		FROM compatibilities as c
 		JOIN personality_types as pt1 ON c.personality_type_1_id = pt1.id
 		JOIN personality_types as pt2 ON c.personality_type_2_id = pt2.id
 		WHERE pt1."type" = $1 OR pt2."type" = $1;
+		`;
+
+			const compatibilityMap = new Map<string, number>();
+
+			const compatibilities = await db.queryObject<
+				{ personality_type: string; percentage: number }
+			>(compatibilityQuery, [user.personality]);
+
+			for (const compatibility of compatibilities.rows) {
+				compatibilityMap.set(
+					compatibility.personality_type,
+					compatibility.percentage,
+				);
+			}
+
+			for (const user of users) {
+				user.compatibility = compatibilityMap.get(user.personality) || 0;
+				user.enemyCategory = UserController.getEnemyCategory(
+					user.compatibility,
+				);
+			}
+
+			return c.json<ClientUser[]>(users);
+		}
+
+		const params: string[] = [];
+
+		if (search) params.push(search);
+
+		// Create query string
+		const qStr = `SELECT id, username, personality FROM users ${
+			search ? "WHERE (username LIKE '%' || $1 || '%')" : ""
+		};`;
+
+		// Get all users with different personality from database
+		const users = (await db.queryObject<ClientUser>(qStr, params)).rows;
+
+		// Create query to get compatibility percentages
+		const compatibilityQuery = `
+SELECT
+	CASE WHEN pt1."type" = $1 THEN pt2."type" ELSE pt1."type" END as personality_type, c.percentage
+FROM
+	compatibilities as c
+JOIN
+	personality_types as pt1 ON c.personality_type_1_id = pt1.id
+JOIN
+	personality_types as pt2 ON c.personality_type_2_id = pt2.id
+WHERE
+	pt1."type" = $1 OR pt2."type" = $1;
 		`;
 
 		const compatibilityMap = new Map<string, number>();
@@ -179,12 +205,16 @@ export default class UserController extends AuthController {
 
 		// Create query to get compatibility percentage
 		const compatibilityQuery = `
-		SELECT 
-			c.percentage
-		FROM compatibilities as c
-		JOIN personality_types as pt1 ON c.personality_type_1_id = pt1.id
-		JOIN personality_types as pt2 ON c.personality_type_2_id = pt2.id
-		WHERE (pt1."type" = $1 AND pt2."type" = $2) OR (pt1."type" = $2 AND pt2."type" = $1);
+SELECT
+	c.percentage
+FROM
+	compatibilities as c
+JOIN
+	personality_types as pt1 ON c.personality_type_1_id = pt1.id
+JOIN
+	personality_types as pt2 ON c.personality_type_2_id = pt2.id
+WHERE
+	(pt1."type" = $1 AND pt2."type" = $2) OR (pt1."type" = $2 AND pt2."type" = $1);
 		`;
 
 		// Query the compatibility between the authenticated user and the requested user

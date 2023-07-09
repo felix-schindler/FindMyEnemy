@@ -1,5 +1,3 @@
-import { serve } from "$std/http/server.ts";
-
 import { Hono } from "hono/mod.ts";
 import { cors, logger, prettyJSON } from "hono/middleware.ts";
 import { HTTPException } from "hono/http-exception.ts";
@@ -100,4 +98,5 @@ if (Deno.args.includes("--show-routes")) {
 }
 
 // Start web server
-serve(app.fetch);
+const serv = Deno.serve(app.fetch);
+serv.finished.then(() => console.log("Server stopped"));

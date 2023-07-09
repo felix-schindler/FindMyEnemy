@@ -25,7 +25,7 @@ tester = await app.request("/users", {
 // 	});
 // 	body = await res.json();
 
-// 	assertEquals(res.status, 200);
+// 	assertEquals(res.status, 201);
 // 	assertNotEquals(body.id, undefined);
 // 	assertNotEquals(body.username, undefined);
 // 	assertNotEquals(body.personality, undefined);
@@ -115,7 +115,7 @@ Deno.test("User get list", async () => {
 
 	for (const user of body) {
 		assertNotEquals(user.compatibility, undefined);
-		assertEquals(user.compatibility > 0 && user.compatibility < 100, true);
+		assertEquals(user.compatibility >= 0 && user.compatibility <= 100, true);
 	}
 });
 
@@ -130,7 +130,7 @@ Deno.test("User get list (search)", async () => {
 
 	for (const user of body) {
 		assertNotEquals(user.compatibility, undefined);
-		assertEquals(user.compatibility > 0 && user.compatibility < 100, true);
+		assertEquals(user.compatibility >= 0 && user.compatibility <= 100, true);
 	}
 });
 
