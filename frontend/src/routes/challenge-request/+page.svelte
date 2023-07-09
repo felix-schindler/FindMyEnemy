@@ -45,7 +45,7 @@
 					{challenge}
 					onDelete={async () => {
 						try {
-							// Send a request to delete the challenge with the specified id 
+							// Send a request to delete the challenge with the specified id
 							await req('/challenges/:id', 'DELETE', undefined, { id: challenge.id });
 							challenges = challenges.filter((c) => c.id !== challenge.id);
 						} catch (e) {

@@ -1,7 +1,7 @@
 <script lang="ts">
-    import type { User } from '$lib/core/types';
+	import type { User } from '$lib/core/types';
 
-    export let user: User; // Declare a prop named 'user' of type User
+	export let user: User; // Declare a prop named 'user' of type User
 </script>
 
 <!-- Display an image based on the user's personality 
@@ -9,16 +9,15 @@
 -->
 
 <a href="/enemy-account/{user.id}" class="grid-item">
-    <img src={`${user.personality}.svg`} alt={user.username} /> 
-    <div class="user-information">
-        <div class="user-details">
-            <p><b>{user.username}</b></p>
-            <p><b>{user.compatibility}%</b></p> 
-        </div>
-        <p>{user.personality}</p> 
-    </div>
+	<img src={`${user.personality}.svg`} alt={user.username} />
+	<div class="user-information">
+		<div class="user-details">
+			<p><b>{user.username}</b></p>
+			<p><b>{user.compatibility}%</b></p>
+		</div>
+		<p>{user.personality}</p>
+	</div>
 </a>
-
 
 <style>
 	.grid-item {

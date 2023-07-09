@@ -198,7 +198,7 @@ export async function req<
 	// Build query params from Record<string, string>
 	let reqUrl: string;
 	if (process.env.NODE_ENV === 'development' && method === 'GET') {
-		reqUrl = '/api/' + path + '.json';
+		reqUrl = '/api/' + path.replace(':id', '1') + '.json';
 	} else {
 		if (query) {
 			const params = new URLSearchParams();

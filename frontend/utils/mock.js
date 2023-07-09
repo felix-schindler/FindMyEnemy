@@ -63,7 +63,7 @@ try {
 	await createDirectory(usersDirectory);
 
 	await writeFileAsync(
-		usersDirectory + '/:id.json',
+		usersDirectory + '/1.json',
 		await fetch(ENDPOINT.user, {
 			headers: {
 				Authorization: USER.token
@@ -93,7 +93,7 @@ try {
 	);
 
 	await writeFileAsync(
-		challengesDirectory + '/:id.json',
+		challengesDirectory + '/1.json',
 		await fetch(ENDPOINT.challenge, {
 			headers: {
 				Authorization: USER.token

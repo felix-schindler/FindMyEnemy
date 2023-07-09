@@ -1,23 +1,23 @@
 <script lang="ts">
-    import type { User } from '$lib/core/types';
+	import type { User } from '$lib/core/types';
 
-    export let enemy: User; // Declare a prop named 'user' of type User
+	export let enemy: User; // Declare a prop named 'user' of type User
 </script>
 
 <!-- Display an image based on the user's personality 
 	Display the user's username, personality and compatibility
 -->
 <a href="/enemy-account/{enemy.id}" class="enemy-grid-item">
-    <div class="image-container">
-        <img src={`${enemy.personality}.svg`} alt={enemy.username} /> 
-    </div>
-    <div class="enemy-information">
-        <div class="enemy-details">
-            <p>{enemy.username}</p>  
-             <p>{enemy.compatibility}%</p> 
-        </div>
-        <p>{enemy.personality}</p> 
-    </div>
+	<div class="image-container">
+		<img src={`${enemy.personality}.svg`} alt={enemy.username} />
+	</div>
+	<div class="enemy-information">
+		<div class="enemy-details">
+			<p>{enemy.username}</p>
+			<p>{enemy.compatibility}%</p>
+		</div>
+		<p>{enemy.personality}</p>
+	</div>
 </a>
 
 <style>

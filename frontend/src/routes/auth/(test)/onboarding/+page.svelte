@@ -4,14 +4,14 @@
 	import NextIcon from '$lib/images/next-icon.svg';
 
 	let screen = 1, // Initialize the screen variable to 1
-        personality: string;
+		personality: string;
 
-    /**
-    * Handles the next button click event by incrementing the screen number.
-    */
-    function handleNext() {
-        screen++; 
-    }
+	/**
+	 * Handles the next button click event by incrementing the screen number.
+	 */
+	function handleNext() {
+		screen++;
+	}
 </script>
 
 <!-- Check the current screen and render the appropriate content based on the screen number -->
