@@ -145,6 +145,10 @@ input[type='password'] {
 	background-image: url('/src/lib/images/password-icon.svg');
 }
 
+input[type='search'] {
+	background-image: url('/src/lib/images/search-icon.svg');
+}
+
 .back-button {
 	top: 2rem;
 	left: 2rem;
