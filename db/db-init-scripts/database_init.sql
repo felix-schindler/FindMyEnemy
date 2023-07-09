@@ -21,8 +21,8 @@ CREATE TABLE IF NOT EXISTS answers (
 
 CREATE TABLE IF NOT EXISTS challenges (
 	id SERIAL PRIMARY KEY,
-	user_1_id INT NOT NULL REFERENCES users(id),
-	user_2_id INT NOT NULL REFERENCES users(id),
+	user_1_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+	user_2_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
 	user_1_score INT DEFAULT 0,
 	user_2_score INT DEFAULT 0
 );
@@ -43,8 +43,8 @@ CREATE TABLE IF NOT EXISTS compatibilities (
 
 CREATE TABLE IF NOT EXISTS frenemies (
 	id SERIAL PRIMARY KEY,
-	user_id INT NOT NULL REFERENCES users(id),
-	enemy_id INT NOT NULL REFERENCES users(id),
+	user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+	enemy_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
 	compatibility_id INT REFERENCES compatibilities(id),
 	UNIQUE(user_id, enemy_id)
 );
