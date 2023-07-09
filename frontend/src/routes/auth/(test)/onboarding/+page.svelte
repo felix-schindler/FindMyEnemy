@@ -3,13 +3,25 @@
 	import QuestionaireResult from './QuestionaireResult.svelte';
 	import NextIcon from '$lib/images/next-icon.svg';
 
-	let screen = 1,
-		personality: string;
+	let screen = 1, // Initialize the screen variable to 1
+        personality: string;
 
-	function handleNext() {
-		screen++;
-	}
+    /**
+    * Handles the next button click event by incrementing the screen number.
+    */
+    function handleNext() {
+        screen++; 
+    }
 </script>
+
+<!-- Check the current screen and render the appropriate content based on the screen number -->
+
+<!-- 
+  If the personality is available, display the QuestionaireResult component.
+  Otherwise, if the screen is 1, display the initial screen with a title and a button to proceed.
+  If the screen is 2, display the screen for the personality test introduction.
+  If the screen is 3, display the PersonalityTest component to perform the test.
+ */ -->
 
 {#if personality}
 	<QuestionaireResult {personality} />

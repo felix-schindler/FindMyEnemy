@@ -12,16 +12,19 @@
 	let enemies: User[];
 
 	async function getUsers() {
-		try {
-			enemies = await req('/users', 'GET', undefined, { frenemies: true });
-		} catch (e: any) {
-			toast.error(e.message);
-		}
-	}
+        try {
+            // Fetch users from the API with frenemies filter enabled to only get favorized users 
+            enemies = await req('/users', 'GET', undefined, { frenemies: true });
+        } catch (e: any) {
+            // Display an error toast if there's an exception
+            toast.error(e.message);
+        }
+    }
 
-	onMount(async () => {
-		await getUsers();
-	});
+    // Call the getUsers function when the component is mounted
+    onMount(async () => {
+        await getUsers();
+    });
 </script>
 
 <AccountButton />

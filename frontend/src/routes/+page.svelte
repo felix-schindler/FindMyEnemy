@@ -127,26 +127,6 @@
 		padding-right: var(--padding);
 	}
 
-	.search-button {
-		background: transparent;
-		border: none;
-		position: absolute;
-		appearance: none;
-		top: 50%;
-		right: 3.5rem;
-		transform: translateY(-50%);
-	}
-
-	.deleteSearch-button {
-		background: transparent;
-		border: none;
-		position: absolute;
-		appearance: none;
-		top: 50%;
-		right: var(--margin20);
-		transform: translateY(-50%);
-	}
-
 	.grid-container {
 		display: flex;
 		grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
