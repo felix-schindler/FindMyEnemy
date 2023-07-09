@@ -50,11 +50,21 @@ After opening in your browser, you can login with `admin:admin`
 
 ## Tests
 
+We had some issues with testing on both sides.
+
 ### Frontend
 
 - End-to-End account life cycle (Quiz, Register, Logout, Login, Delete Account)
 - Components: AccountButton, DiscoverEnemy
 
+1. The component tests are using `@playwright/experimental-ct-svelte` which (as the name states) is still experimental. It's really unreliable and means sometime the tests work and other times they don't.
+2. We didn't get playwright to run in the CI/CD because of issues during the playwright setup. Changing from alpine to debian didn't help much as the browser installs are still failing.
+
 ### Backend
 
 - All API endpoints
+
+On the backend there where leaking ressources, which is why in the tests
+
+1. `POST /users` (creating the test user) is outside of the test
+2. `GET /questions` (getting the questions) is commented out
