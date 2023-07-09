@@ -10,6 +10,7 @@
 
 	let challenges: Challenge[];
 
+	// Filtering the 'challenges' array to only include challenges where the account user's score is 0
 	async function getChallenges() {
 		try {
 			challenges = await req('/challenges', 'GET');
@@ -44,6 +45,7 @@
 					{challenge}
 					onDelete={async () => {
 						try {
+							// Send a request to delete the challenge with the specified id 
 							await req('/challenges/:id', 'DELETE', undefined, { id: challenge.id });
 							challenges = challenges.filter((c) => c.id !== challenge.id);
 						} catch (e) {

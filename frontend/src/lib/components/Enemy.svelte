@@ -14,7 +14,7 @@
     <div class="enemy-information">
         <div class="enemy-details">
             <p>{enemy.username}</p>  
-             <p>{enemy.compatibility}</p> 
+             <p>{enemy.compatibility}%</p> 
         </div>
         <p>{enemy.personality}</p> 
     </div>
